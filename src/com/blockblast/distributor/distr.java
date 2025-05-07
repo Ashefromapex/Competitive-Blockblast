@@ -1,7 +1,7 @@
 package com.blockblast.distributor;
 
 public class distr {
-    public void distr(){
+    public distr(){
         // Constructor code here
     }
 }
