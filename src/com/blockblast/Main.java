@@ -1,6 +1,7 @@
 
-//import other files
+//declare package
 package com.blockblast;
+//import files
 
 import com.blockblast.gui.gui;
 import com.blockblast.distributor.distr;
