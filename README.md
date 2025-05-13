@@ -1,0 +1,29 @@
+Backlog: 
+
+Blockblast-like Game mit Single und multiplayer 
+
+Aufbau:
+-  Main/Controller
+-  Test class
+-  GUI - Magdalena, Luzia
+-  Game Logic - Maurice, Liam
+-  Network - Luca
+-  Storage - Luca
+
+Aufbau: 
+Feld: 8 x 8 Felder
+
+Mögliche Blöcke: siehe Bild 
+Man muss alle 3 gegebenen Blöcke platzieren (Maybe mit Time limit)
+Wenn eine Reihe komplett ausgefüllt ist, wird sie gecleared 
+
+Multiplayer:
+-  Turn based
+-  Wenn man eine Line cleared schickt man "Angriff" zum Gegner
+
+How to commit:
+-  Repository pullen
+-  lokale Branch erstellen
+-  Änderungen durchführen --> TESTEN!!
+-  lokale Kopie updaten
+-  committen und pushen 
