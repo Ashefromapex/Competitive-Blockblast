@@ -1,8 +1,10 @@
-Backlog: 
+
+
+# Backlog:
 
 Blockblast-like Game mit Single und multiplayer 
 
-Aufbau:
+**Aufbau:**
 -  Main/Controller
 -  Test class
 -  GUI - Magdalena, Luzia
@@ -10,10 +12,10 @@ Aufbau:
 -  Network - Luca
 -  Storage - Luca
 
-Aufbau: 
+
 Feld: 8 x 8 Felder
 
-Mögliche Blöcke: siehe Bild 
+Mögliche Blöcke: siehe [Bild](https://github.com/Ashefromapex/Competitive-Blockblast/blob/main/blocks.jpg) 
 Man muss alle 3 gegebenen Blöcke platzieren (Maybe mit Time limit)
 Wenn eine Reihe komplett ausgefüllt ist, wird sie gecleared 
 
@@ -21,9 +23,10 @@ Multiplayer:
 -  Turn based
 -  Wenn man eine Line cleared schickt man "Angriff" zum Gegner
 
-How to commit:
--  Repository pullen
+## How to commit:
+
+  Repository pullen
 -  lokale Branch erstellen
--  Änderungen durchführen --> TESTEN!!
+-  Änderungen durchführen --> **TESTEN!!**
 -  lokale Kopie updaten
 -  committen und pushen 
