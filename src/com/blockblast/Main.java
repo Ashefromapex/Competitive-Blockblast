@@ -4,7 +4,7 @@ package com.blockblast;
 //import files
 
 import com.blockblast.gui.gui;
-import com.blockblast.distributor.distr;
+import com.blockblast.storage.data;
 import com.blockblast.logic.algo;
 import com.blockblast.Network.ipconf;
 
