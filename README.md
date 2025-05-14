@@ -33,6 +33,20 @@ getscore() --> score für gui
 run() --> startet spiel und returned score am ende 
 returnBlocks() --> gibt drei neue Blöcke aus
 
+Storage:
+pushScore() --> score senden, wird in history gespeichert + mybe highscore
+pushName() --> name angeben 
+fetch(name) --> stats zu name asugeben 
+reset() --> reset 
+pushScore() --> für multiplayer --> ggn wen und ob gewonnen 
+fetchHist(name) --> history von multiplayer ausgeben 
+
+IP:
+getIp() --> ip von Gerät ausgeben 
+connect(ip) --> mit ip verbinden 
+send()
+receive()
+
 # Questions:
 Blöcke in Algo feld einzeln bennen --> für GUI?
 
