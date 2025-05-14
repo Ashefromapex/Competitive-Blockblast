@@ -23,6 +23,18 @@ Multiplayer:
 -  Turn based
 -  Wenn man eine Line cleared schickt man "Angriff" zum Gegner
 
+# Communication:
+
+Algo: 
+returnSeed() --> returns seed
+getState() --> returned array (feld der Blöcke)
+placeBlock() --> von Gui zu Algo, welcher Block, wo platziert Wurde
+getscore() --> score für gui
+run() --> startet spiel und returned score am ende 
+
+# Questions:
+Blöcke in Algo feld einzeln bennen --> für GUI?
+
 ## How to commit:
 
   Repository pullen
@@ -30,3 +42,5 @@ Multiplayer:
 -  Änderungen durchführen --> **TESTEN!!**
 -  lokale Kopie updaten
 -  committen und pushen 
+
+
