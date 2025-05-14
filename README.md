@@ -31,6 +31,7 @@ getState() --> returned array (feld der Blöcke)
 placeBlock() --> von Gui zu Algo, welcher Block, wo platziert Wurde
 getscore() --> score für gui
 run() --> startet spiel und returned score am ende 
+returnBlocks() --> gibt drei neue Blöcke aus
 
 # Questions:
 Blöcke in Algo feld einzeln bennen --> für GUI?
