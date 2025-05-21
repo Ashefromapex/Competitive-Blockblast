@@ -12,6 +12,7 @@ Board:
 Klassen:
 -Spielfeld
 -Blöcke
+-Rotation: 0=default; 1=rechts; 2=upside down; 3=links;
 
 
 Methoden
