@@ -1,6 +1,6 @@
 package com.blockblast.gui;
+import javax.swing.*;
 import javax.swing.JFrame;
-
 public class gui extends JFrame {
 
 
@@ -44,18 +44,49 @@ public class gui extends JFrame {
         block11grosseecke = new block();
         block12TBlock = new block();
         block132x3 = new block();
-        // positionen festlegen, erstmal einer
-        //block1einser.setBounds(5,10,4,3);
-        this.getContentPane().add(block1einser);
-
-        this.pack();
     }
 
 }
-class block
+
+class block extends gui
 {
+    int Blockart;
+    char Rotation;
   public block()
   {
 
   }
+  private block blockErstellen(int Blockart, char Rotation)
+  {
+      int[][] Blockarray= new int[5][5];
+      switch (Blockart)
+      {
+        case 1://Block 1 der einser
+        {
+          Blockarray[0] = {0,0,0,0,0};
+          Blockarray[1] = {0,0,0,0,0};
+          Blockarray[2] = {0,0,1,0,0};
+          Blockarray[3] = {0,0,0,0,0};
+          Blockarray[4] = {0,0,0,0,0};
+        }
+        case 2: // Block 2 Zweier Linie
+        {
+
+        }
+        case 3: // Block 3 Dreierlinie
+        {
+
+        }
+        case 4:// Block 4 Viererlinie
+        {
+
+        }
+
+
+
+
+      }
+      return this;
+  }
+
 }
