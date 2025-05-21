@@ -15,7 +15,7 @@ Blockblast-like Game mit Single und multiplayer
 
 Feld: 8 x 8 Felder
 
-Mögliche Blöcke: siehe [Bild](https://github.com/Ashefromapex/Competitive-Blockblast/blob/main/blocks.jpg) 
+Mögliche Blöcke: siehe [Bild](https://github.com/Ashefromapex/Competitive-Blockblast/blob/main/Blocks.jpeg) 
 Man muss alle 3 gegebenen Blöcke platzieren (Maybe mit Time limit)
 Wenn eine Reihe komplett ausgefüllt ist, wird sie gecleared 
 
