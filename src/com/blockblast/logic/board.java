@@ -2,10 +2,10 @@ package com.blockblast.logic;
 
 //import java.lang.reflect.Array;
 
-public class board
+public class Board
 {
     boolean[][] board;
-    public board()
+    public Board()
     {
 
         board = new boolean[8][8];

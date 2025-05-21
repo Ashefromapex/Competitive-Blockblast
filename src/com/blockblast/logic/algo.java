@@ -1,10 +1,10 @@
 package com.blockblast.logic;
 
-public class algo
+public class Algo
 {
-    board board;
-    public algo()
+    Board board;
+    public Algo()
     {
-        board = new board();
+        board = new Board();
     }
 }
