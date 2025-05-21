@@ -1,4 +1,8 @@
 package com.blockblast.logic;
 
-public class board {
+public class board
+{
+
+
+
 }
