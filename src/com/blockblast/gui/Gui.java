@@ -28,7 +28,7 @@ public class Gui extends JPanel {
     }
 
 }
-
+// Klasse ist nur zum generieren de Blöcke da
 class BlockGui extends Gui
 {
     int Blockart;
