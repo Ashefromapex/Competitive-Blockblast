@@ -12,7 +12,7 @@ public class Data {
     //this class is used to store Data and read it again at startup
 
     //declare filepath
-    final String FILEPATH = "resources/userdata.txt";
+    final String FILEPATH = "src/resources/userdata.txt";
     //declare variables
     protected String currentUser;
     public File data;
