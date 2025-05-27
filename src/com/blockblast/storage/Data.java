@@ -15,12 +15,13 @@ public class Data {
     final String FILEPATH = "resources/userdata.txt";
     //declare variables
     protected String currentUser;
+    public File data;
 
     public Data(){
         // Constructor code here
 
         currentUser = "null";
-        File data = createFile();
+        data = createFile();
     }
     private File createFile()
     {
@@ -39,7 +40,7 @@ public class Data {
         }
         return data;
     }
-    private boolean deleteFile(File f)
+    public boolean deleteFile(File f)
     {
         if (f.exists())
         {

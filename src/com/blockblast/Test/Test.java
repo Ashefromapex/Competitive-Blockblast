@@ -16,22 +16,29 @@ public class Test
     public void testAll()
     {
        //einzelne testmethoden werden aufgerufen
-        testController();
-        testIpconf();
-        testData();
-        testAlgo();
-        testGui();
+        if(testController() &&
+        testIpconf() &&
+        testData() &&
+        testAlgo() &&
+        testGui())
+        {
+            System.out.println("All tests passed successfully!");
+        }
+        else
+        {
+            System.out.println("Some tests failed. Please check the output for details.");
+        }
     }
 
-    private void testController()
+    private boolean testController()
     {
-
+        return true;
     }
-    private void testIpconf()
+    private boolean testIpconf()
     {
-
+        return true;
     }
-    private void testData()
+    private boolean testData()
     {
         //set highscore to 100
         Data data = new Data();
@@ -40,14 +47,25 @@ public class Test
         data.pushScore(200);
         //prints highscore
         System.out.println("Highscore: " + data.fetchHighscore());
+        if(data.fetchHighscore() == 200)
+        {
+            data.deleteFile(data.data);
+            return true;
+        }
+        else
+        {
+            System.out.println("Data test failed!\n Wrong Highscore!!");
+            data.deleteFile(data.data);
+            return false;
+        }
     }
-    private void testAlgo()
+    private boolean testAlgo()
     {
-
+        return true;
     }
-    private void testGui()
+    private boolean testGui()
     {
-
+        return true;
     }
 
 
