@@ -3,9 +3,9 @@
 package com.blockblast;
 //import files
 import com.blockblast.Test.Test;
-import com.blockblast.network.Ipconf;
-import com.blockblast.controller.controller;
+import com.blockblast.network.Ip;
 import com.blockblast.storage.Data;
+import com.blockblast.controller.controller;
 
 public class Main
 {

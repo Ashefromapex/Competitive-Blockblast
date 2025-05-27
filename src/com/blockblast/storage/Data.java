@@ -68,6 +68,11 @@ public class Data {
         //1. read current highscore from file
         String high = readFromFile();
         //convert to double
+        if(high.isEmpty())
+        {
+            //if file is empty, set highscore to 0
+            high = "0";
+        }
         int highscore = Integer.parseInt(high);
 
         //2. compare it with the new score
@@ -95,7 +100,6 @@ public class Data {
             System.out.println("Error writing to userdata.txt file: " + e.getMessage());
         }
     }
-
     private String readFromFile()
     {
         String content = "";
@@ -117,5 +121,17 @@ public class Data {
             System.out.println("Error reading userdata.txt file: " + e.getMessage());
         }
         return content;
+    }
+    public int fetchHighscore()
+    {
+        String content = readFromFile();
+        if(content.isEmpty())
+        {
+            return 0;
+        }
+        else
+        {
+            return Integer.parseInt(content);
+        }
     }
 }

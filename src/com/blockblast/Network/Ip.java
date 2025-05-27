@@ -1,7 +1,7 @@
 package com.blockblast.network;
 
-public class Ipconf {
-    public Ipconf() {
+public class Ip {
+    public Ip() {
 
     }
     public void test()
