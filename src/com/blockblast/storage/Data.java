@@ -7,16 +7,16 @@ import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class data {
+public class Data {
 
-    //this class is used to store data and read it again at startup
+    //this class is used to store Data and read it again at startup
 
     //declare filepath
-    final String FILEPATH = "ressources/userdata.txt";
+    final String FILEPATH = "resources/userdata.txt";
     //declare variables
     protected String currentUser;
 
-    public data(){
+    public Data(){
         // Constructor code here
 
         currentUser = "null";
