@@ -7,20 +7,21 @@ import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class data {
+public class Data {
 
-    //this class is used to store data and read it again at startup
+    //this class is used to store Data and read it again at startup
 
     //declare filepath
-    final String FILEPATH = "ressources/userdata.txt";
+    final String FILEPATH = "src/resources/userdata.txt";
     //declare variables
     protected String currentUser;
+    public File data;
 
-    public data(){
+    public Data(){
         // Constructor code here
 
         currentUser = "null";
-        File data = createFile();
+        data = createFile();
     }
     private File createFile()
     {
@@ -39,7 +40,7 @@ public class data {
         }
         return data;
     }
-    private boolean deleteFile(File f)
+    public boolean deleteFile(File f)
     {
         if (f.exists())
         {
@@ -68,6 +69,11 @@ public class data {
         //1. read current highscore from file
         String high = readFromFile();
         //convert to double
+        if(high.isEmpty())
+        {
+            //if file is empty, set highscore to 0
+            high = "0";
+        }
         int highscore = Integer.parseInt(high);
 
         //2. compare it with the new score
@@ -95,7 +101,6 @@ public class data {
             System.out.println("Error writing to userdata.txt file: " + e.getMessage());
         }
     }
-
     private String readFromFile()
     {
         String content = "";
@@ -117,5 +122,17 @@ public class data {
             System.out.println("Error reading userdata.txt file: " + e.getMessage());
         }
         return content;
+    }
+    public int fetchHighscore()
+    {
+        String content = readFromFile();
+        if(content.isEmpty())
+        {
+            return 0;
+        }
+        else
+        {
+            return Integer.parseInt(content);
+        }
     }
 }
