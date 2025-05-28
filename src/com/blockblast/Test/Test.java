@@ -17,7 +17,7 @@ public class Test
     {
        //einzelne testmethoden werden aufgerufen
         if(testController() &&
-        testIpconf() &&
+        testIp() &&
         testData() &&
         testAlgo() &&
         testGui())
@@ -34,7 +34,7 @@ public class Test
     {
         return true;
     }
-    private boolean testIpconf()
+    private boolean testIp()
     {
         return true;
     }

@@ -56,7 +56,7 @@ class BlockGui extends Gui
         {
             Blockarray[0] = new int[]{0, 0, 0, 0, 0};
             Blockarray[1] = new int[]{0, 0 ,0 ,0 ,0};
-            Blockarray[2] = new int[]{0, 0, 1, 0, 0};
+            Blockarray[2] = new int[]{0, 1, 1, 0, 0};
             Blockarray[3] = new int[]{0, 0, 0, 0, 0};
             Blockarray[4] = new int[]{0, 0, 0, 0, 0};
 

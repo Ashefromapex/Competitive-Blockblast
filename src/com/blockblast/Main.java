@@ -1,10 +1,15 @@
-
-//declare package
 package com.blockblast;
+
+/*
+ *  Die Main Klasse hat zwei Aufgaben:
+ *  1. Die Testklasse aufrufen → testen aller Funktionen
+ *  2. Den Controller starten → startet das Spiel
+ */
+
+
 //import files
+
 import com.blockblast.Test.Test;
-import com.blockblast.network.Ip;
-import com.blockblast.storage.Data;
 import com.blockblast.controller.controller;
 
 public class Main
@@ -20,6 +25,9 @@ public class Main
             Test test = new Test();
             test.testAll();
         }
+
+        controller c = new controller();
+        c.start();
 
     }
 
