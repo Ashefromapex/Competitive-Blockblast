@@ -1,7 +1,8 @@
+package com.blockblast.gui.window;
+
 import javax.swing.*;
 
-public class Window extends JFrame
-{
+public class Window extends JFrame{
     public Window()
     {
         setTitle("Window");

@@ -2,14 +2,17 @@ package com.blockblast.gui;
 import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.Graphics;
+import com.blockblast.gui.window.Window;
 public class Gui extends JPanel {
 
 
     private JPanel[] panel;
     private  BlockGui block;
 
-    public Gui() {
-
+    public Gui()
+    {
+        //create Window
+        com.blockblast.gui.window.Window w = new com.blockblast.gui.window.Window();
     }
     // die methode sollte eigentlich den block visualisieren
     public void blockVisualisieren(int Blockart, char Rotation, Graphics g)
