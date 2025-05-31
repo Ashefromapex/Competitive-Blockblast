@@ -7,21 +7,18 @@ public class BlockAlgo
     private int typ;
     private int rotation;
     Random rand = new Random();
-    int [] blockinfo;   //Liam: Amount = 0; Typ = 1; Rotation = 2;
+    int blockinfo;   //Liam: Amount = 0; Typ = 1; Rotation = 2;
 
 
 
     public BlockAlgo()
     {
-        blockinfo = new int[3];
-        blockinfo[0] = 0;
-        blockinfo[1] = 0;
-        blockinfo[2] = 0;
+        blockinfo = 0;
         generateBlock();
 
     }
 
-    public int[] generateBlock()
+    public int generateBlock()
     {
         int probability  = rand.nextInt(70);
         if (probability <= 10)
@@ -60,9 +57,7 @@ public class BlockAlgo
             typ = 0;
         }
         rotation = rand.nextInt(4);
-        blockinfo[0] = amount;
-        blockinfo[1] = typ;
-        blockinfo[2] = rotation;
+        blockinfo = amount * 100 + typ * 10 + rotation;
         return blockinfo;
     }
 }
