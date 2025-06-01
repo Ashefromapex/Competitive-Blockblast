@@ -9,7 +9,7 @@ package com.blockblast;
 
 //import files
 
-import com.blockblast.Test.Test;
+import com.blockblast.test.Test;
 import com.blockblast.controller.controller;
 
 public class Main

@@ -1,4 +1,4 @@
-package com.blockblast.Test;
+package com.blockblast.test;
 
 //import packages
 import com.blockblast.controller.controller;
@@ -6,6 +6,8 @@ import com.blockblast.network.Ip;
 import com.blockblast.storage.Data;
 import com.blockblast.logic.Algo;
 import com.blockblast.gui.Gui;
+import com.blockblast.logic.Translator;
+import com.blockblast.blocks.Block;
 
 public class Test
 {
@@ -61,6 +63,17 @@ public class Test
     }
     private boolean testAlgo()
     {
+        //testing of translator
+        Translator t = new Translator();
+        int[][] arr = new int[8][8];
+        //for code 201:
+        System.out.println("Block 201:");
+        t.printBlock(t.translate(201));
+        System.out.println("Block 202:");
+        t.printBlock(t.translate(202));
+        t.translate(421);
+
+
         return true;
     }
     private boolean testGui()
