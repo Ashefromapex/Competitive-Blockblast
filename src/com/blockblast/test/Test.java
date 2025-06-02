@@ -72,9 +72,9 @@ public class Test
         int[][] arr = new int[8][8];
         //for code 201:
         System.out.println("Block 201:");
-        bE.printBlock(t.translate(201));
+        bE.printBlock(t.translate(201), 4, 4);
         System.out.println("Block 202:");
-        bE.printBlock(t.translate(202));
+        bE.printBlock(t.translate(202), 4, 4);
         t.translate(421);
 
 
@@ -88,7 +88,7 @@ public class Test
     private boolean testBoard()
     {
         Board board = new Board();
-        board.buildCompleteBlock();
+        board.buildCompleteBlock(4, 4);
         return true;
     }
 

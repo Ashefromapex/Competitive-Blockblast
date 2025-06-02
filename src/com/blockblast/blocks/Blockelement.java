@@ -257,39 +257,40 @@ public class Blockelement extends Block
     }
 
 
-    public void printBlock(Blockelement b)
-    {
 
-        //testfield
+    public void printBlock(Blockelement b,int x, int y)
+    {
         int[][] arr = new int[8][8];
 
 
         //funktioniert gerasde nur mit dem 10x, 20x, 31x, 44x block, weil Nachbarn nicht mitgenommen werden
-        int x = 4;
-        int y = 4;
+
+        //testfield
+
         if(!b.isEnd())
         {
             arr[x][y] = 1;
             //this is where I would put my visualizeBlock() ... if I had one -Lami
+            b.printNeighbours();
             if(!b.left.isEnd())
             {
-                arr[x - 1][y] = 1;
-                b.printBlock(b.left);
+
+                b.printBlock(b.left, x-1, y);
             }
             if(!b.right.isEnd())
             {
-                arr[x + 1][y] = 1;
-                b.printBlock(b.right);
+
+                b.printBlock(b.right, x+1, y);
             }
             if(!b.below.isEnd())
             {
-                arr[x][y + 1] = 1;
-                b.printBlock(b.below);
+
+                b.printBlock(b.below, x, y+1);
             }
             if(!b.above.isEnd())
             {
-                arr[x][y - 1] = 1;
-                b.printBlock(b.above);
+
+                b.printBlock(b.above, x, y-1);
             }
         }
         for(int i = 0; i < 8; i++)
@@ -300,5 +301,15 @@ public class Blockelement extends Block
             }
             System.out.println();
         }
+    }
+
+    public void printNeighbours()
+    {
+        System.out.println("Neighbours:" + this);
+        System.out.println(this.above);
+        System.out.println(this.below);
+        System.out.println(this.left);
+        System.out.println(this.right);
+        System.out.println();
     }
 }

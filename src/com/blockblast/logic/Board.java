@@ -86,13 +86,13 @@ public class Board
 
 
 
-    public void buildCompleteBlock()
+    public void buildCompleteBlock(int x, int y)
     {
         System.out.println();
         int code = bA.generateBlock();
         System.out.println(code);
         System.out.println();
-        bE.printBlock(t.translate(code));
+        bE.printBlock(t.translate(code),x , y);
 
     }
 

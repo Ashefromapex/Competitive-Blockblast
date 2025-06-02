@@ -2,6 +2,8 @@ package com.blockblast.blocks;
 
 public abstract class Block
 {
+
+
     protected abstract void insertl(Block b);
     protected abstract void insertr(Block b);
     protected abstract void inserta(Block b);
@@ -9,6 +11,9 @@ public abstract class Block
     public abstract Block rotate(int r);
     public abstract Block buildBlock(int ammount, int type);
     public abstract boolean isEnd();
-    public void printBlock(Block b)
+    public void printBlock(Block b, int x, int y)
     {}
+
+    protected void printNeighbours() {
+    }
 }
