@@ -70,11 +70,11 @@ public class Translator
             }
             if(!root.below.isEnd())
             {
-                arr[x][y - 1] = 1;
+                arr[x][y + 1] = 1;
             }
             if(!root.above.isEnd())
             {
-                arr[x][y + 1] = 1;
+                arr[x][y - 1] = 1;
             }
         }
         for(int i = 0; i < 8; i++)

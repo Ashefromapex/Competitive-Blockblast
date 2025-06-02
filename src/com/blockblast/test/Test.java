@@ -2,6 +2,7 @@ package com.blockblast.test;
 
 //import packages
 import com.blockblast.controller.controller;
+import com.blockblast.logic.Board;
 import com.blockblast.network.Ip;
 import com.blockblast.storage.Data;
 import com.blockblast.logic.Algo;
@@ -22,7 +23,8 @@ public class Test
         testIp() &&
         testData() &&
         testAlgo() &&
-        testGui())
+        testGui() &&
+        testBoard())
         {
             System.out.println("All tests passed successfully!");
         }
@@ -79,6 +81,12 @@ public class Test
     private boolean testGui()
     {
 
+        return true;
+    }
+    private boolean testBoard()
+    {
+        Board board = new Board();
+        board.buildCompleteBlock();
         return true;
     }
 

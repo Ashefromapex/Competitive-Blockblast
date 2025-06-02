@@ -77,6 +77,19 @@ public class Board
         }
     }
 
+    BlockAlgo bA = new BlockAlgo();
+    Translator t = new Translator();
+
+
+    public void buildCompleteBlock()
+    {
+        System.out.println();
+        int code = bA.generateBlock();
+        System.out.println(code);
+        System.out.println();
+        t.printBlock(t.translate(code));
+
+    }
 
 
 }
