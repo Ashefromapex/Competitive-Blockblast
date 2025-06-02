@@ -9,4 +9,6 @@ public abstract class Block
     public abstract Block rotate(int r);
     public abstract Block buildBlock(int ammount, int type);
     public abstract boolean isEnd();
+    public void printBlock(Block b)
+    {}
 }

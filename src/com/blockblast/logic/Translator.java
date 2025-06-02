@@ -6,13 +6,13 @@ import com.blockblast.blocks.BlockEnd;
 
 public class Translator
 {
-    Block root;
+    Blockelement root;
     public Translator()
     {
         root = new Blockelement();
     }
 
-    public Block translate(int code)
+    public Blockelement translate(int code)
     {
         //decode code
         int tmp = code % 100;
@@ -48,43 +48,6 @@ public class Translator
         }
         return root.rotate(rotation);
     }
-    public void printBlock(Block b)
-    {
-        //testfield
-        int[][] arr = new int[8][8];
-        Blockelement root = (Blockelement) b;
 
-        //funktioniert gerasde nur mit dem zweier block kein bock mehr zu machen und auch keinm plan tbh
-        int x = 4;
-        int y = 4;
-        if(!root.isEnd())
-        {
-            arr[x][y] = 1;
-            if(!root.left.isEnd())
-            {
-                arr[x - 1][y] = 1;
-            }
-            if(!root.right.isEnd())
-            {
-                arr[x + 1][y] = 1;
-            }
-            if(!root.below.isEnd())
-            {
-                arr[x][y + 1] = 1;
-            }
-            if(!root.above.isEnd())
-            {
-                arr[x][y - 1] = 1;
-            }
-        }
-        for(int i = 0; i < 8; i++)
-        {
-            for(int j = 0; j < 8; j++)
-            {
-                System.out.print(arr[j][i]+ " ");
-            }
-            System.out.println();
-        }
-    }
 
 }

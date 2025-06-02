@@ -30,7 +30,7 @@ public class Blockelement extends Block
     {
         below = b;
     }
-    public Block rotate(int r)
+    public Blockelement rotate(int r)
     {
         //recursion magic
         Block tmp;
@@ -68,14 +68,15 @@ public class Blockelement extends Block
 
 
     }
-    public Block buildBlock(int ammount, int type)
+    public Blockelement buildBlock(int ammount, int type)
     {
+        Blockelement b = new Blockelement();
         switch(ammount)
         {
             case 1:
                 if(type == 0)
                 {
-                    return this;
+                    return b;
                 }
                 else
                 {
@@ -90,8 +91,8 @@ public class Blockelement extends Block
                 }
                 else if(type == 0)
                 {
-                    this.insertr(new Blockelement());
-                    return this;
+                    b.insertr(new Blockelement());
+                    return b;
                 }
                 else
                 {
@@ -105,15 +106,15 @@ public class Blockelement extends Block
                     //line
                     Blockelement tmp = new Blockelement();
                     tmp.insertr(new Blockelement());
-                    this.insertr(tmp);
-                    return this;
+                    b.insertr(tmp);
+                    return b;
                 }
                 else if(type == 1)
                 {
                     //dorito thing
-                    this.insertr(new Blockelement());
-                    this.insertb(new Blockelement());
-                    return this;
+                    b.insertr(new Blockelement());
+                    b.insertb(new Blockelement());
+                    return b;
                 }
                 else
                 {
@@ -130,36 +131,36 @@ public class Blockelement extends Block
                         Blockelement tmp02 = new Blockelement();
                         tmp02.insertr(new Blockelement());
                         tmp01.insertr(tmp02);
-                        this.insertr(tmp01);
-                        return this;
+                        b.insertr(tmp01);
+                        return b;
                     case 1:
                         //BLÖCK
                         Blockelement tmp11 = new Blockelement();
                         tmp11.insertb(new Blockelement());
-                        this.insertr(tmp11);
-                        this.insertb(new Blockelement());
-                        return this;
+                        b.insertr(tmp11);
+                        b.insertb(new Blockelement());
+                        return b;
                     case 2:
                         //L
                         Blockelement tmp21 = new Blockelement();
                         tmp21.insertb(new Blockelement());
-                        this.insertb(tmp21);
-                        this.insertr(new Blockelement());
-                        return this;
+                        b.insertb(tmp21);
+                        b.insertr(new Blockelement());
+                        return b;
                     case 3:
                         //ich will nicht mehr
                         Blockelement tmp31 = new Blockelement();
                         Blockelement tmp32 = new Blockelement();
                         tmp31.insertr(new Blockelement());
                         tmp32.inserta(tmp32);
-                        this.insertr(tmp32);
-                        return this;
+                        b.insertr(tmp32);
+                        return b;
                     case 4:
                         //fortnite
-                        this.inserta(new Blockelement());
-                        this.insertr(new Blockelement());
-                        this.insertb(new Blockelement());
-                        return this;
+                        b.inserta(new Blockelement());
+                        b.insertr(new Blockelement());
+                        b.insertb(new Blockelement());
+                        return b;
                     default:
                         System.out.println("NO VALID TYPE");
 
@@ -175,8 +176,8 @@ public class Blockelement extends Block
                     tmp1.insertr(new Blockelement());
                     tmp2.insertr(tmp1);
                     tmp3.insertr(tmp2);
-                    this.insertr(tmp3);
-                    return this;
+                    b.insertr(tmp3);
+                    return b;
                 }
                 else if (type == 1)
                 {
@@ -187,8 +188,8 @@ public class Blockelement extends Block
                     tmp1.insertb(new Blockelement());
                     tmp2.insertb(tmp1);
                     tmp3.insertr(tmp2);
-                    this.insertr(tmp3);
-                    return this;
+                    b.insertr(tmp3);
+                    return b;
                 }
                 else
                 {
@@ -204,11 +205,11 @@ public class Blockelement extends Block
                     Blockelement tmp2 = new Blockelement();
                     Blockelement tmp3 = new Blockelement();
                     tmp1.insertr(new Blockelement());
-                    this.insertr(tmp1);
+                    b.insertr(tmp1);
                     tmp2.insertr(new Blockelement());
                     tmp3.insertr(tmp2);
-                    this.insertb(tmp3);
-                    return this;
+                    b.insertb(tmp3);
+                    return b;
                 }
                 else
                 {
@@ -235,9 +236,9 @@ public class Blockelement extends Block
                     tmp4.insertb(tmp2);
                     //final line
                     tmp5.insertr(new Blockelement());
-                    this.insertr(tmp5);
-                    this.insertb(tmp4);
-                    return this;
+                    b.insertr(tmp5);
+                    b.insertb(tmp4);
+                    return b;
                 }
                 else
                 {
@@ -246,12 +247,58 @@ public class Blockelement extends Block
                 }
             default:
                 System.out.println("wrong ammount");
-                return this;
+                return b;
         }
-        return this;
+        return b;
     }
     public boolean isEnd()
     {
         return false;
+    }
+
+
+    public void printBlock(Blockelement b)
+    {
+
+        //testfield
+        int[][] arr = new int[8][8];
+
+
+        //funktioniert gerasde nur mit dem 10x, 20x, 31x, 44x block, weil Nachbarn nicht mitgenommen werden
+        int x = 4;
+        int y = 4;
+        if(!b.isEnd())
+        {
+            arr[x][y] = 1;
+            //this is where I would put my visualizeBlock() ... if I had one -Lami
+            if(!b.left.isEnd())
+            {
+                arr[x - 1][y] = 1;
+                b.printBlock(b.left);
+            }
+            if(!b.right.isEnd())
+            {
+                arr[x + 1][y] = 1;
+                b.printBlock(b.right);
+            }
+            if(!b.below.isEnd())
+            {
+                arr[x][y + 1] = 1;
+                b.printBlock(b.below);
+            }
+            if(!b.above.isEnd())
+            {
+                arr[x][y - 1] = 1;
+                b.printBlock(b.above);
+            }
+        }
+        for(int i = 0; i < 8; i++)
+        {
+            for(int j = 0; j < 8; j++)
+            {
+                System.out.print(arr[j][i]+ " ");
+            }
+            System.out.println();
+        }
     }
 }

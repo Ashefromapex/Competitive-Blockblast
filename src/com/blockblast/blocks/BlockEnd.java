@@ -29,4 +29,8 @@ public class BlockEnd extends Block {
     {
         return true;
     }
+    public void printBlock(Block b)
+    {
+
+    }
 }

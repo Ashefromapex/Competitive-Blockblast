@@ -1,6 +1,7 @@
 package com.blockblast.test;
 
 //import packages
+import com.blockblast.blocks.Blockelement;
 import com.blockblast.controller.controller;
 import com.blockblast.logic.Board;
 import com.blockblast.network.Ip;
@@ -67,12 +68,13 @@ public class Test
     {
         //testing of translator
         Translator t = new Translator();
+        Blockelement bE = new Blockelement();
         int[][] arr = new int[8][8];
         //for code 201:
         System.out.println("Block 201:");
-        t.printBlock(t.translate(201));
+        bE.printBlock(t.translate(201));
         System.out.println("Block 202:");
-        t.printBlock(t.translate(202));
+        bE.printBlock(t.translate(202));
         t.translate(421);
 
 

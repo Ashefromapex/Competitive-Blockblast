@@ -56,7 +56,7 @@ public class BlockAlgo
             amount = 9;
             typ = 0;
         }
-        rotation = rand.nextInt(4);
+        rotation = rand.nextInt(4)+1;
         blockinfo = amount * 100 + typ * 10 + rotation;
         return blockinfo;
     }
