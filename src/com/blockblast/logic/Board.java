@@ -2,6 +2,9 @@ package com.blockblast.logic;
 
 //import java.lang.reflect.Array;
 
+import com.blockblast.blocks.Block;
+import com.blockblast.blocks.Blockelement;
+
 public class Board
 {
     int[][] board;
@@ -77,6 +80,21 @@ public class Board
         }
     }
 
+    BlockAlgo bA = new BlockAlgo();
+    Translator t = new Translator();
+    Blockelement bE = new Blockelement();
+
+
+
+    public void buildCompleteBlock(int x, int y)
+    {
+        System.out.println();
+        int code = bA.generateBlock();
+        System.out.println(code);
+        System.out.println();
+        bE.printBlock(t.translate(code),x , y);
+
+    }
 
 
 }
