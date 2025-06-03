@@ -36,9 +36,28 @@ public class Board
 
     public boolean checkPlacement()
     {
-        return true;
+        int x = 2;
+        if ( x == 1 /* da muss noch was gescheids rein, kp wie man checkt ob das geht oder nicht*/)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
-
+    // wird ausgeführt wenn der nutzer den block platzieren will
+    public void placeBlock()
+    {
+        if (this.checkPlacement())
+        {
+            //blockplatzieren
+        }
+        else
+        {
+            System.out.println("Placement failed");
+        }
+    }
 
 
 
