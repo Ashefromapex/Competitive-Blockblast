@@ -3,6 +3,8 @@ package com.blockblast.test;
 //import packages
 import com.blockblast.blocks.Blockelement;
 import com.blockblast.controller.controller;
+import com.blockblast.gui.window.Launcher;
+import com.blockblast.gui.window.Window;
 import com.blockblast.logic.Board;
 import com.blockblast.network.Ip;
 import com.blockblast.storage.Data;
@@ -10,6 +12,8 @@ import com.blockblast.logic.Algo;
 import com.blockblast.gui.Gui;
 import com.blockblast.logic.Translator;
 import com.blockblast.blocks.Block;
+
+import javax.swing.*;
 
 public class Test
 {
@@ -93,6 +97,16 @@ public class Test
         board.buildCompleteBlock(4, 4);
         return true;
     }
+
+    private boolean TestWindow()
+    {
+        Window w = new Window();
+
+        return true;
+
+    }
+
+
 
 
 }
