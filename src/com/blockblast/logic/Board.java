@@ -1,7 +1,6 @@
 package com.blockblast.logic;
 
 //import java.lang.reflect.Array;
-
 import com.blockblast.blocks.Block;
 import com.blockblast.blocks.Blockelement;
 
@@ -10,7 +9,7 @@ public class Board
     int[][] board;
     public Board()
     {
-
+        System.out.println("Board created");
         board = new int[8][8];
         for(int x = 0; x < 8; x++) //set all values in matrix to false
         {
@@ -19,6 +18,11 @@ public class Board
                 board[x][y] = 0;//x is row and y is column
             }
         }
+    }
+
+    public int[][] getBoard()
+    {
+        return board;
     }
 
     public void check_field(int[][] board)//score ?
@@ -30,7 +34,30 @@ public class Board
         }
     }
 
-
+    public boolean checkPlacement()
+    {
+        int x = 2;
+        if ( x == 1 /* da muss noch was gescheids rein, kp wie man checkt ob das geht oder nicht*/)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    // wird ausgeführt wenn der nutzer den block platzieren will
+    public void placeBlock()
+    {
+        if (this.checkPlacement())
+        {
+            //blockplatzieren
+        }
+        else
+        {
+            System.out.println("Placement failed");
+        }
+    }
 
 
 
