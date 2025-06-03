@@ -258,8 +258,12 @@ public class Blockelement extends Block
 
 
 
-    public void printBlock(Blockelement b,int x, int y)
+    public void printBlock(Blockelement c,int x, int y)
     {
+        Block tmp1 = c.right;
+        Block tmp2 = c.left;
+        Block tmp3= c.below;
+        Block tmp4 = c.above;
         int[][] arr = new int[8][8];
 
 
@@ -267,30 +271,30 @@ public class Blockelement extends Block
 
         //testfield
 
-        if(!b.isEnd())
+        if(!c.isEnd())
         {
             arr[x][y] = 1;
             //this is where I would put my visualizeBlock() ... if I had one -Lami
-            b.printNeighbours();
-            if(!b.left.isEnd())
+            c.printNeighbours();
+            if(!c.left.isEnd())
             {
-
-                b.printBlock(b.left, x-1, y);
+                tmp2 = (Blockelement)c.left;
+                c.printBlock(tmp2, x-1, y);
             }
-            if(!b.right.isEnd())
+            if(!c.right.isEnd())
             {
-
-                b.printBlock(b.right, x+1, y);
+                tmp1 = (Blockelement)c.right;
+                c.printBlock(tmp1, x+1, y);
             }
-            if(!b.below.isEnd())
+            if(!c.below.isEnd())
             {
-
-                b.printBlock(b.below, x, y+1);
+                tmp3 = (Blockelement)c.below;
+                c.printBlock(c.below, x, y+1);
             }
-            if(!b.above.isEnd())
+            if(!c.above.isEnd())
             {
-
-                b.printBlock(b.above, x, y-1);
+                tmp4 = (Blockelement)c.above;
+                c.printBlock(c.above, x, y-1);
             }
         }
         for(int i = 0; i < 8; i++)
