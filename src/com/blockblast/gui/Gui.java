@@ -2,6 +2,9 @@ package com.blockblast.gui;
 import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.Graphics;
+
+import com.blockblast.blocks.BlockEnd;
+import com.blockblast.blocks.Blockelement;
 import com.blockblast.gui.window.Window;
 public class Gui extends JPanel {
 
@@ -9,10 +12,17 @@ public class Gui extends JPanel {
     private JPanel[] panel;
     private  BlockGui block;
 
+    Blockelement b1;
+    Blockelement b2;
+    Blockelement b3;
+
     public Gui()
     {
         //create Window
         com.blockblast.gui.window.Window w = new com.blockblast.gui.window.Window();
+        b1 = new Blockelement();
+        b2 = new Blockelement();
+        b3 = new Blockelement();
     }
     // die methode sollte eigentlich den block visualisieren
     public void blockVisualisieren(int Blockart, char Rotation, Graphics g)
@@ -27,6 +37,17 @@ public class Gui extends JPanel {
         }
 
 
+
+    }
+
+    public void pullBlock(Blockelement a, Blockelement b, Blockelement c)
+    {
+          b1 = a;
+          b2 = b;
+          b3 = c;
+    }
+    public void visualizeBlock()
+    {
 
     }
 

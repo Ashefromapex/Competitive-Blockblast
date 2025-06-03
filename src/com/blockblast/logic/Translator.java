@@ -31,8 +31,8 @@ public class Translator
 
         if(type == 0)
         {
-            //0 Types need to be roated differently
-            if(ammount == 1 || ammount == 6 || ammount == 9) //block dont need to be rotated at all
+            //0 Types need to be rotated differently
+            if(ammount == 1 || ammount == 9) //block dont need to be rotated at all
             {
                 return root;
             }

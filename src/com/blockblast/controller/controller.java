@@ -8,7 +8,7 @@ import com.blockblast.network.Ip;
 public class controller
 {
     private Gui gui; //GUI object
-    private Algo algo; //Logic object
+    private Algo alg; //Logic object
 
     public controller()
     {
@@ -22,6 +22,14 @@ public class controller
     public void startSP()
     {
         //start single player
+        alg = new Algo();
+        //Block generieren
+        alg.genBlocks();
+        //push blocks to gui
+        gui = new Gui();
+        gui.pullBlock(alg.getBlock1(), alg.getBlock2(), alg.getBlock3());
+
+
     }
     public void startMP()
     {
