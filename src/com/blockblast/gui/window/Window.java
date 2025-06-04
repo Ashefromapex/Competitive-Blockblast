@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-import static jdk.internal.org.jline.utils.InfoCmp.Capability.buttons;
 
 public class Window extends JFrame {
 
@@ -21,14 +20,15 @@ public class Window extends JFrame {
 
         //MainPanel erstellen
         JPanel mainPanel = new JPanel();
-        setLayout(new GridLayout(5,5));
-        mainPanel.setSize(1000,1000);
+        setLayout(new BorderLayout(5,5));
+        setLayout(new GridLayout(8,50));
+        mainPanel.setSize(5000,5000);
         mainPanel.setBorder(BorderFactory.createEmptyBorder(50,50,50,50));
         mainPanel.setBackground(Color.DARK_GRAY);
-        mainPanel.add;
+        ;
 
         //MainPanel Buttons
-        GridLayout gridLayout = new GridLayout(5,5);
+        GridLayout gridLayout = new GridLayout(8,8);
 
         JButton[] buttons = new JButton[64];
         for (int i = 0; i < 64; i++)
@@ -41,9 +41,8 @@ public class Window extends JFrame {
             mainPanel.add(buttons[i]);
 
         }
-
-
         mainPanel.setVisible(true);
+        add(mainPanel, BorderLayout.CENTER);
 
         //Button erstellen south
         JPanel buttonPanel = new JPanel();
@@ -52,6 +51,9 @@ public class Window extends JFrame {
         buttonPanel.add(repeatButton);
         buttonPanel.add(startButton);
         buttonPanel.setSize(50,50);
+        buttonPanel.setBackground(Color.blue);
+        add(buttonPanel, BorderLayout.SOUTH);
+
 
 
 
@@ -79,7 +81,7 @@ public class Window extends JFrame {
         p.add(label);*/
 
         //gibt ideale Größe an
-        /*pack();*/
+        //pack();
 
         //verdrahtung controller mit buttons
         //Controller c = new Controller();
