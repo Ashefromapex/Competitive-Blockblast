@@ -14,6 +14,7 @@ import com.blockblast.logic.Translator;
 import com.blockblast.blocks.Block;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
 
 public class Test
 {
@@ -30,6 +31,7 @@ public class Test
         //testAlgo() && funktioniert nicht
         testGui()
         //testBoard() funktioniert nicht
+
             )
         {
             System.out.println("All tests passed successfully!");
@@ -98,9 +100,12 @@ public class Test
         return true;
     }
 
-    private boolean TestWindow()
+
+    private boolean TestWindow(ActionListener listener)
     {
-        Window w = new Window();
+
+        Window window = new Window(listener);
+        window.setVisible(true);
 
         return true;
 
