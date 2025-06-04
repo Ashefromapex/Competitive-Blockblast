@@ -3,7 +3,7 @@ package com.blockblast.test;
 //import packages
 import com.blockblast.blocks.Blockelement;
 import com.blockblast.controller.controller;
-import com.blockblast.gui.window.Launcher;
+import com.blockblast.gui.window.Controller;
 import com.blockblast.gui.window.Window;
 import com.blockblast.logic.Board;
 import com.blockblast.network.Ip;
@@ -28,11 +28,9 @@ public class Test
         if(testController() &&
         testIp() &&
         testData() &&
-        //testAlgo() && funktioniert nicht
-        testGui()
-        //testBoard() funktioniert nicht
-
-            )
+        testAlgo() &&
+        testGui() &&
+        testBoard())
         {
             System.out.println("All tests passed successfully!");
         }
@@ -76,14 +74,12 @@ public class Test
         //testing of translator
         Translator t = new Translator();
         Blockelement bE = t.translate(301);
-        int[][] arr = new int[8][8];
         //for code 201:
         System.out.println("Block 201:");
-        bE.printBlock(4, 4);
+        //bE.printBlock(4, 4);
         bE = t.translate(202);
         System.out.println("Block 202:");
-        bE.printBlock(4,4);
-        t.translate(421);
+        //bE.printBlock(4,4);
 
 
         return true;
@@ -96,7 +92,10 @@ public class Test
     private boolean testBoard()
     {
         Board board = new Board();
-        board.buildCompleteBlock(4, 4);
+        controller c = new controller();
+        board.buildCompleteBlock(c,4, 4);
+
+        c.printTestfield();
         return true;
     }
 

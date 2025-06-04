@@ -10,9 +10,9 @@ public class Algo
     Board board;
     Translator t;
     BlockAlgo ba;
-    Blockelement b1;
-    Blockelement b2;
-    Blockelement b3;
+    public Blockelement b1;
+    public Blockelement b2;
+    public Blockelement b3;
     public Algo()
     {
         board = new Board();

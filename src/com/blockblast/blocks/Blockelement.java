@@ -1,5 +1,7 @@
 package com.blockblast.blocks;
 
+import com.blockblast.controller.controller;
+
 public class Blockelement extends Block
 {
     public Block left;
@@ -258,45 +260,41 @@ public class Blockelement extends Block
 
 
 
-    public void printBlock(int x, int y)
+
+    public void printBlock(controller c, int x, int y)
     {
-
-        int[][] arr = new int[8][8];
-
-
-        //funktioniert gerasde nur mit dem 10x, 20x, 31x, 44x block, weil Nachbarn nicht mitgenommen werden
-
-        //testfield
-
         if(!this.isEnd())
         {
-            arr[x][y] = 1;
+            c.testfield[x][y] = 1;
             //this is where I would put my visualizeBlock() ... if I had one -Lami
-            this.printNeighbours();
             if(!this.left.isEnd())
             {
-                this.printBlock(x-1, y);
+                if (x>0)
+                {
+                    this.printBlock(c,x-1, y);
+                }
             }
             if(!this.right.isEnd())
             {
-                this.printBlock(x+1, y);
+                if(x<7)
+                {
+                    this.printBlock(c, x+1, y);
+                }
             }
             if(!this.below.isEnd())
             {
-                this.printBlock(x, y+1);
+                if(y<7)
+                {
+                    this.printBlock(c, x, y + 1);
+                }
             }
             if(!this.above.isEnd())
             {
-                this.printBlock(x, y-1);
+                if(y>0)
+                {
+                    this.printBlock(c, x, y-1);
+                }
             }
-        }
-        for(int i = 0; i < 8; i++)
-        {
-            for(int j = 0; j < 8; j++)
-            {
-                System.out.print(arr[j][i]+ " ");
-            }
-            System.out.println();
         }
     }
 

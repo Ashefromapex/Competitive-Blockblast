@@ -1,11 +1,15 @@
 package com.blockblast.logic;
 
 //import java.lang.reflect.Array;
-import com.blockblast.blocks.Block;
 import com.blockblast.blocks.Blockelement;
+import com.blockblast.controller.controller;
 
 public class Board
 {
+    Blockelement b1;
+    Blockelement b2;
+    Blockelement b3;
+
     int[][] board;
     public Board()
     {
@@ -34,22 +38,79 @@ public class Board
         }
     }
 
-    public boolean checkPlacement()
+    public void getBlocks(Blockelement a, Blockelement b, Blockelement c)
     {
-        int x = 2;
-        if ( x == 1 /* da muss noch was gescheids rein, kp wie man checkt ob das geht oder nicht*/)
-        {
-            return true;
+
+    }
+
+
+    public boolean checkPlacement(int blockx, int x, int y)
+    {
+       // int x = 2;
+       // if ( x == 1 /* da muss noch was gescheids rein, kp wie man checkt ob das geht oder nicht*/)
+       // {
+            /*switch(blockx)
+            {
+                case 1:
+                    while(board[x][y] == 0)
+                    {
+                        //board[x][y] = 1; just wanna check
+                        b1.above.checkPlacement(blockx,)
+                        b1.left.
+                        b1.below
+                        b1.right.
+                        break;
+                    }
+
+                case 2:
+                    b2.
+                    break;
+
+                case 3:
+                    b3.
+                    break;
+
+
+
+
+
+            }
+
+
+
+       /*     return true;
         }
         else
         {
-            return false;
+        return false;
         }
+        */
+        return false;
     }
-    // wird ausgeführt wenn der nutzer den block platzieren will
-    public void placeBlock()
+
+    public boolean checkAll()
     {
-        if (this.checkPlacement())
+        for(int z = 0; z < 3; z++)
+        {
+            for (int x = 0; x < 8; x++)
+            {
+                for (int y = 0; y < 8; y++)
+                {
+                    if(board[x][y] == 0)
+                    {
+                        checkPlacement(z, x, y);
+                    }
+                }
+            }
+        }
+        return true; // nur damit fehlermedlung weg ist sonst ist des eigl nicht hier bzw ohne gedanken hier
+    }
+
+
+    // wird ausgeführt wenn der nutzer den block platzieren will
+    public void placeBlock(int blockx, int x, int y)
+    {
+        if (this.checkPlacement(blockx, x, y))
         {
             //blockplatzieren
         }
@@ -107,19 +168,20 @@ public class Board
         }
     }
 
-    BlockAlgo bA = new BlockAlgo();
-    Translator t = new Translator();
-    Blockelement bE = new Blockelement();
 
 
 
-    public void buildCompleteBlock(int x, int y)
+
+    public void buildCompleteBlock(controller c, int x, int y)
     {
-        System.out.println();
+        BlockAlgo bA = new BlockAlgo();
         int code = bA.generateBlock();
+        Translator t = new Translator();
+        Blockelement bE = t.translate(code);
+        System.out.println();
         System.out.println(code);
         System.out.println();
-        bE.printBlock(t.translate(code),x , y);
+        bE.printBlock(c, x , y);
 
     }
 
