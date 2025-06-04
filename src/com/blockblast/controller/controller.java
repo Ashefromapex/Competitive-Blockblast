@@ -8,11 +8,12 @@ import com.blockblast.network.Ip;
 public class controller
 {
     private Gui gui; //GUI object
-    private Algo alg; //Logic object
+    private Algo alg;//Logic object
+    public int [] [] testfield = new int [8][8];
 
     public controller()
     {
-
+        clearTestfeld();
     }
     //handles communication between the GUI and the logic
     public void start()
@@ -34,5 +35,27 @@ public class controller
     public void startMP()
     {
         //start multiplayer
+    }
+
+    public void printTestfield()
+    {
+        for(int i = 0; i < 8; i++)
+        {
+            for(int j = 0; j < 8; j++)
+            {
+                System.out.print(testfield[j][i]+ " ");
+            }
+            System.out.println();
+        }
+    }
+    public void clearTestfeld()
+    {
+        for(int i = 0; i < 8; i++)
+        {
+            for(int j = 0; j < 8; j++)
+            {
+                testfield[j][i] = 0;
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.blockblast.logic;
 //import java.lang.reflect.Array;
 import com.blockblast.blocks.Block;
 import com.blockblast.blocks.Blockelement;
+import com.blockblast.controller.controller;
 
 public class Board
 {
@@ -107,19 +108,20 @@ public class Board
         }
     }
 
-    BlockAlgo bA = new BlockAlgo();
-    Translator t = new Translator();
-    Blockelement bE = new Blockelement();
 
 
 
-    public void buildCompleteBlock(int x, int y)
+
+    public void buildCompleteBlock(controller c, int x, int y)
     {
-        System.out.println();
+        BlockAlgo bA = new BlockAlgo();
         int code = bA.generateBlock();
+        Translator t = new Translator();
+        Blockelement bE = t.translate(code);
+        System.out.println();
         System.out.println(code);
         System.out.println();
-        bE.printBlock(t.translate(code),x , y);
+        bE.printBlock(c, x , y);
 
     }
 
