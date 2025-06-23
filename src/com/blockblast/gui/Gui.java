@@ -31,21 +31,7 @@ public class Gui extends JFrame implements ActionListener {
         b2 = new Blockelement();
         b3 = new Blockelement();
     }
-    // die methode sollte eigentlich den block visualisieren
-    public void blockVisualisieren(int Blockart, char Rotation, Graphics g)
-    {
-        int[][] array = block.blockErstellen(Blockart,Rotation);
-        for( int i = 0; i < array.length; i++ ) {
-            for( int j = 0; j < array[0].length; j++ ) {
-                if( array[i][j] == 0 ) g.setColor( Color.red );
-                else g.setColor( Color.black );
-                g.drawRect( 10*i, 10*j, 10, 10 );
-            }
-        }
 
-
-
-    }
 
     public void pullBlock(Blockelement a, Blockelement b, Blockelement c)
     {
