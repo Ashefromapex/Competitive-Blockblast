@@ -76,7 +76,20 @@ public class Test
     {
         Algo a = new Algo();
         a.genBlocks();
-
+        Board b = new Board();
+        b.getBlocks(a.getBlock1(),a.getBlock2(),a.getBlock3());
+        //b.printi();
+        //b.checkPlacement(2,8,0);
+        if(b.checkPlacement(1,3,4))
+        {
+            System.out.println("Algo test passed successfully!");
+        }
+        else
+        {
+            System.out.println("Some tests failed. Please check the output for details.");
+        }
+        //b.checkAll();
+        //b.printi();
         return true;
     }
     private boolean testGui()

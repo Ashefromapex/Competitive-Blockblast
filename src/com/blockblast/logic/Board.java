@@ -4,76 +4,123 @@ package com.blockblast.logic;
 import com.blockblast.blocks.Blockelement;
 import com.blockblast.controller.controller;
 
-public class Board
-{
-    Blockelement b1;
-    Blockelement b2;
-    Blockelement b3;
+import java.util.Arrays;
 
+public class Board {
+    public Blockelement b1;
+    public Blockelement b2;
+    public Blockelement b3;
+    int[][] faki;
     int[][] board;
-    public Board()
-    {
+    boolean[][][] allPossible;
+    public Board() {
         System.out.println("Board created");
         board = new int[8][8];
-        for(int x = 0; x < 8; x++) //set all values in matrix to false
-        {
-            for(int y = 0; y < 8; y++)
-            {
-                board[x][y] = 0;//x is row and y is column
-            }
-        }
+        faki = new int[8][8];
+        allPossible = new boolean[3][8][8];
     }
 
-    public int[][] getBoard()
-    {
+    public int[][] getBoard() {
         return board;
     }
 
     public void check_field(int[][] board)//score ?
     {
-        for (int x = 0; x < 8; x++)
-        {
+        for (int x = 0; x < 8; x++) {
             check_column(x);
             check_row(x);
         }
     }
 
-    public void getBlocks(Blockelement a, Blockelement b, Blockelement c)
-    {
-
+    public void getBlocks(Blockelement a, Blockelement b, Blockelement c) {
+        b1 = a;
+        b2 = b;
+        b3 = c;
     }
 
-
-    public boolean checkPlacement(int blockx, int x, int y)
+    public boolean[][][] getAllPossible()
     {
-       // int x = 2;
-       // if ( x == 1 /* da muss noch was gescheids rein, kp wie man checkt ob das geht oder nicht*/)
-       // {
-            /*switch(blockx)
+        checkAll();
+        return allPossible;
+    }
+
+    public boolean checkPlacement(int blockx, int x, int y) {
+        // int x = 2;
+        // if ( x == 1 /* da muss noch was gescheids rein, kp wie man checkt ob das geht oder nicht*/)
+        // {
+            switch(blockx)
             {
                 case 1:
-                    while(board[x][y] == 0)
-                    {
-                        //board[x][y] = 1; just wanna check
-                        b1.above.checkPlacement(blockx,)
-                        b1.left.
-                        b1.below
-                        b1.right.
-                        break;
-                    }
+                while(x >= 0 && y >= 0 && x < 8 && y < 8 && faki[x][y] < 2) {
+
+
+                        faki[x][y] = faki[x][y] + b1.checkPlacement(x, y);
+                        if (!b1.above.isEnd()) {
+                            checkPlacement(blockx, x, y - 1);
+                        }
+                        if (!b1.left.isEnd()) {
+                            checkPlacement(blockx, x - 1, y);
+                        }
+                        if (!b1.below.isEnd()) {
+                            checkPlacement(blockx, x, y + 1);
+                        }
+                        if (!b1.right.isEnd()) {
+                            checkPlacement(blockx, x + 1, y);
+                        }
+
+                        return true;
+
+
+                }
+                return false;
+
 
                 case 2:
-                    b2.
-                    break;
+                    while(x >= 0 && y >= 0 && x < 8 && y < 8 && faki[x][y] < 2) {
+
+                            faki[x][y] = faki[x][y] + b2.checkPlacement(x, y);
+                            if (!b2.above.isEnd()) {
+                                checkPlacement(blockx, x, y - 1);
+                            }
+                            if (!b2.left.isEnd()) {
+                                checkPlacement(blockx, x - 1, y);
+                            }
+                            if (!b2.below.isEnd()) {
+                                checkPlacement(blockx, x, y + 1);
+                            }
+                            if (!b2.right.isEnd()) {
+                                checkPlacement(blockx, x + 1, y);
+                            }
+
+                            return true;
+
+                        }
+
+
+                    return false;
 
                 case 3:
-                    b3.
-                    break;
+                    while(x >= 0 && y >= 0 && x < 8 && y < 8 && faki[x][y] < 2) {
+
+                            faki[x][y] = faki[x][y] + b3.checkPlacement(x, y);
+                            if (!b3.above.isEnd()) {
+                                checkPlacement(blockx, x, y - 1);
+                            }
+                            if (!b3.left.isEnd()) {
+                                checkPlacement(blockx, x - 1, y);
+                            }
+                            if (!b3.below.isEnd()) {
+                                checkPlacement(blockx, x, y + 1);
+                            }
+                            if (!b3.right.isEnd()) {
+                                checkPlacement(blockx, x + 1, y);
+                            }
+
+                            return true;
 
 
-
-
-
+                    }
+                    return false;
             }
 
 
@@ -88,6 +135,20 @@ public class Board
         return false;
     }
 
+    public boolean checkSpezField(int x, int y)//useless rn lmao
+    {
+        if (board[x][y] == 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+
     public boolean checkAll()
     {
         for(int z = 0; z < 3; z++)
@@ -96,9 +157,14 @@ public class Board
             {
                 for (int y = 0; y < 8; y++)
                 {
+                    faki = board;
                     if(board[x][y] == 0)
                     {
-                        checkPlacement(z, x, y);
+
+                        if(checkPlacement(z, x, y))
+                        {
+                            allPossible[z][x][y] = true;
+                        }
                     }
                 }
             }
@@ -110,9 +176,58 @@ public class Board
     // wird ausgeführt wenn der nutzer den block platzieren will
     public void placeBlock(int blockx, int x, int y)
     {
-        if (this.checkPlacement(blockx, x, y))
+        if (this.checkPlacement(blockx, x, y)) // or allPossible
         {
-            //blockplatzieren
+            switch(blockx) {
+                case 1:
+                    board[x][y] = board[x][y] + b1.placeBlock(x, y);
+                    if (!b1.above.isEnd()) {
+                        placeBlock(blockx, x, y - 1);
+                    }
+                    if (!b1.left.isEnd()) {
+                        placeBlock(blockx, x - 1, y);
+                    }
+                    if (!b1.below.isEnd()) {
+                        placeBlock(blockx, x, y + 1);
+                    }
+                    if (!b1.right.isEnd()) {
+                        placeBlock(blockx, x + 1, y);
+                    }
+                    break;
+
+
+                case 2:
+                    board[x][y] = board[x][y] + b2.placeBlock(x, y);
+                    if (!b2.above.isEnd()) {
+                        placeBlock(blockx, x, y - 1);
+                    }
+                    if (!b2.left.isEnd()) {
+                        placeBlock(blockx, x - 1, y);
+                    }
+                    if (!b2.below.isEnd()) {
+                        placeBlock(blockx, x, y + 1);
+                    }
+                    if (!b2.right.isEnd()) {
+                        placeBlock(blockx, x + 1, y);
+                    }
+                    break;
+
+                case 3:
+                    board[x][y] = board[x][y] + b3.placeBlock(x, y);
+                    if (!b3.above.isEnd()) {
+                        placeBlock(blockx, x, y - 1);
+                    }
+                    if (!b3.left.isEnd()) {
+                        placeBlock(blockx, x - 1, y);
+                    }
+                    if (!b3.below.isEnd()) {
+                        placeBlock(blockx, x, y + 1);
+                    }
+                    if (!b3.right.isEnd()) {
+                        placeBlock(blockx, x + 1, y);
+                    }
+                    break;
+            }
         }
         else
         {
@@ -185,7 +300,12 @@ public class Board
         return bE;
     }
 
-
+    public void printi()
+    {
+        System.out.println("faki" +"\n"+ Arrays.deepToString(faki));
+        System.out.println("board" +"\n"+ Arrays.deepToString(board));
+        System.out.println("allPossible" +"\n"+ Arrays.deepToString(allPossible));
+    }
 }
 
 

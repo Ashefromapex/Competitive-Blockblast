@@ -33,4 +33,7 @@ public class BlockEnd extends Block {
     {
 
     }
+
+
+    public int checkPlacement(int x, int i) {return 0;}
 }

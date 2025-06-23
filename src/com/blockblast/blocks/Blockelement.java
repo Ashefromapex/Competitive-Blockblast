@@ -321,4 +321,19 @@ public class Blockelement extends Block
         System.out.println(this.right);
         System.out.println();
     }
+
+    //@Override
+    public int checkPlacement(int x, int y)
+    {
+        return 1;
+    }
+
+    public int placeBlock(int x, int y) {
+    return 1;
+    }
+
+    //placeBlock() etc; oder so
+
+
+
 }
