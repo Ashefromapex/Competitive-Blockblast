@@ -14,10 +14,17 @@ import com.blockblast.logic.Translator;
 import com.blockblast.blocks.Block;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Test
 {
+    ActionListener listener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    };
     public static void Test()
     {
 
@@ -30,7 +37,8 @@ public class Test
         testData() &&
         testAlgo() &&
         testGui() &&
-        testBoard())
+        testBoard() &&
+        testWindow(listener))
         {
             System.out.println("All tests passed successfully!");
         }
@@ -92,7 +100,7 @@ public class Test
     }
 
 
-    private boolean TestWindow(ActionListener listener)
+    private boolean testWindow(ActionListener listener)
     {
 
         Window window = new Window(listener);
