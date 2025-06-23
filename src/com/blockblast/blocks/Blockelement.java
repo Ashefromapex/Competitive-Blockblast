@@ -157,14 +157,21 @@ public class Blockelement extends Block
                         b.insertl(new Blockelement());
                         return b;
                     case 4:
-                        //ich will nicht mehr
                         Blockelement tmp41 = new Blockelement();
                         Blockelement tmp42 = new Blockelement();
-                        tmp31.insertr(new Blockelement());
-                        tmp42.inserta(tmp42);
-                        b.insertr(tmp42);
+                        tmp41.insertb(tmp42);
+                        tmp42.insertr(new Blockelement());
+                        b.insertr(tmp41);
                         return b;
                     case 5:
+                        //ich will nicht mehr
+                        Blockelement tmp51 = new Blockelement();
+                        Blockelement tmp52 = new Blockelement();
+                        tmp51.insertr(new Blockelement());
+                        tmp52.inserta(tmp51);
+                        b.insertr(tmp52);
+                        return b;
+                    case 6:
                         //fortnite
                         b.inserta(new Blockelement());
                         b.insertr(new Blockelement());
@@ -268,38 +275,38 @@ public class Blockelement extends Block
 
 
 
-    public void printBlock(controller c, int x, int y)
+    public void printBlock( int x, int y)
     {
         if(!this.isEnd())
         {
-            c.testfield[x][y] = 1;
+
             //this is where I would put my visualizeBlock() ... if I had one -Lami
             if(!this.left.isEnd())
             {
                 if (x>0)
                 {
-                    this.printBlock(c,x-1, y);
+                    this.printBlock(x-1, y);
                 }
             }
             if(!this.right.isEnd())
             {
                 if(x<7)
                 {
-                    this.printBlock(c, x+1, y);
+                    this.printBlock( x+1, y);
                 }
             }
             if(!this.below.isEnd())
             {
                 if(y<7)
                 {
-                    this.printBlock(c, x, y + 1);
+                    this.printBlock( x, y + 1);
                 }
             }
             if(!this.above.isEnd())
             {
                 if(y>0)
                 {
-                    this.printBlock(c, x, y-1);
+                    this.printBlock( x, y-1);
                 }
             }
         }

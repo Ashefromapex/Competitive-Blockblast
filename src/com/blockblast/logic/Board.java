@@ -172,7 +172,7 @@ public class Board
 
 
 
-    public void buildCompleteBlock(controller c, int x, int y)
+    public Blockelement buildCompleteBlock( int x, int y)
     {
         BlockAlgo bA = new BlockAlgo();
         int code = bA.generateBlock();
@@ -181,8 +181,8 @@ public class Board
         System.out.println();
         System.out.println(code);
         System.out.println();
-        bE.printBlock(c, x , y);
-
+        bE.printBlock( x , y);
+        return bE;
     }
 
 
