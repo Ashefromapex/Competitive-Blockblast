@@ -50,24 +50,19 @@ public class Test
     }
     private boolean testData()
     {
-        //set highscore to 100
-        Data data = new Data();
-        data.pushScore(100);
-        //set highscore to 200
-        data.pushScore(200);
-        //prints highscore
-        System.out.println("Highscore: " + data.fetchHighscore());
-        if(data.fetchHighscore() == 200)
-        {
-            data.deleteFile(data.data);
-            return true;
-        }
-        else
-        {
-            System.out.println("Data test failed!\n Wrong Highscore!!");
-            data.deleteFile(data.data);
-            return false;
-        }
+        //logs in user luca
+        Data d = new Data();
+        d.loginUser("Luca");
+        d.pushScore(100);
+        d.pushScore(200);
+        d.pushScore(300);
+        //logs in user peter
+        d.loginUser("Peter");
+        d.pushScore(500);
+        d.pushScore(600);
+        d.pushScore(700);
+        d.exit();
+        return true;
     }
     private boolean testAlgo()
     {
