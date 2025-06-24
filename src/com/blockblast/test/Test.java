@@ -67,11 +67,11 @@ public class Test
     private boolean testAlgo()
     {
         Algo a = new Algo();
-        a.genBlocks();
         Board b = new Board();
+        a.genBlocks();
         b.getBlocks();
-        //b.printi();
-        //b.checkPlacement(2,8,0);
+        b.printi();
+        b.checkPlacement(2,7,0);
         if(b.checkPlacement(1,3,4))
         {
             System.out.println("Algo test passed successfully!");
@@ -80,8 +80,9 @@ public class Test
         {
             System.out.println("Some tests failed. Please check the output for details.");
         }
-        //b.checkAll();
-        //b.printi();
+        b.printi();
+        b.checkAll();
+        b.printi();
         return true;
     }
     private boolean testGui()

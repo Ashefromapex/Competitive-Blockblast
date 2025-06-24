@@ -55,7 +55,7 @@ public class Board {
         // {
             switch(blockx)
             {
-                case 1:
+                case 0:
                 while(x >= 0 && y >= 0 && x < 8 && y < 8 && faki[x][y] < 2) {
 
 
@@ -80,7 +80,7 @@ public class Board {
                 return false;
 
 
-                case 2:
+                case 1:
                     while(x >= 0 && y >= 0 && x < 8 && y < 8 && faki[x][y] < 2) {
 
                             faki[x][y] = faki[x][y] + b2.checkPlacement(x, y);
@@ -104,7 +104,7 @@ public class Board {
 
                     return false;
 
-                case 3:
+                case 2:
                     while(x >= 0 && y >= 0 && x < 8 && y < 8 && faki[x][y] < 2) {
 
                             faki[x][y] = faki[x][y] + b3.checkPlacement(x, y);
@@ -162,21 +162,32 @@ public class Board {
             {
                 for (int y = 0; y < 8; y++)
                 {
-                    faki = board;
-                    if(board[x][y] == 0)
-                    {
+                    copyBoardToFaki();
+
+
 
                         if(checkPlacement(z, x, y))
                         {
                             allPossible[z][x][y] = true;
                         }
-                    }
+
                 }
             }
         }
         return true; // nur damit fehlermedlung weg ist sonst ist des eigl nicht hier bzw ohne gedanken hier
     }
 
+
+    public void copyBoardToFaki()
+    {
+        for (int x = 0; x < 8; x++)
+        {
+            for (int y = 0; y < 8; y++)
+            {
+                faki[x][y] = board[x][y];
+            }
+        }
+    }
 
     // wird ausgeführt wenn der nutzer den block platzieren will
     public void placeBlock(int blockx, int x, int y)
