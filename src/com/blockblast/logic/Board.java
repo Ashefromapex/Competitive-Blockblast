@@ -10,6 +10,7 @@ public class Board {
     public Blockelement b1;
     public Blockelement b2;
     public Blockelement b3;
+    public Algo alg;
     int[][] faki;
     int[][] board;
     boolean[][][] allPossible;
@@ -18,6 +19,7 @@ public class Board {
         board = new int[8][8];
         faki = new int[8][8];
         allPossible = new boolean[3][8][8];
+        alg = new Algo();
     }
 
     public int[][] getBoard() {
@@ -32,10 +34,12 @@ public class Board {
         }
     }
 
-    public void getBlocks(Blockelement a, Blockelement b, Blockelement c) {
-        b1 = a;
-        b2 = b;
-        b3 = c;
+    public void getBlocks()
+    {
+      alg.genBlocks();
+      b1 = alg.b1;
+      b2 = alg.b2;
+      b3 = alg.b3;
     }
 
     public boolean[][][] getAllPossible()
@@ -44,13 +48,14 @@ public class Board {
         return allPossible;
     }
 
-    public boolean checkPlacement(int blockx, int x, int y) {
+    public boolean checkPlacement(int blockx, int x, int y)
+    {
         // int x = 2;
         // if ( x == 1 /* da muss noch was gescheids rein, kp wie man checkt ob das geht oder nicht*/)
         // {
             switch(blockx)
             {
-                case 1:
+                case 0:
                 while(x >= 0 && y >= 0 && x < 8 && y < 8 && faki[x][y] < 2) {
 
 
@@ -75,7 +80,7 @@ public class Board {
                 return false;
 
 
-                case 2:
+                case 1:
                     while(x >= 0 && y >= 0 && x < 8 && y < 8 && faki[x][y] < 2) {
 
                             faki[x][y] = faki[x][y] + b2.checkPlacement(x, y);
@@ -99,7 +104,7 @@ public class Board {
 
                     return false;
 
-                case 3:
+                case 2:
                     while(x >= 0 && y >= 0 && x < 8 && y < 8 && faki[x][y] < 2) {
 
                             faki[x][y] = faki[x][y] + b3.checkPlacement(x, y);
@@ -157,21 +162,32 @@ public class Board {
             {
                 for (int y = 0; y < 8; y++)
                 {
-                    faki = board;
-                    if(board[x][y] == 0)
-                    {
+                    copyBoardToFaki();
+
+
 
                         if(checkPlacement(z, x, y))
                         {
                             allPossible[z][x][y] = true;
                         }
-                    }
+
                 }
             }
         }
-        return true; // nur damit fehlermedlung weg ist sonst ist des eigl nicht hier bzw ohne gedanken hier
+        return true;// nur damit fehlermedlung weg ist sonst ist des eigl nicht hier bzw ohne gedanken hier
     }
 
+
+    public void copyBoardToFaki()
+    {
+        for (int x = 0; x < 8; x++)
+        {
+            for (int y = 0; y < 8; y++)
+            {
+                faki[x][y] = board[x][y];
+            }
+        }
+    }
 
     // wird ausgeführt wenn der nutzer den block platzieren will
     public void placeBlock(int blockx, int x, int y)
@@ -287,18 +303,6 @@ public class Board {
 
 
 
-    public Blockelement buildCompleteBlock( int x, int y)
-    {
-        BlockAlgo bA = new BlockAlgo();
-        int code = bA.generateBlock();
-        Translator t = new Translator();
-        Blockelement bE = t.translate(code);
-        System.out.println();
-        System.out.println(code);
-        System.out.println();
-        bE.printBlock( x , y);
-        return bE;
-    }
 
     public void printi()
     {

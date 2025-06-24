@@ -2,13 +2,14 @@ package com.blockblast.controller;
 
 import com.blockblast.logic.Algo;
 import com.blockblast.gui.Gui;
+import com.blockblast.logic.Board;
 import com.blockblast.storage.Data;
 import com.blockblast.network.Ip;
 
 public class controller
 {
     private Gui gui; //GUI object
-    private Algo alg;//Logic object
+    private Board b;//Logic object
     public int [][] testfield = new int [8][8];
 
     public controller()
@@ -23,19 +24,21 @@ public class controller
     public void startSP()
     {
         //start single player
-        alg = new Algo();
-        //Block generieren
-        alg.genBlocks();
+        b = new Board();
+        b.getBlocks();
         //push blocks to gui
         gui = new Gui();
-        gui.pullBlock(alg.getBlock1(), alg.getBlock2(), alg.getBlock3());
+        gui.pullBlock(b.b1, b.b2, b.b3);
 
 
     }
-    public void startMP()
+   /* public void startMP()
     {
         //start multiplayer
     }
+    ausgecommmentet weil schaffen wir eh nicht
+
+    */
 
     public void printTestfield()
     {
