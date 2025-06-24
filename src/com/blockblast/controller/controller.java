@@ -9,7 +9,7 @@ public class controller
 {
     private Gui gui; //GUI object
     private Algo alg;//Logic object
-    public int [] [] testfield = new int [8][8];
+    public int [][] testfield = new int [8][8];
 
     public controller()
     {

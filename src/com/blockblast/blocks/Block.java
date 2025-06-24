@@ -16,4 +16,9 @@ public abstract class Block
 
     protected void printNeighbours() {
     }
+
+    public  int checkPlacement(int x, int i)
+    {
+      return 99;
+    }
 }

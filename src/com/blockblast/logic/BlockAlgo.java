@@ -14,7 +14,6 @@ public class BlockAlgo
     public BlockAlgo()
     {
         blockinfo = 0;
-        generateBlock();
 
     }
 
@@ -39,7 +38,7 @@ public class BlockAlgo
         if (probability <= 40 && probability >30)
         {
             amount = 4;
-            typ = rand.nextInt(5);
+            typ = rand.nextInt(7);
         }
         if(probability <= 50 && probability >40)
         {
@@ -58,6 +57,7 @@ public class BlockAlgo
         }
         rotation = rand.nextInt(4)+1;
         blockinfo = amount * 100 + typ * 10 + rotation;
+        System.out.println(blockinfo);
         return blockinfo;
     }
 }

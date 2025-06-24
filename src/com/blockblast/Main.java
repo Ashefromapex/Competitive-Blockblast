@@ -25,7 +25,6 @@ public class Main
             Test test = new Test();
             test.testAll();
         }
-
         controller c = new controller();
         c.start();
 

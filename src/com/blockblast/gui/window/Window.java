@@ -1,96 +1,69 @@
 package com.blockblast.gui.window;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.util.ArrayList;
 
 public class Window extends JFrame {
 
     //instanzvariable erstellen
     JLabel label;
-
+    ArrayList<JButton> grid = new ArrayList<JButton>();
+    static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
     public Window(ActionListener listener) {
 
 
-        //Window erstellen north
+
+
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+
+        setExtendedState(JFrame.MAXIMIZED_BOTH); //Windowed Fullscreen
+        setVisible(true);
+
+        //Window erstellen
         setTitle("BlockBlast");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(650, 800);
+
+        //Button erstellen south
+        JPanel buttonPanel = new JPanel();
+        JButton repeatButton = new JButton("Repeat");
+        JButton startButton = new JButton("Start");
+        buttonPanel.add(repeatButton);
+        buttonPanel.add(startButton);
+
+        //MainPanel erstellen
+        JPanel mainPanel = new JPanel();
+        setLayout(new GridLayout(0,8));
+        mainPanel.setSize(500,800);
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20,20,0,20));
+        mainPanel.setBackground(Color.DARK_GRAY);
+
+        JColorChooser colorChooser = new JColorChooser();
+        colorChooser.setColor(Color.GRAY);
+        colorChooser.setSize(10,10);
+        colorChooser.setBounds(50,50,50,50);
+
+        for(int i = 0;i < 64;i++) //Code Monstrum zusammengefasst
+        {
+            JButton b = new JButton();
+            mainPanel.add(b);
+            b.setSize(25,50);
+            b.setBackground(colorChooser.getColor());
+            this.add(b);
+            grid.add(b);
+        }
+
+
+        mainPanel.setVisible(true);
+
 
         //Titel erstellen
         JLabel titleLabel = new JLabel("BlockBlast");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
-        //titleLabel.setBackground(Color.BLUE);
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(30, 5, 0, 5));
-        add(titleLabel, BorderLayout.NORTH);
-        setPreferredSize(new Dimension(50,5000));
-
-
-
-
-        //MainPanel erstellen
-        JPanel mainPanel = new JPanel();
-        setLayout(new BorderLayout(3,0));
-
-        mainPanel.setSize(5000,5000);
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(50,50,5,50));
-        //mainPanel.setBackground(Color.DARK_GRAY);;
-
-        ;
-
-
-        //MainPanel Buttons
-        GridLayout gridLayout = new GridLayout(8,8);
-
-        JButton[] buttons = new JButton[64];
-        for (int i = 0; i < 64; i++)
-        {
-            buttons[i] = new JButton("");
-            buttons[i].addActionListener(listener);
-            buttons[i].setBackground(Color.red);
-            buttons[i].setBorder(BorderFactory.createEmptyBorder(30,30,30,30));
-            buttons[i].setSize(5000,5000000);
-            mainPanel.add(buttons[i]);
-
-        }
-        mainPanel.setVisible(true);
-        add(mainPanel, BorderLayout.CENTER);
-
-
-        //Button erstellen south
-        JPanel buttonPanel = new JPanel();
-        JButton repeatButton = new JButton("Repeat");
-        repeatButton.setHorizontalTextPosition(SwingConstants.CENTER);
-        JButton startButton = new JButton("Start ");
-        repeatButton.setHorizontalTextPosition(SwingConstants.CENTER);
-
-        buttonPanel.add(repeatButton);
-        buttonPanel.add(startButton);
-        //buttonPanel.setSize(1000,5000);
-        //buttonPanel.setBackground(Color.blue);
-        add(buttonPanel, BorderLayout.SOUTH);
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
-
-
-        repeatButton.setBorder(BorderFactory.createEmptyBorder(30,70,30,40));
-        repeatButton.setHorizontalAlignment(SwingConstants.CENTER);
-
-        startButton.setBorder(BorderFactory.createEmptyBorder(30,40,30,70));
-            startButton.setHorizontalAlignment(SwingConstants.CENTER);
-
-
-        buttonPanel.setVisible(true);
-
-
-
-
-
-
-
-
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 5, 10, 5));
 
         //Top label layout
         add(titleLabel, BorderLayout.NORTH);
@@ -99,12 +72,9 @@ public class Window extends JFrame {
 
 
 
-
-
         //neue Komponente
         label = new JLabel();
         label.setText("---");
-
 
         //Pannel einfügen -> Button einfügen
         /*p.add(b1);
@@ -112,13 +82,12 @@ public class Window extends JFrame {
         p.add(label);*/
 
         //gibt ideale Größe an
-        //pack();
+        /*pack();*/
 
         //verdrahtung controller mit buttons
         //Controller c = new Controller();
         repeatButton.addActionListener(listener);
         startButton.addActionListener(listener);
-
 
 
 
