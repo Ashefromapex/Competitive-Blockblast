@@ -47,14 +47,14 @@ public class Gui extends JFrame implements ActionListener {
     public void visualizeBlock(Blockelement b1, Blockelement b2 , Blockelement b3 )
     // visualisiert die blöcke
     {
-         Gui.transformBlock(b1, b2, b3);
+         //Gui.transformBlock(b1, b2, b3);
     }
-    public blockarray transformBlock(Blockelement b1, Blockelement b2, Blockelement b3)
-
-    {
-
-        return 0;
-    }
+//    public blockarray transformBlock(Blockelement b1, Blockelement b2, Blockelement b3)
+//
+//    {
+//
+//        return 0;
+//    }
 
 
 
