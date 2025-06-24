@@ -20,7 +20,7 @@ public class Window extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setExtendedState(JFrame.MAXIMIZED_BOTH); //Windowed Fullscreen
         setVisible(true);
 
         //Window erstellen
@@ -45,7 +45,7 @@ public class Window extends JFrame {
         colorChooser.setSize(10,10);
         colorChooser.setBounds(50,50,50,50);
 
-        for(int i = 0;i < 64;i++)
+        for(int i = 0;i < 64;i++) //Code Monstrum zusammengefasst
         {
             JButton b = new JButton();
             mainPanel.add(b);
