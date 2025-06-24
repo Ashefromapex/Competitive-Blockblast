@@ -15,7 +15,7 @@ public class Gui extends JFrame implements ActionListener {
     {}
 
     private JPanel[] panel;
-    private  BlockGui block;
+    private int [][] blockarray;
 
 
 
@@ -33,26 +33,29 @@ public class Gui extends JFrame implements ActionListener {
     }
 
 
+
+
     public void pullBlock(Blockelement a, Blockelement b, Blockelement c)
+    // gibt die generierten blöcker von der algorithmus zur gui
     {
           b1 = a;
           b2 = b;
           b3 = c;
+
+         // Gui.visualizeBlock(a,b,c);
     }
-    public void visualizeBlock()
+    public void visualizeBlock(Blockelement b1, Blockelement b2 , Blockelement b3 )
+    // visualisiert die blöcke
+    {
+         Gui.transformBlock(b1, b2, b3);
+    }
+    public blockarray transformBlock(Blockelement b1, Blockelement b2, Blockelement b3)
+
     {
 
+        return 0;
     }
 
-}
-// Klasse ist nur zum generieren de Blöcke da
-class BlockGui extends Gui
-{
-    int Blockart;
-    char Rotation;
-  public BlockGui()
-  {
 
-  }
 
 }

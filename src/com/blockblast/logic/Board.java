@@ -174,7 +174,7 @@ public class Board {
                 }
             }
         }
-        return true; // nur damit fehlermedlung weg ist sonst ist des eigl nicht hier bzw ohne gedanken hier
+        return true;// nur damit fehlermedlung weg ist sonst ist des eigl nicht hier bzw ohne gedanken hier
     }
 
 
