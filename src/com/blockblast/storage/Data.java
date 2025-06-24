@@ -327,7 +327,7 @@ public class Data {
             out += Integer.toString(j);
             out += " ,";
         }
-        if(newLine)
+        if(newLine) //you only need lines sometimes idfk
         {
             out += "\n";
         }

@@ -1,19 +1,11 @@
 package com.blockblast.test;
 
 //import packages
-import com.blockblast.blocks.Blockelement;
-import com.blockblast.controller.controller;
-import com.blockblast.gui.window.Controller;
 import com.blockblast.gui.window.Window;
 import com.blockblast.logic.Board;
-import com.blockblast.network.Ip;
 import com.blockblast.storage.Data;
 import com.blockblast.logic.Algo;
-import com.blockblast.gui.Gui;
-import com.blockblast.logic.Translator;
-import com.blockblast.blocks.Block;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -77,7 +69,7 @@ public class Test
         Algo a = new Algo();
         a.genBlocks();
         Board b = new Board();
-        b.getBlocks(a.getBlock1(),a.getBlock2(),a.getBlock3());
+        b.getBlocks();
         //b.printi();
         //b.checkPlacement(2,8,0);
         if(b.checkPlacement(1,3,4))
@@ -101,7 +93,7 @@ public class Test
     {
         Board board = new Board();
 
-        board.buildCompleteBlock(4,4);
+
 
 
         return true;

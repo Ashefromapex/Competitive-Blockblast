@@ -10,6 +10,7 @@ public class Board {
     public Blockelement b1;
     public Blockelement b2;
     public Blockelement b3;
+    public Algo alg;
     int[][] faki;
     int[][] board;
     boolean[][][] allPossible;
@@ -18,6 +19,7 @@ public class Board {
         board = new int[8][8];
         faki = new int[8][8];
         allPossible = new boolean[3][8][8];
+        alg = new Algo();
     }
 
     public int[][] getBoard() {
@@ -32,10 +34,12 @@ public class Board {
         }
     }
 
-    public void getBlocks(Blockelement a, Blockelement b, Blockelement c) {
-        b1 = a;
-        b2 = b;
-        b3 = c;
+    public void getBlocks()
+    {
+      alg.genBlocks();
+      b1 = alg.b1;
+      b2 = alg.b2;
+      b3 = alg.b3;
     }
 
     public boolean[][][] getAllPossible()
@@ -44,7 +48,8 @@ public class Board {
         return allPossible;
     }
 
-    public boolean checkPlacement(int blockx, int x, int y) {
+    public boolean checkPlacement(int blockx, int x, int y)
+    {
         // int x = 2;
         // if ( x == 1 /* da muss noch was gescheids rein, kp wie man checkt ob das geht oder nicht*/)
         // {
@@ -287,18 +292,6 @@ public class Board {
 
 
 
-    public Blockelement buildCompleteBlock( int x, int y)
-    {
-        BlockAlgo bA = new BlockAlgo();
-        int code = bA.generateBlock();
-        Translator t = new Translator();
-        Blockelement bE = t.translate(code);
-        System.out.println();
-        System.out.println(code);
-        System.out.println();
-        bE.printBlock( x , y);
-        return bE;
-    }
 
     public void printi()
     {
