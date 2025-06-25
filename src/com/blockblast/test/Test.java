@@ -1,6 +1,7 @@
 package com.blockblast.test;
 
 //import packages
+import com.blockblast.blocks.Blockelement;
 import com.blockblast.gui.window.Window;
 import com.blockblast.logic.Board;
 import com.blockblast.storage.Data;
@@ -83,6 +84,9 @@ public class Test
         b.printi();
         b.checkAll();
         b.printi();
+        int[][] arr = new int[8][8];
+        Blockelement block = a.translate(202);
+        b.setBlockinArray(block, 4, 4, arr);
         return true;
     }
     private boolean testGui()
