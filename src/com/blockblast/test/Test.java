@@ -86,12 +86,12 @@ public class Test
         b.printi();
         b.checkAll();
         b.printi();
-        b.createBlockmatrix();
-        b.printArray(b.bm1);
-        System.out.println();
-        b.printArray(b.bm2);
-        System.out.println();
-        b.printArray(b.bm3);
+//        b.createBlockmatrix();
+//        b.printArray(b.bm1);
+//        System.out.println();
+//        b.printArray(b.bm2);
+//        System.out.println();
+//        b.printArray(b.bm3);
         return true;
     }
     private boolean testGui()

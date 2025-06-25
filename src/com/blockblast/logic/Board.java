@@ -312,9 +312,9 @@ public class Board {
 
     public void createBlockmatrix()
     {
-        setBlockinArray(b1, optimalPlacement(code1)[0], optimalPlacement(code1)[1], bm1);
-        setBlockinArray(b2, optimalPlacement(code2)[0], optimalPlacement(code2)[1], bm2);
-        setBlockinArray(b3, optimalPlacement(code3)[0], optimalPlacement(code3)[1], bm3);
+//        setBlockinArray(b1, optimalPlacement(code1)[0], optimalPlacement(code1)[1], bm1);
+//        setBlockinArray(b2, optimalPlacement(code2)[0], optimalPlacement(code2)[1], bm2);
+//        setBlockinArray(b3, optimalPlacement(code3)[0], optimalPlacement(code3)[1], bm3);
     }
     public int[] optimalPlacement(int code)
     {
