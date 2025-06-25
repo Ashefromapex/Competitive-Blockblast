@@ -52,41 +52,53 @@ public class Window extends JFrame {
         //BlockPanel erstellen und Space für die einzelnen Blöcke
         JPanel blockPanel = new JPanel();
         blockPanel.setBackground(Color.DARK_GRAY);
-        JPanel block1 = new JPanel();
+        BoxLayout blockPanelLayout = new BoxLayout(blockPanel,BoxLayout.LINE_AXIS);
+        blockPanel.setLayout(blockPanelLayout);
         int blockBorder = 10;
+        int blockPreviewSize = 125;
+        JPanel block1 = new JPanel();
         block1.setLayout(new GridLayout(5,5));
-        block1.setPreferredSize(new Dimension(125,125));
+        block1.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         for (int i = 0; i < 25; i++)
         {
             JButton b = new JButton();
             b.setBackground(Color.GRAY);
             block1.add(b);
         }
-        block1.setBorder(BorderFactory.createEmptyBorder(blockBorder,blockBorder,blockBorder,blockBorder));
         JPanel block2 = new JPanel();
         block2.setLayout(new GridLayout(5,5));
-        block2.setPreferredSize(new Dimension(125,125));
+        block2.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         for (int i = 0; i < 25; i++)
         {
             JButton b = new JButton();
             b.setBackground(Color.GRAY);
             block2.add(b);
         }
-        block2.setBorder(BorderFactory.createEmptyBorder(blockBorder,blockBorder,blockBorder,blockBorder));
         JPanel block3 = new JPanel();
         block3.setLayout(new GridLayout(5,5));
-        block3.setPreferredSize(new Dimension(125,125));
+        block3.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         for (int i = 0; i < 25; i++)
         {
             JButton b = new JButton();
             b.setBackground(Color.GRAY);
             block3.add(b);
         }
-        block3.setBorder(BorderFactory.createEmptyBorder(blockBorder,blockBorder,blockBorder,blockBorder));
-        blockPanel.setLayout(new BoxLayout(blockPanel,BoxLayout.LINE_AXIS));
+        blockPanel.add(Box.createRigidArea(new Dimension(blockBorder, 0)));
         blockPanel.add(block1);
+        blockPanel.add(Box.createRigidArea(new Dimension(blockBorder, 0)));
         blockPanel.add(block2);
+        blockPanel.add(Box.createRigidArea(new Dimension(blockBorder, 0)));
         blockPanel.add(block3);
+        blockPanel.add(Box.createRigidArea(new Dimension(blockBorder, 0)));
+
+        //Unteren Rand von den BlockPreviews entfernen
+        JPanel blockOverlord = new JPanel();
+        blockOverlord.setLayout(new BorderLayout());
+        JPanel southBumper = new JPanel();
+        southBumper.setBackground(Color.DARK_GRAY);
+        southBumper.setPreferredSize(new Dimension(blockBorder*4+blockPreviewSize*3, blockBorder));
+        blockOverlord.add(southBumper, BorderLayout.SOUTH);
+        blockOverlord.add(blockPanel, BorderLayout.CENTER);
 
         JColorChooser colorChooser = new JColorChooser();
         colorChooser.setColor(Color.GRAY);
@@ -116,7 +128,7 @@ public class Window extends JFrame {
         //Top label layout
         add(titleLabel, BorderLayout.NORTH);
         add(mainPanel, BorderLayout.CENTER);
-        add(blockPanel, BorderLayout.SOUTH);
+        add(blockOverlord, BorderLayout.SOUTH);
 
 
 
