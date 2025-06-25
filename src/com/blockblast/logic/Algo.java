@@ -9,6 +9,9 @@ public class Algo
     public Blockelement b1;
     public Blockelement b2;
     public Blockelement b3;
+    public int code1;
+    public int code2;
+    public int code3;
     private int amount;
     private int typ;
     private int rotation;
@@ -25,9 +28,12 @@ public class Algo
 
     public void genBlocks()
     {
-        b1 = translate(generateBlock());
-        b2 = translate(generateBlock());
-        b3 = translate(generateBlock());
+        code1 = generateBlock();
+        code2 = generateBlock();
+        code3 = generateBlock();
+        b1 = translate(code1);
+        b2 = translate(code2);
+        b3 = translate(code3);
     }
     public Blockelement getBlock1()
     {

@@ -10,6 +10,13 @@ public class Board {
     public Blockelement b1;
     public Blockelement b2;
     public Blockelement b3;
+    public Blockelement[] blockarr;
+    public int code1;
+    public int code2;
+    public int code3;
+    public int[][] bm1; //--> converted Blockmatrix of block 1
+    public int[][] bm2;
+    public int[][] bm3;
     public Algo alg;
     int[][] faki;
     int[][] board;
@@ -20,6 +27,10 @@ public class Board {
         faki = new int[8][8];
         allPossible = new boolean[3][8][8];
         alg = new Algo();
+        blockarr = new Blockelement[3];
+        bm1 = new int[5][5];
+        bm2 = new int[5][5];
+        bm3 = new int[5][5];
     }
 
     public int[][] getBoard() {
@@ -40,6 +51,9 @@ public class Board {
       b1 = alg.b1;
       b2 = alg.b2;
       b3 = alg.b3;
+      code1 = alg.code1;
+      code2 = alg.code2;
+      code3 = alg.code3;
     }
 
     public boolean[][][] getAllPossible()
@@ -295,6 +309,126 @@ public class Board {
             setBlockinArray((Blockelement) b.right, x , y + 1, array);
         }
     }
+
+    public void createBlockmatrix()
+    {
+        setBlockinArray(b1, optimalPlacement(code1)[0], optimalPlacement(code1)[1], bm1);
+        setBlockinArray(b2, optimalPlacement(code2)[0], optimalPlacement(code2)[1], bm2);
+        setBlockinArray(b3, optimalPlacement(code3)[0], optimalPlacement(code3)[1], bm3);
+    }
+    public int[] optimalPlacement(int code)
+    {
+        /*
+         *  returns the optimal x (at index 0) and y (at index 1) positions for the block
+         */
+        int tmp = code % 100;
+        int ammount = (code - tmp) / 100;
+        int type = (tmp - tmp % 10) / 10;
+        int rotation = tmp % 10;
+
+        // array works like this:
+        // x determines the vertical row (normally called y)
+        // y determines the position within a row from left to right (normally called x)
+
+        int[] arr = new int[2];
+
+        switch (ammount)
+        {
+
+            case 1, 2:
+                arr = new int[]{2, 2};
+                break;
+            case 3:
+                if(type == 0)
+                {
+                    arr = new int[]{2, 1};
+                }
+                else
+                {
+                    arr = new int[]{2, 2};
+                }
+                break;
+            case 4:
+                switch (type)
+                {
+                    case 0:
+                        arr =  new int[]{2, 0};
+                        break;
+                    case 1:
+                        arr =  new int[]{2, 2};
+                        break;
+                    case 2:
+                        arr =  new int[]{1, 1};
+                        break;
+                    case 3:
+                        arr =  new int[]{1, 3};
+                        break;
+                    case 4, 5:
+                        arr =  new int[]{2, 1};
+                        break;
+                    case 6:
+                        arr =  new int[]{2, 2};
+                        break;
+                }
+                break;
+            case 5:
+                if(type == 0)
+                {
+                    arr = new int[]{2, 0};
+                }
+                else
+                {
+                    arr = new int[]{1, 1};
+                }
+                break;
+            case 6:
+                arr =  new int[]{1, 1};
+                break;
+            case 9:
+                arr = new int[]{1, 1};
+                break;
+            default:
+                arr =  new int[]{2, 2};
+        }
+        //now some rotation magic (again)
+        //calculates x diff and y diff to then invert them as needed
+        int dx = arr[0] - 2;
+        int dy = arr[1] - 2;
+
+        switch (rotation) //dont even fucking ask
+        {
+            case 1:
+                break;
+            case 2:
+                dy = dy;
+                dx = -1 * dx;
+                break;
+            case 3:
+                dx = -1* dx;
+                dy = -1 * dy;
+                break;
+            case 4:
+                dx = -1 * dy;
+                dy = dx;
+                break;
+        }
+        //apply diff to original positions
+        arr[0] = 2 + dx;
+        arr[1] = 2 + dy;
+        return arr;
+    }
+    public void printArray(int[][] arr)
+    {
+        for (int i = 0; i < arr.length; i++)
+        {
+            for(int j = 0; j < arr[i].length; j++)
+            {
+                System.out.print(arr[i][j] + "  ");
+            }
+            System.out.println();
+        }
+    }
+
 }
 
 

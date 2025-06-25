@@ -67,8 +67,10 @@ public class Test
     }
     private boolean testAlgo()
     {
+
         Algo a = new Algo();
         Board b = new Board();
+        a.translate(431);
         a.genBlocks();
         b.getBlocks();
         b.printi();
@@ -84,9 +86,12 @@ public class Test
         b.printi();
         b.checkAll();
         b.printi();
-        int[][] arr = new int[8][8];
-        Blockelement block = a.translate(202);
-        b.setBlockinArray(block, 4, 4, arr);
+        b.createBlockmatrix();
+        b.printArray(b.bm1);
+        System.out.println();
+        b.printArray(b.bm2);
+        System.out.println();
+        b.printArray(b.bm3);
         return true;
     }
     private boolean testGui()
