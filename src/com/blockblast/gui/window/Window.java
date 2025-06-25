@@ -1,6 +1,9 @@
 package com.blockblast.gui.window;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +23,7 @@ public class Window extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 
-        setExtendedState(JFrame.MAXIMIZED_BOTH); //Windowed Fullscreen
+
         setVisible(true);
 
         //Window erstellen
@@ -35,10 +38,55 @@ public class Window extends JFrame {
 
         //MainPanel erstellen
         JPanel mainPanel = new JPanel();
-        setLayout(new GridLayout(0,8));
-        mainPanel.setSize(500,800);
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(20,20,0,20));
+        GridLayout mainPanelGridLayout = new GridLayout(0,8);
+        mainPanel.setLayout(mainPanelGridLayout);
+        int mainPanelBorder = 50;
+        EmptyBorder Distance = new EmptyBorder(mainPanelBorder, mainPanelBorder, mainPanelBorder, mainPanelBorder);
+        LineBorder mainPanelOutline = new LineBorder(Color.black);
+        CompoundBorder mainPanelCompoundBorder = new CompoundBorder(Distance, mainPanelOutline);
+        mainPanel.setBorder(mainPanelCompoundBorder);
         mainPanel.setBackground(Color.DARK_GRAY);
+        mainPanel.setPreferredSize(new Dimension(400,400));
+        mainPanel.setMaximumSize(new Dimension(400,400));
+
+        //BlockPanel erstellen und Space für die einzelnen Blöcke
+        JPanel blockPanel = new JPanel();
+        blockPanel.setBackground(Color.DARK_GRAY);
+        JPanel block1 = new JPanel();
+        int blockBorder = 10;
+        block1.setLayout(new GridLayout(5,5));
+        block1.setPreferredSize(new Dimension(125,125));
+        for (int i = 0; i < 25; i++)
+        {
+            JButton b = new JButton();
+            b.setBackground(Color.GRAY);
+            block1.add(b);
+        }
+        block1.setBorder(BorderFactory.createEmptyBorder(blockBorder,blockBorder,blockBorder,blockBorder));
+        JPanel block2 = new JPanel();
+        block2.setLayout(new GridLayout(5,5));
+        block2.setPreferredSize(new Dimension(125,125));
+        for (int i = 0; i < 25; i++)
+        {
+            JButton b = new JButton();
+            b.setBackground(Color.GRAY);
+            block2.add(b);
+        }
+        block2.setBorder(BorderFactory.createEmptyBorder(blockBorder,blockBorder,blockBorder,blockBorder));
+        JPanel block3 = new JPanel();
+        block3.setLayout(new GridLayout(5,5));
+        block3.setPreferredSize(new Dimension(125,125));
+        for (int i = 0; i < 25; i++)
+        {
+            JButton b = new JButton();
+            b.setBackground(Color.GRAY);
+            block3.add(b);
+        }
+        block3.setBorder(BorderFactory.createEmptyBorder(blockBorder,blockBorder,blockBorder,blockBorder));
+        blockPanel.setLayout(new BoxLayout(blockPanel,BoxLayout.LINE_AXIS));
+        blockPanel.add(block1);
+        blockPanel.add(block2);
+        blockPanel.add(block3);
 
         JColorChooser colorChooser = new JColorChooser();
         colorChooser.setColor(Color.GRAY);
@@ -48,27 +96,28 @@ public class Window extends JFrame {
         for(int i = 0;i < 64;i++) //Code Monstrum zusammengefasst
         {
             JButton b = new JButton();
-            mainPanel.add(b);
-            b.setSize(25,50);
             b.setBackground(colorChooser.getColor());
             this.add(b);
+            mainPanel.add(b);
             grid.add(b);
         }
 
 
         mainPanel.setVisible(true);
+        blockPanel.setVisible(true);
 
 
         //Titel erstellen
         JLabel titleLabel = new JLabel("BlockBlast");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 5, 10, 5));
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
 
         //Top label layout
         add(titleLabel, BorderLayout.NORTH);
         add(mainPanel, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
+        add(blockPanel, BorderLayout.SOUTH);
+
 
 
 
@@ -81,8 +130,9 @@ public class Window extends JFrame {
         p.add(b2);
         p.add(label);*/
 
-        //gibt ideale Größe an
-        /*pack();*/
+        //gibt ideale Größe an und centert den Frame
+        pack();
+        setLocationRelativeTo(null);
 
         //verdrahtung controller mit buttons
         //Controller c = new Controller();
