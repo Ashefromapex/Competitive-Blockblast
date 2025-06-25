@@ -9,7 +9,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Data {
+public class Data
+{
 
     //this class is used to store Data and read it again at startup
 
@@ -38,8 +39,12 @@ public class Data {
         data = createDataFile();
         mp = createMPFile();
         settings = createSettingsFile();
-        setHistLenght(5);
         histLenght = getHistLength();
+        if(histLenght == -1)
+        {
+            histLenght = 5; //default value
+            setHistLenght(histLenght);
+        }
         history = new int[histLenght];
 
 
@@ -306,10 +311,14 @@ public class Data {
         {
 
             data = "";
-            while(in.charAt(j) != ' ')
+            while(j < in.length() && in.charAt(j) != ' ')
             {
                 data += in.charAt(j);
                 j++;
+            }
+            if(j >= in.length()) //j is out of bounds for the string
+            {
+                return "0";
             }
             j += 2; //skips comma
         }
@@ -336,6 +345,10 @@ public class Data {
     private int getHistLength()
     {
         String tmp = readFromFile(FILEPATH_SETTINGS, 1);
+        if(tmp.isEmpty())
+        {
+            return -1;
+        }
         if(isInteger(tmp))
         {
             int a = Integer.parseInt(tmp);
@@ -346,7 +359,7 @@ public class Data {
             }
             return a;
         }
-        return 1;
+        return -1;
 
     }
     private void setHistLenght(int lenght)
