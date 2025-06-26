@@ -5,15 +5,17 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class Window extends JFrame {
 
     //instanzvariable erstellen
     JLabel label;
-    ArrayList<JButton> grid = new ArrayList<JButton>();
+    JButton [][] grid = new JButton[8][8];
+    JButton [][] fakeGrid = new JButton[8][8];
+    JButton [][] blockPreview1 = new JButton[5][5];
+    JButton [][] blockPreview2 = new JButton[5][5];
+    JButton [][] blockPreview3 = new JButton[5][5];
     static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
     public Window(ActionListener listener) {
 
@@ -43,12 +45,15 @@ public class Window extends JFrame {
         CompoundBorder mainPanelCompoundBorder = new CompoundBorder(Distance, mainPanelOutline); //Coole schwarze Outline
         mainPanel.setBorder(mainPanelCompoundBorder);
         mainPanel.setBackground(Color.DARK_GRAY);
-        for(int i = 0;i < 64;i++) //Code Monstrum zusammengefasst
+        for(int j = 0; j < 8; j++)
         {
-            JButton b = new JButton();
-            b.setBackground(Color.GRAY);
-            mainPanel.add(b);
-            grid.add(b);
+            for(int i = 0;i < 8;i++) //Code Monstrum zusammengefasst
+            {
+                JButton b = new JButton();
+                b.setBackground(Color.GRAY);
+                mainPanel.add(b);
+                grid[i][j] = b;
+            }
         }
 
         //Fake Board zum Blöcke hovern erstellen, sieht genauso aus wie das Main Board
@@ -59,13 +64,17 @@ public class Window extends JFrame {
         fakeBoard.setOpaque(false); //macht durchsichtig
         fakeBoard.setBackground(new Color(0,0,0,0)); //macht durchsichtig
         fakeBoard.setBorder(Distance);
-        for(int i = 0;i < 64;i++) //Füllen mit Blöcken
+        for(int j = 0; j < 8; j++)
         {
-            JButton b = new JButton();
-            b.setOpaque(false); //macht durchsichtig
-            b.setContentAreaFilled(false); //macht Blöcke innen durchsichtig
-            b.setBorderPainted(false); //macht Block Outlines durchsichtig
-            fakeBoard.add(b);
+            for(int i = 0;i < 8;i++) //Füllen mit Blöcken
+            {
+                JButton b = new JButton();
+                b.setOpaque(false); //macht durchsichtig
+                b.setContentAreaFilled(false); //macht Blöcke innen durchsichtig
+                b.setBorderPainted(false); //macht Block Outlines durchsichtig
+                fakeBoard.add(b);
+                fakeGrid[i][j] = b;
+            }
         }
 
 
@@ -79,29 +88,41 @@ public class Window extends JFrame {
         JPanel block1 = new JPanel(); //1.Block
         block1.setLayout(new GridLayout(5,5));
         block1.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
-        for (int i = 0; i < 25; i++) //Ausfüllen mit JButtons
+        for(int j = 0; j < 8; j++)
         {
-            JButton b = new JButton();
-            b.setBackground(Color.GRAY);
-            block1.add(b);
+            for (int i = 0; i < 25; i++) //Ausfüllen mit JButtons
+            {
+                JButton b = new JButton();
+                b.setBackground(Color.GRAY);
+                block1.add(b);
+                blockPreview1[i][j] = b;
+            }
         }
         JPanel block2 = new JPanel(); //2.Block
         block2.setLayout(new GridLayout(5,5));
         block2.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
-        for (int i = 0; i < 25; i++)
+        for(int j = 0; j < 8; j++)
         {
-            JButton b = new JButton();
-            b.setBackground(Color.GRAY);
-            block2.add(b);
+            for (int i = 0; i < 25; i++) //Ausfüllen mit JButtons
+            {
+                JButton b = new JButton();
+                b.setBackground(Color.GRAY);
+                block2.add(b);
+                blockPreview2[i][j] = b;
+            }
         }
         JPanel block3 = new JPanel(); //3.Block
         block3.setLayout(new GridLayout(5,5));
         block3.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
-        for (int i = 0; i < 25; i++)
+        for(int j = 0; j < 8; j++)
         {
-            JButton b = new JButton();
-            b.setBackground(Color.GRAY);
-            block3.add(b);
+            for (int i = 0; i < 25; i++) //Ausfüllen mit JButtons
+            {
+                JButton b = new JButton();
+                b.setBackground(Color.GRAY);
+                block3.add(b);
+                blockPreview3[i][j] = b;
+            }
         }
         //Elemente des BoxLayouts, von links nach rechts
         blockPanel.add(Box.createRigidArea(new Dimension(blockBorder, 0)));
