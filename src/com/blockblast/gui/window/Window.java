@@ -77,7 +77,6 @@ public class Window extends JFrame {
             }
         }
 
-
         //BlockPanel erstellen und Space für die einzelnen Blöcke
         JPanel blockPanel = new JPanel(); //Panel für die BlockPreviews
         blockPanel.setBackground(Color.DARK_GRAY);
@@ -88,9 +87,9 @@ public class Window extends JFrame {
         JPanel block1 = new JPanel(); //1.Block
         block1.setLayout(new GridLayout(5,5));
         block1.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
-        for(int j = 0; j < 8; j++)
+        for(int j = 0; j < 5; j++)
         {
-            for (int i = 0; i < 25; i++) //Ausfüllen mit JButtons
+            for (int i = 0; i < 5; i++) //Ausfüllen mit JButtons
             {
                 JButton b = new JButton();
                 b.setBackground(Color.GRAY);
@@ -101,9 +100,9 @@ public class Window extends JFrame {
         JPanel block2 = new JPanel(); //2.Block
         block2.setLayout(new GridLayout(5,5));
         block2.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
-        for(int j = 0; j < 8; j++)
+        for(int j = 0; j < 5; j++)
         {
-            for (int i = 0; i < 25; i++) //Ausfüllen mit JButtons
+            for (int i = 0; i < 5; i++) //Ausfüllen mit JButtons
             {
                 JButton b = new JButton();
                 b.setBackground(Color.GRAY);
@@ -114,9 +113,9 @@ public class Window extends JFrame {
         JPanel block3 = new JPanel(); //3.Block
         block3.setLayout(new GridLayout(5,5));
         block3.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
-        for(int j = 0; j < 8; j++)
+        for(int j = 0; j < 5; j++)
         {
-            for (int i = 0; i < 25; i++) //Ausfüllen mit JButtons
+            for (int i = 0; i < 5; i++) //Ausfüllen mit JButtons
             {
                 JButton b = new JButton();
                 b.setBackground(Color.GRAY);
@@ -143,8 +142,6 @@ public class Window extends JFrame {
         blockOverlord.add(southBumper, BorderLayout.SOUTH);
         blockOverlord.add(blockPanel, BorderLayout.CENTER);
         blockOverlord.setBounds(0,50+boardSize,boardSize,blockPreviewSize+southBumperHeight); //Position und Größe des Panels im Layout
-
-
 
 
 
