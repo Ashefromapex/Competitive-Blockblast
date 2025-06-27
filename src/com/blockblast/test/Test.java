@@ -2,6 +2,7 @@ package com.blockblast.test;
 
 //import packages
 import com.blockblast.blocks.Blockelement;
+import com.blockblast.gui.window.Keyboard;
 import com.blockblast.gui.window.Window;
 import com.blockblast.logic.Board;
 import com.blockblast.storage.Data;
@@ -9,6 +10,7 @@ import com.blockblast.logic.Algo;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 public class Test
 {
