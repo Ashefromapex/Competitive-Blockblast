@@ -208,26 +208,26 @@ public class Window extends JFrame {
 
         do
         {
-            if(!block1Chosen && !block2Chosen && !block3Chosen)
+            if(!block1Chosen && !block2Chosen && !block3Chosen) //no block is chosen right now
             {
-                if(Keyboard.isKeyPressed(KeyEvent.VK_1))
+                if(Keyboard.isKeyPressed(KeyEvent.VK_1)) //pressing 1
                 {
                     chooseBlock1();
                 }
-                if(Keyboard.isKeyPressed(KeyEvent.VK_2))
+                if(Keyboard.isKeyPressed(KeyEvent.VK_2)) //pressing 2
                 {
                     chooseBlock2();
                 }
-                if(Keyboard.isKeyPressed(KeyEvent.VK_3))
+                if(Keyboard.isKeyPressed(KeyEvent.VK_3)) //pressing 3
                 {
                     chooseBlock3();
                 }
             }
-            if(Keyboard.isKeyPressed(KeyEvent.VK_ESCAPE))
+            if(Keyboard.isKeyPressed(KeyEvent.VK_ESCAPE)) //pressing ESCAPE
             {
                 deselectBlock();
             }
-        } while (!Keyboard.isKeyPressed(KeyEvent.VK_4));
+        } while (!Keyboard.isKeyPressed(KeyEvent.VK_4)); //pressing 4
     }
 
     public void showMessage(String msg)
@@ -242,14 +242,14 @@ public class Window extends JFrame {
         {
             for(int i = 0; i < 5; i++)
             {
-                fakeGrid [i][j].setText(blockPreview1[i][j].getText());
+                fakeGrid [i][j].setText(blockPreview1[i][j].getText()); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
             }
         }
-        block1.setVisible(false);
-        block1Chosen = true;
+        block1.setVisible(false); //the BlockPreview for Block1 is now invisible
+        block1Chosen = true; //make sure no other block can be selected
     }
 
-    public void chooseBlock2()
+    public void chooseBlock2() //the same as chooseBlock1() but for Block2
     {
         for(int j = 0; j < 5; j++)
         {
@@ -262,7 +262,7 @@ public class Window extends JFrame {
         block2Chosen = true;
     }
 
-    public void chooseBlock3()
+    public void chooseBlock3() //the same as chooseBlock1() but for Block3
     {
         for(int j = 0; j < 5; j++)
         {
