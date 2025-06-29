@@ -10,7 +10,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Window extends JFrame implements KeyListener {
-
     //instanzvariable erstellen
     JLabel label;
     JButton [][] grid = new JButton[8][8];
@@ -27,9 +26,14 @@ public class Window extends JFrame implements KeyListener {
     private boolean block2Chosen = false;
     private boolean block3Chosen = false;
     static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
-    public Window(ActionListener listener) {
+    public Window() {
 
 
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false); //Window bleibt genausogroß wie wir wollen
+        setVisible(true);
+        setLayout(null);
+        addKeyListener(this);
         //Window erstellen
         setTitle("BlockBlast");
 
@@ -172,12 +176,7 @@ public class Window extends JFrame implements KeyListener {
         //Top label layout
         //Start und Stop Stuff
         //fügt alles hinzu, was zuerst hinzugefügt wird ist am weitesten oben
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false); //Window bleibt genausogroß wie wir wollen
-        setVisible(true);
-        setLayout(null);
         setSize(new Dimension(boardSize+15,50+boardSize+mainPanelBorder+blockPreviewSize+southBumperHeight-15));
-        addKeyListener(this);
         add(titleLabel);
         add(fakeBoard);
         add(mainPanel);
@@ -205,8 +204,8 @@ public class Window extends JFrame implements KeyListener {
 
         //verdrahtung controller mit buttons
         //Controller c = new Controller();
-        repeatButton.addActionListener(listener);
-        startButton.addActionListener(listener);
+        //repeatButton.addActionListener(listener);
+        //startButton.addActionListener(listener);
     }
 
     public void showMessage(String msg)
@@ -285,30 +284,7 @@ public class Window extends JFrame implements KeyListener {
     @Override
     public void keyTyped(KeyEvent e)
     {
-        switch (e.getKeyChar())
-        {
-            case '1':
-                if(!block1Chosen && !block2Chosen && !block3Chosen)
-                {
-                    chooseBlock1();
-                }
-                break;
-            case '2':
-                if(!block1Chosen && !block2Chosen && !block3Chosen)
-                {
-                    chooseBlock2();
-                }
-                break;
-            case '3':
-                if(!block1Chosen && !block2Chosen && !block3Chosen)
-                {
-                    chooseBlock3();
-                }
-                break;
-            case KeyEvent.VK_ESCAPE:
-                deselectBlock();
-                break;
-        }
+
     }
 
     @Override
@@ -347,8 +323,7 @@ public class Window extends JFrame implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e)
     {
-        System.out.println("You released key char: " + e.getKeyChar());
-        System.out.println("You released key code: " + e.getKeyCode());
+
     }
 }
 

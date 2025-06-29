@@ -26,10 +26,10 @@ public class Gui extends JFrame implements ActionListener {
     public Gui()
     {
         //create Window
-        com.blockblast.gui.window.Window w = new com.blockblast.gui.window.Window(this);
+        /*com.blockblast.gui.window.Window w = new com.blockblast.gui.window.Window(this);
         b1 = new Blockelement();
         b2 = new Blockelement();
-        b3 = new Blockelement();
+        b3 = new Blockelement();*/
     }
 
 

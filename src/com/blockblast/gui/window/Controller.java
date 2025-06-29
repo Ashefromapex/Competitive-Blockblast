@@ -11,7 +11,7 @@ public class Controller implements ActionListener
     //Erzeugt Fenster
     public void startGui()
     {
-        window = new Window(this);
+        window = new Window();
         window.setVisible(true);
     }
 
