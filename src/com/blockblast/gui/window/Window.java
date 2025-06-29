@@ -7,8 +7,9 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Window extends JFrame {
+public class Window extends JFrame implements KeyListener {
 
     //instanzvariable erstellen
     JLabel label;
@@ -176,6 +177,7 @@ public class Window extends JFrame {
         setVisible(true);
         setLayout(null);
         setSize(new Dimension(boardSize+15,50+boardSize+mainPanelBorder+blockPreviewSize+southBumperHeight-15));
+        addKeyListener(this);
         add(titleLabel);
         add(fakeBoard);
         add(mainPanel);
@@ -205,29 +207,6 @@ public class Window extends JFrame {
         //Controller c = new Controller();
         repeatButton.addActionListener(listener);
         startButton.addActionListener(listener);
-
-        do
-        {
-            if(!block1Chosen && !block2Chosen && !block3Chosen) //no block is chosen right now
-            {
-                if(Keyboard.isKeyPressed(KeyEvent.VK_1)) //pressing 1
-                {
-                    chooseBlock1();
-                }
-                if(Keyboard.isKeyPressed(KeyEvent.VK_2)) //pressing 2
-                {
-                    chooseBlock2();
-                }
-                if(Keyboard.isKeyPressed(KeyEvent.VK_3)) //pressing 3
-                {
-                    chooseBlock3();
-                }
-            }
-            if(Keyboard.isKeyPressed(KeyEvent.VK_ESCAPE)) //pressing ESCAPE
-            {
-                deselectBlock();
-            }
-        } while (!Keyboard.isKeyPressed(KeyEvent.VK_4)); //pressing 4
     }
 
     public void showMessage(String msg)
@@ -300,6 +279,76 @@ public class Window extends JFrame {
             block3.setVisible(true);
             block3Chosen = false;
         }
+    }
+
+
+    @Override
+    public void keyTyped(KeyEvent e)
+    {
+        switch (e.getKeyChar())
+        {
+            case '1':
+                if(!block1Chosen && !block2Chosen && !block3Chosen)
+                {
+                    chooseBlock1();
+                }
+                break;
+            case '2':
+                if(!block1Chosen && !block2Chosen && !block3Chosen)
+                {
+                    chooseBlock2();
+                }
+                break;
+            case '3':
+                if(!block1Chosen && !block2Chosen && !block3Chosen)
+                {
+                    chooseBlock3();
+                }
+                break;
+            case KeyEvent.VK_ESCAPE:
+                deselectBlock();
+                break;
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e)
+    {
+        switch (e.getKeyCode())
+        {
+            case 49:
+                if(!block1Chosen && !block2Chosen && !block3Chosen)
+                {
+                    chooseBlock1();
+                }
+                System.out.println("Block1 chosen");
+                break;
+            case 50:
+                if(!block1Chosen && !block2Chosen && !block3Chosen)
+                {
+                    chooseBlock2();
+                }
+                System.out.println("Block2 chosen");
+                break;
+            case 51:
+                if(!block1Chosen && !block2Chosen && !block3Chosen)
+                {
+                    chooseBlock3();
+                }
+                System.out.println("Block3 chosen");
+                break;
+            case KeyEvent.VK_ESCAPE:
+                deselectBlock();
+                System.out.println("Block deselected");
+                break;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e)
+    {
+        System.out.println("You released key char: " + e.getKeyChar());
+        System.out.println("You released key code: " + e.getKeyCode());
     }
 }
 

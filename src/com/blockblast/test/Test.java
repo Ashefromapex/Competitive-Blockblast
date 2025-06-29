@@ -115,8 +115,7 @@ public class Test
     private boolean testWindow(ActionListener listener)
     {
 
-        Window window = new Window(listener);
-        window.setVisible(true);
+        new Window(listener);
 
         return true;
 
