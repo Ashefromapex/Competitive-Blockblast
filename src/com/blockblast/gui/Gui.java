@@ -9,13 +9,13 @@ import com.blockblast.blocks.BlockEnd;
 import com.blockblast.blocks.Blockelement;
 import com.blockblast.gui.window.Window;
 import com.blockblast.logic.Board;
-public class Gui extends JFrame implements ActionListener {
+public class Gui implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent g)
     {}
 
-    private JPanel[] panel;
+
 
 
 
@@ -51,28 +51,30 @@ public class Gui extends JFrame implements ActionListener {
 
          // Gui.visualizeBlock(a,b,c);
     }
-    public void visualizeBlock(int[][] testblock)// erstmal mit testblock weil kp wo der übergabe parameter herkommt
-    // visualisiert die blöcke
-    {
-        panel = new JPanel[];
-        panel.setLayout(new GridLayout(5,5));
-        //JFrame box = new JFrame();
+//    public void visualizeBlock(int[][] testblock)// erstmal mit testblock weil kp wo der übergabe parameter herkommt
+//    // visualisiert die blöcke
+//    {
+//        JPanel panel = new JPanel();
+//        panel.setLayout(new GridLayout(5,5));
+//        for(int g = 0; g < 5; g++){
+//            for(int h = 0; h < 5; h++){
+//                panel[g][h] = new JButton();
+//                this.add(panel[g][h]);
+//
+//        for (int i=0; i< 5; i++){
+//
+//            for (int j=0; j<5; j++){
+//
+//                if (testblock[i][j] == 1){
+//                    panel.[i][j].setBackground(Color.red);
+//                }
+//                else{
+//                    panel[i][j].setBackground(Color.black);
+//                }
+//
+//            }
+//        }
 
-        for (int i=0; i< 5; i++){
-
-            for (int j=0; j<5; j++){
-
-                if (testblock[i][j] == 1){
-                    panel.[i][j].setBackground(Color.red);
-                }
-                else{
-                    panel[i][j].setBackground(Color.black);
-                }
-                // JPanel dem Frame hinzufuegen
-                box.wait(panel[i][j]);
-            }
-        }
-    }
 
 
 

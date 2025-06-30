@@ -26,6 +26,12 @@ public class  Window extends JFrame implements KeyListener {
     private boolean block2Chosen = false;
     private boolean block3Chosen = false;
     static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
+    int [][] testblock = {{0,0,1,1,0,},
+                          {0,1,1,0,0,},
+                          {0,0,0,0,0,},
+                          {0,0,0,0,0,},
+                          {0,0,0,0,0,}};
+
     public Window() {
 
 
@@ -98,44 +104,47 @@ public class  Window extends JFrame implements KeyListener {
         block1.setLayout(new GridLayout(5,5));
         block1.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block1.setBounds(blockBorder,50+boardSize,blockPreviewSize,blockPreviewSize);
-        for(int j = 0; j < 5; j++)
-        {
-            for (int i = 0; i < 5; i++) //Ausfüllen mit JButtons
-            {
-                JButton b = new JButton();
-                b.setBackground(Color.GRAY);
-                block1.add(b);
-                blockPreview1[i][j] = b;
-            }
-        }
+        this.visualizeBlock(block1, testblock);
+//        for(int j = 0; j < 5; j++)
+//        {
+//            for (int i = 0; i < 5; i++) //Ausfüllen mit JButtons
+//            {
+//                JButton b = new JButton();
+//                b.setBackground(Color.GRAY);
+//                block1.add(b);
+//                blockPreview1[i][j] = b;
+//            }
+//        }
         block2 = new JPanel(); //2.Block
         block2.setLayout(new GridLayout(5,5));
         block2.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block2.setBounds(blockBorder*2+blockPreviewSize,50+boardSize,blockPreviewSize,blockPreviewSize);
-        for(int j = 0; j < 5; j++)
-        {
-            for (int i = 0; i < 5; i++) //Ausfüllen mit JButtons
-            {
-                JButton b = new JButton();
-                b.setBackground(Color.GRAY);
-                block2.add(b);
-                blockPreview2[i][j] = b;
-            }
-        }
+        this.visualizeBlock(block2, testblock);
+//        for(int j = 0; j < 5; j++)
+//        {
+//            for (int i = 0; i < 5; i++) //Ausfüllen mit JButtons
+//            {
+//                JButton b = new JButton();
+//                b.setBackground(Color.GRAY);
+//                block2.add(b);
+//                blockPreview2[i][j] = b;
+//            }
+//        }
         block3 = new JPanel(); //3.Block
         block3.setLayout(new GridLayout(5,5));
         block3.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block3.setBounds(blockBorder*3+blockPreviewSize*2,50+boardSize,blockPreviewSize,blockPreviewSize);
-        for(int j = 0; j < 5; j++)
-        {
-            for (int i = 0; i < 5; i++) //Ausfüllen mit JButtons
-            {
-                JButton b = new JButton();
-                b.setBackground(Color.GRAY);
-                block3.add(b);
-                blockPreview3[i][j] = b;
-            }
-        }
+        this.visualizeBlock(block3, testblock);
+//        for(int j = 0; j < 5; j++)
+//        {
+//            for (int i = 0; i < 5; i++) //Ausfüllen mit JButtons
+//            {
+//                JButton b = new JButton();
+//                b.setBackground(Color.GRAY);
+//                block3.add(b);
+//                blockPreview3[i][j] = b;
+//            }
+//        }
 
 
         JPanel southBumper = new JPanel(); //Bumper zu unterem Rand
@@ -154,23 +163,23 @@ public class  Window extends JFrame implements KeyListener {
         titleLabel.setBounds(0,0,boardSize,50); //Bestimmt Position und Größe des Titels
 
 
-        //Blöcke zum Testen hardcoden
-        blockPreview1[0][0].setText("Block");
-        blockPreview1[0][1].setText("Block");
-        blockPreview1[0][2].setText("Block");
-        blockPreview1[1][2].setText("Block");
-        blockPreview1[2][2].setText("Block");
+        //Blöcke zum Test hardcoden
+//        blockPreview1[0][0].setText("Block");
+//        blockPreview1[0][1].setText("Block");
+//        blockPreview1[0][2].setText("Block");
+//        blockPreview1[1][2].setText("Block");
+//        blockPreview1[2][2].setText("Block");
+//
+//        blockPreview2[0][0].setText("Block");
+//        blockPreview2[0][1].setText("Block");
+//        blockPreview2[1][1].setText("Block");
+//        blockPreview2[1][0].setText("Block");
 
-        blockPreview2[0][0].setText("Block");
-        blockPreview2[0][1].setText("Block");
-        blockPreview2[1][1].setText("Block");
-        blockPreview2[1][0].setText("Block");
-
-        blockPreview3[0][0].setText("Block");
-        blockPreview3[0][1].setText("Block");
-        blockPreview3[0][2].setText("Block");
-        blockPreview3[0][3].setText("Block");
-        blockPreview3[0][4].setText("Block");
+//        blockPreview3[0][0].setText("Block");
+//        blockPreview3[0][1].setText("Block");
+//        blockPreview3[0][2].setText("Block");
+//        blockPreview3[0][3].setText("Block");
+//        blockPreview3[0][4].setText("Block");
 
 
         //Top label layout
@@ -317,6 +326,39 @@ public class  Window extends JFrame implements KeyListener {
                 deselectBlock();
                 System.out.println("Block deselected");
                 break;
+        }
+    }
+
+    public void visualizeBlock(JPanel panel, int[][] array)
+
+    {
+        //erzeugen der buttonmatirx
+//        JPanel panel = new JPanel();
+//        panel.setLayout(new GridLayout(5,5));
+        JButton [][] buttonmatrix = new JButton[5][5];
+        for(int g = 0; g < 5; g++)
+        {
+            for (int h = 0; h < 5; h++)
+            {
+                JButton b = new JButton();
+                panel.add(b);
+                buttonmatrix[g][h]= b;
+            }
+        }
+        // einfärbern der buttonmatrix
+        for (int i=0; i< 5; i++){
+
+            for (int j=0; j<5; j++){
+
+                if (array[i][j] == 1)
+                {
+                    buttonmatrix[i][j].setBackground(Color.RED);
+                }
+                else{
+                    buttonmatrix[i][j].setBackground(Color.BLACK);
+                }
+
+            }
         }
     }
 
