@@ -70,7 +70,7 @@ public class  Window extends JFrame implements KeyListener {
         mainPanel.setLayout(mainPanelGridLayout);
         mainPanel.setOpaque(true);
         int mainPanelBorder = 50; //Abstand vom Rand des Fensters
-        int boardSize = 640; //Größe des Boards
+        int boardSize = 400; //Größe des Boards
         mainPanel.setBounds(0,50,boardSize,boardSize); //Position und Größe des Boards im Layout
         EmptyBorder Distance = new EmptyBorder(mainPanelBorder, mainPanelBorder, mainPanelBorder, mainPanelBorder);
         LineBorder mainPanelOutline = new LineBorder(Color.black);
@@ -110,10 +110,11 @@ public class  Window extends JFrame implements KeyListener {
         }
 
 
-        int blockBorder = 10; //Abstand vom Rand
-        int blockPreviewSize = 200; //Größe des BlockPreviews
+        int blockBorder = 25; //Abstand vom Rand
+        int blockPreviewSize = 100; //Größe des BlockPreviews
         block1 = new JPanel(); //1.Block
         block1.setLayout(new GridLayout(5,5));
+        block1.setBackground(Color.DARK_GRAY);
         block1.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block1.setBounds(blockBorder,50+boardSize,blockPreviewSize,blockPreviewSize);
         this.visualizeBlock1(block1, testblock1);
@@ -129,12 +130,14 @@ public class  Window extends JFrame implements KeyListener {
 //        }
         block2 = new JPanel(); //2.Block
         block2.setLayout(new GridLayout(5,5));
+        block2.setBackground(Color.DARK_GRAY);
         block2.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block2.setBounds(blockBorder*2+blockPreviewSize,50+boardSize,blockPreviewSize,blockPreviewSize);
         this.visualizeBlock2(block2, testblock2);
 
         block3 = new JPanel(); //3.Block
         block3.setLayout(new GridLayout(5,5));
+        block3.setBackground(Color.DARK_GRAY);
         block3.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block3.setBounds(blockBorder*3+blockPreviewSize*2,50+boardSize,blockPreviewSize,blockPreviewSize);
         this.visualizeBlock3(block3, testblock3);
@@ -142,7 +145,7 @@ public class  Window extends JFrame implements KeyListener {
 
 
         JPanel southBumper = new JPanel(); //Bumper zu unterem Rand
-        int southBumperHeight = 20; //Abstand zu unterem Rand
+        int southBumperHeight = blockBorder*2; //Abstand zu unterem Rand
         southBumper.setBackground(Color.DARK_GRAY);
         southBumper.setPreferredSize(new Dimension(blockBorder*4+blockPreviewSize*3, blockPreviewSize+southBumperHeight));
         southBumper.setBounds(0,50+boardSize,blockBorder*4+blockPreviewSize*3,blockPreviewSize+southBumperHeight);
@@ -331,7 +334,7 @@ public class  Window extends JFrame implements KeyListener {
             {
                 JLabel b = new JLabel();
                 panel.add(b);
-                blockPreview1[g][h]= b;
+                blockPreview1[h][g]= b;
             }
         }
         // einfärbern des blockpreviews
@@ -339,13 +342,13 @@ public class  Window extends JFrame implements KeyListener {
 
             for (int j=0; j<5; j++){
 
-                if (array[i][j] == 1)
+                if (array[j][i] == 1)
                 {
-                    blockPreview1[i][j].setText("block");
+                    blockPreview1[j][i].setText("block");
                 }
                 else
                 {
-                    blockPreview1[i][j].setBackground(Color.BLACK);
+                    blockPreview1[j][i].setBackground(Color.BLACK);
                 }
 
             }
@@ -359,7 +362,7 @@ public class  Window extends JFrame implements KeyListener {
             {
                 JLabel b = new JLabel();
                 panel.add(b);
-                blockPreview2[g][h]= b;
+                blockPreview2[h][g]= b;
             }
         }
         // einfärbern des blockpreviews
@@ -367,13 +370,13 @@ public class  Window extends JFrame implements KeyListener {
 
             for (int j=0; j<5; j++){
 
-                if (array[i][j] == 1)
+                if (array[j][i] == 1)
                 {
-                    blockPreview2[i][j].setText("block");
+                    blockPreview2[j][i].setText("block");
                 }
                 else
                 {
-                    blockPreview2[i][j].setBackground(Color.BLACK);
+                    blockPreview2[j][i].setBackground(Color.BLACK);
                 }
 
             }
@@ -387,7 +390,7 @@ public class  Window extends JFrame implements KeyListener {
             {
                 JLabel b = new JLabel();
                 panel.add(b);
-                blockPreview3[g][h]= b;
+                blockPreview3[h][g]= b;
             }
         }
         // einfärbern des blockpreviews
@@ -395,13 +398,13 @@ public class  Window extends JFrame implements KeyListener {
 
             for (int j=0; j<5; j++){
 
-                if (array[i][j] == 1)
+                if (array[j][i] == 1)
                 {
-                    blockPreview3[i][j].setText("block");
+                    blockPreview3[j][i].setText("block");
                 }
                 else
                 {
-                    blockPreview3[i][j].setBackground(Color.BLACK);
+                    blockPreview3[j][i].setBackground(Color.BLACK);
                 }
 
             }
