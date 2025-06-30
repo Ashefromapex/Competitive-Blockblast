@@ -225,6 +225,7 @@ public class Board {
                     setBlockinArray(b3, x, y, board);
                     break;
             }
+            check_field(board);
             return true;
         }
         else
