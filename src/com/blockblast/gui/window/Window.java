@@ -12,11 +12,11 @@ import java.awt.event.KeyListener;
 public class  Window extends JFrame implements KeyListener {
     //instanzvariable erstellen
     JLabel label;
-    JButton [][] grid = new JButton[8][8];
-    JButton [][] fakeGrid = new JButton[8][8];
-    JButton [][] blockPreview1 = new JButton[5][5];
-    JButton [][] blockPreview2 = new JButton[5][5];
-    JButton [][] blockPreview3 = new JButton[5][5];
+    JLabel [][] grid = new JLabel[8][8];
+    JLabel [][] fakeGrid = new JLabel[8][8];
+    JLabel [][] blockPreview1 = new JLabel[5][5];
+    JLabel [][] blockPreview2 = new JLabel[5][5];
+    JLabel [][] blockPreview3 = new JLabel[5][5];
     JPanel mainPanel;
     JPanel fakeBoard;
     JPanel block1;
@@ -81,7 +81,7 @@ public class  Window extends JFrame implements KeyListener {
         {
             for(int i = 0;i < 8;i++) //Code Monstrum zusammengefasst
             {
-                JButton b = new JButton();
+                JLabel b = new JLabel();
                 b.setBackground(Color.GRAY);
                 mainPanel.add(b);
                 grid[i][j] = b;
@@ -100,10 +100,10 @@ public class  Window extends JFrame implements KeyListener {
         {
             for(int i = 0;i < 8;i++) //Füllen mit Blöcken
             {
-                JButton b = new JButton();
+                JLabel b = new JLabel();
                 b.setOpaque(false); //macht durchsichtig
-                b.setContentAreaFilled(false); //macht Blöcke innen durchsichtig
-                b.setBorderPainted(false); //macht Block Outlines durchsichtig
+//                b.setContentAreaFilled(false); //macht Blöcke innen durchsichtig
+//                b.setBorderPainted(false); //macht Block Outlines durchsichtig
                 fakeBoard.add(b);
                 fakeGrid[i][j] = b;
             }
@@ -131,32 +131,14 @@ public class  Window extends JFrame implements KeyListener {
         block2.setLayout(new GridLayout(5,5));
         block2.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block2.setBounds(blockBorder*2+blockPreviewSize,50+boardSize,blockPreviewSize,blockPreviewSize);
-  //      this.visualizeBlock(block2, testblock2);
-        for(int j = 0; j < 5; j++)
-        {
-            for (int i = 0; i < 5; i++) //Ausfüllen mit JButtons
-            {
-                JButton b = new JButton();
-                b.setBackground(Color.GRAY);
-                block2.add(b);
-                blockPreview2[i][j] = b;
-            }
-        }
+        this.visualizeBlock2(block2, testblock2);
+
         block3 = new JPanel(); //3.Block
         block3.setLayout(new GridLayout(5,5));
         block3.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block3.setBounds(blockBorder*3+blockPreviewSize*2,50+boardSize,blockPreviewSize,blockPreviewSize);
         this.visualizeBlock3(block3, testblock3);
-//        for(int j = 0; j < 5; j++)
-//        {
-//            for (int i = 0; i < 5; i++) //Ausfüllen mit JButtons
-//            {
-//                JButton b = new JButton();
-//                b.setBackground(Color.GRAY);
-//                block3.add(b);
-//                blockPreview3[i][j] = b;
-//            }
-//        }
+
 
 
         JPanel southBumper = new JPanel(); //Bumper zu unterem Rand
@@ -347,7 +329,7 @@ public class  Window extends JFrame implements KeyListener {
         {
             for (int h = 0; h < 5; h++)
             {
-                JButton b = new JButton();
+                JLabel b = new JLabel();
                 panel.add(b);
                 blockPreview1[g][h]= b;
             }
@@ -375,7 +357,7 @@ public class  Window extends JFrame implements KeyListener {
         {
             for (int h = 0; h < 5; h++)
             {
-                JButton b = new JButton();
+                JLabel b = new JLabel();
                 panel.add(b);
                 blockPreview2[g][h]= b;
             }
@@ -403,7 +385,7 @@ public class  Window extends JFrame implements KeyListener {
         {
             for (int h = 0; h < 5; h++)
             {
-                JButton b = new JButton();
+                JLabel b = new JLabel();
                 panel.add(b);
                 blockPreview3[g][h]= b;
             }
