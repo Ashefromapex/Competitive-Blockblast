@@ -108,23 +108,23 @@ public class Algo
         //build block
         root = root.buildBlock(ammount, type);
 
-        if(type == 0)
-        {
-            //0 Types need to be rotated differently
-            if(ammount == 1 || ammount == 9) //block dont need to be rotated at all
-            {
-                return root;
-            }
-            //ony count roation 1 and 2
-            if(rotation == 1 || rotation == 3)
-            {
-                return root;
-            }
-            else
-            {
-                return root.rotate(2);
-            }
-        }
+//        if(type == 0)
+//        {
+//            //0 Types need to be rotated differently
+//            if(ammount == 1 || ammount == 9) //block dont need to be rotated at all
+//            {
+//                return root;
+//            }
+//            //ony count roation 1 and 2
+//            if(rotation == 1 || rotation == 3)
+//            {
+//                return root;
+//            }
+//            else
+//            {
+//                return root.rotate(2);
+//            }
+//        }
         return root.rotate(rotation);
     }
 }

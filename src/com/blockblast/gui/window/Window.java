@@ -10,8 +10,10 @@ import java.awt.event.KeyListener;
 import java.awt.Image;
 import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
+import com.blockblast.controller.controller;
 
 public class  Window extends JFrame implements KeyListener {
+    controller c;
     //instanzvariable erstellen
     JLabel label;
     JLabel [][] grid = new JLabel[8][8];
@@ -51,9 +53,9 @@ public class  Window extends JFrame implements KeyListener {
                            {0,0,0,0,0,}};
 
 
-    public Window() {
+    public Window(controller c) {
 
-
+        this.c = c;
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false); //Window bleibt genausogroß wie wir wollen
         setVisible(true);
@@ -407,6 +409,12 @@ public class  Window extends JFrame implements KeyListener {
     public void keyReleased(KeyEvent e)
     {
 
+    }
+    public void pushBM(int[][] bm1, int[][] bm2, int[][] bm3)
+    {
+        testblock1 = bm1;
+        testblock2 = bm2;
+        testblock3 = bm3;
     }
 }
 
