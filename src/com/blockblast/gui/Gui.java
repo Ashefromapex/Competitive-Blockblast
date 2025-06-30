@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import com.blockblast.blocks.BlockEnd;
 import com.blockblast.blocks.Blockelement;
 import com.blockblast.gui.window.Window;
+import com.blockblast.logic.Board;
 public class Gui extends JFrame implements ActionListener {
 
     @Override
@@ -15,13 +16,19 @@ public class Gui extends JFrame implements ActionListener {
     {}
 
     private JPanel[] panel;
-    private int [][] blockarray;
+
 
 
 
     Blockelement b1;
     Blockelement b2;
     Blockelement b3;
+
+    int [][] testblock = {{0,0,0,0,0,},
+                          {0,0,0,0,0,},
+                          {0,0,1,0,0,},
+                          {0,0,0,0,0,},
+                          {0,0,0,0,0,}};
 
     public Gui()
     {
@@ -44,17 +51,29 @@ public class Gui extends JFrame implements ActionListener {
 
          // Gui.visualizeBlock(a,b,c);
     }
-    public void visualizeBlock(Blockelement b1, Blockelement b2 , Blockelement b3 )
+    public void visualizeBlock(int[][] testblock)// erstmal mit testblock weil kp wo der übergabe parameter herkommt
     // visualisiert die blöcke
     {
-         //Gui.transformBlock(b1, b2, b3);
+        panel = new JPanel[];
+        panel.setLayout(new GridLayout(5,5));
+        //JFrame box = new JFrame();
+
+        for (int i=0; i< 5; i++){
+
+            for (int j=0; j<5; j++){
+
+                if (testblock[i][j] == 1){
+                    panel.[i][j].setBackground(Color.red);
+                }
+                else{
+                    panel[i][j].setBackground(Color.black);
+                }
+                // JPanel dem Frame hinzufuegen
+                box.wait(panel[i][j]);
+            }
+        }
     }
-//    public blockarray transformBlock(Blockelement b1, Blockelement b2, Blockelement b3)
-//
-//    {
-//
-//        return 0;
-//    }
+
 
 
 

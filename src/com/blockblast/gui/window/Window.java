@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Window extends JFrame implements KeyListener {
+public class  Window extends JFrame implements KeyListener {
     //instanzvariable erstellen
     JLabel label;
     JButton [][] grid = new JButton[8][8];
