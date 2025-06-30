@@ -26,11 +26,23 @@ public class  Window extends JFrame implements KeyListener {
     private boolean block2Chosen = false;
     private boolean block3Chosen = false;
     static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
-    int [][] testblock = {{0,0,1,1,0,},
-                          {0,1,1,0,0,},
-                          {0,0,0,0,0,},
-                          {0,0,0,0,0,},
-                          {0,0,0,0,0,}};
+
+    int [][] testblock1 = {{1,0,0,0,0,},
+                           {1,1,1,0,0,},
+                           {0,0,0,0,0,},
+                           {0,0,0,0,0,},
+                           {0,0,0,0,0,}};
+    int [][] testblock2 = {{1,1,0,0,0,},
+                           {1,1,0,0,0,},
+                           {0,0,0,0,0,},
+                           {0,0,0,0,0,},
+                           {0,0,0,0,0,}};
+    int [][] testblock3 = {{0,1,1,0,0,},
+                           {1,1,0,0,0,},
+                           {0,0,0,0,0,},
+                           {0,0,0,0,0,},
+                           {0,0,0,0,0,}};
+
 
     public Window() {
 
@@ -104,7 +116,7 @@ public class  Window extends JFrame implements KeyListener {
         block1.setLayout(new GridLayout(5,5));
         block1.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block1.setBounds(blockBorder,50+boardSize,blockPreviewSize,blockPreviewSize);
-        this.visualizeBlock(block1, testblock);
+        this.visualizeBlock1(block1, testblock1);
 //        for(int j = 0; j < 5; j++)
 //        {
 //            for (int i = 0; i < 5; i++) //Ausfüllen mit JButtons
@@ -119,22 +131,22 @@ public class  Window extends JFrame implements KeyListener {
         block2.setLayout(new GridLayout(5,5));
         block2.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block2.setBounds(blockBorder*2+blockPreviewSize,50+boardSize,blockPreviewSize,blockPreviewSize);
-        this.visualizeBlock(block2, testblock);
-//        for(int j = 0; j < 5; j++)
-//        {
-//            for (int i = 0; i < 5; i++) //Ausfüllen mit JButtons
-//            {
-//                JButton b = new JButton();
-//                b.setBackground(Color.GRAY);
-//                block2.add(b);
-//                blockPreview2[i][j] = b;
-//            }
-//        }
+  //      this.visualizeBlock(block2, testblock2);
+        for(int j = 0; j < 5; j++)
+        {
+            for (int i = 0; i < 5; i++) //Ausfüllen mit JButtons
+            {
+                JButton b = new JButton();
+                b.setBackground(Color.GRAY);
+                block2.add(b);
+                blockPreview2[i][j] = b;
+            }
+        }
         block3 = new JPanel(); //3.Block
         block3.setLayout(new GridLayout(5,5));
         block3.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block3.setBounds(blockBorder*3+blockPreviewSize*2,50+boardSize,blockPreviewSize,blockPreviewSize);
-        this.visualizeBlock(block3, testblock);
+        this.visualizeBlock3(block3, testblock3);
 //        for(int j = 0; j < 5; j++)
 //        {
 //            for (int i = 0; i < 5; i++) //Ausfüllen mit JButtons
@@ -170,10 +182,10 @@ public class  Window extends JFrame implements KeyListener {
 //        blockPreview1[1][2].setText("Block");
 //        blockPreview1[2][2].setText("Block");
 //
-//        blockPreview2[0][0].setText("Block");
-//        blockPreview2[0][1].setText("Block");
-//        blockPreview2[1][1].setText("Block");
-//        blockPreview2[1][0].setText("Block");
+        blockPreview2[0][0].setText("Block");
+        blockPreview2[0][1].setText("Block");
+        blockPreview2[1][1].setText("Block");
+        blockPreview2[1][0].setText("Block");
 
 //        blockPreview3[0][0].setText("Block");
 //        blockPreview3[0][1].setText("Block");
@@ -329,33 +341,85 @@ public class  Window extends JFrame implements KeyListener {
         }
     }
 
-    public void visualizeBlock(JPanel panel, int[][] array)
+    public void visualizeBlock1(JPanel panel, int[][] array) {
 
-    {
-        //erzeugen der buttonmatirx
-//        JPanel panel = new JPanel();
-//        panel.setLayout(new GridLayout(5,5));
-        JButton [][] buttonmatrix = new JButton[5][5];
         for(int g = 0; g < 5; g++)
         {
             for (int h = 0; h < 5; h++)
             {
                 JButton b = new JButton();
                 panel.add(b);
-                buttonmatrix[g][h]= b;
+                blockPreview1[g][h]= b;
             }
         }
-        // einfärbern der buttonmatrix
+        // einfärbern des blockpreviews
         for (int i=0; i< 5; i++){
 
             for (int j=0; j<5; j++){
 
                 if (array[i][j] == 1)
                 {
-                    buttonmatrix[i][j].setBackground(Color.RED);
+                    blockPreview1[i][j].setText("block");
                 }
-                else{
-                    buttonmatrix[i][j].setBackground(Color.BLACK);
+                else
+                {
+                    blockPreview1[i][j].setBackground(Color.BLACK);
+                }
+
+            }
+        }
+    }
+    public void visualizeBlock2(JPanel panel, int[][] array) {
+
+        for(int g = 0; g < 5; g++)
+        {
+            for (int h = 0; h < 5; h++)
+            {
+                JButton b = new JButton();
+                panel.add(b);
+                blockPreview2[g][h]= b;
+            }
+        }
+        // einfärbern des blockpreviews
+        for (int i=0; i< 5; i++){
+
+            for (int j=0; j<5; j++){
+
+                if (array[i][j] == 1)
+                {
+                    blockPreview2[i][j].setText("block");
+                }
+                else
+                {
+                    blockPreview2[i][j].setBackground(Color.BLACK);
+                }
+
+            }
+        }
+    }
+    public void visualizeBlock3(JPanel panel, int[][] array) {
+
+        for(int g = 0; g < 5; g++)
+        {
+            for (int h = 0; h < 5; h++)
+            {
+                JButton b = new JButton();
+                panel.add(b);
+                blockPreview3[g][h]= b;
+            }
+        }
+        // einfärbern des blockpreviews
+        for (int i=0; i< 5; i++){
+
+            for (int j=0; j<5; j++){
+
+                if (array[i][j] == 1)
+                {
+                    blockPreview3[i][j].setText("block");
+                }
+                else
+                {
+                    blockPreview3[i][j].setBackground(Color.BLACK);
                 }
 
             }
