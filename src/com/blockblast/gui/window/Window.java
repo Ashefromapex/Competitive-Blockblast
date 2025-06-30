@@ -26,7 +26,6 @@ public class  Window extends JFrame implements KeyListener {
     private boolean block2Chosen = false;
     private boolean block3Chosen = false;
     static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
-
     int [][] testblock1 = {{1,0,0,0,0,},
                            {1,1,1,0,0,},
                            {0,0,0,0,0,},
@@ -118,16 +117,7 @@ public class  Window extends JFrame implements KeyListener {
         block1.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block1.setBounds(blockBorder,50+boardSize,blockPreviewSize,blockPreviewSize);
         this.visualizeBlock1(block1, testblock1);
-//        for(int j = 0; j < 5; j++)
-//        {
-//            for (int i = 0; i < 5; i++) //Ausfüllen mit JButtons
-//            {
-//                JButton b = new JButton();
-//                b.setBackground(Color.GRAY);
-//                block1.add(b);
-//                blockPreview1[i][j] = b;
-//            }
-//        }
+
         block2 = new JPanel(); //2.Block
         block2.setLayout(new GridLayout(5,5));
         block2.setBackground(Color.DARK_GRAY);
@@ -159,24 +149,6 @@ public class  Window extends JFrame implements KeyListener {
         titleLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
         titleLabel.setBounds(0,0,boardSize,50); //Bestimmt Position und Größe des Titels
 
-
-        //Blöcke zum Test hardcoden
-//        blockPreview1[0][0].setText("Block");
-//        blockPreview1[0][1].setText("Block");
-//        blockPreview1[0][2].setText("Block");
-//        blockPreview1[1][2].setText("Block");
-//        blockPreview1[2][2].setText("Block");
-//
-        blockPreview2[0][0].setText("Block");
-        blockPreview2[0][1].setText("Block");
-        blockPreview2[1][1].setText("Block");
-        blockPreview2[1][0].setText("Block");
-
-//        blockPreview3[0][0].setText("Block");
-//        blockPreview3[0][1].setText("Block");
-//        blockPreview3[0][2].setText("Block");
-//        blockPreview3[0][3].setText("Block");
-//        blockPreview3[0][4].setText("Block");
 
 
         //Top label layout
@@ -344,7 +316,7 @@ public class  Window extends JFrame implements KeyListener {
 
                 if (array[j][i] == 1)
                 {
-                    blockPreview1[j][i].setText("block");
+                    blockPreview1[j][i].setIcon(new ImageIcon("/assets/block_provisorisch.png"));
                 }
                 else
                 {
@@ -372,7 +344,7 @@ public class  Window extends JFrame implements KeyListener {
 
                 if (array[j][i] == 1)
                 {
-                    blockPreview2[j][i].setText("block");
+                    blockPreview2[j][i].setIcon(new ImageIcon("/assets/block_provisorisch.png"));
                 }
                 else
                 {
@@ -400,7 +372,7 @@ public class  Window extends JFrame implements KeyListener {
 
                 if (array[j][i] == 1)
                 {
-                    blockPreview3[j][i].setText("block");
+                    blockPreview3[j][i].setIcon(new ImageIcon("src/com/blockblast/assets/block_provisorisch.png"));
                 }
                 else
                 {
