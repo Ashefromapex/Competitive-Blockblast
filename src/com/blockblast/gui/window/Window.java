@@ -270,7 +270,7 @@ public class  Window extends JFrame implements KeyListener {
     {
         switch (e.getKeyCode())
         {
-            case 49:
+            case 48:
                 if(!block1Chosen && !block2Chosen && !block3Chosen)
                 {
                     chooseBlock1();
