@@ -253,7 +253,7 @@ public class Window extends JFrame implements KeyListener {
         block3Chosen = true;
     }
 
-    public void deselectBlock()
+    public void deselectBlock() //kein Block mehr ausgewählt
     {
         for(int j = 0; j < 8; j++)
         {
