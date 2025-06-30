@@ -36,21 +36,7 @@ public class  Window extends JFrame implements KeyListener {
     private boolean block2Chosen = false;
     private boolean block3Chosen = false;
     static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
-    int [][] testblock1 = {{1,0,0,0,0,},
-                           {1,1,1,0,0,},
-                           {0,0,0,0,0,},
-                           {0,0,0,0,0,},
-                           {0,0,0,0,0,}};
-    int [][] testblock2 = {{1,1,0,0,0,},
-                           {1,1,0,0,0,},
-                           {0,0,0,0,0,},
-                           {0,0,0,0,0,},
-                           {0,0,0,0,0,}};
-    int [][] testblock3 = {{0,1,1,0,0,},
-                           {1,1,0,0,0,},
-                           {0,0,0,0,0,},
-                           {0,0,0,0,0,},
-                           {0,0,0,0,0,}};
+
 
 
     public Window(controller c) {
@@ -173,6 +159,10 @@ public class  Window extends JFrame implements KeyListener {
         add(block2);
         add(block3);
         add(southBumper);
+        //imports the blocks
+        int[][] testblock1 = c.getBm1();
+        int[][] testblock2 = c.getBm2();
+        int[][] testblock3 = c.getBm3();
         visualizeBlock1(block1,testblock1);
         visualizeBlock2(block2,testblock2);
         visualizeBlock3(block3,testblock3);
@@ -410,12 +400,7 @@ public class  Window extends JFrame implements KeyListener {
     {
 
     }
-    public void pushBM(int[][] bm1, int[][] bm2, int[][] bm3)
-    {
-        testblock1 = bm1;
-        testblock2 = bm2;
-        testblock3 = bm3;
-    }
+
 }
 
 

@@ -11,10 +11,11 @@ public class controller
     private Window w; //GUI object
     private Board b;//Logic object
     public int [][] testfield = new int [8][8];
+    int blockcnt = 3;
 
     public controller()
     {
-        w = new Window(this);
+
         clearTestfeld();
     }
     //handles communication between the GUI and the logic
@@ -25,20 +26,48 @@ public class controller
     public void startSP()
     {
         //start single player
+        b = new Board();
         b.getBlocks();
         b.createBlockmatrix();
-        w.pushBM(b.bm1, b.bm2, b.bm3);
+        w = new Window(this);
 
     }
     public void startMP()
     {
         //start multiplayer
+        int seed = b.getSeed();
     }
 
-    public void placeBlock(int blocknr, int x, int y)
+    public boolean placeBlock(int blocknr, int x, int y)
     {
-        b.placeBlock(blocknr, x, y);
+        if(b.placeBlock(blocknr, x, y))
+        {
+            blockcnt--;
+            if(blockcnt == 0)
+            {
+                b.getBlocks();
+                b.createBlockmatrix();
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
+    public int[][] getBm1()
+    {
+        return b.bm1;
+    }
+    public int[][] getBm2()
+    {
+        return b.bm2;
+    }
+    public int[][] getBm3()
+    {
+        return b.bm3;
+    }
+
 
 
 

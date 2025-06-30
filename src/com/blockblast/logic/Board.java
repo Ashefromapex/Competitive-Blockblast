@@ -55,7 +55,10 @@ public class Board {
       code2 = alg.code2;
       code3 = alg.code3;
     }
-
+    public int getSeed()
+    {
+        return alg.getSeed();
+    }
     public boolean[][][] getAllPossible()
     {
         checkAll();
@@ -204,7 +207,7 @@ public class Board {
     }
 
     // wird ausgeführt wenn der nutzer den block platzieren will
-    public void placeBlock(int blockx, int x, int y)
+    public boolean placeBlock(int blockx, int x, int y)
     {
         if (this.checkPlacement(blockx, x, y)) // or allPossible
         {
@@ -222,10 +225,11 @@ public class Board {
                     setBlockinArray(b3, x, y, board);
                     break;
             }
+            return true;
         }
         else
         {
-            System.out.println("Placement failed");
+            return false;
         }
     }
 
