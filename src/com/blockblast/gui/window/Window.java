@@ -5,9 +5,11 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.Image;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 
 public class  Window extends JFrame implements KeyListener {
     //instanzvariable erstellen
@@ -22,6 +24,12 @@ public class  Window extends JFrame implements KeyListener {
     JPanel block1;
     JPanel block2;
     JPanel block3;
+    ImageIcon blockTexture = new  ImageIcon(("src/com/blockblast/assets/block_provisorisch.png"));
+    Image scaleBlockTextureImgPreview;
+    ImageIcon scaleBlockTextureIconPreview;
+    Image scaleBlockTextureImgBoard;
+    ImageIcon scaleBlockTextureIconBoard;
+    ImageIcon empty = new  ImageIcon();
     private boolean block1Chosen = false;
     private boolean block2Chosen = false;
     private boolean block3Chosen = false;
@@ -101,8 +109,6 @@ public class  Window extends JFrame implements KeyListener {
             {
                 JLabel b = new JLabel();
                 b.setOpaque(false); //macht durchsichtig
-//                b.setContentAreaFilled(false); //macht Blöcke innen durchsichtig
-//                b.setBorderPainted(false); //macht Block Outlines durchsichtig
                 fakeBoard.add(b);
                 fakeGrid[i][j] = b;
             }
@@ -116,21 +122,18 @@ public class  Window extends JFrame implements KeyListener {
         block1.setBackground(Color.DARK_GRAY);
         block1.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block1.setBounds(blockBorder,50+boardSize,blockPreviewSize,blockPreviewSize);
-        this.visualizeBlock1(block1, testblock1);
 
         block2 = new JPanel(); //2.Block
         block2.setLayout(new GridLayout(5,5));
         block2.setBackground(Color.DARK_GRAY);
         block2.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block2.setBounds(blockBorder*2+blockPreviewSize,50+boardSize,blockPreviewSize,blockPreviewSize);
-        this.visualizeBlock2(block2, testblock2);
 
         block3 = new JPanel(); //3.Block
         block3.setLayout(new GridLayout(5,5));
         block3.setBackground(Color.DARK_GRAY);
         block3.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block3.setBounds(blockBorder*3+blockPreviewSize*2,50+boardSize,blockPreviewSize,blockPreviewSize);
-        this.visualizeBlock3(block3, testblock3);
 
 
 
@@ -149,6 +152,12 @@ public class  Window extends JFrame implements KeyListener {
         titleLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
         titleLabel.setBounds(0,0,boardSize,50); //Bestimmt Position und Größe des Titels
 
+        scaleBlockTextureImgPreview = blockTexture.getImage().getScaledInstance(blockPreviewSize/5,blockPreviewSize/5,Image.SCALE_DEFAULT);
+        scaleBlockTextureIconPreview = new ImageIcon(scaleBlockTextureImgPreview);
+        scaleBlockTextureImgBoard = blockTexture.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/8,Image.SCALE_DEFAULT);
+        scaleBlockTextureIconBoard = new ImageIcon(scaleBlockTextureImgBoard);
+
+
 
 
         //Top label layout
@@ -162,7 +171,9 @@ public class  Window extends JFrame implements KeyListener {
         add(block2);
         add(block3);
         add(southBumper);
-
+        visualizeBlock1(block1,testblock1);
+        visualizeBlock2(block2,testblock2);
+        visualizeBlock3(block3,testblock3);
 
 
 
@@ -198,7 +209,10 @@ public class  Window extends JFrame implements KeyListener {
         {
             for(int i = 0; i < 5; i++)
             {
-                fakeGrid [i][j].setText(blockPreview1[i][j].getText()); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
+                if(blockPreview1 [i][j].getIcon() == scaleBlockTextureIconPreview )
+                {
+                    fakeGrid[i][j].setIcon(scaleBlockTextureIconBoard); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
+                }
             }
         }
         block1.setVisible(false); //the BlockPreview for Block1 is now invisible
@@ -211,7 +225,10 @@ public class  Window extends JFrame implements KeyListener {
         {
             for(int i = 0; i < 5; i++)
             {
-                fakeGrid [i][j].setText(blockPreview2[i][j].getText());
+                if(blockPreview2 [i][j].getIcon() == scaleBlockTextureIconPreview )
+                {
+                    fakeGrid[i][j].setIcon(scaleBlockTextureIconBoard); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
+                }
             }
         }
         block2.setVisible(false);
@@ -224,7 +241,10 @@ public class  Window extends JFrame implements KeyListener {
         {
             for(int i = 0; i < 5; i++)
             {
-                fakeGrid [i][j].setText(blockPreview3[i][j].getText());
+                if(blockPreview3 [i][j].getIcon() == scaleBlockTextureIconPreview )
+                {
+                    fakeGrid[i][j].setIcon(scaleBlockTextureIconBoard); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
+                }
             }
         }
         block3.setVisible(false);
@@ -237,7 +257,7 @@ public class  Window extends JFrame implements KeyListener {
         {
             for(int i = 0; i < 8; i++)
             {
-                fakeGrid [i][j].setText("");
+                fakeGrid [i][j].setIcon(empty);
             }
         }
 
@@ -270,7 +290,7 @@ public class  Window extends JFrame implements KeyListener {
     {
         switch (e.getKeyCode())
         {
-            case 48:
+            case 49:
                 if(!block1Chosen && !block2Chosen && !block3Chosen)
                 {
                     chooseBlock1();
@@ -316,7 +336,7 @@ public class  Window extends JFrame implements KeyListener {
 
                 if (array[j][i] == 1)
                 {
-                    blockPreview1[j][i].setIcon(new ImageIcon("/assets/block_provisorisch.png"));
+                    blockPreview1[j][i].setIcon(scaleBlockTextureIconPreview);
                 }
                 else
                 {
@@ -344,7 +364,7 @@ public class  Window extends JFrame implements KeyListener {
 
                 if (array[j][i] == 1)
                 {
-                    blockPreview2[j][i].setIcon(new ImageIcon("/assets/block_provisorisch.png"));
+                    blockPreview2[j][i].setIcon(scaleBlockTextureIconPreview);
                 }
                 else
                 {
@@ -372,7 +392,7 @@ public class  Window extends JFrame implements KeyListener {
 
                 if (array[j][i] == 1)
                 {
-                    blockPreview3[j][i].setIcon(new ImageIcon("src/com/blockblast/assets/block_provisorisch.png"));
+                    blockPreview3[j][i].setIcon(scaleBlockTextureIconPreview);
                 }
                 else
                 {
