@@ -275,21 +275,21 @@ public class  Window extends JFrame implements KeyListener {
         switch (e.getKeyCode())
         {
             case 49:
-                if(!block1Chosen && !block2Chosen && !block3Chosen)
+                if(!block1Chosen && !block2Chosen && !block3Chosen && !block1Placed)
                 {
                     chooseBlock1();
                 }
                 System.out.println("Block1 chosen");
                 break;
             case 50:
-                if(!block1Chosen && !block2Chosen && !block3Chosen)
+                if(!block1Chosen && !block2Chosen && !block3Chosen && !block2Placed)
                 {
                     chooseBlock2();
                 }
                 System.out.println("Block2 chosen");
                 break;
             case 51:
-                if(!block1Chosen && !block2Chosen && !block3Chosen)
+                if(!block1Chosen && !block2Chosen && !block3Chosen && !block3Placed)
                 {
                     chooseBlock3();
                 }
@@ -607,7 +607,7 @@ public class  Window extends JFrame implements KeyListener {
         {
             int x = c.getRoot(1)[1] + deltax;//+ delta x
             int y = c.getRoot(1)[0] + deltay; //+ delta y
-            placeable = c.b.placeBlock(1, x, y);
+            placeable = c.placeBlock(1, x, y);
             System.out.println("Block1 placed");
 
         }
@@ -648,6 +648,7 @@ public class  Window extends JFrame implements KeyListener {
                     }
                 }
                 block1Chosen = false;
+                block1Placed = true;
             }
             if(block2Chosen)
             {
@@ -659,6 +660,7 @@ public class  Window extends JFrame implements KeyListener {
                     }
                 }
                 block2Chosen = false;
+                block2Placed = true;
             }
             if(block3Chosen)
             {
@@ -670,6 +672,7 @@ public class  Window extends JFrame implements KeyListener {
                     }
                 }
                 block3Chosen = false;
+                block3Placed = true;
             }
             deltax = 0;
             deltay = 0;
