@@ -60,6 +60,7 @@ public class  Window extends JFrame implements KeyListener {
         deltax = 0;
         deltay = 0;
 
+;
 
         //MainPanel erstellen
         mainPanel = new JPanel();
