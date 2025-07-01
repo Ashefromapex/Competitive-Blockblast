@@ -22,6 +22,8 @@ public class Board {
     int[][] faki;
     int[][] board;
     boolean[][][] allPossible;
+    int score;
+    int kombo;
     public Board() {
         System.out.println("Board created");
         board = new int[8][8];
@@ -32,6 +34,8 @@ public class Board {
         bm1 = new int[5][5];
         bm2 = new int[5][5];
         bm3 = new int[5][5];
+        score = 0;
+        kombo = 0;
         optimalPlacements = new int[3][2];
     }
 
@@ -41,10 +45,23 @@ public class Board {
 
     public void check_field(int[][] board)//score ?
     {
-        for (int x = 0; x < 8; x++) {
-            check_column(x);
-            check_row(x);
+        int komboTest = kombo;
+        for (int i = 0; i < 8; i++) {
+            check_column(i);
+            check_row(i);
         }
+        if (kombo == komboTest)
+        {
+            kombo = 0;
+        }
+        SetScore();
+    }
+
+    public double SetScore()
+    {
+
+        score = (score + 100) * 3^(kombo + 1) /2;
+        return score;
     }
 
     public void getBlocks()
@@ -67,29 +84,29 @@ public class Board {
         return allPossible;
     }
 
-    public boolean checkPlacement(int blockx, int x, int y)
+    public boolean checkPlacement(int blockx, int y, int x)
     {
-        // int x = 2;
-        // if (x == 1 /* da muss noch was gescheids rein, kp wie man checkt ob das geht oder nicht*/)
+        // int y = 2;
+        // if (y == 1 /* da muss noch was gescheids rein, kp wie man checkt ob das geht oder nicht*/)
         // {
             switch(blockx)
             {
                 case 0:
-                while(x >= 0 && y >= 0 && x < 8 && y < 8 && faki[x][y] < 2) {
+                while(y >= 0 && x >= 0 && y < 8 && x < 8 && faki[y][x] < 2) {
 
 
-                        faki[x][y] = faki[x][y] + b1.checkPlacement(x, y);
+                        faki[y][x] = faki[y][x] + b1.checkPlacement(y, x);
                         if (!b1.above.isEnd()) {
-                            checkPlacement(blockx, x, y - 1);
+                            checkPlacement(blockx, y - 1, x);
                         }
                         if (!b1.left.isEnd()) {
-                            checkPlacement(blockx, x - 1, y);
+                            checkPlacement(blockx, y, x - 1);
                         }
                         if (!b1.below.isEnd()) {
-                            checkPlacement(blockx, x, y + 1);
+                            checkPlacement(blockx, y + 1, x);
                         }
                         if (!b1.right.isEnd()) {
-                            checkPlacement(blockx, x + 1, y);
+                            checkPlacement(blockx, y, x + 1);
                         }
 
                         return true;
@@ -100,20 +117,20 @@ public class Board {
 
 
                 case 1:
-                    while(x >= 0 && y >= 0 && x < 8 && y < 8 && faki[x][y] < 2) {
+                    while(y >= 0 && x >= 0 && y < 8 && x < 8 && faki[y][x] < 2) {
 
-                            faki[x][y] = faki[x][y] + b2.checkPlacement(x, y);
+                            faki[y][x] = faki[y][x] + b2.checkPlacement(y, x);
                             if (!b2.above.isEnd()) {
-                                checkPlacement(blockx, x, y - 1);
+                                checkPlacement(blockx, y - 1, x);
                             }
                             if (!b2.left.isEnd()) {
-                                checkPlacement(blockx, x - 1, y);
+                                checkPlacement(blockx, y, x - 1);
                             }
                             if (!b2.below.isEnd()) {
-                                checkPlacement(blockx, x, y + 1);
+                                checkPlacement(blockx, y + 1, x);
                             }
                             if (!b2.right.isEnd()) {
-                                checkPlacement(blockx, x + 1, y);
+                                checkPlacement(blockx, y, x + 1);
                             }
 
                             return true;
@@ -124,20 +141,20 @@ public class Board {
                     return false;
 
                 case 2:
-                    while(x >= 0 && y >= 0 && x < 8 && y < 8 && faki[x][y] < 2) {
+                    while(y >= 0 && x >= 0 && y < 8 && x < 8 && faki[y][x] < 2) {
 
-                            faki[x][y] = faki[x][y] + b3.checkPlacement(x, y);
+                            faki[y][x] = faki[y][x] + b3.checkPlacement(y, x);
                             if (!b3.above.isEnd()) {
-                                checkPlacement(blockx, x, y - 1);
+                                checkPlacement(blockx, y - 1, x);
                             }
                             if (!b3.left.isEnd()) {
-                                checkPlacement(blockx, x - 1, y);
+                                checkPlacement(blockx, y, x - 1);
                             }
                             if (!b3.below.isEnd()) {
-                                checkPlacement(blockx, x, y + 1);
+                                checkPlacement(blockx, y + 1, x);
                             }
                             if (!b3.right.isEnd()) {
-                                checkPlacement(blockx, x + 1, y);
+                                checkPlacement(blockx, y, x + 1);
                             }
 
                             return true;
@@ -159,9 +176,9 @@ public class Board {
         return false;
     }
 
-    public boolean checkSpezField(int x, int y)//useless rn lmao
+    public boolean checkSpezField(int y, int x)//useless rn lmao
     {
-        if (board[x][y] == 0)
+        if (board[y][x] == 0)
         {
             return true;
         }
@@ -274,6 +291,7 @@ public class Board {
         {
             board[y][columnY] = 0;
         }
+        kombo++;
     }
 
     private void reset_row(int rowX)
@@ -282,6 +300,7 @@ public class Board {
         {
             board[rowX][y] = 0;
         }
+        kombo++;
     }
 
 

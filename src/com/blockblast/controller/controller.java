@@ -47,6 +47,7 @@ public class controller
             {
                 b.getBlocks();
                 b.createBlockmatrix();
+                blockcnt = 3;
             }
             return true;
         }
