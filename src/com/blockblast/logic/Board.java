@@ -262,7 +262,7 @@ public class Board {
     public void check_column(int columnY)
     {
         int check = 0;
-        for(int x = 0; x < 8;)//check if column Y is full
+        for(int x = 0; x < 8;x++)//check if column Y is full
         {
             check = check + board[x][columnY];
         }
