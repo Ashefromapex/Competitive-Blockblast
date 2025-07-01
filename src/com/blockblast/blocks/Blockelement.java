@@ -275,7 +275,7 @@ public class Blockelement extends Block
 
 
 
-    public void printBlock( int x, int y)
+    public void printBlock( int y, int x)
     {
         if(!this.isEnd())
         {
@@ -283,30 +283,30 @@ public class Blockelement extends Block
             //this is where I would put my visualizeBlock() ... if I had one -Lami
             if(!this.left.isEnd())
             {
-                if (x>0)
+                if (y>0)
                 {
-                    this.printBlock(x-1, y);
+                    this.printBlock(y-1, x);
                 }
             }
             if(!this.right.isEnd())
             {
-                if(x<7)
+                if(y<7)
                 {
-                    this.printBlock( x+1, y);
+                    this.printBlock( y+1, x);
                 }
             }
             if(!this.below.isEnd())
             {
-                if(y<7)
+                if(x<7)
                 {
-                    this.printBlock( x, y + 1);
+                    this.printBlock( y, x + 1);
                 }
             }
             if(!this.above.isEnd())
             {
-                if(y>0)
+                if(x>0)
                 {
-                    this.printBlock( x, y-1);
+                    this.printBlock( y, x-1);
                 }
             }
         }
@@ -323,12 +323,12 @@ public class Blockelement extends Block
     }
 
     //@Override
-    public int checkPlacement(int x, int y)
+    public int checkPlacement(int y, int x)
     {
         return 1;
     }
 
-    public int placeBlock(int x, int y) {
+    public int placeBlock(int y, int x) {
     return 1;
     }
 
