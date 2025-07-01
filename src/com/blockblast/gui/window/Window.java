@@ -27,10 +27,13 @@ public class  Window extends JFrame implements KeyListener {
     JPanel block2;
     JPanel block3;
     ImageIcon blockTexture = new  ImageIcon(("src/com/blockblast/assets/block_provisorisch.png"));
+    ImageIcon hintergrundTexture = new ImageIcon(("src/com/blockblast/assets/hintergrund.png"));
     Image scaleBlockTextureImgPreview;
     ImageIcon scaleBlockTextureIconPreview;
     Image scaleBlockTextureImgBoard;
     ImageIcon scaleBlockTextureIconBoard;
+    Image scaleHintergrundTextureImg;
+    ImageIcon scaleHintergrundTextureIcon;
     ImageIcon empty = new  ImageIcon();
     private boolean block1Chosen = false;
     private boolean block2Chosen = false;
@@ -71,13 +74,15 @@ public class  Window extends JFrame implements KeyListener {
         LineBorder mainPanelOutline = new LineBorder(Color.black);
         CompoundBorder mainPanelCompoundBorder = new CompoundBorder(Distance, mainPanelOutline); //Coole schwarze Outline
         mainPanel.setBorder(mainPanelCompoundBorder);
-        mainPanel.setBackground(Color.DARK_GRAY);
+        mainPanel.setBackground(Color.BLUE);
+        scaleHintergrundTextureImg = hintergrundTexture.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/8,Image.SCALE_DEFAULT);
+        scaleHintergrundTextureIcon = new ImageIcon(scaleHintergrundTextureImg);
         for(int j = 0; j < 8; j++)
         {
             for(int i = 0;i < 8;i++) //Code Monstrum zusammengefasst
             {
                 JLabel b = new JLabel();
-                b.setBackground(Color.GRAY);
+                b.setIcon(hintergrundTexture);
                 mainPanel.add(b);
                 grid[i][j] = b;
             }
@@ -96,7 +101,7 @@ public class  Window extends JFrame implements KeyListener {
             for(int i = 0;i < 8;i++) //Füllen mit Blöcken
             {
                 JLabel b = new JLabel();
-                b.setOpaque(false); //macht durchsichtig
+                b.setOpaque(false);//macht durchsichtig
                 fakeBoard.add(b);
                 fakeGrid[i][j] = b;
             }
@@ -332,7 +337,7 @@ public class  Window extends JFrame implements KeyListener {
                 }
                 else
                 {
-                    blockPreview1[j][i].setBackground(Color.BLACK);
+                    blockPreview1[j][i].setBackground(Color.BLUE);
                 }
 
             }
@@ -360,7 +365,7 @@ public class  Window extends JFrame implements KeyListener {
                 }
                 else
                 {
-                    blockPreview2[j][i].setBackground(Color.BLACK);
+                    blockPreview2[j][i].setBackground(Color.BLUE);
                 }
 
             }
@@ -388,7 +393,7 @@ public class  Window extends JFrame implements KeyListener {
                 }
                 else
                 {
-                    blockPreview3[j][i].setBackground(Color.BLACK);
+                    blockPreview3[j][i].setBackground(Color.BLUE);
                 }
 
             }
