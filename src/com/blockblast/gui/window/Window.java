@@ -295,23 +295,23 @@ public class  Window extends JFrame implements KeyListener {
             case 32:
                 if (block1Chosen)
                 {
-                    int x = c.getRoot(1)[0] + deltax;//+ delta x
-                    int y = c.getRoot(1)[1] + deltay; //+ delta y
+                    int x = c.getRoot(1)[1] + deltax;//+ delta x
+                    int y = c.getRoot(1)[0] + deltay; //+ delta y
                     c.placeBlock(1, x, y);
                     System.out.println("Block1 placed");
 
                 }
                 if (block2Chosen)
                 {
-                    int x = c.getRoot(2)[0] + deltax;
-                    int y = c.getRoot(2)[1] + deltay;
+                    int x = c.getRoot(2)[1] + deltax;
+                    int y = c.getRoot(2)[0] + deltay;
                     c.placeBlock(2, x, y);
                     System.out.println("Block2 placed");
                 }
                 if(block3Chosen)
                 {
-                    int x = c.getRoot(3)[0] + deltax;
-                    int y = c.getRoot(3)[1] + deltay;
+                    int x = c.getRoot(3)[1] + deltax;
+                    int y = c.getRoot(3)[0] + deltay;
                     c.placeBlock(3, x, y);
                     System.out.println("Block3 placed");
                 }
