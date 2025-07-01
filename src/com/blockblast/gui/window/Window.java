@@ -187,9 +187,9 @@ public class  Window extends JFrame implements KeyListener {
 
     public void chooseBlock1()
     {
-        for(int j = 0; j < 5; j++)
+        for(int i = 0; i < 5; i++)
         {
-            for(int i = 0; i < 5; i++)
+            for(int j = 0; j < 5; j++)
             {
                 if(blockPreview1 [i][j].getIcon() == scaleBlockTextureIconPreview )
                 {
@@ -203,9 +203,9 @@ public class  Window extends JFrame implements KeyListener {
 
     public void chooseBlock2() //the same as chooseBlock1() but for Block2
     {
-        for(int j = 0; j < 5; j++)
+        for(int i = 0; i < 5; i++)
         {
-            for(int i = 0; i < 5; i++)
+            for(int j = 0; j < 5; j++)
             {
                 if(blockPreview2 [i][j].getIcon() == scaleBlockTextureIconPreview )
                 {
@@ -219,13 +219,13 @@ public class  Window extends JFrame implements KeyListener {
 
     public void chooseBlock3() //the same as chooseBlock1() but for Block3
     {
-        for(int j = 0; j < 5; j++)
+        for(int i = 0; i < 5; i++)
         {
-            for(int i = 0; i < 5; i++)
+            for(int j = 0; j < 5; j++)
             {
                 if(blockPreview3 [i][j].getIcon() == scaleBlockTextureIconPreview )
                 {
-                    fakeGrid[i][j].setIcon(scaleBlockTextureIconBoard); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
+                    fakeGrid[i][j].setIcon(scaleBlockTextureIconBoard); //sets the image of every block in fakeGrid to the equivalent in blockPreview1
                 }
             }
         }
@@ -235,9 +235,9 @@ public class  Window extends JFrame implements KeyListener {
 
     public void deselectBlock() //kein Block mehr ausgewählt
     {
-        for(int j = 0; j < 8; j++)
+        for(int i = 0; i < 8; i++)
         {
-            for(int i = 0; i < 8; i++)
+            for(int j = 0; j < 8; j++)
             {
                 fakeGrid [i][j].setIcon(empty);
             }
@@ -318,19 +318,46 @@ public class  Window extends JFrame implements KeyListener {
                 deltax = 0;
                 deltay = 0;
 
+            case KeyEvent.VK_UP:
+                moveBlockUp();
+                System.out.println("Block moved up");
+                break;
+
+            case KeyEvent.VK_DOWN:
+                moveBlockDown();
+                System.out.println("Block moved down");
+                break;
+
+            case KeyEvent.VK_LEFT:
+                moveBlockLeft();
+                System.out.println("Block moved left");
+                break;
+
+            case KeyEvent.VK_RIGHT:
+                moveBlockRight();
+                System.out.println("Block moved right");
+                break;
 
             case KeyEvent.VK_ESCAPE:
                 deselectBlock();
                 System.out.println("Block deselected");
+                deltax = 0;
+                deltay = 0;
                 break;
         }
     }
 
+    @Override
+    public void keyReleased(KeyEvent e)
+    {
+
+    }
+
     public void visualizeBlock1(JPanel panel, int[][] array) {
 
-        for(int g = 0; g < 5; g++)
+        for(int h = 0; h < 5; h++)
         {
-            for (int h = 0; h < 5; h++)
+            for (int g = 0; g < 5; g++)
             {
                 JLabel b = new JLabel();
                 panel.add(b);
@@ -338,9 +365,9 @@ public class  Window extends JFrame implements KeyListener {
             }
         }
         // einfärbern des blockpreviews
-        for (int i=0; i< 5; i++){
+        for (int j=0; j< 5; j++){
 
-            for (int j=0; j<5; j++){
+            for (int i=0; i<5; i++){
 
                 if (array[j][i] == 1)
                 {
@@ -356,9 +383,9 @@ public class  Window extends JFrame implements KeyListener {
     }
     public void visualizeBlock2(JPanel panel, int[][] array) {
 
-        for(int g = 0; g < 5; g++)
+        for(int h = 0; h < 5; h++)
         {
-            for (int h = 0; h < 5; h++)
+            for (int g = 0; g < 5; g++)
             {
                 JLabel b = new JLabel();
                 panel.add(b);
@@ -366,9 +393,9 @@ public class  Window extends JFrame implements KeyListener {
             }
         }
         // einfärbern des blockpreviews
-        for (int i=0; i< 5; i++){
+        for (int j=0; j< 5; j++){
 
-            for (int j=0; j<5; j++){
+            for (int i=0; i<5; i++){
 
                 if (array[j][i] == 1)
                 {
@@ -384,9 +411,9 @@ public class  Window extends JFrame implements KeyListener {
     }
     public void visualizeBlock3(JPanel panel, int[][] array) {
 
-        for(int g = 0; g < 5; g++)
+        for(int h = 0; h < 5; h++)
         {
-            for (int h = 0; h < 5; h++)
+            for (int g = 0; g < 5; g++)
             {
                 JLabel b = new JLabel();
                 panel.add(b);
@@ -394,9 +421,9 @@ public class  Window extends JFrame implements KeyListener {
             }
         }
         // einfärbern des blockpreviews
-        for (int i=0; i< 5; i++){
+        for (int j=0; j< 5; j++){
 
-            for (int j=0; j<5; j++){
+            for (int i=0; i<5; i++){
 
                 if (array[j][i] == 1)
                 {
@@ -411,11 +438,186 @@ public class  Window extends JFrame implements KeyListener {
         }
     }
 
-    @Override
-    public void keyReleased(KeyEvent e)
+    public boolean moveBlockUp()
     {
+        for(int g = 0; g < 8; g++)
+        {
+            if(fakeGrid[g][0].getIcon() == scaleBlockTextureIconBoard)
+            {
+                return false;
+            }
+        }
+        JLabel[][] movementGrid = new JLabel[8][8];
+        for(int g = 0; g < 8; g++)
+        {
+            for(int h = 0; h < 8; h++)
+            {
+                JLabel l = new JLabel();
+                l.setIcon(empty);
+                movementGrid[g][h]=l;
+            }
+        }
+        for(int h = 0; h < 8; h++)
+        {
+            for (int i=0; i< 8; i++)
+            {
+                if(fakeGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
+                {
+                    movementGrid[h][i-1].setIcon(fakeGrid[h][i].getIcon());
+                    fakeGrid[h][i].setIcon(empty);
+                }
+            }
+        }
+        for(int h = 0; h < 8; h++)
+        {
+            for (int i=0; i< 8; i++)
+            {
+                if(movementGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
+                {
+                    fakeGrid[h][i].setIcon(scaleBlockTextureIconBoard);
+                }
+            }
+        }
 
+        deltay--;
+        return true;
     }
+
+    public boolean moveBlockDown()
+    {
+        for(int g = 0; g < 8; g++)
+        {
+            if(fakeGrid[g][7].getIcon() == scaleBlockTextureIconBoard)
+            {
+                return false;
+            }
+        }
+        JLabel[][] movementGrid = new JLabel[8][8];
+        for(int g = 0; g < 8; g++)
+        {
+            for(int h = 0; h < 8; h++)
+            {
+                JLabel l = new JLabel();
+                l.setIcon(empty);
+                movementGrid[g][h]=l;
+            }
+        }
+        for(int h = 0; h < 8; h++)
+        {
+            for (int i=0; i< 8; i++)
+            {
+                if(fakeGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
+                {
+                    movementGrid[h][i+1].setIcon(fakeGrid[h][i].getIcon());
+                    fakeGrid[h][i].setIcon(empty);
+                }
+            }
+        }
+        for(int h = 0; h < 8; h++)
+        {
+            for (int i=0; i< 8; i++)
+            {
+                if(movementGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
+                {
+                    fakeGrid[h][i].setIcon(scaleBlockTextureIconBoard);
+                }
+            }
+        }
+
+        deltay++;
+        return true;
+    }
+
+    public boolean moveBlockLeft()
+    {
+        for(int g = 0; g < 8; g++)
+        {
+            if(fakeGrid[0][g].getIcon() == scaleBlockTextureIconBoard)
+            {
+                return false;
+            }
+        }
+        JLabel[][] movementGrid = new JLabel[8][8];
+        for(int g = 0; g < 8; g++)
+        {
+            for(int h = 0; h < 8; h++)
+            {
+                JLabel l = new JLabel();
+                l.setIcon(empty);
+                movementGrid[g][h]=l;
+            }
+        }
+        for(int h = 0; h < 8; h++)
+        {
+            for (int i=0; i< 8; i++)
+            {
+                if(fakeGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
+                {
+                    movementGrid[h-1][i].setIcon(fakeGrid[h][i].getIcon());
+                    fakeGrid[h][i].setIcon(empty);
+                }
+            }
+        }
+        for(int h = 0; h < 8; h++)
+        {
+            for (int i=0; i< 8; i++)
+            {
+                if(movementGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
+                {
+                    fakeGrid[h][i].setIcon(scaleBlockTextureIconBoard);
+                }
+            }
+        }
+
+        deltax--;
+        return true;
+    }
+
+    public boolean moveBlockRight()
+    {
+        for(int g = 0; g < 8; g++)
+        {
+            if(fakeGrid[7][g].getIcon() == scaleBlockTextureIconBoard)
+            {
+                return false;
+            }
+        }
+        JLabel[][] movementGrid = new JLabel[8][8];
+        for(int g = 0; g < 8; g++)
+        {
+            for(int h = 0; h < 8; h++)
+            {
+                JLabel l = new JLabel();
+                l.setIcon(empty);
+                movementGrid[g][h]=l;
+            }
+        }
+        for(int h = 0; h < 8; h++)
+        {
+            for (int i=0; i< 8; i++)
+            {
+                if(fakeGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
+                {
+                    movementGrid[h+1][i].setIcon(fakeGrid[h][i].getIcon());
+                    fakeGrid[h][i].setIcon(empty);
+                }
+            }
+        }
+        for(int h = 0; h < 8; h++)
+        {
+            for (int i=0; i< 8; i++)
+            {
+                if(movementGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
+                {
+                    fakeGrid[h][i].setIcon(scaleBlockTextureIconBoard);
+                }
+            }
+        }
+
+        deltay++;
+        return true;
+    }
+
 
 
 }
