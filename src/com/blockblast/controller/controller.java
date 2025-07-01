@@ -41,7 +41,7 @@ public class controller
 
     public boolean placeBlock(int blocknr, int x, int y)
     {
-        if(b.placeBlock(blocknr, x, y))
+        if(b.placeBlock(blocknr, y, x)) //dont ask why its switched shhhhh
         {
             blockcnt--;
             if(blockcnt == 0)
