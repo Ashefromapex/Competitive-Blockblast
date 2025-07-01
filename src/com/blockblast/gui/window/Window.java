@@ -299,11 +299,15 @@ public class  Window extends JFrame implements KeyListener {
                 }
                 if (block1Chosen)
                 {
-                    c.placeBlock(2, 2, 3);
+                    int x = c.getRoot(2)[1] + deltax;
+                    int y = c.getRoot(2)[0] + deltay;
+                    c.placeBlock(2, x, y);
                 }
                 else
                 {
-                    c.placeBlock(3, 2, 3);
+                    int x = c.getRoot(3)[1] + deltax;
+                    int y = c.getRoot(3)[0] + deltay;
+                    c.placeBlock(3, x, y);
                 }
                 deltax = 0;
                 deltay = 0;
