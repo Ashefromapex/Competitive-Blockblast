@@ -82,7 +82,7 @@ public class  Window extends JFrame implements KeyListener {
             for(int i = 0;i < 8;i++) //Code Monstrum zusammengefasst
             {
                 JLabel b = new JLabel();
-                b.setIcon(hintergrundTexture);
+                b.setIcon(scaleHintergrundTextureIcon);
                 mainPanel.add(b);
                 grid[i][j] = b;
             }
