@@ -24,6 +24,7 @@ public class Board {
     boolean[][][] allPossible;
     int score;
     int kombo;
+    boolean gameOver;
     public Board() {
         System.out.println("Board created");
         board = new int[8][8];
@@ -37,6 +38,7 @@ public class Board {
         score = 0;
         kombo = 0;
         optimalPlacements = new int[3][2];
+        gameOver = false;
     }
 
     public int[][] getBoard() {
@@ -57,7 +59,7 @@ public class Board {
         SetScore();
     }
 
-    public double SetScore()
+    public int SetScore()
     {
 
         score = (score + 100) * 3^(kombo + 1) /2;
@@ -245,6 +247,8 @@ public class Board {
                     break;
             }
             check_field(board);
+            checkAll();
+            checkGameOver();
             return true;
         }
         else
@@ -253,7 +257,38 @@ public class Board {
         }
     }
 
+    private void checkGameOver()
+    {
+        int x;
+        int y;
+        int z;
+        int kek = 0;
+        {
+            for (z = 0; z < 3; z++)
+            {
+                for (x = 0; x < 8; x++)
+                {
+                    for (y = 0; y < 8; y++)
+                    {
 
+
+
+                        if(allPossible[z][x][y])
+                        {
+                            kek++;
+                        }
+
+
+                    }
+                }
+            }
+
+        }
+        if(kek == 0)
+        {
+            gameOver = true;
+        }
+    }
 
 
 
@@ -275,7 +310,7 @@ public class Board {
     public void check_row(int rowX)
     {
         int check = 0;
-        for(int y = 0; y < 8;)//check if row X is full
+        for(int y = 0; y < 8;y++)//check if row X is full
         {
             check = check + board[rowX][y];
         }
