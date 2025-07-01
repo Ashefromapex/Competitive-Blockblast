@@ -3,7 +3,7 @@ package com.blockblast.gui.window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Controller implements ActionListener
+public class ControllerGui implements ActionListener
 {
     //Instanzvariable
     private Window window;
@@ -11,7 +11,7 @@ public class Controller implements ActionListener
     //Erzeugt Fenster
     public void startGui()
     {
-        window = new Window(this);
+//        window = new Window();
         window.setVisible(true);
     }
 

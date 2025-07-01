@@ -1,7 +1,7 @@
 package com.blockblast.test;
 
 //import packages
-import com.blockblast.blocks.Blockelement;
+import com.blockblast.controller.controller;
 import com.blockblast.gui.window.Window;
 import com.blockblast.logic.Board;
 import com.blockblast.storage.Data;
@@ -43,6 +43,8 @@ public class Test
 
     private boolean testController()
     {
+        controller c = new controller();
+        c.startSP();
         return true;
     }
     private boolean testIp()
@@ -86,12 +88,13 @@ public class Test
         b.printi();
         b.checkAll();
         b.printi();
-//        b.createBlockmatrix();
-//        b.printArray(b.bm1);
-//        System.out.println();
-//        b.printArray(b.bm2);
-//        System.out.println();
-//        b.printArray(b.bm3);
+
+        b.createBlockmatrix();
+        b.printArray(b.bm1);
+        System.out.println();
+        b.printArray(b.bm2);
+        System.out.println();
+        b.printArray(b.bm3);
         return true;
     }
     private boolean testGui()
@@ -102,10 +105,6 @@ public class Test
     private boolean testBoard()
     {
         Board board = new Board();
-
-
-
-
         return true;
     }
 
@@ -113,8 +112,7 @@ public class Test
     private boolean testWindow(ActionListener listener)
     {
 
-        Window window = new Window(listener);
-        window.setVisible(true);
+//        new Window(new controller());
 
         return true;
 

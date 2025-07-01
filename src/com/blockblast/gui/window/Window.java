@@ -5,21 +5,48 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.Image;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
+import com.blockblast.controller.controller;
 
-public class Window extends JFrame {
-
+public class  Window extends JFrame implements KeyListener {
+    controller c;
     //instanzvariable erstellen
     JLabel label;
-    JButton [][] grid = new JButton[8][8];
-    JButton [][] fakeGrid = new JButton[8][8];
-    JButton [][] blockPreview1 = new JButton[5][5];
-    JButton [][] blockPreview2 = new JButton[5][5];
-    JButton [][] blockPreview3 = new JButton[5][5];
+    JLabel [][] grid = new JLabel[8][8];
+    JLabel [][] fakeGrid = new JLabel[8][8];
+    JLabel [][] blockPreview1 = new JLabel[5][5];
+    JLabel [][] blockPreview2 = new JLabel[5][5];
+    JLabel [][] blockPreview3 = new JLabel[5][5];
+    JPanel mainPanel;
+    JPanel fakeBoard;
+    JPanel block1;
+    JPanel block2;
+    JPanel block3;
+    ImageIcon blockTexture = new  ImageIcon(("src/com/blockblast/assets/block_provisorisch.png"));
+    Image scaleBlockTextureImgPreview;
+    ImageIcon scaleBlockTextureIconPreview;
+    Image scaleBlockTextureImgBoard;
+    ImageIcon scaleBlockTextureIconBoard;
+    ImageIcon empty = new  ImageIcon();
+    private boolean block1Chosen = false;
+    private boolean block2Chosen = false;
+    private boolean block3Chosen = false;
     static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
-    public Window(ActionListener listener) {
 
 
+
+    public Window(controller c) {
+
+        this.c = c;
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false); //Window bleibt genausogroß wie wir wollen
+        setVisible(true);
+        setLayout(null);
+        addKeyListener(this);
         //Window erstellen
         setTitle("BlockBlast");
 
@@ -33,12 +60,12 @@ public class Window extends JFrame {
         buttonPanel.add(startButton);
 
         //MainPanel erstellen
-        JPanel mainPanel = new JPanel();
+        mainPanel = new JPanel();
         GridLayout mainPanelGridLayout = new GridLayout(0,8);
         mainPanel.setLayout(mainPanelGridLayout);
         mainPanel.setOpaque(true);
         int mainPanelBorder = 50; //Abstand vom Rand des Fensters
-        int boardSize = 640; //Größe des Boards
+        int boardSize = 400; //Größe des Boards
         mainPanel.setBounds(0,50,boardSize,boardSize); //Position und Größe des Boards im Layout
         EmptyBorder Distance = new EmptyBorder(mainPanelBorder, mainPanelBorder, mainPanelBorder, mainPanelBorder);
         LineBorder mainPanelOutline = new LineBorder(Color.black);
@@ -49,7 +76,7 @@ public class Window extends JFrame {
         {
             for(int i = 0;i < 8;i++) //Code Monstrum zusammengefasst
             {
-                JButton b = new JButton();
+                JLabel b = new JLabel();
                 b.setBackground(Color.GRAY);
                 mainPanel.add(b);
                 grid[i][j] = b;
@@ -57,7 +84,7 @@ public class Window extends JFrame {
         }
 
         //Fake Board zum Blöcke hovern erstellen, sieht genauso aus wie das Main Board
-        JPanel fakeBoard = new JPanel();
+        fakeBoard = new JPanel();
         GridLayout fakeBoardGridLayout = new GridLayout(0,8);
         fakeBoard.setLayout(fakeBoardGridLayout);
         fakeBoard.setBounds(0,50,boardSize,boardSize);
@@ -68,80 +95,41 @@ public class Window extends JFrame {
         {
             for(int i = 0;i < 8;i++) //Füllen mit Blöcken
             {
-                JButton b = new JButton();
+                JLabel b = new JLabel();
                 b.setOpaque(false); //macht durchsichtig
-                b.setContentAreaFilled(false); //macht Blöcke innen durchsichtig
-                b.setBorderPainted(false); //macht Block Outlines durchsichtig
                 fakeBoard.add(b);
                 fakeGrid[i][j] = b;
             }
         }
 
-        //BlockPanel erstellen und Space für die einzelnen Blöcke
-        JPanel blockPanel = new JPanel(); //Panel für die BlockPreviews
-        blockPanel.setBackground(Color.DARK_GRAY);
-        BoxLayout blockPanelLayout = new BoxLayout(blockPanel,BoxLayout.LINE_AXIS); //horizontales BoxLayout
-        blockPanel.setLayout(blockPanelLayout);
-        int blockBorder = 10; //Abstand vom Rand
-        int blockPreviewSize = 200; //Größe des BlockPreviews
-        JPanel block1 = new JPanel(); //1.Block
-        block1.setLayout(new GridLayout(5,5));
-        block1.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
-        for(int j = 0; j < 5; j++)
-        {
-            for (int i = 0; i < 5; i++) //Ausfüllen mit JButtons
-            {
-                JButton b = new JButton();
-                b.setBackground(Color.GRAY);
-                block1.add(b);
-                blockPreview1[i][j] = b;
-            }
-        }
-        JPanel block2 = new JPanel(); //2.Block
-        block2.setLayout(new GridLayout(5,5));
-        block2.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
-        for(int j = 0; j < 5; j++)
-        {
-            for (int i = 0; i < 5; i++) //Ausfüllen mit JButtons
-            {
-                JButton b = new JButton();
-                b.setBackground(Color.GRAY);
-                block2.add(b);
-                blockPreview2[i][j] = b;
-            }
-        }
-        JPanel block3 = new JPanel(); //3.Block
-        block3.setLayout(new GridLayout(5,5));
-        block3.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
-        for(int j = 0; j < 5; j++)
-        {
-            for (int i = 0; i < 5; i++) //Ausfüllen mit JButtons
-            {
-                JButton b = new JButton();
-                b.setBackground(Color.GRAY);
-                block3.add(b);
-                blockPreview3[i][j] = b;
-            }
-        }
-        //Elemente des BoxLayouts, von links nach rechts
-        blockPanel.add(Box.createRigidArea(new Dimension(blockBorder, 0)));
-        blockPanel.add(block1);
-        blockPanel.add(Box.createRigidArea(new Dimension(blockBorder, 0)));
-        blockPanel.add(block2);
-        blockPanel.add(Box.createRigidArea(new Dimension(blockBorder, 0)));
-        blockPanel.add(block3);
-        blockPanel.add(Box.createRigidArea(new Dimension(blockBorder, 0)));
 
-        //Abstand von unterem Rand und BlockPreviews erstellen
-        JPanel blockOverlord = new JPanel(); //Panel, was blockPanel und Abstandspanel beinhaltet
-        blockOverlord.setLayout(new BorderLayout());
+        int blockBorder = 25; //Abstand vom Rand
+        int blockPreviewSize = 100; //Größe des BlockPreviews
+        block1 = new JPanel(); //1.Block
+        block1.setLayout(new GridLayout(5,5));
+        block1.setBackground(Color.DARK_GRAY);
+        block1.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
+        block1.setBounds(blockBorder,50+boardSize,blockPreviewSize,blockPreviewSize);
+
+        block2 = new JPanel(); //2.Block
+        block2.setLayout(new GridLayout(5,5));
+        block2.setBackground(Color.DARK_GRAY);
+        block2.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
+        block2.setBounds(blockBorder*2+blockPreviewSize,50+boardSize,blockPreviewSize,blockPreviewSize);
+
+        block3 = new JPanel(); //3.Block
+        block3.setLayout(new GridLayout(5,5));
+        block3.setBackground(Color.DARK_GRAY);
+        block3.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
+        block3.setBounds(blockBorder*3+blockPreviewSize*2,50+boardSize,blockPreviewSize,blockPreviewSize);
+
+
+
         JPanel southBumper = new JPanel(); //Bumper zu unterem Rand
-        int southBumperHeight = 20; //Abstand zu unterem Rand
+        int southBumperHeight = blockBorder*2; //Abstand zu unterem Rand
         southBumper.setBackground(Color.DARK_GRAY);
-        southBumper.setPreferredSize(new Dimension(blockBorder*4+blockPreviewSize*3, southBumperHeight));
-        blockOverlord.add(southBumper, BorderLayout.SOUTH);
-        blockOverlord.add(blockPanel, BorderLayout.CENTER);
-        blockOverlord.setBounds(0,50+boardSize,boardSize,blockPreviewSize+southBumperHeight); //Position und Größe des Panels im Layout
+        southBumper.setPreferredSize(new Dimension(blockBorder*4+blockPreviewSize*3, blockPreviewSize+southBumperHeight));
+        southBumper.setBounds(0,50+boardSize,blockBorder*4+blockPreviewSize*3,blockPreviewSize+southBumperHeight);
 
 
 
@@ -152,19 +140,32 @@ public class Window extends JFrame {
         titleLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
         titleLabel.setBounds(0,0,boardSize,50); //Bestimmt Position und Größe des Titels
 
+        scaleBlockTextureImgPreview = blockTexture.getImage().getScaledInstance(blockPreviewSize/5,blockPreviewSize/5,Image.SCALE_DEFAULT);
+        scaleBlockTextureIconPreview = new ImageIcon(scaleBlockTextureImgPreview);
+        scaleBlockTextureImgBoard = blockTexture.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/8,Image.SCALE_DEFAULT);
+        scaleBlockTextureIconBoard = new ImageIcon(scaleBlockTextureImgBoard);
+
+
+
 
         //Top label layout
         //Start und Stop Stuff
         //fügt alles hinzu, was zuerst hinzugefügt wird ist am weitesten oben
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false); //Window bleibt genausogroß wie wir wollen
-        setVisible(true);
-        setLayout(null);
         setSize(new Dimension(boardSize+15,50+boardSize+mainPanelBorder+blockPreviewSize+southBumperHeight-15));
         add(titleLabel);
         add(fakeBoard);
         add(mainPanel);
-        add(blockOverlord);
+        add(block1);
+        add(block2);
+        add(block3);
+        add(southBumper);
+        //imports the blocks
+        int[][] testblock1 = c.getBm1();
+        int[][] testblock2 = c.getBm2();
+        int[][] testblock3 = c.getBm3();
+        visualizeBlock1(block1,testblock1);
+        visualizeBlock2(block2,testblock2);
+        visualizeBlock3(block3,testblock3);
 
 
 
@@ -184,11 +185,8 @@ public class Window extends JFrame {
 
         //verdrahtung controller mit buttons
         //Controller c = new Controller();
-        repeatButton.addActionListener(listener);
-        startButton.addActionListener(listener);
-
-
-
+        //repeatButton.addActionListener(listener);
+        //startButton.addActionListener(listener);
     }
 
     public void showMessage(String msg)
@@ -196,6 +194,213 @@ public class Window extends JFrame {
         label.setText(msg);
 
     }
+
+    public void chooseBlock1()
+    {
+        for(int j = 0; j < 5; j++)
+        {
+            for(int i = 0; i < 5; i++)
+            {
+                if(blockPreview1 [i][j].getIcon() == scaleBlockTextureIconPreview )
+                {
+                    fakeGrid[i][j].setIcon(scaleBlockTextureIconBoard); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
+                }
+            }
+        }
+        block1.setVisible(false); //the BlockPreview for Block1 is now invisible
+        block1Chosen = true; //make sure no other block can be selected
+    }
+
+    public void chooseBlock2() //the same as chooseBlock1() but for Block2
+    {
+        for(int j = 0; j < 5; j++)
+        {
+            for(int i = 0; i < 5; i++)
+            {
+                if(blockPreview2 [i][j].getIcon() == scaleBlockTextureIconPreview )
+                {
+                    fakeGrid[i][j].setIcon(scaleBlockTextureIconBoard); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
+                }
+            }
+        }
+        block2.setVisible(false);
+        block2Chosen = true;
+    }
+
+    public void chooseBlock3() //the same as chooseBlock1() but for Block3
+    {
+        for(int j = 0; j < 5; j++)
+        {
+            for(int i = 0; i < 5; i++)
+            {
+                if(blockPreview3 [i][j].getIcon() == scaleBlockTextureIconPreview )
+                {
+                    fakeGrid[i][j].setIcon(scaleBlockTextureIconBoard); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
+                }
+            }
+        }
+        block3.setVisible(false);
+        block3Chosen = true;
+    }
+
+    public void deselectBlock() //kein Block mehr ausgewählt
+    {
+        for(int j = 0; j < 8; j++)
+        {
+            for(int i = 0; i < 8; i++)
+            {
+                fakeGrid [i][j].setIcon(empty);
+            }
+        }
+
+        if(block1Chosen)
+        {
+            block1.setVisible(true);
+            block1Chosen = false;
+        }
+        if(block2Chosen)
+        {
+            block2.setVisible(true);
+            block2Chosen = false;
+        }
+        if(block3Chosen)
+        {
+            block3.setVisible(true);
+            block3Chosen = false;
+        }
+    }
+
+
+    @Override
+    public void keyTyped(KeyEvent e)
+    {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e)
+    {
+        switch (e.getKeyCode())
+        {
+            case 49:
+                if(!block1Chosen && !block2Chosen && !block3Chosen)
+                {
+                    chooseBlock1();
+                }
+                System.out.println("Block1 chosen");
+                break;
+            case 50:
+                if(!block1Chosen && !block2Chosen && !block3Chosen)
+                {
+                    chooseBlock2();
+                }
+                System.out.println("Block2 chosen");
+                break;
+            case 51:
+                if(!block1Chosen && !block2Chosen && !block3Chosen)
+                {
+                    chooseBlock3();
+                }
+                System.out.println("Block3 chosen");
+                break;
+            case KeyEvent.VK_ESCAPE:
+                deselectBlock();
+                System.out.println("Block deselected");
+                break;
+        }
+    }
+
+    public void visualizeBlock1(JPanel panel, int[][] array) {
+
+        for(int g = 0; g < 5; g++)
+        {
+            for (int h = 0; h < 5; h++)
+            {
+                JLabel b = new JLabel();
+                panel.add(b);
+                blockPreview1[h][g]= b;
+            }
+        }
+        // einfärbern des blockpreviews
+        for (int i=0; i< 5; i++){
+
+            for (int j=0; j<5; j++){
+
+                if (array[j][i] == 1)
+                {
+                    blockPreview1[j][i].setIcon(scaleBlockTextureIconPreview);
+                }
+                else
+                {
+                    blockPreview1[j][i].setBackground(Color.BLACK);
+                }
+
+            }
+        }
+    }
+    public void visualizeBlock2(JPanel panel, int[][] array) {
+
+        for(int g = 0; g < 5; g++)
+        {
+            for (int h = 0; h < 5; h++)
+            {
+                JLabel b = new JLabel();
+                panel.add(b);
+                blockPreview2[h][g]= b;
+            }
+        }
+        // einfärbern des blockpreviews
+        for (int i=0; i< 5; i++){
+
+            for (int j=0; j<5; j++){
+
+                if (array[j][i] == 1)
+                {
+                    blockPreview2[j][i].setIcon(scaleBlockTextureIconPreview);
+                }
+                else
+                {
+                    blockPreview2[j][i].setBackground(Color.BLACK);
+                }
+
+            }
+        }
+    }
+    public void visualizeBlock3(JPanel panel, int[][] array) {
+
+        for(int g = 0; g < 5; g++)
+        {
+            for (int h = 0; h < 5; h++)
+            {
+                JLabel b = new JLabel();
+                panel.add(b);
+                blockPreview3[h][g]= b;
+            }
+        }
+        // einfärbern des blockpreviews
+        for (int i=0; i< 5; i++){
+
+            for (int j=0; j<5; j++){
+
+                if (array[j][i] == 1)
+                {
+                    blockPreview3[j][i].setIcon(scaleBlockTextureIconPreview);
+                }
+                else
+                {
+                    blockPreview3[j][i].setBackground(Color.BLACK);
+                }
+
+            }
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e)
+    {
+
+    }
+
 }
 
 

@@ -55,7 +55,10 @@ public class Board {
       code2 = alg.code2;
       code3 = alg.code3;
     }
-
+    public int getSeed()
+    {
+        return alg.getSeed();
+    }
     public boolean[][][] getAllPossible()
     {
         checkAll();
@@ -204,7 +207,7 @@ public class Board {
     }
 
     // wird ausgeführt wenn der nutzer den block platzieren will
-    public void placeBlock(int blockx, int x, int y)
+    public boolean placeBlock(int blockx, int x, int y)
     {
         if (this.checkPlacement(blockx, x, y)) // or allPossible
         {
@@ -222,10 +225,12 @@ public class Board {
                     setBlockinArray(b3, x, y, board);
                     break;
             }
+            check_field(board);
+            return true;
         }
         else
         {
-            System.out.println("Placement failed");
+            return false;
         }
     }
 
@@ -312,9 +317,9 @@ public class Board {
 
     public void createBlockmatrix()
     {
-//        setBlockinArray(b1, optimalPlacement(code1)[0], optimalPlacement(code1)[1], bm1);
-//        setBlockinArray(b2, optimalPlacement(code2)[0], optimalPlacement(code2)[1], bm2);
-//        setBlockinArray(b3, optimalPlacement(code3)[0], optimalPlacement(code3)[1], bm3);
+        setBlockinArray(b1, optimalPlacement(code1)[0], optimalPlacement(code1)[1], bm1);
+        setBlockinArray(b2, optimalPlacement(code2)[0], optimalPlacement(code2)[1], bm2);
+        setBlockinArray(b3, optimalPlacement(code3)[0], optimalPlacement(code3)[1], bm3);
     }
     public int[] optimalPlacement(int code)
     {
@@ -400,16 +405,37 @@ public class Board {
             case 1:
                 break;
             case 2:
-                dy = dy;
-                dx = -1 * dx;
+                if(dx == 0)
+                {
+                    dx = dy;
+                    dy = 0;
+                }
+                else
+                {
+                    dy *= -1;
+                }
                 break;
             case 3:
-                dx = -1* dx;
-                dy = -1 * dy;
+                if(dx == 0)
+                {
+                    dy *= -1;
+                }
+                else
+                {
+                    dx *= -1;
+                    dy *= -1;
+                }
                 break;
             case 4:
-                dx = -1 * dy;
-                dy = dx;
+               if(dx == 0)
+               {
+                   dx = -1* dy;
+                   dy = 0;
+               }
+               else
+               {
+                   dx *= -1;
+               }
                 break;
         }
         //apply diff to original positions

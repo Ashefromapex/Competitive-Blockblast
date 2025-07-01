@@ -1,19 +1,21 @@
 package com.blockblast.controller;
 
 import com.blockblast.logic.Algo;
-import com.blockblast.gui.Gui;
+import com.blockblast.gui.window.Window;
 import com.blockblast.logic.Board;
 import com.blockblast.storage.Data;
 import com.blockblast.network.Ip;
 
 public class controller
 {
-    private Gui gui; //GUI object
+    private Window w; //GUI object
     private Board b;//Logic object
     public int [][] testfield = new int [8][8];
+    int blockcnt = 3;
 
     public controller()
     {
+
         clearTestfeld();
     }
     //handles communication between the GUI and the logic
@@ -26,19 +28,49 @@ public class controller
         //start single player
         b = new Board();
         b.getBlocks();
-        //push blocks to gui
-        gui = new Gui();
-        gui.pullBlock(b.b1, b.b2, b.b3);
-
+        b.createBlockmatrix();
+        w = new Window(this);
 
     }
-   /* public void startMP()
+    public void startMP()
     {
         //start multiplayer
+        int seed = b.getSeed();
     }
-    ausgecommmentet weil schaffen wir eh nicht
 
-    */
+    public boolean placeBlock(int blocknr, int x, int y)
+    {
+        if(b.placeBlock(blocknr, x, y))
+        {
+            blockcnt--;
+            if(blockcnt == 0)
+            {
+                b.getBlocks();
+                b.createBlockmatrix();
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public int[][] getBm1()
+    {
+        return b.bm1;
+    }
+    public int[][] getBm2()
+    {
+        return b.bm2;
+    }
+    public int[][] getBm3()
+    {
+        return b.bm3;
+    }
+
+
+
+
 
     public void printTestfield()
     {
