@@ -308,7 +308,7 @@ public class  Window extends JFrame implements KeyListener {
                     c.placeBlock(2, x, y);
                     System.out.println("Block2 placed");
                 }
-                else
+                if(block3Chosen)
                 {
                     int x = c.getRoot(3)[0] + deltax;
                     int y = c.getRoot(3)[1] + deltay;
@@ -317,28 +317,29 @@ public class  Window extends JFrame implements KeyListener {
                 }
                 deltax = 0;
                 deltay = 0;
+                break;
 
-            case KeyEvent.VK_UP:
+            case 38:
                 moveBlockUp();
                 System.out.println("Block moved up");
                 break;
 
-            case KeyEvent.VK_DOWN:
+            case 40:
                 moveBlockDown();
                 System.out.println("Block moved down");
                 break;
 
-            case KeyEvent.VK_LEFT:
+            case 37:
                 moveBlockLeft();
                 System.out.println("Block moved left");
                 break;
 
-            case KeyEvent.VK_RIGHT:
+            case 39:
                 moveBlockRight();
                 System.out.println("Block moved right");
                 break;
 
-            case KeyEvent.VK_ESCAPE:
+            case 27:
                 deselectBlock();
                 System.out.println("Block deselected");
                 deltax = 0;
