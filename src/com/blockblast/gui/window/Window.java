@@ -78,9 +78,9 @@ public class  Window extends JFrame implements KeyListener {
         mainPanel.setBackground(Color.BLUE);
         scaleHintergrundTextureImg = hintergrundTexture.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/8,Image.SCALE_DEFAULT);
         scaleHintergrundTextureIcon = new ImageIcon(scaleHintergrundTextureImg);
-        for(int j = 0; j < 8; j++)
+        for(int i = 0; i < 8; i++)
         {
-            for(int i = 0;i < 8;i++) //Code Monstrum zusammengefasst
+            for(int j = 0;j < 8;j++) //Code Monstrum zusammengefasst
             {
                 JLabel b = new JLabel();
                 b.setIcon(scaleHintergrundTextureIcon);
@@ -97,9 +97,9 @@ public class  Window extends JFrame implements KeyListener {
         fakeBoard.setOpaque(false); //macht durchsichtig
         fakeBoard.setBackground(new Color(0,0,0,0)); //macht durchsichtig
         fakeBoard.setBorder(Distance);
-        for(int j = 0; j < 8; j++)
+        for(int i = 0; i < 8; i++)
         {
-            for(int i = 0;i < 8;i++) //Füllen mit Blöcken
+            for(int j = 0;j < 8;j++) //Füllen mit Blöcken
             {
                 JLabel b = new JLabel();
                 b.setOpaque(false);//macht durchsichtig
