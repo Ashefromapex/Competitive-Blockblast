@@ -17,6 +17,7 @@ public class Board {
     public int[][] bm1; //--> converted Blockmatrix of block 1
     public int[][] bm2;
     public int[][] bm3;
+    public int[][] optimalPlacements;
     public Algo alg;
     int[][] faki;
     int[][] board;
@@ -31,6 +32,7 @@ public class Board {
         bm1 = new int[5][5];
         bm2 = new int[5][5];
         bm3 = new int[5][5];
+        optimalPlacements = new int[3][2];
     }
 
     public int[][] getBoard() {
@@ -317,9 +319,12 @@ public class Board {
 
     public void createBlockmatrix()
     {
-        setBlockinArray(b1, optimalPlacement(code1)[0], optimalPlacement(code1)[1], bm1);
-        setBlockinArray(b2, optimalPlacement(code2)[0], optimalPlacement(code2)[1], bm2);
-        setBlockinArray(b3, optimalPlacement(code3)[0], optimalPlacement(code3)[1], bm3);
+        optimalPlacements[0]= optimalPlacement(code1);
+        optimalPlacements[1]= optimalPlacement(code2);
+        optimalPlacements[2]= optimalPlacement(code3);
+        setBlockinArray(b1, optimalPlacements[0][0], optimalPlacements[0][1], bm1);
+        setBlockinArray(b2, optimalPlacements[1][0], optimalPlacements[1][1], bm2);
+        setBlockinArray(b3, optimalPlacements[2][0], optimalPlacements[2][1], bm3);
     }
     public int[] optimalPlacement(int code)
     {

@@ -67,6 +67,11 @@ public class controller
     {
         return b.bm3;
     }
+    public int[] getRoot(int blocknr)
+    {
+        blocknr--;
+        return b.optimalPlacements[blocknr];
+    }
 
 
 

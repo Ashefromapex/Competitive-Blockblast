@@ -10,11 +10,15 @@ import java.awt.event.KeyListener;
 import java.awt.Image;
 import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
+
+import com.blockblast.Main;
 import com.blockblast.controller.controller;
 
 public class  Window extends JFrame implements KeyListener {
     controller c;
     //instanzvariable erstellen
+    int deltax;
+    int deltay;
     JLabel label;
     JLabel [][] grid = new JLabel[8][8];
     JLabel [][] fakeGrid = new JLabel[8][8];
@@ -27,15 +31,19 @@ public class  Window extends JFrame implements KeyListener {
     JPanel block2;
     JPanel block3;
     ImageIcon blockTexture = new  ImageIcon(("src/com/blockblast/assets/block_provisorisch.png"));
+    ImageIcon hintergrundTexture = new ImageIcon(("src/com/blockblast/assets/hintergrund.png"));
     Image scaleBlockTextureImgPreview;
     ImageIcon scaleBlockTextureIconPreview;
     Image scaleBlockTextureImgBoard;
     ImageIcon scaleBlockTextureIconBoard;
+    Image scaleHintergrundTextureImg;
+    ImageIcon scaleHintergrundTextureIcon;
     ImageIcon empty = new  ImageIcon();
     private boolean block1Chosen = false;
     private boolean block2Chosen = false;
     private boolean block3Chosen = false;
     static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
+
 
 
 
@@ -51,14 +59,6 @@ public class  Window extends JFrame implements KeyListener {
         setTitle("BlockBlast");
 
 
-        //Button erstellen south
-        //ist zur Zeit nicht verwendet
-        JPanel buttonPanel = new JPanel();
-        JButton repeatButton = new JButton("Repeat");
-        JButton startButton = new JButton("Start");
-        buttonPanel.add(repeatButton);
-        buttonPanel.add(startButton);
-
         //MainPanel erstellen
         mainPanel = new JPanel();
         GridLayout mainPanelGridLayout = new GridLayout(0,8);
@@ -71,13 +71,15 @@ public class  Window extends JFrame implements KeyListener {
         LineBorder mainPanelOutline = new LineBorder(Color.black);
         CompoundBorder mainPanelCompoundBorder = new CompoundBorder(Distance, mainPanelOutline); //Coole schwarze Outline
         mainPanel.setBorder(mainPanelCompoundBorder);
-        mainPanel.setBackground(Color.DARK_GRAY);
+        mainPanel.setBackground(Color.BLUE);
+        scaleHintergrundTextureImg = hintergrundTexture.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/8,Image.SCALE_DEFAULT);
+        scaleHintergrundTextureIcon = new ImageIcon(scaleHintergrundTextureImg);
         for(int j = 0; j < 8; j++)
         {
             for(int i = 0;i < 8;i++) //Code Monstrum zusammengefasst
             {
                 JLabel b = new JLabel();
-                b.setBackground(Color.GRAY);
+                b.setIcon(scaleHintergrundTextureIcon);
                 mainPanel.add(b);
                 grid[i][j] = b;
             }
@@ -96,7 +98,7 @@ public class  Window extends JFrame implements KeyListener {
             for(int i = 0;i < 8;i++) //Füllen mit Blöcken
             {
                 JLabel b = new JLabel();
-                b.setOpaque(false); //macht durchsichtig
+                b.setOpaque(false);//macht durchsichtig
                 fakeBoard.add(b);
                 fakeGrid[i][j] = b;
             }
@@ -168,25 +170,9 @@ public class  Window extends JFrame implements KeyListener {
         visualizeBlock3(block3,testblock3);
 
 
-
-
-
-        //neue Komponente
-        label = new JLabel();
-        label.setText("---");
-
-        //Pannel einfügen -> Button einfügen
-        /*p.add(b1);
-        p.add(b2);
-        p.add(label);*/
-
         //gibt ideale Größe an und centert den Frame
         setLocationRelativeTo(null);
 
-        //verdrahtung controller mit buttons
-        //Controller c = new Controller();
-        //repeatButton.addActionListener(listener);
-        //startButton.addActionListener(listener);
     }
 
     public void showMessage(String msg)
@@ -303,6 +289,26 @@ public class  Window extends JFrame implements KeyListener {
                 }
                 System.out.println("Block3 chosen");
                 break;
+            case 32:
+                if (block1Chosen)
+                {
+                    int x = c.getRoot(1)[1] + deltax;//+ delta x
+                    int y = c.getRoot(1)[0] + deltay; //+ delta y
+                    c.placeBlock(1, x, y);
+
+                }
+                if (block1Chosen)
+                {
+                    c.placeBlock(2, 2, 3);
+                }
+                else
+                {
+                    c.placeBlock(3, 2, 3);
+                }
+                deltax = 0;
+                deltay = 0;
+
+
             case KeyEvent.VK_ESCAPE:
                 deselectBlock();
                 System.out.println("Block deselected");
@@ -332,7 +338,7 @@ public class  Window extends JFrame implements KeyListener {
                 }
                 else
                 {
-                    blockPreview1[j][i].setBackground(Color.BLACK);
+                    blockPreview1[j][i].setBackground(Color.BLUE);
                 }
 
             }
@@ -360,7 +366,7 @@ public class  Window extends JFrame implements KeyListener {
                 }
                 else
                 {
-                    blockPreview2[j][i].setBackground(Color.BLACK);
+                    blockPreview2[j][i].setBackground(Color.BLUE);
                 }
 
             }
@@ -388,7 +394,7 @@ public class  Window extends JFrame implements KeyListener {
                 }
                 else
                 {
-                    blockPreview3[j][i].setBackground(Color.BLACK);
+                    blockPreview3[j][i].setBackground(Color.BLUE);
                 }
 
             }
@@ -400,6 +406,7 @@ public class  Window extends JFrame implements KeyListener {
     {
 
     }
+
 
 }
 
