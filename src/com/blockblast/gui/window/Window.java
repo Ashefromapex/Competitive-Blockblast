@@ -480,7 +480,7 @@ public class  Window extends JFrame implements KeyListener {
             }
         }
 
-        deltay--;
+        deltax--;
         return true;
     }
 
@@ -525,7 +525,7 @@ public class  Window extends JFrame implements KeyListener {
             }
         }
 
-        deltay++;
+        deltax++;
         return true;
     }
 
@@ -570,7 +570,7 @@ public class  Window extends JFrame implements KeyListener {
             }
         }
 
-        deltax--;
+        deltay--;
         return true;
     }
 
