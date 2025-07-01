@@ -42,6 +42,9 @@ public class  Window extends JFrame implements KeyListener {
     private boolean block1Chosen = false;
     private boolean block2Chosen = false;
     private boolean block3Chosen = false;
+    private boolean block1Placed = false;
+    private boolean block2Placed = false;
+    private boolean block3Placed = false;
     static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
 
 
@@ -620,6 +623,83 @@ public class  Window extends JFrame implements KeyListener {
         return true;
     }
 
+    public void placeBlock()
+    {
+        boolean placeable = false;
+        if (block1Chosen)
+        {
+            int x = c.getRoot(1)[0] + deltax;//+ delta x
+            int y = c.getRoot(1)[1] + deltay; //+ delta y
+            placeable = c.b.placeBlock(1, x, y);
+            System.out.println("Block1 placed");
+
+        }
+        if (block2Chosen)
+        {
+            int x = c.getRoot(2)[0] + deltax;
+            int y = c.getRoot(2)[1] + deltay;
+            placeable = c.placeBlock(2, x, y);
+            System.out.println("Block2 placed");
+        }
+        if(block3Chosen)
+        {
+            int x = c.getRoot(3)[0] + deltax;
+            int y = c.getRoot(3)[1] + deltay;
+            placeable = c.placeBlock(3, x, y);
+            System.out.println("Block3 placed");
+        }
+        if(placeable)
+        {
+            for(int g = 0; g < 8; g++)
+            {
+                for(int h = 0; h < 8; h++)
+                {
+                    if(fakeGrid[g][h].getIcon() == scaleBlockTextureIconBoard)
+                    {
+                        grid[g][h].setIcon(fakeGrid[g][h].getIcon());
+                        fakeGrid[g][h].setIcon(empty);
+                    }
+                }
+            }
+            if(block1Chosen)
+            {
+                for(int g = 0; g < 5; g++)
+                {
+                    for(int h = 0; h < 5; h++)
+                    {
+                        blockPreview1[g][h].setIcon(empty);
+                    }
+                }
+                block1Chosen = false;
+            }
+            if(block2Chosen)
+            {
+                for(int g = 0; g < 5; g++)
+                {
+                    for(int h = 0; h < 5; h++)
+                    {
+                        blockPreview2[g][h].setIcon(empty);
+                    }
+                }
+                block2Chosen = false;
+            }
+            if(block3Chosen)
+            {
+                for(int g = 0; g < 5; g++)
+                {
+                    for(int h = 0; h < 5; h++)
+                    {
+                        blockPreview3[g][h].setIcon(empty);
+                    }
+                }
+                block3Chosen = false;
+            }
+            deltax = 0;
+            deltay = 0;
+        }
+
+
+    }
 
 
 }
