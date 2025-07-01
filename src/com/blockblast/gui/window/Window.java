@@ -54,14 +54,6 @@ public class  Window extends JFrame implements KeyListener {
         setTitle("BlockBlast");
 
 
-        //Button erstellen south
-        //ist zur Zeit nicht verwendet
-        JPanel buttonPanel = new JPanel();
-        JButton repeatButton = new JButton("Repeat");
-        JButton startButton = new JButton("Start");
-        buttonPanel.add(repeatButton);
-        buttonPanel.add(startButton);
-
         //MainPanel erstellen
         mainPanel = new JPanel();
         GridLayout mainPanelGridLayout = new GridLayout(0,8);
@@ -173,25 +165,9 @@ public class  Window extends JFrame implements KeyListener {
         visualizeBlock3(block3,testblock3);
 
 
-
-
-
-        //neue Komponente
-        label = new JLabel();
-        label.setText("---");
-
-        //Pannel einfügen -> Button einfügen
-        /*p.add(b1);
-        p.add(b2);
-        p.add(label);*/
-
         //gibt ideale Größe an und centert den Frame
         setLocationRelativeTo(null);
 
-        //verdrahtung controller mit buttons
-        //Controller c = new Controller();
-        //repeatButton.addActionListener(listener);
-        //startButton.addActionListener(listener);
     }
 
     public void showMessage(String msg)
