@@ -317,6 +317,7 @@ public class  Window extends JFrame implements KeyListener {
                 }
                 deltax = 0;
                 deltay = 0;
+                c.b.printArray(c.b.getBoard());
                 break;
 
             case 38:

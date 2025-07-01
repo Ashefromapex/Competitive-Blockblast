@@ -91,6 +91,7 @@ public class Board {
         // int y = 2;
         // if (y == 1 /* da muss noch was gescheids rein, kp wie man checkt ob das geht oder nicht*/)
         // {
+            blockx--;
             switch(blockx)
             {
                 case 0:

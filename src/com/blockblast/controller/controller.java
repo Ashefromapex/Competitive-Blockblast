@@ -10,7 +10,7 @@ public class controller
 {
     private titleScreen t; //Titlebildschirm
     private Window w;//GUI object
-    private Board b;//Logic object
+    public Board b;//Logic object
     public int [][] testfield = new int [8][8];
     int blockcnt = 3;
 
