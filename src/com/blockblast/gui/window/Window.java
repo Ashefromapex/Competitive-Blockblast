@@ -439,7 +439,7 @@ public class  Window extends JFrame implements KeyListener {
         }
     }
 
-    public boolean moveBlockUp()
+    public boolean moveBlockLeft()
     {
         for(int g = 0; g < 8; g++)
         {
@@ -484,7 +484,7 @@ public class  Window extends JFrame implements KeyListener {
         return true;
     }
 
-    public boolean moveBlockDown()
+    public boolean moveBlockRight()
     {
         for(int g = 0; g < 8; g++)
         {
@@ -529,7 +529,7 @@ public class  Window extends JFrame implements KeyListener {
         return true;
     }
 
-    public boolean moveBlockLeft()
+    public boolean moveBlockUp()
     {
         for(int g = 0; g < 8; g++)
         {
@@ -574,7 +574,7 @@ public class  Window extends JFrame implements KeyListener {
         return true;
     }
 
-    public boolean moveBlockRight()
+    public boolean moveBlockDown()
     {
         for(int g = 0; g < 8; g++)
         {
