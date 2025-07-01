@@ -5,10 +5,11 @@ import com.blockblast.gui.window.Window;
 import com.blockblast.logic.Board;
 import com.blockblast.storage.Data;
 import com.blockblast.network.Ip;
-
+import com.blockblast.gui.window.titleScreen;
 public class controller
 {
-    private Window w; //GUI object
+    private titleScreen t; //Titlebildschirm
+    private Window w;//GUI object
     private Board b;//Logic object
     public int [][] testfield = new int [8][8];
     int blockcnt = 3;
@@ -21,7 +22,7 @@ public class controller
     //handles communication between the GUI and the logic
     public void start()
     {
-        //startet die basic Gui → Auswählen, ob single oder multiplayer
+        t = new titleScreen(this);
     }
     public void startSP()
     {

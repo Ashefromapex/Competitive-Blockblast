@@ -48,6 +48,8 @@ public class  Window extends JFrame implements KeyListener {
 
 
     public Window(controller c) {
+        deltax = 0;
+        deltay = 0;
 
         this.c = c;
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -57,8 +59,7 @@ public class  Window extends JFrame implements KeyListener {
         addKeyListener(this);
         //Window erstellen
         setTitle("BlockBlast");
-        deltax = 0;
-        deltay = 0;
+
 
 ;
 
@@ -112,19 +113,19 @@ public class  Window extends JFrame implements KeyListener {
         int blockPreviewSize = 100; //Größe des BlockPreviews
         block1 = new JPanel(); //1.Block
         block1.setLayout(new GridLayout(5,5));
-        block1.setBackground(Color.DARK_GRAY);
+        block1.setBackground(Color.BLUE);
         block1.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block1.setBounds(blockBorder,50+boardSize,blockPreviewSize,blockPreviewSize);
 
         block2 = new JPanel(); //2.Block
         block2.setLayout(new GridLayout(5,5));
-        block2.setBackground(Color.DARK_GRAY);
+        block2.setBackground(Color.BLUE);
         block2.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block2.setBounds(blockBorder*2+blockPreviewSize,50+boardSize,blockPreviewSize,blockPreviewSize);
 
         block3 = new JPanel(); //3.Block
         block3.setLayout(new GridLayout(5,5));
-        block3.setBackground(Color.DARK_GRAY);
+        block3.setBackground(Color.BLUE);
         block3.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block3.setBounds(blockBorder*3+blockPreviewSize*2,50+boardSize,blockPreviewSize,blockPreviewSize);
 
@@ -132,7 +133,7 @@ public class  Window extends JFrame implements KeyListener {
 
         JPanel southBumper = new JPanel(); //Bumper zu unterem Rand
         int southBumperHeight = blockBorder*2; //Abstand zu unterem Rand
-        southBumper.setBackground(Color.DARK_GRAY);
+        southBumper.setBackground(Color.BLUE);
         southBumper.setPreferredSize(new Dimension(blockBorder*4+blockPreviewSize*3, blockPreviewSize+southBumperHeight));
         southBumper.setBounds(0,50+boardSize,blockBorder*4+blockPreviewSize*3,blockPreviewSize+southBumperHeight);
 

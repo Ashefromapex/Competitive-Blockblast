@@ -1,30 +1,81 @@
 package com.blockblast.gui.window;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.*;
+
+import com.blockblast.controller.controller;
 
 public class titleScreen extends JFrame{
 
+controller c;
 JPanel titleScreen;
 JButton startSingleplayer;
 JButton startMultiplayer;
-  public titleScreen(){
+  public titleScreen(controller c){
 
+      this.c = c;
+      setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+      setResizable(false); //Window bleibt genausogroß wie wir wollen
+      setVisible(true);
+      setLayout(null);
+      setSize(500,600);
+      getContentPane().setBackground(Color.BLACK);
+      //Window erstellen
+      setTitle("BlockBlast");
+      //Panel
       titleScreen = new JPanel();
-      GridLayout mainPanelGridLayout = new GridLayout(0,8);
-      titleScreen.setLayout(mainPanelGridLayout);
       titleScreen.setOpaque(true);
-      int mainPanelBorder = 50; //Abstand vom Rand des Fensters
-      int boardSize = 400; //Größe des Boards
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      titleScreen.setBounds(0,50,boardSize,boardSize);//Position und Größe des Boards im Layout
-      EmptyBorder Distance = new EmptyBorder(mainPanelBorder, mainPanelBorder, mainPanelBorder, mainPanelBorder);
-      LineBorder mainPanelOutline = new LineBorder(Color.black);
-      JButton startSingleplayer = new JButton("Start Singleplayer");
-      JButton startMultiplayer = new JButton("Start Multiplayer");
+      titleScreen.setBounds(0,0,00,00);
+      titleScreen.setBackground(Color.WHITE);
+
+//      JLabel firma = new JLabel("such dir was tolles aus Production presents...");
+//      firma.setFont(new Font("Tahoma", Font.BOLD, 10));
+//      firma.setForeground(Color.GREEN);
+//      firma.setBounds(10,500,300,50);
+      //Titel
+      JLabel titleLabel = new JLabel("BlockBlast");
+      titleLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
+      titleLabel.setForeground(Color.GREEN);
+      titleLabel.setBounds(162,100,300,50);
+
+      //Buttons zum starten
+
+      //singleplayer
+      JButton stS = new JButton("Singleplayer");
+      stS.setFont(new Font("Tahoma", Font.BOLD, 20));
+      stS.setForeground(Color.BLUE);
+      stS.setBounds(50,300,175,50);
+      stS.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+              System.out.println("Singleplayer wird gestartet");
+              c.startSP();
+              dispose();
+          }
+      });
+
+      //multiplayer
+      JButton sM = new JButton("Multiplayer");
+      sM.setFont(new Font("Tahoma", Font.BOLD, 20));
+      sM.setForeground(Color.BLUE);
+      sM.setBounds(250,300,175,50);
+
+
+      //alles hinzufügen
+      add(titleScreen);
+      add(titleLabel);
+      add(stS);
+      add(sM);
+      setLocationRelativeTo(null);
+
   }
+
+
 
 
 }
