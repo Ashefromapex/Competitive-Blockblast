@@ -9,7 +9,7 @@ public class Launcher
     public static void main(String[] args)
     {
         //erzeugt Controller
-        Controller controller = new Controller();
+        ControllerGui controller = new ControllerGui();
         controller.startGui();
     }
 }
