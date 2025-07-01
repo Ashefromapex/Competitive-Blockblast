@@ -10,11 +10,15 @@ import java.awt.event.KeyListener;
 import java.awt.Image;
 import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
+
+import com.blockblast.Main;
 import com.blockblast.controller.controller;
 
 public class  Window extends JFrame implements KeyListener {
     controller c;
     //instanzvariable erstellen
+    int deltax;
+    int deltay;
     JLabel label;
     JLabel [][] grid = new JLabel[8][8];
     JLabel [][] fakeGrid = new JLabel[8][8];
@@ -39,6 +43,7 @@ public class  Window extends JFrame implements KeyListener {
     private boolean block2Chosen = false;
     private boolean block3Chosen = false;
     static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
+
 
 
 
@@ -284,6 +289,26 @@ public class  Window extends JFrame implements KeyListener {
                 }
                 System.out.println("Block3 chosen");
                 break;
+            case 32:
+                if (block1Chosen)
+                {
+                    int x = c.getRoot(1)[1] + deltax;//+ delta x
+                    int y = c.getRoot(1)[0] + deltay; //+ delta y
+                    c.placeBlock(1, x, y);
+
+                }
+                if (block1Chosen)
+                {
+                    c.placeBlock(2, 2, 3);
+                }
+                else
+                {
+                    c.placeBlock(3, 2, 3);
+                }
+                deltax = 0;
+                deltay = 0;
+
+
             case KeyEvent.VK_ESCAPE:
                 deselectBlock();
                 System.out.println("Block deselected");
