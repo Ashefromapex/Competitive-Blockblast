@@ -1,4 +1,4 @@
-package com.blockblast.network;
+package com.blockblast.Network;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -87,13 +87,14 @@ public class Ip
             }
             else
             {
-                return "ERROR";
+                return "!";
             }
         }
         catch (IOException e)
         {
             throw new RuntimeException(e);
         }
+
     }
     public String startServer(int port)
     {
@@ -108,6 +109,7 @@ public class Ip
         try
         {
             server = new ServerSocket();
+            server.bind(new InetSocketAddress("0.0.0.0", 9000));
             client = server.accept();
             out = new PrintWriter(client.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(client.getInputStream()));
