@@ -44,7 +44,7 @@ public class Test
     private boolean testController()
     {
         controller c = new controller();
-        c.startSP();
+//        c.start();
         return true;
     }
     private boolean testIp()
