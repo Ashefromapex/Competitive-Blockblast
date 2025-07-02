@@ -297,6 +297,7 @@ public class  Window extends JFrame implements KeyListener {
                 break;
             case 32:
                 placeBlock();
+                visualiseBlockAgain();
                 c.b.printArray(c.b.getBoard());
                 break;
 
@@ -325,10 +326,6 @@ public class  Window extends JFrame implements KeyListener {
                 System.out.println("Block deselected");
                 deltax = 0;
                 deltay = 0;
-                break;
-
-            case KeyEvent.VK_UP:
-                //moveBlockUp();
                 break;
 
 
@@ -685,32 +682,23 @@ public class  Window extends JFrame implements KeyListener {
         }
 
 
+
     }
 
-    /*public void moveBlockUp()
+    public void visualiseBlockAgain()
     {
-        JLabel[][] fake2Grid = new JLabel[8][8];
-
-        for(int h = 0; h < 8; h++)
+        if (block1Placed && block2Placed && block3Placed )
         {
-            for(int g = 0; g < 8; g++)
-            {
-                if (!(h == 0))
-                {
-                    fake2Grid[h-1][g]  =  fakeGrid[h][g];
-                }
-            }
+             visualizeBlock1(c.getBm1());
+             visualizeBlock2(c.getBm2());
+             visualizeBlock3(c.getBm3());
+             block1Placed = false;
+             block2Placed = false;
+             block3Placed = false;
         }
+    }
 
-        for (int g = 0; g < 8; g++)
-        {
-            for (int h = 0; h < 8; h++)
-            {
-                fakeGrid[g][h] = fake2Grid[g][h];
 
-            }
-        }
-    }*/
 
 }
 
