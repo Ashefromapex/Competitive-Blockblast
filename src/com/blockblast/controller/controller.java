@@ -66,9 +66,19 @@ public class controller
             blockcnt--;
             if(blockcnt == 0)
             {
+                clearBlockMatrixes();
                 b.getBlocks();
                 b.createBlockmatrix();
                 blockcnt = 3;
+                for(int i = 0; i < 5; i++)
+                {
+                    for(int j = 0; j < 5; j++)
+                    {
+                        System.out.print(b.bm1[j][i]+ " ");
+                    }
+                    System.out.println();
+                }
+
             }
             return true;
         }
@@ -117,6 +127,19 @@ public class controller
             for(int j = 0; j < 8; j++)
             {
                 testfield[j][i] = 0;
+            }
+        }
+    }
+
+    public void clearBlockMatrixes()
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            for(int j = 0; j < 5; j++)
+            {
+                b.bm1[i][j] = 0;
+                b.bm2[i][j] = 0;
+                b.bm3[i][j] = 0;
             }
         }
     }

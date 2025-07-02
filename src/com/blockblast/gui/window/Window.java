@@ -119,18 +119,45 @@ public class  Window extends JFrame implements KeyListener {
         block1.setBackground(Color.BLUE);
         block1.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block1.setBounds(blockBorder,50+boardSize,blockPreviewSize,blockPreviewSize);
+        for(int h = 0; h < 5; h++)
+        {
+            for (int g = 0; g < 5; g++)
+            {
+                JLabel b = new JLabel();
+                block1.add(b);
+                blockPreview1[h][g]= b;
+            }
+        }
 
         block2 = new JPanel(); //2.Block
         block2.setLayout(new GridLayout(5,5));
         block2.setBackground(Color.BLUE);
         block2.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block2.setBounds(blockBorder*2+blockPreviewSize,50+boardSize,blockPreviewSize,blockPreviewSize);
+        for(int h = 0; h < 5; h++)
+        {
+            for (int g = 0; g < 5; g++)
+            {
+                JLabel b = new JLabel();
+                block2.add(b);
+                blockPreview2[h][g]= b;
+            }
+        }
 
         block3 = new JPanel(); //3.Block
         block3.setLayout(new GridLayout(5,5));
         block3.setBackground(Color.BLUE);
         block3.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block3.setBounds(blockBorder*3+blockPreviewSize*2,50+boardSize,blockPreviewSize,blockPreviewSize);
+        for(int h = 0; h < 5; h++)
+        {
+            for (int g = 0; g < 5; g++)
+            {
+                JLabel b = new JLabel();
+                block3.add(b);
+                blockPreview3[h][g]= b;
+            }
+        }
 
 
 
@@ -340,15 +367,7 @@ public class  Window extends JFrame implements KeyListener {
 
     public void visualizeBlock1( int[][] array) {
 
-        for(int h = 0; h < 5; h++)
-        {
-            for (int g = 0; g < 5; g++)
-            {
-                JLabel b = new JLabel();
-                block1.add(b);
-                blockPreview1[h][g]= b;
-            }
-        }
+
         // einfärbern des blockpreviews
         for (int j=0; j< 5; j++){
 
@@ -368,15 +387,6 @@ public class  Window extends JFrame implements KeyListener {
     }
     public void visualizeBlock2(int[][] array) {
 
-        for(int h = 0; h < 5; h++)
-        {
-            for (int g = 0; g < 5; g++)
-            {
-                JLabel b = new JLabel();
-                block2.add(b);
-                blockPreview2[h][g]= b;
-            }
-        }
         // einfärbern des blockpreviews
         for (int j=0; j< 5; j++){
 
@@ -396,15 +406,7 @@ public class  Window extends JFrame implements KeyListener {
     }
     public void visualizeBlock3( int[][] array) {
 
-        for(int h = 0; h < 5; h++)
-        {
-            for (int g = 0; g < 5; g++)
-            {
-                JLabel b = new JLabel();
-                block3.add(b);
-                blockPreview3[h][g]= b;
-            }
-        }
+
         // einfärbern des blockpreviews
         for (int j=0; j< 5; j++){
 
@@ -652,6 +654,7 @@ public class  Window extends JFrame implements KeyListener {
                 }
                 block1Chosen = false;
                 block1Placed = true;
+                block1.setVisible(true);
             }
             if(block2Chosen)
             {
@@ -664,6 +667,7 @@ public class  Window extends JFrame implements KeyListener {
                 }
                 block2Chosen = false;
                 block2Placed = true;
+                block2.setVisible(true);
             }
             if(block3Chosen)
             {
@@ -676,6 +680,7 @@ public class  Window extends JFrame implements KeyListener {
                 }
                 block3Chosen = false;
                 block3Placed = true;
+                block3.setVisible(true);
             }
             deltax = 0;
             deltay = 0;
