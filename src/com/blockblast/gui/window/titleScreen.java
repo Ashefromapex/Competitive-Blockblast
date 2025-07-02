@@ -46,15 +46,7 @@ controller c;
       stS.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
-              System.out.println("Singleplayer wird gestartet");
-              if (c.checkSinglePlayer())
-              {
-                  c.startSP();
-              }
-              else
-              {
-                  c.startMP();
-              }
+              c.startSP();
               dispose();
           }
       });

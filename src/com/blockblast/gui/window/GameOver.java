@@ -37,7 +37,15 @@ public class GameOver extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Singleplayer wird gestartet");
-                c.startSP();
+                System.out.println("Singleplayer wird gestartet");
+                if (c.checkSinglePlayer())
+                {
+                    c.startSP();
+                }
+                else
+                {
+                    c.startMP();
+                }
                 dispose();
             }
         });
