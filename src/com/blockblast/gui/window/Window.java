@@ -369,7 +369,7 @@ public class  Window extends JFrame implements KeyListener {
             }
         }
     }
-    public void visualizeBlock2(JPanel panel, int[][] array) {
+    public void visualizeBlock2(int[][] array) {
 
         for(int h = 0; h < 5; h++)
         {
