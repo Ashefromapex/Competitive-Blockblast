@@ -1,7 +1,7 @@
 package com.blockblast.test;
 
 //import packages
-import com.blockblast.network.Ip;
+import com.blockblast.Network.Ip;
 
 public class Test
 {
@@ -10,14 +10,11 @@ public class Test
     {
 
     }
-    public void TestAll()
+    public void testAll()
     {
         Ip i =  new Ip();
-        i.startClient(9000);
-        i.sendMsg("haiiiii");
-        i.sendMsg("haiiiii");
-        i.sendMsg("haiiiii");
-        i.sendMsg("haiiiii");
-        i.sendMsg("haiiiii");
+        System.out.println(i.startServer(9000));
+        i.getIp();
+        i.serverPrinter();
     }
 }
