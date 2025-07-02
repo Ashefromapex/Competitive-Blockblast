@@ -120,4 +120,8 @@ public class controller
             }
         }
     }
+    public int getSeed()
+    {
+        return b.getSeed();
+    }
 }

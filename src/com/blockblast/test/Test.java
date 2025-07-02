@@ -12,12 +12,6 @@ public class Test
     }
     public void TestAll()
     {
-        Ip i =  new Ip();
-        i.startClient(9000);
-        i.sendMsg("haiiiii");
-        i.sendMsg("haiiiii");
-        i.sendMsg("haiiiii");
-        i.sendMsg("haiiiii");
-        i.sendMsg("haiiiii");
+
     }
 }

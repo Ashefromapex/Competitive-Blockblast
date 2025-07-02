@@ -1,4 +1,6 @@
-package com.blockblast.Network;
+package com.blockblast.network;
+
+import com.blockblast.controller.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,10 +17,11 @@ public class Ip
     private BufferedReader in;
     private ServerSocket server;
     boolean clientmode;
+    controller c;
 
-    public Ip()
+    public Ip(controller c)
     {
-
+        this.c = c;
     }
     public String getIp()
     {
@@ -46,18 +49,36 @@ public class Ip
         }
         clientmode = true;
 
-//        String msg;
-//        while(true)
-//        {
-//            msg = readMsg();
-//            if(msg.equals("!"))
-//            {
-//                break;
-//            }
-//            System.out.println(msg);
-//        }
+        startClientCommunication();
 
     }
+
+    private void startClientCommunication()
+    {
+        //ig müsste ne thread sein
+        String in = readMsg();
+        switch (in)
+        {
+            case "!":
+                sendMsg("!");
+                stopClient();
+                break;
+            case "u?":
+                sendMsg("y!"); //tells the server its up
+                break;
+            case "s?":
+                int seed = c.getSeed();
+                String out = "s:" + String.valueOf(seed);
+                sendMsg(out);
+                break;
+            case "start":
+                //start game
+                break;
+                //attacks müssen noch gehandelt werden
+        }
+
+    }
+
     public void stopClient()
     {
         try
@@ -70,6 +91,11 @@ public class Ip
             throw new RuntimeException(e);
         }
         clientmode = false;
+    }
+    public String communicate(String message)
+    {
+        out.println(message);
+        return readMsg();
     }
     public void sendMsg(String msg)
     {
@@ -137,4 +163,8 @@ public class Ip
 
 
 }
+
+
+
+
 
