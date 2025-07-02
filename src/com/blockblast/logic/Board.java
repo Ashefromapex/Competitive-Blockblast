@@ -91,10 +91,10 @@ public class Board {
         // int y = 2;
         // if (y == 1 /* da muss noch was gescheids rein, kp wie man checkt ob das geht oder nicht*/)
         // {
-            blockx--;
+
             switch(blockx)
             {
-                case 0:
+                case 1:
                 while(y >= 0 && x >= 0 && y < 8 && x < 8 && faki[y][x] < 2) {
 
 
@@ -119,7 +119,7 @@ public class Board {
                 return false;
 
 
-                case 1:
+                case 2:
                     while(y >= 0 && x >= 0 && y < 8 && x < 8 && faki[y][x] < 2) {
 
                             faki[y][x] = faki[y][x] + b2.checkPlacement(y, x);
@@ -143,7 +143,7 @@ public class Board {
 
                     return false;
 
-                case 2:
+                case 3:
                     while(y >= 0 && x >= 0 && y < 8 && x < 8 && faki[y][x] < 2) {
 
                             faki[y][x] = faki[y][x] + b3.checkPlacement(y, x);
@@ -231,7 +231,7 @@ public class Board {
     // wird ausgeführt wenn der nutzer den block platzieren will
     public boolean placeBlock(int blockx, int x, int y)
     {
-        if (this.checkPlacement(blockx, x, y)) // or allPossible
+        if (allPossible[blockx -1][x][y]) // or allPossible
         {
             switch(blockx) {
                 case 1:
@@ -247,8 +247,8 @@ public class Board {
                     setBlockinArray(b3, x, y, board);
                     break;
             }
-            check_field(board);
-            checkAll();
+            check_field(board); // cleared feld, fals reihe voll + combo + score
+            checkAll(); // all possible geupdated
             checkGameOver();
             return true;
         }
