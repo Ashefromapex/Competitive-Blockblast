@@ -638,8 +638,15 @@ public class  Window extends JFrame implements KeyListener {
                 {
                     if(fakeGrid[g][h].getIcon() == scaleBlockTextureIconBoard)
                     {
-                        grid[g][h].setIcon(fakeGrid[g][h].getIcon());
                         fakeGrid[g][h].setIcon(empty);
+                    }
+                    if(c.b.getBoard()[g][h] >= 1)
+                    {
+                        grid[g][h].setIcon(scaleBlockTextureIconBoard);
+                    }
+                    if(c.b.getBoard()[g][h] == 0)
+                    {
+                        grid[g][h].setIcon(scaleHintergrundTextureIcon);
                     }
                 }
             }

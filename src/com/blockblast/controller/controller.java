@@ -70,14 +70,6 @@ public class controller
                 b.getBlocks();
                 b.createBlockmatrix();
                 blockcnt = 3;
-                for(int i = 0; i < 5; i++)
-                {
-                    for(int j = 0; j < 5; j++)
-                    {
-                        System.out.print(b.bm1[j][i]+ " ");
-                    }
-                    System.out.println();
-                }
 
             }
             return true;
