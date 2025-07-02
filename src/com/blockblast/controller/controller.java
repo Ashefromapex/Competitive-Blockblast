@@ -6,9 +6,12 @@ import com.blockblast.logic.Board;
 import com.blockblast.storage.Data;
 import com.blockblast.network.Ip;
 import com.blockblast.gui.window.titleScreen;
+import com.blockblast.gui.window.GameOver;
 public class controller
+
 {
     private titleScreen t; //Titlebildschirm
+    private GameOver g;
     private Window w;//GUI object
     public Board b;//Logic object
     public int [][] testfield = new int [8][8];
@@ -39,6 +42,15 @@ public class controller
         int seed = b.getSeed();
     }
 
+    public void GameOver()
+    {
+        g =  new GameOver(this);
+    }
+
+    public void startMenu()
+    {
+        t = new titleScreen(this);
+    }
     public boolean placeBlock(int blocknr, int x, int y)
     {
         if(b.placeBlock(blocknr, y, x)) //dont ask why its switched shhhhh
