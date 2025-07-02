@@ -47,7 +47,14 @@ controller c;
           @Override
           public void actionPerformed(ActionEvent e) {
               System.out.println("Singleplayer wird gestartet");
-              c.startSP();
+              if (c.checkSinglePlayer())
+              {
+                  c.startSP();
+              }
+              else
+              {
+                  c.startMP();
+              }
               dispose();
           }
       });
