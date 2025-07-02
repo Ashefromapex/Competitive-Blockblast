@@ -46,16 +46,16 @@ public class Ip
         }
         clientmode = true;
 
-        String msg;
-        while(true)
-        {
-            msg = readMsg();
-            if(msg.equals("!"))
-            {
-                break;
-            }
-            System.out.println(msg);
-        }
+//        String msg;
+//        while(true)
+//        {
+//            msg = readMsg();
+//            if(msg.equals("!"))
+//            {
+//                break;
+//            }
+//            System.out.println(msg);
+//        }
 
     }
     public void stopClient()
