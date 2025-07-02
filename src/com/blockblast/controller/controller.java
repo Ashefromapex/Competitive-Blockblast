@@ -6,13 +6,17 @@ import com.blockblast.logic.Board;
 import com.blockblast.storage.Data;
 import com.blockblast.network.Ip;
 import com.blockblast.gui.window.titleScreen;
+import com.blockblast.gui.window.GameOver;
 public class controller
+
 {
     private titleScreen t; //Titlebildschirm
+    private GameOver g;
     private Window w;//GUI object
     public Board b;//Logic object
     public int [][] testfield = new int [8][8];
     int blockcnt = 3;
+    boolean runningSP;
 
     public controller()
     {
@@ -31,14 +35,30 @@ public class controller
         b.getBlocks();
         b.createBlockmatrix();
         w = new Window(this);
+        runningSP = true;
 
     }
     public void startMP()
     {
         //start multiplayer
         int seed = b.getSeed();
+        runningSP = false;
     }
 
+    public void GameOver()
+    {
+        g =  new GameOver(this);
+    }
+
+    public boolean checkSinglePlayer()// überprüft ob single oder multiplayer
+    {
+        return runningSP;
+    }
+
+    public void startMenu()
+    {
+        t = new titleScreen(this);
+    }
     public boolean placeBlock(int blocknr, int x, int y)
     {
         if(b.placeBlock(blocknr, y, x)) //dont ask why its switched shhhhh

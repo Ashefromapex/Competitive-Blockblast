@@ -12,9 +12,7 @@ import com.blockblast.controller.controller;
 public class titleScreen extends JFrame{
 
 controller c;
-JPanel titleScreen;
-JButton startSingleplayer;
-JButton startMultiplayer;
+
   public titleScreen(controller c){
 
       this.c = c;
@@ -26,12 +24,7 @@ JButton startMultiplayer;
       getContentPane().setBackground(Color.BLACK);
       //Window erstellen
       setTitle("BlockBlast");
-      //Panel
-      titleScreen = new JPanel();
-      titleScreen.setOpaque(true);
-      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      titleScreen.setBounds(0,0,00,00);
-      titleScreen.setBackground(Color.WHITE);
+
 
 //      JLabel firma = new JLabel("such dir was tolles aus Production presents...");
 //      firma.setFont(new Font("Tahoma", Font.BOLD, 10));
@@ -53,7 +46,6 @@ JButton startMultiplayer;
       stS.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
-              System.out.println("Singleplayer wird gestartet");
               c.startSP();
               dispose();
           }
@@ -64,10 +56,18 @@ JButton startMultiplayer;
       sM.setFont(new Font("Tahoma", Font.BOLD, 20));
       sM.setForeground(Color.BLUE);
       sM.setBounds(250,300,175,50);
-
+      sM.addActionListener(new ActionListener() {
+                               @Override
+                               public void actionPerformed(ActionEvent e) {
+                                   System.out.println("Singleplayer wird gestartet");
+                                   c.startMP();
+                                   System.out.println("To be continued");
+                                   //dispose();
+                                   }
+      });
 
       //alles hinzufügen
-      add(titleScreen);
+
       add(titleLabel);
       add(stS);
       add(sM);

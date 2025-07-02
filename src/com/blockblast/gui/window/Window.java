@@ -172,9 +172,9 @@ public class  Window extends JFrame implements KeyListener {
         int[][] testblock1 = c.getBm1();
         int[][] testblock2 = c.getBm2();
         int[][] testblock3 = c.getBm3();
-        visualizeBlock1(block1,testblock1);
-        visualizeBlock2(block2,testblock2);
-        visualizeBlock3(block3,testblock3);
+        visualizeBlock1(testblock1);
+        visualizeBlock2(testblock2);
+        visualizeBlock3(testblock3);
 
 
         //gibt ideale Größe an und centert den Frame
@@ -341,14 +341,14 @@ public class  Window extends JFrame implements KeyListener {
 
     }
 
-    public void visualizeBlock1(JPanel panel, int[][] array) {
+    public void visualizeBlock1( int[][] array) {
 
         for(int h = 0; h < 5; h++)
         {
             for (int g = 0; g < 5; g++)
             {
                 JLabel b = new JLabel();
-                panel.add(b);
+                block1.add(b);
                 blockPreview1[h][g]= b;
             }
         }
@@ -376,7 +376,7 @@ public class  Window extends JFrame implements KeyListener {
             for (int g = 0; g < 5; g++)
             {
                 JLabel b = new JLabel();
-                panel.add(b);
+                block2.add(b);
                 blockPreview2[h][g]= b;
             }
         }
@@ -397,14 +397,14 @@ public class  Window extends JFrame implements KeyListener {
             }
         }
     }
-    public void visualizeBlock3(JPanel panel, int[][] array) {
+    public void visualizeBlock3( int[][] array) {
 
         for(int h = 0; h < 5; h++)
         {
             for (int g = 0; g < 5; g++)
             {
                 JLabel b = new JLabel();
-                panel.add(b);
+                block3.add(b);
                 blockPreview3[h][g]= b;
             }
         }
