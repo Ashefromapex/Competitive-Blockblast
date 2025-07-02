@@ -231,7 +231,8 @@ public class Board {
     // wird ausgeführt wenn der nutzer den block platzieren will
     public boolean placeBlock(int blockx, int x, int y)
     {
-        if (allPossible[blockx -1][x][y]) // or allPossible
+
+        if (checkPlacement(blockx,x,y)) // or allPossible
         {
             switch(blockx) {
                 case 1:
