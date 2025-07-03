@@ -25,6 +25,7 @@ public class  Window extends JFrame implements KeyListener {
     JLabel [][] blockPreview1 = new JLabel[5][5];
     JLabel [][] blockPreview2 = new JLabel[5][5];
     JLabel [][] blockPreview3 = new JLabel[5][5];
+    JLabel titleLabel;
     JPanel mainPanel;
     JPanel fakeBoard;
     JPanel block1;
@@ -170,7 +171,7 @@ public class  Window extends JFrame implements KeyListener {
 
 
         //Titel erstellen
-        JLabel titleLabel = new JLabel("BlockBlast");
+        titleLabel = new JLabel(String.valueOf(c.b.getScore()));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
         titleLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
@@ -325,6 +326,7 @@ public class  Window extends JFrame implements KeyListener {
             case 32:
                 placeBlock();
                 visualiseBlockAgain();
+                titleLabel.setText(String.valueOf(c.b.getScore()));
                 c.b.printArray(c.b.getBoard());
                 break;
 
