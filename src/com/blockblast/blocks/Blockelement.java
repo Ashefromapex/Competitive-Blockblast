@@ -322,18 +322,85 @@ public class Blockelement extends Block
         System.out.println();
     }
 
+
+
     //@Override
-    public int checkPlacement(int y, int x)
-    {
-        return 1;
-    }
+
+    ////////}
 
     public int placeBlock(int y, int x) {
     return 1;
     }
 
     //placeBlock() etc; oder so
+    public boolean checkPlacement(int blockx, int y, int x)
+    {
+        // int y = 2;
+        // if (y == 1 /* da muss noch was gescheids rein, kp wie man checkt ob das geht oder nicht*/)
+        // {
 
+        switch(blockx)
+        {
+            case 1:
+                while(y >= 0 && x >= 0 && y < 8 && x < 8) {
+
+
+
+                    if (!above.isEnd()) {
+                        above.checkPlacement(blockx, y - 1, x);
+                    }
+                    if (!left.isEnd()) {
+                        left.checkPlacement(blockx, y, x - 1);
+                    }
+                    if (!below.isEnd()) {
+                        below.checkPlacement(blockx, y + 1, x);
+                    }
+                    if (!right.isEnd()) {
+                        right.checkPlacement(blockx, y, x + 1);
+                    }
+
+                    return x,y;
+
+
+                }
+                return false;
+
+
+            case 2:
+                while(y >= 0 && x >= 0 && y < 8 && x < 8 ) {
+
+
+
+                    return true;
+
+                }
+
+
+                return false;
+
+            case 3:
+                while(y >= 0 && x >= 0 && y < 8 && x < 8 && faki[y][x] < 2) {
+
+                    faki[y][x] = faki[y][x] + b3.checkPlacement(y, x);
+                    if (!b3.above.isEnd()) {
+                        checkPlacement(blockx, y - 1, x);
+                    }
+                    if (!b3.left.isEnd()) {
+                        checkPlacement(blockx, y, x - 1);
+                    }
+                    if (!b3.below.isEnd()) {
+                        checkPlacement(blockx, y + 1, x);
+                    }
+                    if (!b3.right.isEnd()) {
+                        checkPlacement(blockx, y, x + 1);
+                    }
+
+                    return true;
+
+
+                }
+                return false;
+        }
 
 
 }

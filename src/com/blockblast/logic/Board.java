@@ -91,7 +91,7 @@ public class Board {
         // int y = 2;
         // if (y == 1 /* da muss noch was gescheids rein, kp wie man checkt ob das geht oder nicht*/)
         // {
-
+    boolean test = true;
             switch(blockx)
             {
                 case 1:
@@ -120,23 +120,16 @@ public class Board {
 
 
                 case 2:
-                    while(y >= 0 && x >= 0 && y < 8 && x < 8 && faki[y][x] < 2) {
+                    while(y >= 0 && x >= 0 && y < 8 && x < 8 && test == true) {
 
-                            faki[y][x] = faki[y][x] + b2.checkPlacement(y, x);
-                            if (!b2.above.isEnd()) {
-                                checkPlacement(blockx, y - 1, x);
-                            }
-                            if (!b2.left.isEnd()) {
-                                checkPlacement(blockx, y, x - 1);
-                            }
-                            if (!b2.below.isEnd()) {
-                                checkPlacement(blockx, y + 1, x);
-                            }
-                            if (!b2.right.isEnd()) {
-                                checkPlacement(blockx, y, x + 1);
+
+                            if(!b2.isEnd())
+                            {
+
+                                test = b2.checkPlacement(blockx, y , x);
                             }
 
-                            return true;
+                        return true;
 
                         }
 
