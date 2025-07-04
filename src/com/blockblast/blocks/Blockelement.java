@@ -272,56 +272,6 @@ public class Blockelement extends Block
         return false;
     }
 
-
-
-
-    public void printBlock( int y, int x)
-    {
-        if(!this.isEnd())
-        {
-
-            //this is where I would put my visualizeBlock() ... if I had one -Lami
-            if(!this.left.isEnd())
-            {
-                if (y>0)
-                {
-                    this.printBlock(y-1, x);
-                }
-            }
-            if(!this.right.isEnd())
-            {
-                if(y<7)
-                {
-                    this.printBlock( y+1, x);
-                }
-            }
-            if(!this.below.isEnd())
-            {
-                if(x<7)
-                {
-                    this.printBlock( y, x + 1);
-                }
-            }
-            if(!this.above.isEnd())
-            {
-                if(x>0)
-                {
-                    this.printBlock( y, x-1);
-                }
-            }
-        }
-    }
-
-    public void printNeighbours()
-    {
-        System.out.println("Neighbours:" + this);
-        System.out.println(this.above);
-        System.out.println(this.below);
-        System.out.println(this.left);
-        System.out.println(this.right);
-        System.out.println();
-    }
-
     //@Override
     public int checkPlacement(int y, int x)
     {

@@ -1,5 +1,6 @@
 package com.blockblast.controller;
 
+import com.blockblast.blocks.Blockelement;
 import com.blockblast.logic.Algo;
 import com.blockblast.gui.window.Window;
 import com.blockblast.logic.Board;
@@ -59,9 +60,9 @@ public class controller
     {
         t = new titleScreen(this);
     }
-    public boolean placeBlock(int blocknr, int x, int y)
+    public boolean placeBlock(int x, int y, Blockelement be)
     {
-        if(b.placeBlock(blocknr, y, x)) //dont ask why its switched shhhhh
+        if(b.placeBlock(y, x, be)) //dont ask why its switched shhhhh
         {
             blockcnt--;
             if(blockcnt == 0)

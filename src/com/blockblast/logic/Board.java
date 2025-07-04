@@ -86,81 +86,114 @@ public class Board {
         return allPossible;
     }
 
-    public boolean checkPlacement(int blockx, int y, int x)
+    /*public boolean checkPlacement(int blockx, int y, int x)
     {
-        // int y = 2;
-        // if (y == 1 /* da muss noch was gescheids rein, kp wie man checkt ob das geht oder nicht*/)
-        // {
+
+         {
 
             switch(blockx)
             {
                 case 1:
-                while(y >= 0 && x >= 0 && y < 8 && x < 8 && faki[y][x] < 2) {
 
-
+                    if (y >= 0 && x >= 0 && y < 8 && x < 8 && faki[y][x] < 2)
+                    {
+                        int placeable = 0;
                         faki[y][x] = faki[y][x] + b1.checkPlacement(y, x);
                         if (!b1.above.isEnd()) {
-                            checkPlacement(blockx, y - 1, x);
+                            if(!checkPlacement(blockx, y - 1, x))
+                            {
+                                System.out.println(placeable);
+                                placeable = 1;
+                            }
                         }
                         if (!b1.left.isEnd()) {
-                            checkPlacement(blockx, y, x - 1);
+                            if(!checkPlacement(blockx, y, x - 1))
+                            {
+                                System.out.println(placeable);
+                                placeable = 1;
+                            }
                         }
                         if (!b1.below.isEnd()) {
-                            checkPlacement(blockx, y + 1, x);
+                            if(!checkPlacement(blockx, y + 1, x))
+                            {
+                                System.out.println(placeable);
+                                placeable = 1;
+                            }
                         }
                         if (!b1.right.isEnd()) {
-                            checkPlacement(blockx, y, x + 1);
+                            if(!checkPlacement(blockx, y, x + 1))
+                            {
+                                System.out.println(placeable);
+                                placeable = 1;
+                            }
                         }
-
-                        return true;
-
-
-                }
-                return false;
+                        System.out.println(placeable);
+                        return placeable == 0;
+                    }
+                    return false;
 
 
                 case 2:
-                    while(y >= 0 && x >= 0 && y < 8 && x < 8 && faki[y][x] < 2) {
-
-                            faki[y][x] = faki[y][x] + b2.checkPlacement(y, x);
-                            if (!b2.above.isEnd()) {
-                                checkPlacement(blockx, y - 1, x);
+                    if (y >= 0 && x >= 0 && y < 8 && x < 8 && faki[y][x] < 2)
+                    {
+                        int placeable = 0;
+                        faki[y][x] = faki[y][x] + b2.checkPlacement(y, x);
+                        if (!b2.above.isEnd()) {
+                            if (checkPlacement(blockx, y - 1, x)) {
+                                placeable = 1;
                             }
-                            if (!b2.left.isEnd()) {
-                                checkPlacement(blockx, y, x - 1);
-                            }
-                            if (!b2.below.isEnd()) {
-                                checkPlacement(blockx, y + 1, x);
-                            }
-                            if (!b2.right.isEnd()) {
-                                checkPlacement(blockx, y, x + 1);
-                            }
-
-                            return true;
-
                         }
+                        if (!b2.left.isEnd()) {
+                            if (checkPlacement(blockx, y, x - 1)) {
+                                placeable = 1;
+                            }
+                        }
+                        if (!b2.below.isEnd()) {
+                            if (checkPlacement(blockx, y + 1, x)) {
+                                placeable = 1;
+                            }
+                        }
+                        if (!b2.right.isEnd()) {
+                            if (checkPlacement(blockx, y, x + 1)) {
+                                placeable = 1;
+                            }
+                        }
+                        return placeable == 0;
 
+                    }
 
                     return false;
 
                 case 3:
-                    while(y >= 0 && x >= 0 && y < 8 && x < 8 && faki[y][x] < 2) {
+                    if (y >= 0 && x >= 0 && y < 8 && x < 8 && faki[y][x] < 2) {
 
-                            faki[y][x] = faki[y][x] + b3.checkPlacement(y, x);
-                            if (!b3.above.isEnd()) {
-                                checkPlacement(blockx, y - 1, x);
+                        int placeable = 0;
+                        faki[y][x] = faki[y][x] + b3.checkPlacement(y, x);
+                        if (!b3.above.isEnd()) {
+                            if(checkPlacement(blockx, y - 1, x))
+                            {
+                                placeable = 1;
                             }
-                            if (!b3.left.isEnd()) {
-                                checkPlacement(blockx, y, x - 1);
+                        }
+                        if (!b3.left.isEnd()) {
+                            if(checkPlacement(blockx, y, x - 1))
+                            {
+                                placeable = 1;
                             }
-                            if (!b3.below.isEnd()) {
-                                checkPlacement(blockx, y + 1, x);
+                        }
+                        if (!b3.below.isEnd()) {
+                            if(checkPlacement(blockx, y + 1, x))
+                            {
+                                placeable = 1;
                             }
-                            if (!b3.right.isEnd()) {
-                                checkPlacement(blockx, y, x + 1);
+                        }
+                        if (!b3.right.isEnd()) {
+                            if(checkPlacement(blockx, y, x + 1))
+                            {
+                                placeable = 1;
                             }
-
-                            return true;
+                        }
+                        return placeable == 0;
 
 
                     }
@@ -168,14 +201,40 @@ public class Board {
             }
 
 
-
-       /*     return true;
-        }
-        else
-        {
         return false;
+    }*/
+
+    public boolean checkPlacement(int y, int x, Blockelement b)
+    {
+        if(y>= 0 && y < 8 && x >= 0 && x < 8 && board[y][x] == 0)
+        {
+            int placeable = 0;
+            if (!b.above.isEnd()) {
+                if(!checkPlacement( y - 1, x, (Blockelement) b.above))
+                {
+                    placeable = 1;
+                }
+            }
+            if (!b.left.isEnd()) {
+                if(!checkPlacement(y, x - 1,  (Blockelement) b.left))
+                {
+                    placeable = 1;
+                }
+            }
+            if (!b.below.isEnd()) {
+                if(!checkPlacement(y + 1, x, (Blockelement) b.below))
+                {
+                    placeable = 1;
+                }
+            }
+            if (!b.right.isEnd()) {
+                if(!checkPlacement(y, x + 1,  (Blockelement) b.right))
+                {
+                    placeable = 1;
+                }
+            }
+            return placeable == 0;
         }
-        */
         return false;
     }
 
@@ -195,21 +254,26 @@ public class Board {
 
     public boolean checkAll()
     {
-        for(int z = 0; z < 3; z++)
+
+        for (int x = 0; x < 8; x++)
         {
-            for (int x = 0; x < 8; x++)
+            for (int y = 0; y < 8; y++)
             {
-                for (int y = 0; y < 8; y++)
+                copyBoardToFaki();
+
+
+
+                if(checkPlacement(x,y,b1))
                 {
-                    copyBoardToFaki();
-
-
-
-                        if(checkPlacement(z, x, y))
-                        {
-                            allPossible[z][x][y] = true;
-                        }
-
+                    allPossible[0][x][y] = true;
+                }
+                if(checkPlacement(x,y,b2))
+                {
+                    allPossible[1][x][y] = true;
+                }
+                if(checkPlacement(x,y,b3))
+                {
+                    allPossible[2][x][y] = true;
                 }
             }
         }
@@ -229,24 +293,13 @@ public class Board {
     }
 
     // wird ausgeführt wenn der nutzer den block platzieren will
-    public boolean placeBlock(int blockx, int x, int y)
+    public boolean placeBlock(int x, int y, Blockelement b)
     {
 
-        if (checkPlacement(blockx,x,y)) // or allPossible
+        if (checkPlacement(x,y,b)) // or allPossible
         {
-            switch(blockx) {
-                case 1:
-                    setBlockinArray(b1, x, y, board);
-                    break;
-
-
-                case 2:
-                    setBlockinArray(b2, x, y, board);
-                    break;
-
-                case 3:
-                    setBlockinArray(b3, x, y, board);
-                    break;
+            {
+            setBlockinArray(b,x,y,board);
             }
             check_field(board); // cleared feld, fals reihe voll + combo + score
             checkAll(); // all possible geupdated

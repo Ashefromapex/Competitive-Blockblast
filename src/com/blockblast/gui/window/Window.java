@@ -614,7 +614,7 @@ public class  Window extends JFrame implements KeyListener {
         {
             int x = c.getRoot(1)[1] + deltax;//+ delta x
             int y = c.getRoot(1)[0] + deltay; //+ delta y
-            placeable = c.placeBlock(1, x, y);
+            placeable = c.placeBlock(x,y,c.b.alg.getBlock1());
             System.out.println("Block1 placed");
 
         }
@@ -622,14 +622,14 @@ public class  Window extends JFrame implements KeyListener {
         {
             int x = c.getRoot(2)[1] + deltax;
             int y = c.getRoot(2)[0] + deltay;
-            placeable = c.placeBlock(2, x, y);
+            placeable = c.placeBlock(x,y,c.b.alg.getBlock2());
             System.out.println("Block2 placed");
         }
         if(block3Chosen)
         {
             int x = c.getRoot(3)[1] + deltax;
             int y = c.getRoot(3)[0] + deltay;
-            placeable = c.placeBlock(3, x, y);
+            placeable = c.placeBlock(x,y,c.b.alg.getBlock3());
             System.out.println("Block3 placed");
         }
         if(placeable)
