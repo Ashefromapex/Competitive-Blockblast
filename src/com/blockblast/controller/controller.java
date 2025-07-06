@@ -1,19 +1,18 @@
 package com.blockblast.controller;
 
 import com.blockblast.blocks.Blockelement;
-import com.blockblast.logic.Algo;
-import com.blockblast.gui.window.Window;
+import com.blockblast.gui.window.controllerGUI;
+import com.blockblast.gui.window.Singleplayer;
 import com.blockblast.logic.Board;
-import com.blockblast.storage.Data;
-import com.blockblast.network.Ip;
 import com.blockblast.gui.window.titleScreen;
 import com.blockblast.gui.window.GameOver;
 public class controller
 
 {
+    private controllerGUI controllerGUI;
     private titleScreen t; //Titlebildschirm
     private GameOver g;
-    private Window w;//GUI object
+    private Singleplayer w;//GUI object
     public Board b;//Logic object
     public int [][] testfield = new int [8][8];
     int blockcnt = 3;
@@ -27,24 +26,9 @@ public class controller
     //handles communication between the GUI and the logic
     public void start()
     {
-        t = new titleScreen(this);
+        controllerGUI = new controllerGUI(this);
     }
-    public void startSP()
-    {
-        //start single player
-        b = new Board();
-        b.getBlocks();
-        b.createBlockmatrix();
-        w = new Window(this);
-        runningSP = true;
 
-    }
-    public void startMP()
-    {
-        //start multiplayer
-        int seed = b.getSeed();
-        runningSP = false;
-    }
 
     public void GameOver()
     {
@@ -56,10 +40,23 @@ public class controller
         return runningSP;
     }
 
-    public void startMenu()
+    public void startSP()
     {
-        t = new titleScreen(this);
+        //start single player
+        b = new Board();
+        b.getBlocks();
+        b.createBlockmatrix();
+        runningSP = true;
+
     }
+
+    public void startMP()
+    {
+        //start multiplayer
+        int seed = b.getSeed();
+        runningSP = false;
+    }
+
     public boolean placeBlock(int x, int y, Blockelement be)
     {
         if(b.placeBlock(y, x, be)) //dont ask why its switched shhhhh

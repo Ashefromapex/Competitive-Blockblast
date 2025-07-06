@@ -8,14 +8,11 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.Image;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-
-import com.blockblast.Main;
 import com.blockblast.controller.controller;
 
-public class  Window extends JFrame implements KeyListener {
+public class Singleplayer extends JPanel implements KeyListener {
     controller c;
+    controllerGUI cGUI;
     //instanzvariable erstellen
     int deltax;
     int deltay;
@@ -25,7 +22,7 @@ public class  Window extends JFrame implements KeyListener {
     JLabel [][] blockPreview1 = new JLabel[5][5];
     JLabel [][] blockPreview2 = new JLabel[5][5];
     JLabel [][] blockPreview3 = new JLabel[5][5];
-    JLabel titleLabel;
+    JLabel score;
     JPanel mainPanel;
     JPanel fakeBoard;
     JPanel block1;
@@ -51,18 +48,15 @@ public class  Window extends JFrame implements KeyListener {
 
 
 
-    public Window(controller c) {
+    public Singleplayer(controller c, controllerGUI cGUI) {
         deltax = 0;
         deltay = 0;
 
         this.c = c;
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false); //Window bleibt genausogroß wie wir wollen
+        this.cGUI = cGUI;
         setVisible(true);
         setLayout(null);
-        addKeyListener(this);
         //Window erstellen
-        setTitle("BlockBlast");
 
 
 ;
@@ -171,11 +165,11 @@ public class  Window extends JFrame implements KeyListener {
 
 
         //Titel erstellen
-        titleLabel = new JLabel(String.valueOf(c.b.getScore()));
-        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
-        titleLabel.setBounds(0,0,boardSize,50); //Bestimmt Position und Größe des Titels
+        score = new JLabel(String.valueOf(c.b.getScore()));
+        score.setHorizontalAlignment(SwingConstants.CENTER);
+        score.setFont(new Font("Tahoma", Font.BOLD, 30));
+        score.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
+        score.setBounds(0,0,boardSize,50); //Bestimmt Position und Größe des Titels
 
         scaleBlockTextureImgPreview = blockTexture.getImage().getScaledInstance(blockPreviewSize/5,blockPreviewSize/5,Image.SCALE_DEFAULT);
         scaleBlockTextureIconPreview = new ImageIcon(scaleBlockTextureImgPreview);
@@ -189,7 +183,7 @@ public class  Window extends JFrame implements KeyListener {
         //Start und Stop Stuff
         //fügt alles hinzu, was zuerst hinzugefügt wird ist am weitesten oben
         setSize(new Dimension(boardSize+15,50+boardSize+mainPanelBorder+blockPreviewSize+southBumperHeight-15));
-        add(titleLabel);
+        add(score);
         add(fakeBoard);
         add(mainPanel);
         add(block1);
@@ -206,7 +200,6 @@ public class  Window extends JFrame implements KeyListener {
 
 
         //gibt ideale Größe an und centert den Frame
-        setLocationRelativeTo(null);
 
     }
 
@@ -326,7 +319,7 @@ public class  Window extends JFrame implements KeyListener {
             case 32:
                 placeBlock();
                 visualiseBlockAgain();
-                titleLabel.setText(String.valueOf(c.b.getScore()));
+                score.setText(String.valueOf(c.b.getScore()));
                 c.b.printArray(c.b.getBoard());
                 break;
 

@@ -2,7 +2,6 @@ package com.blockblast.test;
 
 //import packages
 import com.blockblast.controller.controller;
-import com.blockblast.gui.window.Window;
 import com.blockblast.logic.Board;
 import com.blockblast.storage.Data;
 import com.blockblast.logic.Algo;

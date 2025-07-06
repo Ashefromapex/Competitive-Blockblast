@@ -1,14 +1,9 @@
 package com.blockblast.gui;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.blockblast.blocks.BlockEnd;
 import com.blockblast.blocks.Blockelement;
-import com.blockblast.gui.window.Window;
-import com.blockblast.logic.Board;
+
 public class Gui implements ActionListener {
 
     @Override

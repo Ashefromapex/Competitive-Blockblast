@@ -9,21 +9,18 @@ import java.awt.event.*;
 
 import com.blockblast.controller.controller;
 
-public class titleScreen extends JFrame{
+public class titleScreen extends JPanel{
 
-controller c;
+controllerGUI c;
 
-  public titleScreen(controller c){
+  public titleScreen(controllerGUI c){
 
       this.c = c;
-      setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-      setResizable(false); //Window bleibt genausogroß wie wir wollen
+
       setVisible(true);
       setLayout(null);
       setSize(500,600);
-      getContentPane().setBackground(Color.BLACK);
-      //Window erstellen
-      setTitle("BlockBlast");
+      setBackground(Color.BLACK);
 
 
 //      JLabel firma = new JLabel("such dir was tolles aus Production presents...");
@@ -46,8 +43,7 @@ controller c;
       stS.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
-              c.startSP();
-              dispose();
+              c.singleplayer();
           }
       });
 
@@ -60,7 +56,7 @@ controller c;
                                @Override
                                public void actionPerformed(ActionEvent e) {
                                    System.out.println("Singleplayer wird gestartet");
-                                   c.startMP();
+                                   c.multiplayer();
                                    System.out.println("To be continued");
                                    //dispose();
                                    }
@@ -71,7 +67,6 @@ controller c;
       add(titleLabel);
       add(stS);
       add(sM);
-      setLocationRelativeTo(null);
 
   }
 
