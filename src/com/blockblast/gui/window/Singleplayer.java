@@ -420,43 +420,27 @@ public class Singleplayer extends JPanel implements KeyListener {
         }
     }
 
-    public boolean moveBlockLeft()
-    {
-        for(int g = 0; g < 8; g++)
-        {
-            if(fakeGrid[g][0].getIcon() == scaleBlockTextureIconBoard)
-            {
+    public boolean moveBlockLeft() {
+        for (int g = 0; g < 8; g++) {
+            if (fakeGrid[g][0].getIcon() == scaleBlockTextureIconBoard) {
                 return false;
             }
         }
-        JLabel[][] movementGrid = new JLabel[8][8];
-        for(int g = 0; g < 8; g++)
-        {
-            for(int h = 0; h < 8; h++)
-            {
-                JLabel l = new JLabel();
-                l.setIcon(empty);
-                movementGrid[g][h]=l;
-            }
-        }
-        for(int h = 0; h < 8; h++)
-        {
-            for (int i=0; i< 8; i++)
-            {
-                if(fakeGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
-                {
-                    movementGrid[h][i-1].setIcon(fakeGrid[h][i].getIcon());
+
+        boolean[][] shape = new boolean[8][8];
+        for (int h = 0; h < 8; h++) {
+            for (int i = 0; i < 8; i++) {
+                if (fakeGrid[h][i].getIcon() == scaleBlockTextureIconBoard) {
+                    shape[h][i] = true;
                     fakeGrid[h][i].setIcon(empty);
                 }
             }
         }
-        for(int h = 0; h < 8; h++)
-        {
-            for (int i=0; i< 8; i++)
-            {
-                if(movementGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
-                {
-                    fakeGrid[h][i].setIcon(scaleBlockTextureIconBoard);
+
+        for (int h = 0; h < 8; h++) {
+            for (int i = 0; i < 8; i++) {
+                if (shape[h][i]) {
+                    fakeGrid[h][i - 1].setIcon(scaleBlockTextureIconBoard);
                 }
             }
         }
@@ -465,43 +449,27 @@ public class Singleplayer extends JPanel implements KeyListener {
         return true;
     }
 
-    public boolean moveBlockRight()
-    {
-        for(int g = 0; g < 8; g++)
-        {
-            if(fakeGrid[g][7].getIcon() == scaleBlockTextureIconBoard)
-            {
+    public boolean moveBlockRight() {
+        for (int g = 0; g < 8; g++) {
+            if (fakeGrid[g][7].getIcon() == scaleBlockTextureIconBoard) {
                 return false;
             }
         }
-        JLabel[][] movementGrid = new JLabel[8][8];
-        for(int g = 0; g < 8; g++)
-        {
-            for(int h = 0; h < 8; h++)
-            {
-                JLabel l = new JLabel();
-                l.setIcon(empty);
-                movementGrid[g][h]=l;
-            }
-        }
-        for(int h = 0; h < 8; h++)
-        {
-            for (int i=0; i< 8; i++)
-            {
-                if(fakeGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
-                {
-                    movementGrid[h][i+1].setIcon(fakeGrid[h][i].getIcon());
+
+        boolean[][] shape = new boolean[8][8];
+        for (int h = 0; h < 8; h++) {
+            for (int i = 0; i < 8; i++) {
+                if (fakeGrid[h][i].getIcon() == scaleBlockTextureIconBoard) {
+                    shape[h][i] = true;
                     fakeGrid[h][i].setIcon(empty);
                 }
             }
         }
-        for(int h = 0; h < 8; h++)
-        {
-            for (int i=0; i< 8; i++)
-            {
-                if(movementGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
-                {
-                    fakeGrid[h][i].setIcon(scaleBlockTextureIconBoard);
+
+        for (int h = 0; h < 8; h++) {
+            for (int i = 0; i < 8; i++) {
+                if (shape[h][i]) {
+                    fakeGrid[h][i + 1].setIcon(scaleBlockTextureIconBoard);
                 }
             }
         }
@@ -510,43 +478,27 @@ public class Singleplayer extends JPanel implements KeyListener {
         return true;
     }
 
-    public boolean moveBlockUp()
-    {
-        for(int g = 0; g < 8; g++)
-        {
-            if(fakeGrid[0][g].getIcon() == scaleBlockTextureIconBoard)
-            {
+    public boolean moveBlockUp() {
+        for (int g = 0; g < 8; g++) {
+            if (fakeGrid[0][g].getIcon() == scaleBlockTextureIconBoard) {
                 return false;
             }
         }
-        JLabel[][] movementGrid = new JLabel[8][8];
-        for(int g = 0; g < 8; g++)
-        {
-            for(int h = 0; h < 8; h++)
-            {
-                JLabel l = new JLabel();
-                l.setIcon(empty);
-                movementGrid[g][h]=l;
-            }
-        }
-        for(int h = 0; h < 8; h++)
-        {
-            for (int i=0; i< 8; i++)
-            {
-                if(fakeGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
-                {
-                    movementGrid[h-1][i].setIcon(fakeGrid[h][i].getIcon());
+
+        boolean[][] shape = new boolean[8][8];
+        for (int h = 0; h < 8; h++) {
+            for (int i = 0; i < 8; i++) {
+                if (fakeGrid[h][i].getIcon() == scaleBlockTextureIconBoard) {
+                    shape[h][i] = true;
                     fakeGrid[h][i].setIcon(empty);
                 }
             }
         }
-        for(int h = 0; h < 8; h++)
-        {
-            for (int i=0; i< 8; i++)
-            {
-                if(movementGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
-                {
-                    fakeGrid[h][i].setIcon(scaleBlockTextureIconBoard);
+
+        for (int h = 0; h < 8; h++) {
+            for (int i = 0; i < 8; i++) {
+                if (shape[h][i]) {
+                    fakeGrid[h - 1][i].setIcon(scaleBlockTextureIconBoard);
                 }
             }
         }
@@ -555,43 +507,27 @@ public class Singleplayer extends JPanel implements KeyListener {
         return true;
     }
 
-    public boolean moveBlockDown()
-    {
-        for(int g = 0; g < 8; g++)
-        {
-            if(fakeGrid[7][g].getIcon() == scaleBlockTextureIconBoard)
-            {
+    public boolean moveBlockDown() {
+        for (int g = 0; g < 8; g++) {
+            if (fakeGrid[7][g].getIcon() == scaleBlockTextureIconBoard) {
                 return false;
             }
         }
-        JLabel[][] movementGrid = new JLabel[8][8];
-        for(int g = 0; g < 8; g++)
-        {
-            for(int h = 0; h < 8; h++)
-            {
-                JLabel l = new JLabel();
-                l.setIcon(empty);
-                movementGrid[g][h]=l;
-            }
-        }
-        for(int h = 0; h < 8; h++)
-        {
-            for (int i=0; i< 8; i++)
-            {
-                if(fakeGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
-                {
-                    movementGrid[h+1][i].setIcon(fakeGrid[h][i].getIcon());
+
+        boolean[][] shape = new boolean[8][8];
+        for (int h = 0; h < 8; h++) {
+            for (int i = 0; i < 8; i++) {
+                if (fakeGrid[h][i].getIcon() == scaleBlockTextureIconBoard) {
+                    shape[h][i] = true;
                     fakeGrid[h][i].setIcon(empty);
                 }
             }
         }
-        for(int h = 0; h < 8; h++)
-        {
-            for (int i=0; i< 8; i++)
-            {
-                if(movementGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
-                {
-                    fakeGrid[h][i].setIcon(scaleBlockTextureIconBoard);
+
+        for (int h = 0; h < 8; h++) {
+            for (int i = 0; i < 8; i++) {
+                if (shape[h][i]) {
+                    fakeGrid[h + 1][i].setIcon(scaleBlockTextureIconBoard);
                 }
             }
         }

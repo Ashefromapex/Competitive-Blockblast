@@ -17,13 +17,11 @@ public class Algo
     private int rotation;
     Random rand = new Random();
     int blockinfo;   //Liam: Amount = 0; Typ = 1; Rotation = 2;
-    Blockelement root;
     private final int seed;
 
     public Algo()
     {
         blockinfo = 0;
-        root = new Blockelement();
         seed = rand.nextInt(100000);
         rand.setSeed(seed);
 
@@ -114,7 +112,7 @@ public class Algo
          */
 
         //build block
-        root = root.buildBlock(ammount, type);
+        Blockelement block = new Blockelement().buildBlock(ammount, type);
 
 //        if(type == 0)
 //        {
@@ -133,7 +131,7 @@ public class Algo
 //                return root.rotate(2);
 //            }
 //        }
-        return root.rotate(rotation);
+        return block.rotate(rotation);
     }
 }
 
