@@ -59,9 +59,9 @@ public class controller
         runningSP = false;
     }
 
-    public boolean placeBlock(int x, int y, Blockelement be)
+    public boolean placeBlock(int blocknr, int x, int y)
     {
-        if(b.placeBlock(y, x, be)) //dont ask why its switched shhhhh
+        if(b.placeBlock(blocknr, y, x)) //dont ask why its switched shhhhh
         {
             blockcnt--;
             if(blockcnt == 0)

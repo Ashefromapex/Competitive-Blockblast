@@ -293,23 +293,46 @@ public class Board {
     }
 
     // wird ausgeführt wenn der nutzer den block platzieren will
-    public boolean placeBlock(int x, int y, Blockelement b)
+    public boolean placeBlock(int blocknr, int x, int y)
     {
+        switch (blocknr)
+        {
+            case 1:
+                if(checkPlacement(x, y, b1))
+                {
+                    setBlockinArray(b1, x, y, board);
+                }
+                else
+                {
+                    return false;
+                }
+                break;
+            case 2:
+                if(checkPlacement(x, y, b2))
+                {
+                    setBlockinArray(b2, x, y, board);
+                }
+                else
+                {
+                    return false;
+                }
+                break;
+            case 3:
+                if(checkPlacement(x, y, b3))
+                {
+                    setBlockinArray(b3, x, y, board);
+                }
+                else
+                {
+                    return false;
+                }
+                break;
+        }
+        check_field(board); // cleared feld, fals reihe voll + combo + score
+        checkAll(); // all possible geupdated
+        checkGameOver();
+        return true;
 
-        if (checkPlacement(x,y,b)) // or allPossible
-        {
-            {
-            setBlockinArray(b,x,y,board);
-            }
-            check_field(board); // cleared feld, fals reihe voll + combo + score
-            checkAll(); // all possible geupdated
-            checkGameOver();
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 
     private void checkGameOver()
@@ -480,7 +503,17 @@ public class Board {
                         arr =  new int[]{1, 1};
                         break;
                     case 3:
-                        arr =  new int[]{1, 3};
+                        switch (rotation)
+                        {
+                            case 1:
+                                return new int[]{1, 3};
+                            case 2:
+                                return new int[]{3, 3};
+                            case 3:
+                                return new int[]{4, 1};
+                            case 4:
+                                return new int[]{1, 1};
+                        }
                         break;
                     case 4, 5:
                         arr =  new int[]{2, 1};
