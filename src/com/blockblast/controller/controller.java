@@ -1,49 +1,36 @@
 package com.blockblast.controller;
 
-import com.blockblast.logic.Algo;
-import com.blockblast.gui.window.Window;
+import com.blockblast.blocks.Blockelement;
+import com.blockblast.gui.window.ControllerGUI;
+import com.blockblast.gui.window.Singleplayer;
 import com.blockblast.logic.Board;
-import com.blockblast.storage.Data;
-import com.blockblast.network.Ip;
-import com.blockblast.gui.window.titleScreen;
+import com.blockblast.gui.window.TitleScreen;
 import com.blockblast.gui.window.GameOver;
+import com.blockblast.storage.Data;
 public class controller
 
 {
-    private titleScreen t; //Titlebildschirm
+    private ControllerGUI controllerGUI;
+    private TitleScreen t; //Titlebildschirm
     private GameOver g;
-    private Window w;//GUI object
+    private Singleplayer w;//GUI object
     public Board b;//Logic object
     public int [][] testfield = new int [8][8];
     int blockcnt = 3;
     boolean runningSP;
+    private Data d;
 
     public controller()
     {
 
-        clearTestfeld();
     }
     //handles communication between the GUI and the logic
     public void start()
     {
-        t = new titleScreen(this);
+        controllerGUI = new ControllerGUI(this);
+        d = new Data();
     }
-    public void startSP()
-    {
-        //start single player
-        b = new Board();
-        b.getBlocks();
-        b.createBlockmatrix();
-        w = new Window(this);
-        runningSP = true;
 
-    }
-    public void startMP()
-    {
-        //start multiplayer
-        int seed = b.getSeed();
-        runningSP = false;
-    }
 
     public void GameOver()
     {
@@ -55,10 +42,26 @@ public class controller
         return runningSP;
     }
 
-    public void startMenu()
+    public void startSP()
     {
-        t = new titleScreen(this);
+        //start single player
+        b = new Board();
+        b.getBlocks();
+        b.createBlockmatrix();
+        runningSP = true;
+
     }
+
+    public void startMP()
+    {
+        //start multiplayer
+        b = new Board();
+        b.getBlocks();
+        b.createBlockmatrix();
+        int seed = b.getSeed();
+        runningSP = false;
+    }
+
     public boolean placeBlock(int blocknr, int x, int y)
     {
         if(b.placeBlock(blocknr, y, x)) //dont ask why its switched shhhhh
@@ -79,6 +82,10 @@ public class controller
             return false;
         }
     }
+    public void login(String user)
+    {
+        d.loginUser(user);
+    }
     public int[][] getBm1()
     {
         return b.bm1;
@@ -95,32 +102,6 @@ public class controller
     {
         blocknr--;
         return b.optimalPlacements[blocknr];
-    }
-
-
-
-
-
-    public void printTestfield()
-    {
-        for(int i = 0; i < 8; i++)
-        {
-            for(int j = 0; j < 8; j++)
-            {
-                System.out.print(testfield[j][i]+ " ");
-            }
-            System.out.println();
-        }
-    }
-    public void clearTestfeld()
-    {
-        for(int i = 0; i < 8; i++)
-        {
-            for(int j = 0; j < 8; j++)
-            {
-                testfield[j][i] = 0;
-            }
-        }
     }
 
     public void clearBlockMatrixes()

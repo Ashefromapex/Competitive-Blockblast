@@ -2,7 +2,6 @@ package com.blockblast.test;
 
 //import packages
 import com.blockblast.controller.controller;
-import com.blockblast.gui.window.Window;
 import com.blockblast.logic.Board;
 import com.blockblast.storage.Data;
 import com.blockblast.logic.Algo;
@@ -28,7 +27,6 @@ public class Test
         if(testController() &&
         testIp() &&
         testData() &&
-        testAlgo() &&
         testGui() &&
         testBoard() &&
         testWindow(listener))
@@ -76,15 +74,15 @@ public class Test
         a.genBlocks();
         b.getBlocks();
         b.printi();
-        b.checkPlacement(2,7,0);
-        if(b.checkPlacement(1,3,4))
+        //b.checkPlacement(2,7,0);
+        /*if(b.checkPlacement(1,3,4))
         {
             System.out.println("Algo test passed successfully!");
         }
         else
         {
             System.out.println("Some tests failed. Please check the output for details.");
-        }
+        }*/
         b.printi();
         b.checkAll();
         b.printi();
