@@ -14,6 +14,7 @@ public class ControllerGUI extends JFrame
     Singleplayer sp;
     Multiplayer mp;
     TitleScreen titleScreen;
+    LoginScreen loginScreen;
     KeyboardFocusManager focusManager;
 
     //Erzeugt Fenster
@@ -22,10 +23,11 @@ public class ControllerGUI extends JFrame
         setVisible(true);
         this.c = c;
         titleScreen = new TitleScreen(this);
+        loginScreen = new LoginScreen(this);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false); //Window bleibt genausogroß wie wir wollen
         setTitle("Blockblast");
-        setContentPane(titleScreen);
+        setContentPane(loginScreen);
         setSize(getContentPane().getWidth(),getContentPane().getHeight());
         setLocationRelativeTo(null);
         focusManager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
@@ -58,6 +60,14 @@ public class ControllerGUI extends JFrame
         setContentPane(mp);
         setSize(getContentPane().getWidth(),getContentPane().getHeight());
         setLocationRelativeTo(null);
+    }
+
+    public void loggedtfin()
+    {
+        setContentPane(titleScreen);
+        setSize(getContentPane().getWidth(),getContentPane().getHeight());
+        setLocationRelativeTo(null);
+        c.login(loginScreen.getUsername());
     }
 
 }
