@@ -107,8 +107,10 @@ public class Board {
         {
             blocksplaced[i] = false;
         }
+        clearBlockMatrices();
         getBlocks();
         createBlockmatrix();
+        checkAll();
     }
 
     /*public boolean checkPlacement(int blockx, int y, int x)
@@ -279,7 +281,14 @@ public class Board {
 
     public boolean checkAll()
     {
-
+        //resets board
+        for (int i = 0; i < 3; i++) {
+            for (int x = 0; x < 8; x++) {
+                for (int y = 0; y < 8; y++) {
+                    allPossible[i][x][y] = false;
+                }
+            }
+        }
         for (int x = 0; x < 8; x++)
         {
             for (int y = 0; y < 8; y++)
@@ -355,6 +364,12 @@ public class Board {
         }
         blocksplaced[blocknr - 1] = true;
         check_field(board); // cleared feld, fals reihe voll + combo + score
+
+        //checks if all three blocks were placed
+        if(blocksplaced[0] && blocksplaced[1] && blocksplaced[2])
+        {
+            reset();
+        }
         checkAll(); // all possible geupdated
         checkGameOver();
         return true;
@@ -401,7 +416,18 @@ public class Board {
 
 
 
-
+    public void clearBlockMatrices()
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            for(int j = 0; j < 5; j++)
+            {
+                bm1[i][j] = 0;
+                bm2[i][j] = 0;
+                bm3[i][j] = 0;
+            }
+        }
+    }
 
     public void check_column(int columnY)
     {

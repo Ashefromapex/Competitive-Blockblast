@@ -67,14 +67,6 @@ public class controller
     {
         if(b.placeBlock(blocknr, y, x)) //dont ask why its switched shhhhh
         {
-            blockcnt--;
-            if(blockcnt == 0)
-            {
-                clearBlockMatrixes();
-                blockcnt = 3;
-                b.reset();
-
-            }
             if(b.gameOver)
             {
                 GameOver();
@@ -108,16 +100,5 @@ public class controller
         return b.optimalPlacements[blocknr];
     }
 
-    public void clearBlockMatrixes()
-    {
-        for(int i = 0; i < 5; i++)
-        {
-            for(int j = 0; j < 5; j++)
-            {
-                b.bm1[i][j] = 0;
-                b.bm2[i][j] = 0;
-                b.bm3[i][j] = 0;
-            }
-        }
-    }
+
 }
