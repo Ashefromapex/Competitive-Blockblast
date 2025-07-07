@@ -36,7 +36,7 @@ public class controller
     {
         g =  new GameOver(this);
         d.pushScore(b.getScore());
-        b = null; //GARBAGE COLLECTOR DO YOUR THING FUCKER
+        d.exit();
     }
 
     public boolean checkSinglePlayer()// überprüft ob single oder multiplayer
