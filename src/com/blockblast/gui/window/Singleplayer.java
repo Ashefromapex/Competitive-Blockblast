@@ -28,12 +28,15 @@ public class Singleplayer extends JPanel implements KeyListener {
     JPanel block1;
     JPanel block2;
     JPanel block3;
-    ImageIcon blockTexture = new  ImageIcon(("src/com/blockblast/assets/block_provisorisch.png"));
+    ImageIcon blockHoverTexture = new  ImageIcon(("src/com/blockblast/assets/block_provisorisch.png"));
     ImageIcon hintergrundTexture = new ImageIcon(("src/com/blockblast/assets/hintergrund.png"));
+    ImageIcon blockTexture = new  ImageIcon(("src/com/blockblast/assets/block_placed.png"));
     Image scaleBlockTextureImgPreview;
     ImageIcon scaleBlockTextureIconPreview;
-    Image scaleBlockTextureImgBoard;
-    ImageIcon scaleBlockTextureIconBoard;
+    Image scaleBlockHoverTextureImgBoard;
+    ImageIcon scaleBlockHoverTextureIconBoard;
+    Image scaleBlockPlacedTextureImgBoard;
+    ImageIcon scaleBlockPlacedTextureIconBoard;
     Image scaleHintergrundTextureImg;
     ImageIcon scaleHintergrundTextureIcon;
     ImageIcon empty = new  ImageIcon();
@@ -171,10 +174,13 @@ public class Singleplayer extends JPanel implements KeyListener {
         score.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
         score.setBounds(0,0,boardSize,50); //Bestimmt Position und Größe des Titels
 
-        scaleBlockTextureImgPreview = blockTexture.getImage().getScaledInstance(blockPreviewSize/5,blockPreviewSize/5,Image.SCALE_DEFAULT);
+        scaleBlockTextureImgPreview = blockHoverTexture.getImage().getScaledInstance(blockPreviewSize/5,blockPreviewSize/5,Image.SCALE_DEFAULT);
         scaleBlockTextureIconPreview = new ImageIcon(scaleBlockTextureImgPreview);
-        scaleBlockTextureImgBoard = blockTexture.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/8,Image.SCALE_DEFAULT);
-        scaleBlockTextureIconBoard = new ImageIcon(scaleBlockTextureImgBoard);
+        scaleBlockHoverTextureImgBoard = blockHoverTexture.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/8,Image.SCALE_DEFAULT);
+        scaleBlockHoverTextureIconBoard = new ImageIcon(scaleBlockHoverTextureImgBoard);
+        scaleBlockPlacedTextureImgBoard = blockTexture.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/8,Image.SCALE_DEFAULT);
+        scaleBlockPlacedTextureIconBoard = new ImageIcon(scaleBlockPlacedTextureImgBoard);
+
 
 
 
@@ -217,7 +223,7 @@ public class Singleplayer extends JPanel implements KeyListener {
             {
                 if(blockPreview1 [i][j].getIcon() == scaleBlockTextureIconPreview )
                 {
-                    fakeGrid[i][j].setIcon(scaleBlockTextureIconBoard); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
+                    fakeGrid[i][j].setIcon(scaleBlockHoverTextureIconBoard); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
                 }
             }
         }
@@ -233,7 +239,7 @@ public class Singleplayer extends JPanel implements KeyListener {
             {
                 if(blockPreview2 [i][j].getIcon() == scaleBlockTextureIconPreview )
                 {
-                    fakeGrid[i][j].setIcon(scaleBlockTextureIconBoard); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
+                    fakeGrid[i][j].setIcon(scaleBlockHoverTextureIconBoard); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
                 }
             }
         }
@@ -249,7 +255,7 @@ public class Singleplayer extends JPanel implements KeyListener {
             {
                 if(blockPreview3 [i][j].getIcon() == scaleBlockTextureIconPreview )
                 {
-                    fakeGrid[i][j].setIcon(scaleBlockTextureIconBoard); //sets the image of every block in fakeGrid to the equivalent in blockPreview1
+                    fakeGrid[i][j].setIcon(scaleBlockHoverTextureIconBoard); //sets the image of every block in fakeGrid to the equivalent in blockPreview1
                 }
             }
         }
@@ -422,7 +428,7 @@ public class Singleplayer extends JPanel implements KeyListener {
 
     public boolean moveBlockLeft() {
         for (int g = 0; g < 8; g++) {
-            if (fakeGrid[g][0].getIcon() == scaleBlockTextureIconBoard) {
+            if (fakeGrid[g][0].getIcon() == scaleBlockHoverTextureIconBoard) {
                 return false;
             }
         }
@@ -430,7 +436,7 @@ public class Singleplayer extends JPanel implements KeyListener {
         boolean[][] shape = new boolean[8][8];
         for (int h = 0; h < 8; h++) {
             for (int i = 0; i < 8; i++) {
-                if (fakeGrid[h][i].getIcon() == scaleBlockTextureIconBoard) {
+                if (fakeGrid[h][i].getIcon() == scaleBlockHoverTextureIconBoard) {
                     shape[h][i] = true;
                     fakeGrid[h][i].setIcon(empty);
                 }
@@ -440,7 +446,7 @@ public class Singleplayer extends JPanel implements KeyListener {
         for (int h = 0; h < 8; h++) {
             for (int i = 0; i < 8; i++) {
                 if (shape[h][i]) {
-                    fakeGrid[h][i - 1].setIcon(scaleBlockTextureIconBoard);
+                    fakeGrid[h][i - 1].setIcon(scaleBlockHoverTextureIconBoard);
                 }
             }
         }
@@ -451,7 +457,7 @@ public class Singleplayer extends JPanel implements KeyListener {
 
     public boolean moveBlockRight() {
         for (int g = 0; g < 8; g++) {
-            if (fakeGrid[g][7].getIcon() == scaleBlockTextureIconBoard) {
+            if (fakeGrid[g][7].getIcon() == scaleBlockHoverTextureIconBoard) {
                 return false;
             }
         }
@@ -459,7 +465,7 @@ public class Singleplayer extends JPanel implements KeyListener {
         boolean[][] shape = new boolean[8][8];
         for (int h = 0; h < 8; h++) {
             for (int i = 0; i < 8; i++) {
-                if (fakeGrid[h][i].getIcon() == scaleBlockTextureIconBoard) {
+                if (fakeGrid[h][i].getIcon() == scaleBlockHoverTextureIconBoard) {
                     shape[h][i] = true;
                     fakeGrid[h][i].setIcon(empty);
                 }
@@ -469,7 +475,7 @@ public class Singleplayer extends JPanel implements KeyListener {
         for (int h = 0; h < 8; h++) {
             for (int i = 0; i < 8; i++) {
                 if (shape[h][i]) {
-                    fakeGrid[h][i + 1].setIcon(scaleBlockTextureIconBoard);
+                    fakeGrid[h][i + 1].setIcon(scaleBlockHoverTextureIconBoard);
                 }
             }
         }
@@ -480,7 +486,7 @@ public class Singleplayer extends JPanel implements KeyListener {
 
     public boolean moveBlockUp() {
         for (int g = 0; g < 8; g++) {
-            if (fakeGrid[0][g].getIcon() == scaleBlockTextureIconBoard) {
+            if (fakeGrid[0][g].getIcon() == scaleBlockHoverTextureIconBoard) {
                 return false;
             }
         }
@@ -488,7 +494,7 @@ public class Singleplayer extends JPanel implements KeyListener {
         boolean[][] shape = new boolean[8][8];
         for (int h = 0; h < 8; h++) {
             for (int i = 0; i < 8; i++) {
-                if (fakeGrid[h][i].getIcon() == scaleBlockTextureIconBoard) {
+                if (fakeGrid[h][i].getIcon() == scaleBlockHoverTextureIconBoard) {
                     shape[h][i] = true;
                     fakeGrid[h][i].setIcon(empty);
                 }
@@ -498,7 +504,7 @@ public class Singleplayer extends JPanel implements KeyListener {
         for (int h = 0; h < 8; h++) {
             for (int i = 0; i < 8; i++) {
                 if (shape[h][i]) {
-                    fakeGrid[h - 1][i].setIcon(scaleBlockTextureIconBoard);
+                    fakeGrid[h - 1][i].setIcon(scaleBlockHoverTextureIconBoard);
                 }
             }
         }
@@ -509,7 +515,7 @@ public class Singleplayer extends JPanel implements KeyListener {
 
     public boolean moveBlockDown() {
         for (int g = 0; g < 8; g++) {
-            if (fakeGrid[7][g].getIcon() == scaleBlockTextureIconBoard) {
+            if (fakeGrid[7][g].getIcon() == scaleBlockHoverTextureIconBoard) {
                 return false;
             }
         }
@@ -517,7 +523,7 @@ public class Singleplayer extends JPanel implements KeyListener {
         boolean[][] shape = new boolean[8][8];
         for (int h = 0; h < 8; h++) {
             for (int i = 0; i < 8; i++) {
-                if (fakeGrid[h][i].getIcon() == scaleBlockTextureIconBoard) {
+                if (fakeGrid[h][i].getIcon() == scaleBlockHoverTextureIconBoard) {
                     shape[h][i] = true;
                     fakeGrid[h][i].setIcon(empty);
                 }
@@ -527,7 +533,7 @@ public class Singleplayer extends JPanel implements KeyListener {
         for (int h = 0; h < 8; h++) {
             for (int i = 0; i < 8; i++) {
                 if (shape[h][i]) {
-                    fakeGrid[h + 1][i].setIcon(scaleBlockTextureIconBoard);
+                    fakeGrid[h + 1][i].setIcon(scaleBlockHoverTextureIconBoard);
                 }
             }
         }
@@ -567,13 +573,13 @@ public class Singleplayer extends JPanel implements KeyListener {
             {
                 for(int h = 0; h < 8; h++)
                 {
-                    if(fakeGrid[g][h].getIcon() == scaleBlockTextureIconBoard)
+                    if(fakeGrid[g][h].getIcon() == scaleBlockHoverTextureIconBoard)
                     {
                         fakeGrid[g][h].setIcon(empty);
                     }
                     if(c.b.getBoard()[g][h] >= 1)
                     {
-                        grid[g][h].setIcon(scaleBlockTextureIconBoard);
+                        grid[g][h].setIcon(scaleBlockPlacedTextureIconBoard);
                     }
                     if(c.b.getBoard()[g][h] == 0)
                     {

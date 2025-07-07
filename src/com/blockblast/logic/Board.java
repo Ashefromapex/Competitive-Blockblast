@@ -24,8 +24,9 @@ public class Board {
     boolean[][][] allPossible;
     int score;
     int kombo;
-    boolean gameOver;
+    public boolean gameOver;
     int missedKombo;
+    public boolean[] blocksplaced;
     public Board() {
         System.out.println("Board created");
         board = new int[8][8];
@@ -41,6 +42,7 @@ public class Board {
         optimalPlacements = new int[3][2];
         gameOver = false;
         missedKombo = 0;
+        blocksplaced = new boolean[3];
     }
 
     public int[][] getBoard() {
@@ -98,6 +100,17 @@ public class Board {
     {
         checkAll();
         return allPossible;
+    }
+    public void reset()
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            blocksplaced[i] = false;
+        }
+        clearBlockMatrices();
+        getBlocks();
+        createBlockmatrix();
+        checkAll();
     }
 
     /*public boolean checkPlacement(int blockx, int y, int x)
@@ -268,7 +281,14 @@ public class Board {
 
     public boolean checkAll()
     {
-
+        //resets board
+        for (int i = 0; i < 3; i++) {
+            for (int x = 0; x < 8; x++) {
+                for (int y = 0; y < 8; y++) {
+                    allPossible[i][x][y] = false;
+                }
+            }
+        }
         for (int x = 0; x < 8; x++)
         {
             for (int y = 0; y < 8; y++)
@@ -342,7 +362,14 @@ public class Board {
                 }
                 break;
         }
+        blocksplaced[blocknr - 1] = true;
         check_field(board); // cleared feld, fals reihe voll + combo + score
+
+        //checks if all three blocks were placed
+        if(blocksplaced[0] && blocksplaced[1] && blocksplaced[2])
+        {
+            reset();
+        }
         checkAll(); // all possible geupdated
         checkGameOver();
         return true;
@@ -358,6 +385,10 @@ public class Board {
         {
             for (z = 0; z < 3; z++)
             {
+                if(blocksplaced[z])
+                {
+                    continue;
+                }
                 for (x = 0; x < 8; x++)
                 {
                     for (y = 0; y < 8; y++)
@@ -376,15 +407,27 @@ public class Board {
             }
 
         }
-        if(kek == 0)
+        if(kek == 0 )
         {
+            System.out.println("Game Over");
             gameOver = true;
         }
     }
 
 
 
-
+    public void clearBlockMatrices()
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            for(int j = 0; j < 5; j++)
+            {
+                bm1[i][j] = 0;
+                bm2[i][j] = 0;
+                bm3[i][j] = 0;
+            }
+        }
+    }
 
     public void check_column(int columnY)
     {
@@ -620,6 +663,7 @@ public class Board {
     {
         return score;
     }
+
 
 }
 

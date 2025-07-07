@@ -35,6 +35,8 @@ public class controller
     public void GameOver()
     {
         g =  new GameOver(this);
+        d.pushScore(b.getScore());
+        d.exit();
     }
 
     public boolean checkSinglePlayer()// überprüft ob single oder multiplayer
@@ -66,14 +68,9 @@ public class controller
     {
         if(b.placeBlock(blocknr, y, x)) //dont ask why its switched shhhhh
         {
-            blockcnt--;
-            if(blockcnt == 0)
+            if(b.gameOver)
             {
-                clearBlockMatrixes();
-                b.getBlocks();
-                b.createBlockmatrix();
-                blockcnt = 3;
-
+                GameOver();
             }
             return true;
         }
@@ -104,16 +101,5 @@ public class controller
         return b.optimalPlacements[blocknr];
     }
 
-    public void clearBlockMatrixes()
-    {
-        for(int i = 0; i < 5; i++)
-        {
-            for(int j = 0; j < 5; j++)
-            {
-                b.bm1[i][j] = 0;
-                b.bm2[i][j] = 0;
-                b.bm3[i][j] = 0;
-            }
-        }
-    }
+
 }
