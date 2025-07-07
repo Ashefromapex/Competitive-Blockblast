@@ -13,9 +13,26 @@ public class Data
 {
 
     //this class is used to store Data and read it again at startup
+    private static Path getAppDataPath() {
+        String os = System.getProperty("os.name").toLowerCase();
+        String appName = "Comp-BB"; // Your application's name
+
+        if (os.contains("win")) {
+            // Windows: %APPDATA%\AppName
+            return Paths.get(System.getenv("APPDATA"), appName);
+        } else if (os.contains("mac")) {
+            // macOS: ~/Library/Application Support/AppName
+            return Paths.get(System.getProperty("user.home"), "Library", "Application Support", appName);
+        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
+            // Linux/Unix: ~/.config/AppName
+            return Paths.get(System.getProperty("user.home"), ".config", appName);
+        }
+        // Fallback for other operating systems
+        return Paths.get(System.getProperty("user.home"), "." + appName.toLowerCase());
+    }
 
     //declare directories + filepath
-    final String DIRPATH = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "Comp-BB";
+    final String DIRPATH = getAppDataPath().toString();
     final String FILEPATH_DATA = DIRPATH + File.separator + "data.txt";
     final String FILEPATH_MP = DIRPATH + File.separator + "mp.txt";
     final String FILEPATH_SETTINGS = DIRPATH + File.separator + "settings.txt";
