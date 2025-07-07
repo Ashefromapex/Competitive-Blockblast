@@ -6,6 +6,7 @@ import com.blockblast.gui.window.Singleplayer;
 import com.blockblast.logic.Board;
 import com.blockblast.gui.window.TitleScreen;
 import com.blockblast.gui.window.GameOver;
+import com.blockblast.storage.Data;
 public class controller
 
 {
@@ -17,6 +18,7 @@ public class controller
     public int [][] testfield = new int [8][8];
     int blockcnt = 3;
     boolean runningSP;
+    private Data d;
 
     public controller()
     {
@@ -26,6 +28,7 @@ public class controller
     public void start()
     {
         controllerGUI = new ControllerGUI(this);
+        d = new Data();
     }
 
 
@@ -78,6 +81,10 @@ public class controller
         {
             return false;
         }
+    }
+    public void login(String user)
+    {
+        d.loginUser(user);
     }
     public int[][] getBm1()
     {
