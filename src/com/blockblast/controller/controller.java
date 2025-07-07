@@ -35,6 +35,7 @@ public class controller
     public void GameOver()
     {
         g =  new GameOver(this);
+        d.pushScore(b.getScore());
     }
 
     public boolean checkSinglePlayer()// überprüft ob single oder multiplayer
@@ -70,10 +71,13 @@ public class controller
             if(blockcnt == 0)
             {
                 clearBlockMatrixes();
-                b.getBlocks();
-                b.createBlockmatrix();
                 blockcnt = 3;
+                b.reset();
 
+            }
+            if(b.gameOver)
+            {
+                GameOver();
             }
             return true;
         }
