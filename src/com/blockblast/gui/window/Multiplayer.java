@@ -1,5 +1,7 @@
 package com.blockblast.gui.window;
 
+import com.blockblast.controller.controller;
+
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -7,10 +9,8 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.Image;
-import com.blockblast.controller.controller;
 
-public class Singleplayer extends JPanel implements KeyListener {
+public class Multiplayer extends JPanel implements KeyListener {
     controller c;
     ControllerGUI cGUI;
     //instanzvariable erstellen
@@ -22,12 +22,14 @@ public class Singleplayer extends JPanel implements KeyListener {
     JLabel [][] blockPreview1 = new JLabel[5][5];
     JLabel [][] blockPreview2 = new JLabel[5][5];
     JLabel [][] blockPreview3 = new JLabel[5][5];
+    JLabel [] attackCount = new JLabel[8];
     JLabel score;
     JPanel mainPanel;
     JPanel fakeBoard;
     JPanel block1;
     JPanel block2;
     JPanel block3;
+    JPanel attackPanel;
     ImageIcon blockTexture = new  ImageIcon(("src/com/blockblast/assets/block_provisorisch.png"));
     ImageIcon hintergrundTexture = new ImageIcon(("src/com/blockblast/assets/hintergrund.png"));
     Image scaleBlockTextureImgPreview;
@@ -48,7 +50,7 @@ public class Singleplayer extends JPanel implements KeyListener {
 
 
 
-    public Singleplayer(controller c, ControllerGUI cGUI) {
+    public Multiplayer(controller c, ControllerGUI cGUI) {
         deltax = 0;
         deltay = 0;
 
@@ -58,8 +60,7 @@ public class Singleplayer extends JPanel implements KeyListener {
         setLayout(null);
         //Window erstellen
 
-
-;
+        int attackBorder = 50;
 
         //MainPanel erstellen
         mainPanel = new JPanel();
@@ -68,7 +69,7 @@ public class Singleplayer extends JPanel implements KeyListener {
         mainPanel.setOpaque(true);
         int mainPanelBorder = 50; //Abstand vom Rand des Fensters
         int boardSize = 400; //Größe des Boards
-        mainPanel.setBounds(0,50,boardSize,boardSize); //Position und Größe des Boards im Layout
+        mainPanel.setBounds((boardSize-mainPanelBorder*2)/8+attackBorder*2,50,boardSize,boardSize); //Position und Größe des Boards im Layout
         EmptyBorder Distance = new EmptyBorder(mainPanelBorder, mainPanelBorder, mainPanelBorder, mainPanelBorder);
         LineBorder mainPanelOutline = new LineBorder(Color.black);
         CompoundBorder mainPanelCompoundBorder = new CompoundBorder(Distance, mainPanelOutline); //Coole schwarze Outline
@@ -91,7 +92,7 @@ public class Singleplayer extends JPanel implements KeyListener {
         fakeBoard = new JPanel();
         GridLayout fakeBoardGridLayout = new GridLayout(0,8);
         fakeBoard.setLayout(fakeBoardGridLayout);
-        fakeBoard.setBounds(0,50,boardSize,boardSize);
+        fakeBoard.setBounds((boardSize-mainPanelBorder*2)/8+attackBorder*2,50,boardSize,boardSize);
         fakeBoard.setOpaque(false); //macht durchsichtig
         fakeBoard.setBackground(new Color(0,0,0,0)); //macht durchsichtig
         fakeBoard.setBorder(Distance);
@@ -106,6 +107,22 @@ public class Singleplayer extends JPanel implements KeyListener {
             }
         }
 
+        attackPanel = new JPanel();
+        attackPanel.setLayout(new GridLayout(0,1));
+        attackPanel.setBackground(Color.BLUE);
+        EmptyBorder attackDistance = new EmptyBorder(mainPanelBorder, attackBorder, mainPanelBorder, attackBorder);
+        LineBorder attackOutline = new LineBorder(Color.BLACK);
+        CompoundBorder attackCompoundBorder = new  CompoundBorder(attackDistance,attackOutline);
+        attackPanel.setBorder(attackCompoundBorder);
+        for(int h = 0; h < 8; h++)
+        {
+            JLabel b = new JLabel();
+            b.setIcon(scaleHintergrundTextureIcon);
+            attackPanel.add(b);
+            attackCount[h] = b;
+        }
+        attackPanel.setBounds(0,50,(boardSize-mainPanelBorder*2)/8+attackBorder*2,(boardSize-mainPanelBorder*2)+mainPanelBorder*2);
+
 
         int blockBorder = 25; //Abstand vom Rand
         int blockPreviewSize = 100; //Größe des BlockPreviews
@@ -113,7 +130,7 @@ public class Singleplayer extends JPanel implements KeyListener {
         block1.setLayout(new GridLayout(5,5));
         block1.setBackground(Color.BLUE);
         block1.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
-        block1.setBounds(blockBorder,50+boardSize,blockPreviewSize,blockPreviewSize);
+        block1.setBounds((boardSize-mainPanelBorder*2)/8+attackBorder*2+blockBorder,50+boardSize,blockPreviewSize,blockPreviewSize);
         for(int h = 0; h < 5; h++)
         {
             for (int g = 0; g < 5; g++)
@@ -128,7 +145,7 @@ public class Singleplayer extends JPanel implements KeyListener {
         block2.setLayout(new GridLayout(5,5));
         block2.setBackground(Color.BLUE);
         block2.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
-        block2.setBounds(blockBorder*2+blockPreviewSize,50+boardSize,blockPreviewSize,blockPreviewSize);
+        block2.setBounds((boardSize-mainPanelBorder*2)/8+attackBorder*2+blockBorder*2+blockPreviewSize,50+boardSize,blockPreviewSize,blockPreviewSize);
         for(int h = 0; h < 5; h++)
         {
             for (int g = 0; g < 5; g++)
@@ -143,7 +160,7 @@ public class Singleplayer extends JPanel implements KeyListener {
         block3.setLayout(new GridLayout(5,5));
         block3.setBackground(Color.BLUE);
         block3.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
-        block3.setBounds(blockBorder*3+blockPreviewSize*2,50+boardSize,blockPreviewSize,blockPreviewSize);
+        block3.setBounds((boardSize-mainPanelBorder*2)/8+attackBorder*2+blockBorder*3+blockPreviewSize*2,50+boardSize,blockPreviewSize,blockPreviewSize);
         for(int h = 0; h < 5; h++)
         {
             for (int g = 0; g < 5; g++)
@@ -160,7 +177,7 @@ public class Singleplayer extends JPanel implements KeyListener {
         int southBumperHeight = blockBorder*2; //Abstand zu unterem Rand
         southBumper.setBackground(Color.BLUE);
         southBumper.setPreferredSize(new Dimension(blockBorder*4+blockPreviewSize*3, blockPreviewSize+southBumperHeight));
-        southBumper.setBounds(0,50+boardSize,blockBorder*4+blockPreviewSize*3,blockPreviewSize+southBumperHeight);
+        southBumper.setBounds(0,50+boardSize,attackPanel.getWidth()+blockBorder*4+blockPreviewSize*3,blockPreviewSize+southBumperHeight);
 
 
 
@@ -170,6 +187,8 @@ public class Singleplayer extends JPanel implements KeyListener {
         score.setFont(new Font("Tahoma", Font.BOLD, 30));
         score.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
         score.setBounds(0,0,boardSize,50); //Bestimmt Position und Größe des Titels
+
+
 
         scaleBlockTextureImgPreview = blockTexture.getImage().getScaledInstance(blockPreviewSize/5,blockPreviewSize/5,Image.SCALE_DEFAULT);
         scaleBlockTextureIconPreview = new ImageIcon(scaleBlockTextureImgPreview);
@@ -182,13 +201,14 @@ public class Singleplayer extends JPanel implements KeyListener {
         //Top label layout
         //Start und Stop Stuff
         //fügt alles hinzu, was zuerst hinzugefügt wird ist am weitesten oben
-        setSize(new Dimension(boardSize+15,50+boardSize+mainPanelBorder+blockPreviewSize+southBumperHeight-15));
+        setSize(new Dimension((boardSize-mainPanelBorder*2)/8+attackBorder*2+boardSize+15,50+boardSize+mainPanelBorder+blockPreviewSize+southBumperHeight-15));
         add(score);
         add(fakeBoard);
         add(mainPanel);
         add(block1);
         add(block2);
         add(block3);
+        add(attackPanel);
         add(southBumper);
         //imports the blocks
         int[][] testblock1 = c.getBm1();

@@ -7,22 +7,21 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-import static java.awt.event.KeyEvent.KEY_PRESSED;
-
-public class controllerGUI extends JFrame
+public class ControllerGUI extends JFrame
 {
     //Instanzvariable
     controller c;
     Singleplayer sp;
-    titleScreen titleScreen;
+    Multiplayer mp;
+    TitleScreen titleScreen;
     KeyboardFocusManager focusManager;
 
     //Erzeugt Fenster
-    public controllerGUI(controller c)
+    public ControllerGUI(controller c)
     {
         setVisible(true);
         this.c = c;
-        titleScreen = new titleScreen(this);
+        titleScreen = new TitleScreen(this);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false); //Window bleibt genausogroß wie wir wollen
         setTitle("Blockblast");
@@ -55,6 +54,10 @@ public class controllerGUI extends JFrame
     public void multiplayer()
     {
         c.startMP();
+        mp = new Multiplayer(c, this);
+        setContentPane(mp);
+        setSize(getContentPane().getWidth(),getContentPane().getHeight());
+        setLocationRelativeTo(null);
     }
 
 }

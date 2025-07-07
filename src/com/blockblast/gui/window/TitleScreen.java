@@ -1,19 +1,14 @@
 package com.blockblast.gui.window;
 
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
 
-import com.blockblast.controller.controller;
+public class TitleScreen extends JPanel{
 
-public class titleScreen extends JPanel{
+ControllerGUI c;
 
-controllerGUI c;
-
-  public titleScreen(controllerGUI c){
+  public TitleScreen(ControllerGUI c){
 
       this.c = c;
 

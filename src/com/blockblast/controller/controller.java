@@ -1,16 +1,16 @@
 package com.blockblast.controller;
 
 import com.blockblast.blocks.Blockelement;
-import com.blockblast.gui.window.controllerGUI;
+import com.blockblast.gui.window.ControllerGUI;
 import com.blockblast.gui.window.Singleplayer;
 import com.blockblast.logic.Board;
-import com.blockblast.gui.window.titleScreen;
+import com.blockblast.gui.window.TitleScreen;
 import com.blockblast.gui.window.GameOver;
 public class controller
 
 {
-    private controllerGUI controllerGUI;
-    private titleScreen t; //Titlebildschirm
+    private ControllerGUI controllerGUI;
+    private TitleScreen t; //Titlebildschirm
     private GameOver g;
     private Singleplayer w;//GUI object
     public Board b;//Logic object
@@ -21,12 +21,11 @@ public class controller
     public controller()
     {
 
-        clearTestfeld();
     }
     //handles communication between the GUI and the logic
     public void start()
     {
-        controllerGUI = new controllerGUI(this);
+        controllerGUI = new ControllerGUI(this);
     }
 
 
@@ -53,6 +52,9 @@ public class controller
     public void startMP()
     {
         //start multiplayer
+        b = new Board();
+        b.getBlocks();
+        b.createBlockmatrix();
         int seed = b.getSeed();
         runningSP = false;
     }
@@ -93,32 +95,6 @@ public class controller
     {
         blocknr--;
         return b.optimalPlacements[blocknr];
-    }
-
-
-
-
-
-    public void printTestfield()
-    {
-        for(int i = 0; i < 8; i++)
-        {
-            for(int j = 0; j < 8; j++)
-            {
-                System.out.print(testfield[j][i]+ " ");
-            }
-            System.out.println();
-        }
-    }
-    public void clearTestfeld()
-    {
-        for(int i = 0; i < 8; i++)
-        {
-            for(int j = 0; j < 8; j++)
-            {
-                testfield[j][i] = 0;
-            }
-        }
     }
 
     public void clearBlockMatrixes()
