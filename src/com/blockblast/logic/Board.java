@@ -25,6 +25,7 @@ public class Board {
     int score;
     int kombo;
     boolean gameOver;
+    int missedKombo;
     public Board() {
         System.out.println("Board created");
         board = new int[8][8];
@@ -39,6 +40,7 @@ public class Board {
         kombo = 0;
         optimalPlacements = new int[3][2];
         gameOver = false;
+        missedKombo = 0;
     }
 
     public int[][] getBoard() {
@@ -54,6 +56,11 @@ public class Board {
         }
         if (kombo == komboTest)
         {
+            missedKombo++;
+        }
+        if(missedKombo == 3)
+        {
+            missedKombo = 0;
             kombo = 0;
         }
         SetScore();
@@ -62,7 +69,14 @@ public class Board {
     public int SetScore()
     {
 
-        score = (score + 100) * 3^(kombo + 1) /2;
+        if(kombo > 0)
+        {
+            score += 1000 * kombo;
+        }
+        else
+        {
+            score += 100;
+        }
         return score;
     }
 

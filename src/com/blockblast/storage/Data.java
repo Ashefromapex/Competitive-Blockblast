@@ -13,6 +13,7 @@ public class Data
 {
 
     //this class is used to store Data and read it again at startup
+    //coole storage location und so
     private static Path getAppDataPath() {
         String os = System.getProperty("os.name").toLowerCase();
         String appName = "Comp-BB"; // Your application's name
