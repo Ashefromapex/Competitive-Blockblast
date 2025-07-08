@@ -40,7 +40,7 @@ public class LoginScreen extends JPanel implements KeyListener
                 if(!usernameField.getText().isEmpty())
                 {
                     username=usernameField.getText();
-                    c.loggedtfin();
+                    c.titleScreen();
                 }
             }
         });
@@ -69,7 +69,7 @@ public class LoginScreen extends JPanel implements KeyListener
             if(!usernameField.getText().isEmpty())
             {
                 username=usernameField.getText();
-                c.loggedtfin();
+                c.titleScreen();
             }
         }
     }

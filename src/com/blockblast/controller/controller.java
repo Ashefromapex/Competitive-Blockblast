@@ -39,9 +39,11 @@ public class controller
     public void startSP()
     {
         //start single player
+
         b = new Board();
         b.getBlocks();
         b.createBlockmatrix();
+        cGUI.singleplayer();
         runningSP = true;
 
 
@@ -50,10 +52,12 @@ public class controller
     public void startMP()
     {
         //start multiplayer
+
         b = new Board();
         b.getBlocks();
         b.createBlockmatrix();
         int seed = b.getSeed();
+        cGUI.multiplayer();
         runningSP = false;
     }
 
@@ -63,6 +67,10 @@ public class controller
         cGUI.GameOver( b.getScore());
         d.pushScore(b.getScore());
         d.exit();
+    }
+    public void menu()
+    {
+        cGUI.titleScreen();
     }
 
     public boolean placeBlock(int blocknr, int x, int y)

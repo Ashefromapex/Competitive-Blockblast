@@ -44,15 +44,16 @@ public class GameOver extends JPanel {
         restart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Singleplayer wird gestartet");
-                System.out.println("Singleplayer wird gestartet");
+
                 if (c.checkSinglePlayer())
                 {
                     c.startSP();
+                    System.out.println("Singleplayer wird gestartet");
                 }
                 else
                 {
                     c.startMP();
+                    System.out.println("Multiplayer wird gestartet");
 
                 }
 
@@ -67,7 +68,9 @@ public class GameOver extends JPanel {
         menu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Singleplayer wird gestartet");
+
+                System.out.println("zurück zum Menü");
+                c.menu();
 
             }
         });

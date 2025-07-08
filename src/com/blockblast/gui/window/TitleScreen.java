@@ -3,12 +3,13 @@ package com.blockblast.gui.window;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import com.blockblast.controller.*;
 
 public class TitleScreen extends JPanel{
 
-ControllerGUI c;
+ controller c;
 
-  public TitleScreen(ControllerGUI c){
+  public TitleScreen(controller c){
 
       this.c = c;
 
@@ -38,7 +39,7 @@ ControllerGUI c;
       stS.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
-              c.singleplayer();
+              c.startSP();
 
           }
       });
@@ -52,10 +53,20 @@ ControllerGUI c;
                                @Override
                                public void actionPerformed(ActionEvent e) {
                                    System.out.println("Singleplayer wird gestartet");
-                                   c.multiplayer();
+                                   c.startMP();
                                    System.out.println("To be continued");
                                    //dispose();
                                    }
+      });
+
+      JButton logout = new JButton("Logout");
+      logout.setFont(new Font("Tahoma", Font.BOLD, 20));
+      logout.setForeground(Color.BLUE);
+      logout.setBounds(200,600,175,50);
+      logout.addActionListener(new ActionListener() {
+          public void actionPerformed(ActionEvent e) {
+              System.out.println("Logout wird gestartet(Luca koch mal)");
+          }
       });
 
       //alles hinzufügen

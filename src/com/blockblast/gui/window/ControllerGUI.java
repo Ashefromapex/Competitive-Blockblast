@@ -34,7 +34,6 @@ public class ControllerGUI extends JFrame {
     }
 
     public void singleplayer() {
-        c.startSP();
         sp = new Singleplayer(c, this);
         focusManager.addKeyEventDispatcher(new KeyEventDispatcher() {
             @Override
@@ -51,16 +50,15 @@ public class ControllerGUI extends JFrame {
     }
 
     public void multiplayer() {
-        c.startMP();
         mp = new Multiplayer(c, this);
         setContentPane(mp);
         setSize(getContentPane().getWidth(), getContentPane().getHeight());
         setLocationRelativeTo(null);
     }
 
-    public void loggedtfin()
+    public void titleScreen()
     {
-        titleScreen = new TitleScreen(this);
+        titleScreen = new TitleScreen(c);
         setContentPane(titleScreen);
         setSize(getContentPane().getWidth(), getContentPane().getHeight());
         setLocationRelativeTo(null);
