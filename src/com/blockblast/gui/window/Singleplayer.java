@@ -18,9 +18,11 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     //instanzvariable erstellen
     int deltax;
     int deltay;
+    int mainPanelBorder;
+    int boardSize;
     JLabel label;
     JLabel [][] grid = new JLabel[8][8];
-    JLabel [][] fakeGrid = new JLabel[8][8];
+    JLabel [][] fakeGrid = new JLabel[5][5];
     JLabel [][] blockPreview1 = new JLabel[5][5];
     JLabel [][] blockPreview2 = new JLabel[5][5];
     JLabel [][] blockPreview3 = new JLabel[5][5];
@@ -75,8 +77,8 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
         GridLayout mainPanelGridLayout = new GridLayout(0,8);
         mainPanel.setLayout(mainPanelGridLayout);
         mainPanel.setOpaque(true);
-        int mainPanelBorder = 50; //Abstand vom Rand des Fensters
-        int boardSize = 400; //Größe des Boards
+        mainPanelBorder = 36; //Abstand vom Rand des Fensters
+        boardSize = 400; //Größe des Boards
         mainPanel.setBounds(0,50,boardSize,boardSize); //Position und Größe des Boards im Layout
         EmptyBorder Distance = new EmptyBorder(mainPanelBorder, mainPanelBorder, mainPanelBorder, mainPanelBorder);
         LineBorder mainPanelOutline = new LineBorder(Color.black);
@@ -98,15 +100,14 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
 
         //Fake Board zum Blöcke hovern erstellen, sieht genauso aus wie das Main Board
         fakeBoard = new JPanel();
-        GridLayout fakeBoardGridLayout = new GridLayout(0,8);
+        GridLayout fakeBoardGridLayout = new GridLayout(0,5);
         fakeBoard.setLayout(fakeBoardGridLayout);
-        fakeBoard.setBounds(0,50,boardSize,boardSize);
+        fakeBoard.setBounds(0,50,(boardSize-mainPanelBorder*2)/8*5,(boardSize-mainPanelBorder*2)/8*5);
         fakeBoard.setOpaque(false); //macht durchsichtig
         fakeBoard.setBackground(new Color(0,0,0,0)); //macht durchsichtig
-        fakeBoard.setBorder(Distance);
-        for(int i = 0; i < 8; i++)
+        for(int i = 0; i < 5; i++)
         {
-            for(int j = 0;j < 8;j++) //Füllen mit Blöcken
+            for(int j = 0;j < 5;j++) //Füllen mit Blöcken
             {
                 JLabel b = new JLabel();
                 b.setOpaque(false);//macht durchsichtig
@@ -659,13 +660,30 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
         }
     }
 
+    public void snapBlock()
+    {
+        int boardX = 52;
+        int boardY = 52;
+        for(int g = 0; g < 5; g++)
+        {
+            for(int h = 0; h < 5; h++)
+            {
+                System.out.println(grid[g][h].getLocation());
+            }
+        }
+    }
+
+
+
+
+
     int fakeBoardX = 0;
     int fakeBoardY = 0;
 
     @Override
     public void mouseClicked(MouseEvent e)
     {
-        System.out.println("mouseClicked");
+        snapBlock();
     }
 
     @Override
@@ -700,7 +718,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     @Override
     public void mouseReleased(MouseEvent e)
     {
-
+        snapBlock();
     }
 
     @Override
