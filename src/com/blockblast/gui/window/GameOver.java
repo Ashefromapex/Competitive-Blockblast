@@ -10,6 +10,7 @@ public class GameOver extends JPanel {
     controller c;
     JButton restart;
     JButton menu;
+    JLabel scoreLabel;
 
     public GameOver(controller c, int score) {
 
@@ -30,6 +31,13 @@ public class GameOver extends JPanel {
         gameOver.setForeground(Color.WHITE);
         gameOver.setBounds(162, 100,300,50 );
         gameOver.setVisible(true);
+
+
+        scoreLabel = new JLabel("Score: " + score);
+        scoreLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
+        scoreLabel.setForeground(Color.BLACK);
+        scoreLabel.setBounds(162, 175,300,50 );
+        scoreLabel.setVisible(true);
 
 
 
@@ -77,6 +85,7 @@ public class GameOver extends JPanel {
         add(gameOver);
         add(menu);
         add(restart);
+        add(scoreLabel);
     }
 
 
