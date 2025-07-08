@@ -7,19 +7,18 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-public class ControllerGUI extends JFrame
-{
+public class ControllerGUI extends JFrame {
     //Instanzvariable
     controller c;
     Singleplayer sp;
     Multiplayer mp;
     TitleScreen titleScreen;
     LoginScreen loginScreen;
+    GameOver gameOver;
     KeyboardFocusManager focusManager;
 
     //Erzeugt Fenster
-    public ControllerGUI(controller c)
-    {
+    public ControllerGUI(controller c) {
         setVisible(true);
         this.c = c;
         titleScreen = new TitleScreen(this);
@@ -28,46 +27,50 @@ public class ControllerGUI extends JFrame
         setResizable(false); //Window bleibt genausogroß wie wir wollen
         setTitle("Blockblast");
         setContentPane(loginScreen);
-        setSize(getContentPane().getWidth(),getContentPane().getHeight());
+        setSize(getContentPane().getWidth(), getContentPane().getHeight());
         setLocationRelativeTo(null);
         focusManager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
     }
 
-    public void singleplayer()
-    {
+    public void singleplayer() {
         c.startSP();
         sp = new Singleplayer(c, this);
         focusManager.addKeyEventDispatcher(new KeyEventDispatcher() {
             @Override
-            public boolean dispatchKeyEvent(KeyEvent e)
-            {
-                if(e.paramString().charAt(4)=='P')
-                {
+            public boolean dispatchKeyEvent(KeyEvent e) {
+                if (e.paramString().charAt(4) == 'P') {
                     sp.keyPressed(e);
                 }
                 return true;
             }
         });
         setContentPane(sp);
-        setSize(getContentPane().getWidth(),getContentPane().getHeight());
+        setSize(getContentPane().getWidth(), getContentPane().getHeight());
         setLocationRelativeTo(null);
     }
 
-    public void multiplayer()
-    {
+    public void multiplayer() {
         c.startMP();
         mp = new Multiplayer(c, this);
         setContentPane(mp);
-        setSize(getContentPane().getWidth(),getContentPane().getHeight());
+        setSize(getContentPane().getWidth(), getContentPane().getHeight());
         setLocationRelativeTo(null);
     }
 
-    public void loggedtfin()
-    {
+    public void loggedtfin() {
         setContentPane(titleScreen);
-        setSize(getContentPane().getWidth(),getContentPane().getHeight());
+        setSize(getContentPane().getWidth(), getContentPane().getHeight());
         setLocationRelativeTo(null);
         c.login(loginScreen.getUsername());
+    }
+
+    public void GameOver(int score)
+    {
+        gameOver = new GameOver(c,score);
+        setContentPane(gameOver);
+        setSize(getContentPane().getWidth(),getContentPane().getHeight());
+        setLocationRelativeTo(null);
+
     }
 
 }

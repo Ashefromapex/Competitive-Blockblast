@@ -39,6 +39,7 @@ ControllerGUI c;
           @Override
           public void actionPerformed(ActionEvent e) {
               c.singleplayer();
+
           }
       });
 

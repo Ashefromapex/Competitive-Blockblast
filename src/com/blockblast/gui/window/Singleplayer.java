@@ -62,7 +62,7 @@ public class Singleplayer extends JPanel implements KeyListener {
         //Window erstellen
 
 
-;
+
 
         //MainPanel erstellen
         mainPanel = new JPanel();
