@@ -133,5 +133,20 @@ public class Algo
 //        }
         return block.rotate(rotation);
     }
+
+    public Blockelement modifyBlock(Blockelement b, int  lvl)
+    {
+        //loop based on lvl
+        int r = rand.nextInt(4); //rotation where block gets added
+        switch (r)
+        {
+            //adding block
+            case 0 :
+
+
+        }
+        //check that blockdiff from the root (2,2) doesnt exceed 3, if it does rerun
+        return b;
+    }
 }
 
