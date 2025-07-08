@@ -16,12 +16,13 @@ public class ControllerGUI extends JFrame {
     LoginScreen loginScreen;
     GameOver gameOver;
     KeyboardFocusManager focusManager;
+    EnemySelect enemySelect;
 
     //Erzeugt Fenster
     public ControllerGUI(controller c) {
         setVisible(true);
         this.c = c;
-        titleScreen = new TitleScreen(this);
+        enemySelect = new EnemySelect();
         loginScreen = new LoginScreen(this);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false); //Window bleibt genausogroß wie wir wollen
@@ -57,7 +58,9 @@ public class ControllerGUI extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    public void loggedtfin() {
+    public void loggedtfin()
+    {
+        titleScreen = new TitleScreen(this);
         setContentPane(titleScreen);
         setSize(getContentPane().getWidth(), getContentPane().getHeight());
         setLocationRelativeTo(null);
