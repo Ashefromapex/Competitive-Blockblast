@@ -17,7 +17,7 @@ public class LoginScreen extends JPanel implements KeyListener
     public LoginScreen(ControllerGUI c)
     {
         this.c=c;
-        setSize(500,500);
+        setSize(500,600);
         setLayout(null);
         setBackground(Color.BLUE);
         usernameField = new TextField();

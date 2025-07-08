@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 
 public class GameOver extends JPanel {
     controller c;
+    JButton restart;
+    JButton menu;
 
     public GameOver(controller c, int score) {
 
@@ -16,22 +18,25 @@ public class GameOver extends JPanel {
 //        //Grundsetup
 //        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 //      setResizable(false); //Window bleibt genausogroß wie wir wollen
-        setVisible(false);
+        setVisible(true);
         setLayout(null);
         setSize(500,600);
         setBackground(Color.RED);
         setOpaque(true);
 
 
-        JLabel GameOver = new JLabel("Game Over");
-        GameOver.setFont(new Font("Tahoma", Font.BOLD, 30));
-        GameOver.setForeground(Color.WHITE);
-        GameOver.setBounds(162, 100,300,50 );
-        GameOver.setVisible(true);
-        GameOver.
+        JLabel gameOver = new JLabel("Game Over");
+        gameOver.setFont(new Font("Tahoma", Font.BOLD, 30));
+        gameOver.setForeground(Color.WHITE);
+        gameOver.setBounds(162, 100,300,50 );
+        gameOver.setVisible(true);
+
+
+
+
 
         //Button zum neutstarten
-        JButton restart = new JButton("Restart");
+        restart = new JButton("Restart");
         restart.setFont(new Font("Tahoma", Font.BOLD, 20));
         restart.setForeground(Color.BLACK);
         restart.setBounds(50,300,175,50);
@@ -54,18 +59,23 @@ public class GameOver extends JPanel {
             }
         });
 
-        JButton Menu = new JButton("Menü");
-        Menu.setFont(new Font("Tahoma", Font.BOLD, 20));
-        Menu.setForeground(Color.BLACK);
-        Menu.setBounds(50,300,175,50);
-        Menu.setVisible(true);
-        Menu.addActionListener(new ActionListener() {
+        menu = new JButton("Menü");
+        menu.setFont(new Font("Tahoma", Font.BOLD, 20));
+        menu.setForeground(Color.BLACK);
+        menu.setBounds(250,300,175,50);
+        menu.setVisible(true);
+        menu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Singleplayer wird gestartet");
 
             }
         });
+        add(gameOver);
+        add(menu);
+        add(restart);
     }
+
+
 
 }
