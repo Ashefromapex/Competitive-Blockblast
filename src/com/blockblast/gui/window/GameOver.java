@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 public class GameOver extends JFrame {
     controller c;
 
-    public GameOver(controller c) {
+    public GameOver(controller c, int score) {
 
         this.c = c;
 

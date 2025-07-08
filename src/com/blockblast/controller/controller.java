@@ -34,7 +34,7 @@ public class controller
 
     public void GameOver()
     {
-        g =  new GameOver(this);
+        g =  new GameOver(this, b.getScore());
         d.pushScore(b.getScore());
         d.exit();
     }
