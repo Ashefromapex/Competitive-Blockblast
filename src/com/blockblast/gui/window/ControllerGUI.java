@@ -65,6 +65,7 @@ public class ControllerGUI extends JFrame
 
     public void loggedtfin()
     {
+        titleScreen = new TitleScreen(this);
         setContentPane(titleScreen);
         setSize(getContentPane().getWidth(),getContentPane().getHeight());
         setLocationRelativeTo(null);

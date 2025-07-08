@@ -5,9 +5,14 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.Image;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import com.blockblast.controller.controller;
 
 public class Singleplayer extends JPanel implements KeyListener {
@@ -47,6 +52,7 @@ public class Singleplayer extends JPanel implements KeyListener {
     private boolean block2Placed = false;
     private boolean block3Placed = false;
     static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
+    JButton gameOverButton;
 
 
 
@@ -182,13 +188,23 @@ public class Singleplayer extends JPanel implements KeyListener {
         scaleBlockPlacedTextureIconBoard = new ImageIcon(scaleBlockPlacedTextureImgBoard);
 
 
-
+        gameOverButton = new JButton();
+        gameOverButton.setText("Game Over");
+        gameOverButton.setBounds(0,0,50,50);
+        gameOverButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                c.GameOver();
+            }
+        });
 
 
         //Top label layout
         //Start und Stop Stuff
         //fügt alles hinzu, was zuerst hinzugefügt wird ist am weitesten oben
         setSize(new Dimension(boardSize+15,50+boardSize+mainPanelBorder+blockPreviewSize+southBumperHeight-15));
+        add(gameOverButton);
         add(score);
         add(fakeBoard);
         add(mainPanel);
