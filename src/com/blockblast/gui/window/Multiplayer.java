@@ -8,9 +8,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
-public class Multiplayer extends JPanel implements KeyListener {
+public class Multiplayer extends JPanel {
     controller c;
     ControllerGUI cGUI;
     //instanzvariable erstellen
@@ -30,12 +29,15 @@ public class Multiplayer extends JPanel implements KeyListener {
     JPanel block2;
     JPanel block3;
     JPanel attackPanel;
-    ImageIcon blockTexture = new  ImageIcon(("src/com/blockblast/assets/block_provisorisch.png"));
+    ImageIcon blockHoverTexture = new  ImageIcon(("src/com/blockblast/assets/block_provisorisch.png"));
     ImageIcon hintergrundTexture = new ImageIcon(("src/com/blockblast/assets/hintergrund.png"));
+    ImageIcon blockTexture = new  ImageIcon(("src/com/blockblast/assets/block_placed.png"));
     Image scaleBlockTextureImgPreview;
     ImageIcon scaleBlockTextureIconPreview;
-    Image scaleBlockTextureImgBoard;
-    ImageIcon scaleBlockTextureIconBoard;
+    Image scaleBlockHoverTextureImgBoard;
+    ImageIcon scaleBlockHoverTextureIconBoard;
+    Image scaleBlockPlacedTextureImgBoard;
+    ImageIcon scaleBlockPlacedTextureIconBoard;
     Image scaleHintergrundTextureImg;
     ImageIcon scaleHintergrundTextureIcon;
     ImageIcon empty = new  ImageIcon();
@@ -190,10 +192,12 @@ public class Multiplayer extends JPanel implements KeyListener {
 
 
 
-        scaleBlockTextureImgPreview = blockTexture.getImage().getScaledInstance(blockPreviewSize/5,blockPreviewSize/5,Image.SCALE_DEFAULT);
+        scaleBlockTextureImgPreview = blockHoverTexture.getImage().getScaledInstance(blockPreviewSize/5,blockPreviewSize/5,Image.SCALE_DEFAULT);
         scaleBlockTextureIconPreview = new ImageIcon(scaleBlockTextureImgPreview);
-        scaleBlockTextureImgBoard = blockTexture.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/8,Image.SCALE_DEFAULT);
-        scaleBlockTextureIconBoard = new ImageIcon(scaleBlockTextureImgBoard);
+        scaleBlockHoverTextureImgBoard = blockHoverTexture.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/8,Image.SCALE_DEFAULT);
+        scaleBlockHoverTextureIconBoard = new ImageIcon(scaleBlockHoverTextureImgBoard);
+        scaleBlockPlacedTextureImgBoard = blockTexture.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/8,Image.SCALE_DEFAULT);
+        scaleBlockPlacedTextureIconBoard = new ImageIcon(scaleBlockPlacedTextureImgBoard);
 
 
 
@@ -237,7 +241,7 @@ public class Multiplayer extends JPanel implements KeyListener {
             {
                 if(blockPreview1 [i][j].getIcon() == scaleBlockTextureIconPreview )
                 {
-                    fakeGrid[i][j].setIcon(scaleBlockTextureIconBoard); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
+                    fakeGrid[i][j].setIcon(scaleBlockHoverTextureIconBoard); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
                 }
             }
         }
@@ -253,7 +257,7 @@ public class Multiplayer extends JPanel implements KeyListener {
             {
                 if(blockPreview2 [i][j].getIcon() == scaleBlockTextureIconPreview )
                 {
-                    fakeGrid[i][j].setIcon(scaleBlockTextureIconBoard); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
+                    fakeGrid[i][j].setIcon(scaleBlockHoverTextureIconBoard); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
                 }
             }
         }
@@ -269,7 +273,7 @@ public class Multiplayer extends JPanel implements KeyListener {
             {
                 if(blockPreview3 [i][j].getIcon() == scaleBlockTextureIconPreview )
                 {
-                    fakeGrid[i][j].setIcon(scaleBlockTextureIconBoard); //sets the image of every block in fakeGrid to the equivalent in blockPreview1
+                    fakeGrid[i][j].setIcon(scaleBlockHoverTextureIconBoard); //sets the image of every block in fakeGrid to the equivalent in blockPreview1
                 }
             }
         }
@@ -305,12 +309,6 @@ public class Multiplayer extends JPanel implements KeyListener {
     }
 
 
-    @Override
-    public void keyTyped(KeyEvent e)
-    {
-
-    }
-    @Override
     public void keyPressed(KeyEvent e)
     {
         switch (e.getKeyCode())
@@ -372,12 +370,6 @@ public class Multiplayer extends JPanel implements KeyListener {
 
 
         }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e)
-    {
-
     }
 
     public void visualizeBlock1( int[][] array) {
@@ -444,7 +436,7 @@ public class Multiplayer extends JPanel implements KeyListener {
     {
         for(int g = 0; g < 8; g++)
         {
-            if(fakeGrid[g][0].getIcon() == scaleBlockTextureIconBoard)
+            if(fakeGrid[g][0].getIcon() == scaleBlockHoverTextureIconBoard)
             {
                 return false;
             }
@@ -463,7 +455,7 @@ public class Multiplayer extends JPanel implements KeyListener {
         {
             for (int i=0; i< 8; i++)
             {
-                if(fakeGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
+                if(fakeGrid[h][i].getIcon() == scaleBlockHoverTextureIconBoard)
                 {
                     movementGrid[h][i-1].setIcon(fakeGrid[h][i].getIcon());
                     fakeGrid[h][i].setIcon(empty);
@@ -474,9 +466,9 @@ public class Multiplayer extends JPanel implements KeyListener {
         {
             for (int i=0; i< 8; i++)
             {
-                if(movementGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
+                if(movementGrid[h][i].getIcon() == scaleBlockHoverTextureIconBoard)
                 {
-                    fakeGrid[h][i].setIcon(scaleBlockTextureIconBoard);
+                    fakeGrid[h][i].setIcon(scaleBlockHoverTextureIconBoard);
                 }
             }
         }
@@ -489,7 +481,7 @@ public class Multiplayer extends JPanel implements KeyListener {
     {
         for(int g = 0; g < 8; g++)
         {
-            if(fakeGrid[g][7].getIcon() == scaleBlockTextureIconBoard)
+            if(fakeGrid[g][7].getIcon() == scaleBlockHoverTextureIconBoard)
             {
                 return false;
             }
@@ -508,7 +500,7 @@ public class Multiplayer extends JPanel implements KeyListener {
         {
             for (int i=0; i< 8; i++)
             {
-                if(fakeGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
+                if(fakeGrid[h][i].getIcon() == scaleBlockHoverTextureIconBoard)
                 {
                     movementGrid[h][i+1].setIcon(fakeGrid[h][i].getIcon());
                     fakeGrid[h][i].setIcon(empty);
@@ -519,9 +511,9 @@ public class Multiplayer extends JPanel implements KeyListener {
         {
             for (int i=0; i< 8; i++)
             {
-                if(movementGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
+                if(movementGrid[h][i].getIcon() == scaleBlockHoverTextureIconBoard)
                 {
-                    fakeGrid[h][i].setIcon(scaleBlockTextureIconBoard);
+                    fakeGrid[h][i].setIcon(scaleBlockHoverTextureIconBoard);
                 }
             }
         }
@@ -534,7 +526,7 @@ public class Multiplayer extends JPanel implements KeyListener {
     {
         for(int g = 0; g < 8; g++)
         {
-            if(fakeGrid[0][g].getIcon() == scaleBlockTextureIconBoard)
+            if(fakeGrid[0][g].getIcon() == scaleBlockHoverTextureIconBoard)
             {
                 return false;
             }
@@ -553,7 +545,7 @@ public class Multiplayer extends JPanel implements KeyListener {
         {
             for (int i=0; i< 8; i++)
             {
-                if(fakeGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
+                if(fakeGrid[h][i].getIcon() == scaleBlockHoverTextureIconBoard)
                 {
                     movementGrid[h-1][i].setIcon(fakeGrid[h][i].getIcon());
                     fakeGrid[h][i].setIcon(empty);
@@ -564,9 +556,9 @@ public class Multiplayer extends JPanel implements KeyListener {
         {
             for (int i=0; i< 8; i++)
             {
-                if(movementGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
+                if(movementGrid[h][i].getIcon() == scaleBlockHoverTextureIconBoard)
                 {
-                    fakeGrid[h][i].setIcon(scaleBlockTextureIconBoard);
+                    fakeGrid[h][i].setIcon(scaleBlockHoverTextureIconBoard);
                 }
             }
         }
@@ -579,7 +571,7 @@ public class Multiplayer extends JPanel implements KeyListener {
     {
         for(int g = 0; g < 8; g++)
         {
-            if(fakeGrid[7][g].getIcon() == scaleBlockTextureIconBoard)
+            if(fakeGrid[7][g].getIcon() == scaleBlockHoverTextureIconBoard)
             {
                 return false;
             }
@@ -598,7 +590,7 @@ public class Multiplayer extends JPanel implements KeyListener {
         {
             for (int i=0; i< 8; i++)
             {
-                if(fakeGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
+                if(fakeGrid[h][i].getIcon() == scaleBlockHoverTextureIconBoard)
                 {
                     movementGrid[h+1][i].setIcon(fakeGrid[h][i].getIcon());
                     fakeGrid[h][i].setIcon(empty);
@@ -609,9 +601,9 @@ public class Multiplayer extends JPanel implements KeyListener {
         {
             for (int i=0; i< 8; i++)
             {
-                if(movementGrid[h][i].getIcon() == scaleBlockTextureIconBoard)
+                if(movementGrid[h][i].getIcon() == scaleBlockHoverTextureIconBoard)
                 {
-                    fakeGrid[h][i].setIcon(scaleBlockTextureIconBoard);
+                    fakeGrid[h][i].setIcon(scaleBlockHoverTextureIconBoard);
                 }
             }
         }
@@ -651,13 +643,13 @@ public class Multiplayer extends JPanel implements KeyListener {
             {
                 for(int h = 0; h < 8; h++)
                 {
-                    if(fakeGrid[g][h].getIcon() == scaleBlockTextureIconBoard)
+                    if(fakeGrid[g][h].getIcon() == scaleBlockHoverTextureIconBoard)
                     {
                         fakeGrid[g][h].setIcon(empty);
                     }
                     if(c.b.getBoard()[g][h] >= 1)
                     {
-                        grid[g][h].setIcon(scaleBlockTextureIconBoard);
+                        grid[g][h].setIcon(scaleBlockPlacedTextureIconBoard);
                     }
                     if(c.b.getBoard()[g][h] == 0)
                     {

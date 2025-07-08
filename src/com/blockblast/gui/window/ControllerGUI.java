@@ -7,7 +7,8 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-public class ControllerGUI extends JFrame {
+public class ControllerGUI extends JFrame
+{
     //Instanzvariable
     controller c;
     Singleplayer sp;
@@ -15,7 +16,6 @@ public class ControllerGUI extends JFrame {
     TitleScreen titleScreen;
     LoginScreen loginScreen;
     GameOver gameOver;
-    KeyboardFocusManager focusManager;
     EnemySelect enemySelect;
 
     //Erzeugt Fenster
@@ -30,28 +30,19 @@ public class ControllerGUI extends JFrame {
         setContentPane(loginScreen);
         setSize(getContentPane().getWidth(), getContentPane().getHeight());
         setLocationRelativeTo(null);
-        focusManager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
     }
 
     public void singleplayer() {
         sp = new Singleplayer(c, this);
-        focusManager.addKeyEventDispatcher(new KeyEventDispatcher() {
-            @Override
-            public boolean dispatchKeyEvent(KeyEvent e) {
-                if (e.paramString().charAt(4) == 'P') {
-                    sp.keyPressed(e);
-                }
-                return true;
-            }
-        });
+        sp.requestFocusInWindow();
         setContentPane(sp);
         setSize(getContentPane().getWidth(), getContentPane().getHeight());
         setLocationRelativeTo(null);
     }
 
     public void multiplayer() {
-        mp = new Multiplayer(c, this);
-        setContentPane(mp);
+        enemySelect = new EnemySelect();
+        setContentPane(enemySelect);
         setSize(getContentPane().getWidth(), getContentPane().getHeight());
         setLocationRelativeTo(null);
     }

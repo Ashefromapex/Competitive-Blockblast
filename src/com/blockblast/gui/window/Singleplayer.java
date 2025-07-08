@@ -5,17 +5,14 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.awt.Image;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import com.blockblast.controller.controller;
 
-public class Singleplayer extends JPanel implements KeyListener {
+public class Singleplayer extends JPanel implements MouseListener, MouseMotionListener{
     controller c;
     ControllerGUI cGUI;
     //instanzvariable erstellen
@@ -65,6 +62,9 @@ public class Singleplayer extends JPanel implements KeyListener {
         this.cGUI = cGUI;
         setVisible(true);
         setLayout(null);
+        setFocusable(true);
+        addMouseListener(this);
+        addMouseMotionListener(this);
         //Window erstellen
 
 
@@ -171,6 +171,15 @@ public class Singleplayer extends JPanel implements KeyListener {
         southBumper.setPreferredSize(new Dimension(blockBorder*4+blockPreviewSize*3, blockPreviewSize+southBumperHeight));
         southBumper.setBounds(0,50+boardSize,blockBorder*4+blockPreviewSize*3,blockPreviewSize+southBumperHeight);
 
+        block1.addMouseListener(this);
+        block1.addMouseMotionListener(this);
+        block2.addMouseListener(this);
+        block2.addMouseMotionListener(this);
+        block3.addMouseListener(this);
+        block3.addMouseMotionListener(this);
+        mainPanel.addMouseListener(this);
+        fakeBoard.addMouseListener(this);
+        fakeBoard.addMouseMotionListener(this);
 
 
         //Titel erstellen
@@ -306,13 +315,6 @@ public class Singleplayer extends JPanel implements KeyListener {
         }
     }
 
-
-    @Override
-    public void keyTyped(KeyEvent e)
-    {
-
-    }
-    @Override
     public void keyPressed(KeyEvent e)
     {
         switch (e.getKeyCode())
@@ -374,12 +376,6 @@ public class Singleplayer extends JPanel implements KeyListener {
 
 
         }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e)
-    {
-
     }
 
     public void visualizeBlock1( int[][] array) {
@@ -663,8 +659,98 @@ public class Singleplayer extends JPanel implements KeyListener {
         }
     }
 
+    int fakeBoardX = 0;
+    int fakeBoardY = 0;
 
+    @Override
+    public void mouseClicked(MouseEvent e)
+    {
+        System.out.println("mouseClicked");
+    }
 
+    @Override
+    public void mousePressed(MouseEvent e)
+    {
+        if(block1Chosen)
+        {
+            block1.setVisible(false);
+            chooseBlock1();
+            fakeBoard.setLocation(block1.getX()-100, block1.getY()-100);
+            fakeBoardX = fakeBoard.getX()-e.getX();
+            fakeBoardY = fakeBoard.getY()-e.getY();
+        }
+        if(block2Chosen)
+        {
+            block2.setVisible(false);
+            chooseBlock2();
+            fakeBoard.setLocation(block2.getX()-100, block2.getY()-100);
+            fakeBoardX = fakeBoard.getX()-e.getX();
+            fakeBoardY = fakeBoard.getY()-e.getY();
+        }
+        if(block3Chosen)
+        {
+            block3.setVisible(false);
+            chooseBlock3();
+            fakeBoard.setLocation(block3.getX()-100, block3.getY()-100);
+            fakeBoardX = fakeBoard.getX()-e.getX();
+            fakeBoardY = fakeBoard.getY()-e.getY();
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e)
+    {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e)
+    {
+        if(e.getSource() == block1)
+        {
+            block1Chosen = true;
+        }
+        if(e.getSource() == block2)
+        {
+            block2Chosen = true;
+        }
+        if(e.getSource() == block3)
+        {
+            block3Chosen = true;
+        }
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e)
+    {
+        if(e.getSource() == block1)
+        {
+            block1Chosen = false;
+        }
+        if(e.getSource() == block2)
+        {
+            block2Chosen = false;
+        }
+        if(e.getSource() == block3)
+        {
+            block3Chosen = false;
+        }
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e)
+    {
+
+        System.out.println(e.getPoint());
+        fakeBoard.setLocation(fakeBoardX+e.getX(), fakeBoardY+e.getY());
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e)
+    {
+
+    }
 }
 
 
