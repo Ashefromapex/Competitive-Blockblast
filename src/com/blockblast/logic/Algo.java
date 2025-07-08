@@ -56,38 +56,38 @@ public class Algo
 
     public int generateBlock()
     {
-        int probability  = rand.nextInt(70);
-        if (probability <= 10)
+        int probability  = rand.nextInt(90);
+        if (probability <= 5)
         {
             amount = 1;
             typ = 0;
         }
-        if (probability <= 20 && probability >10)
+        if (probability <= 15 && probability >5)
         {
             amount = 2;
             typ = 0;
         }
-        if (probability <= 30 && probability >20)
+        if (probability <= 30 && probability >15)
         {
             amount = 3;
             typ = rand.nextInt(2);
         }
-        if (probability <= 40 && probability >30)
+        if (probability <= 55 && probability >30)
         {
             amount = 4;
             typ = rand.nextInt(7);
         }
-        if(probability <= 50 && probability >40)
+        if(probability <= 65 && probability >55)
         {
             amount = 5;
             typ = rand.nextInt(2);
         }
-        if(probability <= 60 && probability >50)
+        if(probability <= 80 && probability >65)
         {
             amount = 6;
             typ = 0;
         }
-        if(probability >60)
+        if(probability >80)
         {
             amount = 9;
             typ = 0;
