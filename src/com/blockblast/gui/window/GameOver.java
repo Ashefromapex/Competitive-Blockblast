@@ -1,5 +1,7 @@
 package com.blockblast.gui.window;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+
 import com.blockblast.controller.controller;
 
 import java.awt.*;
@@ -12,6 +14,19 @@ public class GameOver extends JPanel {
     JButton menu;
     JLabel scoreLabel;
 
+    private static int Bildwidth = 500;
+    private static int Bildheight = 700;
+
+    private static int wME = 200;
+    private static int hME = 50;
+    private static int xME = Bildwidth*3/4 - wME/2;
+    private static int yME = 300;
+
+    private static int wRE = 200;
+    private static int hRE = 50;
+    private static int xRE = Bildwidth/4 - wRE/2;
+    private static int yRE = 300;
+
     public GameOver(controller c, int score) {
 
         this.c = c;
@@ -21,7 +36,7 @@ public class GameOver extends JPanel {
 //      setResizable(false); //Window bleibt genausogroß wie wir wollen
         setVisible(true);
         setLayout(null);
-        setSize(500,600);
+        setSize(Bildwidth, Bildheight);
         setBackground(Color.RED);
         setOpaque(true);
 
@@ -29,16 +44,17 @@ public class GameOver extends JPanel {
         JLabel gameOver = new JLabel("Game Over");
         gameOver.setFont(new Font("Tahoma", Font.BOLD, 30));
         gameOver.setForeground(Color.WHITE);
-        gameOver.setBounds(162, 100,300,50 );
-        gameOver.setVisible(true);
+        gameOver.setBounds(0, 100,Bildwidth,50 );
+        gameOver.setHorizontalTextPosition(JLabel.CENTER);
+        gameOver.setHorizontalAlignment(SwingConstants.CENTER);
 
 
         scoreLabel = new JLabel("Score: " + score);
-        scoreLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
+        scoreLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
         scoreLabel.setForeground(Color.BLACK);
-        scoreLabel.setBounds(162, 175,300,50 );
-        scoreLabel.setVisible(true);
-
+        scoreLabel.setBounds(0, 175,Bildwidth,50 );
+        scoreLabel.setHorizontalAlignment(JLabel.CENTER);
+        scoreLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 
 
 
@@ -47,7 +63,7 @@ public class GameOver extends JPanel {
         restart = new JButton("Restart");
         restart.setFont(new Font("Tahoma", Font.BOLD, 20));
         restart.setForeground(Color.BLACK);
-        restart.setBounds(50,300,175,50);
+        restart.setBounds(xRE,yRE,wRE,hRE);
         restart.setVisible(true);
         restart.addActionListener(new ActionListener() {
             @Override
@@ -71,7 +87,7 @@ public class GameOver extends JPanel {
         menu = new JButton("Menü");
         menu.setFont(new Font("Tahoma", Font.BOLD, 20));
         menu.setForeground(Color.BLACK);
-        menu.setBounds(250,300,175,50);
+        menu.setBounds(xME,yME,wME,hME);
         menu.setVisible(true);
         menu.addActionListener(new ActionListener() {
             @Override
