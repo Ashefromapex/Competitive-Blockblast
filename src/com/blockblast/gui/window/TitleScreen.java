@@ -7,10 +7,15 @@ import java.awt.*;
 import java.awt.event.*;
 import com.blockblast.controller.*;
 import java.awt.Font;
+import java.io.InputStream;
 
 public class TitleScreen extends JPanel{
 
  controller c;
+
+    Font bungee;
+
+
 
     private static int Bildwidth = 500;
     private static int Bildheight = 600;
@@ -27,8 +32,18 @@ public class TitleScreen extends JPanel{
 
   public TitleScreen(controller c){
 
-
-
+//      //das hat chat gpt gemacht
+//      try {
+//          InputStream is = getClass().getResourceAsStream("com/blockblast/assets/fonts/Bungee-fonts.zip");
+//          bungee = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(40f); // 40pt
+//          GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//          ge.registerFont(bungee);
+//      } catch (Exception e) {
+//          e.printStackTrace();
+//
+//          bungee = new Font("bungee", Font.PLAIN, 40); // Fallback
+//      }
+////bis hier
 
       this.c = c;
 
@@ -44,7 +59,7 @@ public class TitleScreen extends JPanel{
 //      firma.setBounds(10,500,300,50);
       //Titel
       JLabel titleLabel = new JLabel("Block Blast");
-      titleLabel.setFont(new Font("Bit Count Grid Double", Font.BOLD, 50));
+      titleLabel.setFont(new Font("bungee", Font.BOLD, 50));
       titleLabel.setForeground(Color.GREEN);
       titleLabel.setBounds(0,100,Bildwidth,60);
       titleLabel.setHorizontalAlignment(JLabel.CENTER);

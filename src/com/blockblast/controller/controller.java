@@ -1,6 +1,5 @@
 package com.blockblast.controller;
 
-import com.blockblast.blocks.Blockelement;
 import com.blockblast.gui.window.*;
 import com.blockblast.logic.Board;
 import com.blockblast.storage.Data;
@@ -65,6 +64,7 @@ public class controller
     public void GameOver()
     {
         cGUI.GameOver( b.getScore());
+
         d.pushScore(b.getScore());
         d.exit();
     }
