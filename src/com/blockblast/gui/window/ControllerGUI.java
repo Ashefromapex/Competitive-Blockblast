@@ -42,7 +42,9 @@ public class ControllerGUI extends JFrame
 
     public void multiplayer() {
         enemySelect = new EnemySelect();
-        setContentPane(enemySelect);
+        mp = new Multiplayer(c, this);
+        mp.requestFocusInWindow();
+        setContentPane(mp);
         setSize(getContentPane().getWidth(), getContentPane().getHeight());
         setLocationRelativeTo(null);
     }
