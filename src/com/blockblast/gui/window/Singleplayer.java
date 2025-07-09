@@ -50,6 +50,9 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     private boolean block1Placed = false;
     private boolean block2Placed = false;
     private boolean block3Placed = false;
+    private boolean block1Hover = false;
+    private boolean block2Hover = false;
+    private boolean block3Hover = false;
     static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
     JButton gameOverButton;
 
@@ -291,9 +294,9 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
 
     public void deselectBlock() //kein Block mehr ausgewählt
     {
-        for(int i = 0; i < 8; i++)
+        for(int i = 0; i < 5; i++)
         {
-            for(int j = 0; j < 8; j++)
+            for(int j = 0; j < 5; j++)
             {
                 fakeGrid [i][j].setIcon(empty);
             }
@@ -342,7 +345,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
                 System.out.println("Block3 chosen");
                 break;
             case 32:
-                placeBlock();
+                //placeBlock();
                 visualiseBlockAgain();
                 score.setText(String.valueOf(c.b.getScore()));
                 c.b.printArray(c.b.getBoard());
@@ -555,36 +558,29 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
         return true;
     }
 
-    public void placeBlock()
+    public void placeBlock(int x, int y)
     {
         boolean placeable = false;
         if (block1Chosen)
         {
-            int x = c.getRoot(1)[1] + deltax;//+ delta x
-            int y = c.getRoot(1)[0] + deltay; //+ delta y
+
             placeable = c.placeBlock(1,x,y);
-            System.out.println("Block1 placed");
 
         }
         if (block2Chosen)
         {
-            int x = c.getRoot(2)[1] + deltax;
-            int y = c.getRoot(2)[0] + deltay;
             placeable = c.placeBlock(2,x,y);
-            System.out.println("Block2 placed");
         }
         if(block3Chosen)
         {
-            int x = c.getRoot(3)[1] + deltax;
-            int y = c.getRoot(3)[0] + deltay;
+
             placeable = c.placeBlock(3,x,y);
-            System.out.println("Block3 placed");
         }
         if(placeable)
         {
-            for(int g = 0; g < 8; g++)
+            for(int g = 0; g < 5; g++)
             {
-                for(int h = 0; h < 8; h++)
+                for(int h = 0; h < 5; h++)
                 {
                     if(fakeGrid[g][h].getIcon() == scaleBlockHoverTextureIconBoard)
                     {
@@ -612,6 +608,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
                 block1Chosen = false;
                 block1Placed = true;
                 block1.setVisible(true);
+                System.out.println("Block1 placed (me)");
             }
             if(block2Chosen)
             {
@@ -625,6 +622,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
                 block2Chosen = false;
                 block2Placed = true;
                 block2.setVisible(true);
+                System.out.println("Block2 placed (me)");
             }
             if(block3Chosen)
             {
@@ -638,11 +636,16 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
                 block3Chosen = false;
                 block3Placed = true;
                 block3.setVisible(true);
+                System.out.println("Block3 placed (me)");
             }
             deltax = 0;
             deltay = 0;
+            visualiseBlockAgain();
         }
-
+        else
+        {
+            deselectBlock();
+        }
 
 
     }
@@ -662,13 +665,21 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
 
     public void snapBlock()
     {
-        int boardX = 52;
-        int boardY = 52;
+        int boardX = 0;
+        int boardY = 0;
         for(int g = 0; g < 5; g++)
         {
             for(int h = 0; h < 5; h++)
             {
-                System.out.println(grid[g][h].getLocation());
+                if(fakeGrid[g][h].getIcon() == scaleBlockHoverTextureIconBoard)
+                {
+                    boardX = ((fakeBoard.getX()+fakeGrid[g][h].getX()-fakeGrid[g][h].getX()%40+40)/40);
+                    boardY = ((fakeBoard.getY()+fakeGrid[g][h].getY()-fakeGrid[g][h].getY()%40-40)/40);
+                    System.out.println(fakeGrid[g][h].getX() + " " + fakeGrid[g][h].getY());
+                    System.out.println(boardX + " " + boardY);
+                    fakeGrid[g][h].setLocation(boardX*40, boardY*40);
+                    placeBlock(boardX,boardY);
+                }
             }
         }
     }
@@ -683,33 +694,36 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     @Override
     public void mouseClicked(MouseEvent e)
     {
-        snapBlock();
+
     }
 
     @Override
     public void mousePressed(MouseEvent e)
     {
-        if(block1Chosen)
+        if(block1Hover)
         {
+            block1Chosen = true;
             block1.setVisible(false);
             chooseBlock1();
-            fakeBoard.setLocation(block1.getX()-100, block1.getY()-100);
+            fakeBoard.setLocation(block1.getX()-25, block1.getY()-25);
             fakeBoardX = fakeBoard.getX()-e.getX();
             fakeBoardY = fakeBoard.getY()-e.getY();
         }
-        if(block2Chosen)
+        if(block2Hover)
         {
+            block2Chosen = true;
             block2.setVisible(false);
             chooseBlock2();
-            fakeBoard.setLocation(block2.getX()-100, block2.getY()-100);
+            fakeBoard.setLocation(block2.getX()-25, block2.getY()-25);
             fakeBoardX = fakeBoard.getX()-e.getX();
             fakeBoardY = fakeBoard.getY()-e.getY();
         }
-        if(block3Chosen)
+        if(block3Hover)
         {
+            block3Chosen = true;
             block3.setVisible(false);
             chooseBlock3();
-            fakeBoard.setLocation(block3.getX()-100, block3.getY()-100);
+            fakeBoard.setLocation(block3.getX()-25, block3.getY()-25);
             fakeBoardX = fakeBoard.getX()-e.getX();
             fakeBoardY = fakeBoard.getY()-e.getY();
         }
@@ -719,6 +733,11 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     public void mouseReleased(MouseEvent e)
     {
         snapBlock();
+        fakeBoardX = 0;
+        fakeBoardY = 0;
+        block1Chosen = false;
+        block2Chosen = false;
+        block3Chosen = false;
     }
 
     @Override
@@ -726,15 +745,15 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     {
         if(e.getSource() == block1)
         {
-            block1Chosen = true;
+            block1Hover = true;
         }
         if(e.getSource() == block2)
         {
-            block2Chosen = true;
+            block2Hover = true;
         }
         if(e.getSource() == block3)
         {
-            block3Chosen = true;
+            block3Hover = true;
         }
 
     }
@@ -744,15 +763,15 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     {
         if(e.getSource() == block1)
         {
-            block1Chosen = false;
+            block1Hover = false;
         }
         if(e.getSource() == block2)
         {
-            block2Chosen = false;
+            block2Hover = false;
         }
         if(e.getSource() == block3)
         {
-            block3Chosen = false;
+            block3Hover = false;
         }
     }
 
@@ -760,7 +779,6 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     public void mouseDragged(MouseEvent e)
     {
 
-        System.out.println(e.getPoint());
         fakeBoard.setLocation(fakeBoardX+e.getX(), fakeBoardY+e.getY());
     }
 
