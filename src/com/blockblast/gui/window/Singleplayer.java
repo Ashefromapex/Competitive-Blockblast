@@ -398,10 +398,6 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
                 {
                     blockPreview1[j][i].setIcon(scaleBlockTextureIconPreview);
                 }
-                else
-                {
-                    blockPreview1[j][i].setIcon(scaleHintergrundTextureIcon);
-                }
 
             }
         }
@@ -416,10 +412,6 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
                 if (array[j][i] == 1)
                 {
                     blockPreview2[j][i].setIcon(scaleBlockTextureIconPreview);
-                }
-                else
-                {
-                    blockPreview2[j][i].setIcon(scaleHintergrundTextureIcon);
                 }
 
             }
@@ -436,10 +428,6 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
                 if (array[j][i] == 1)
                 {
                     blockPreview3[j][i].setIcon(scaleBlockTextureIconPreview);
-                }
-                else
-                {
-                    blockPreview3[j][i].setIcon(scaleHintergrundTextureIcon);
                 }
 
             }
