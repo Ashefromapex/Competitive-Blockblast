@@ -12,14 +12,14 @@ public class TitleScreen extends JPanel{
  controller c;
 
     private static int Bildwidth = 500;
-    private static int Bildheight = 700;
+    private static int Bildheight = 600;
 
-    private static int wMP = 175;
+    private static int wMP = 160;
     private static int hMP = 50;
     private static int xMP = Bildwidth*3/4 - wMP/2;
     private static int yMP = 300;
 
-    private static int wSP = 175;
+    private static int wSP = 160;
     private static int hSP = 50;
     private static int xSP = Bildwidth/4 - wSP/2;
     private static int ySP = 300;
@@ -56,6 +56,7 @@ public class TitleScreen extends JPanel{
       sSP.setFont(new Font("Tahoma", Font.BOLD, 20));
       sSP.setForeground(Color.BLUE);
       sSP.setBounds(xSP,ySP,wSP,hSP);
+      sSP.setHorizontalAlignment(JButton.CENTER);
       sSP.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
@@ -70,6 +71,7 @@ public class TitleScreen extends JPanel{
       sMP.setFont(new Font("Tahoma", Font.BOLD, 20));
       sMP.setForeground(Color.BLUE);
       sMP.setBounds(xMP,yMP,wMP,hMP);
+      sMP.setHorizontalAlignment(SwingConstants.CENTER);
       sMP.addActionListener(new ActionListener() {
                                @Override
                                public void actionPerformed(ActionEvent e) {

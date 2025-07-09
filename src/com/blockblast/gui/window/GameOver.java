@@ -15,14 +15,14 @@ public class GameOver extends JPanel {
     JLabel scoreLabel;
 
     private static int Bildwidth = 500;
-    private static int Bildheight = 700;
+    private static int Bildheight = 600;
 
-    private static int wME = 200;
+    private static int wME = 175;
     private static int hME = 50;
     private static int xME = Bildwidth*3/4 - wME/2;
     private static int yME = 300;
 
-    private static int wRE = 200;
+    private static int wRE = 175;
     private static int hRE = 50;
     private static int xRE = Bildwidth/4 - wRE/2;
     private static int yRE = 300;
@@ -98,10 +98,17 @@ public class GameOver extends JPanel {
 
             }
         });
+
+        JLabel test = new JLabel("Test");
+        test.setFont(new Font("Tahoma", Font.BOLD, 20));
+        test.setForeground(Color.BLACK);
+        test.setBounds(0,0,300,300);
+
         add(gameOver);
         add(menu);
         add(restart);
         add(scoreLabel);
+        add(test);
     }
 
 
