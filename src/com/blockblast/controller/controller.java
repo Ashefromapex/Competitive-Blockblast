@@ -92,6 +92,10 @@ public class controller
     {
         d.loginUser(user);
     }
+    public String[] getScoreboard()
+    {
+        return d.getScoreboard();
+    }
     public int[][] getBm1()
     {
         return b.bm1;

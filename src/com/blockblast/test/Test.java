@@ -51,18 +51,12 @@ public class Test
     }
     private boolean testData()
     {
-        //logs in user luca
-        Data d = new Data();
-        d.loginUser("Luca");
-        d.pushScore(100);
-        d.pushScore(200);
-        d.pushScore(300);
-        //logs in user peter
-        d.loginUser("Peter");
-        d.pushScore(500);
-        d.pushScore(600);
-        d.pushScore(700);
-        d.exit();
+        Data data = new Data();
+        String[] tmp = data.getScoreboard();
+        for(String s : tmp)
+        {
+            System.out.println(s);
+        }
         return true;
     }
     private boolean testAlgo()
