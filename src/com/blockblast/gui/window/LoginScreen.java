@@ -9,7 +9,7 @@ public class LoginScreen extends JPanel implements KeyListener
     TextField usernameField;
     ControllerGUI c;
     String username = " ";
-    private static int BildWidth = 700;
+    private static int BildWidth = 400;
     private static int BildHeigth = 250;
 
     // width ist bei beiden unterschiedlich, heitgth wird über loginbar definiert
@@ -32,11 +32,11 @@ public class LoginScreen extends JPanel implements KeyListener
 
     public LoginScreen(ControllerGUI c)
     {
-        System.out.println(loginbarX);
-        System.out.println(loginButtonX);
-        System.out.println(loginbarX + usernameFieldWidth );
-        System.out.println(loginbarWidth);
-        System.out.println(loginbarWidth + loginbarX * 2 + " = " + BildWidth);
+//        System.out.println(loginbarX);
+//        System.out.println(loginButtonX);
+//        System.out.println(loginbarX + usernameFieldWidth );
+//        System.out.println(loginbarWidth);
+//        System.out.println(loginbarWidth + loginbarX * 2 + " = " + BildWidth);
 
 
         this.c=c;
@@ -48,7 +48,7 @@ public class LoginScreen extends JPanel implements KeyListener
         JLabel headline = new JLabel("Enter Username:");
         headline.setFont(new Font("Tahoma",Font.BOLD,40));
         headline.setBounds(0,50,BildWidth,50);
-        headline.setForeground(Color.GREEN);
+        headline.setForeground(new Color(0, 200, 0));
         headline.setHorizontalAlignment(JLabel.CENTER);
         headline.setHorizontalTextPosition(SwingConstants.CENTER);
 
@@ -64,7 +64,8 @@ public class LoginScreen extends JPanel implements KeyListener
 
         JButton loginButton = new JButton("Login");
         loginButton.setFont(new Font("Tahoma",Font.BOLD,20));
-        loginButton.setBackground(Color.CYAN);
+        loginButton.setBackground(new Color(0, 130, 200));
+        setForeground(new Color(0, 0, 0));
         loginButton.setBounds(loginButtonX,loginbarY,loginButtonWidth,loginbarHeight);
 //        loginButton.setFocusable(true);
 //        loginButton.requestFocusInWindow();

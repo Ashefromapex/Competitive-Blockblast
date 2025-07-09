@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import com.blockblast.controller.*;
+import java.awt.Font;
 
 public class TitleScreen extends JPanel{
 
@@ -14,12 +15,12 @@ public class TitleScreen extends JPanel{
     private static int Bildwidth = 500;
     private static int Bildheight = 600;
 
-    private static int wMP = 160;
+    private static int wMP = 175;
     private static int hMP = 50;
     private static int xMP = Bildwidth*3/4 - wMP/2;
     private static int yMP = 300;
 
-    private static int wSP = 160;
+    private static int wSP = 175;
     private static int hSP = 50;
     private static int xSP = Bildwidth/4 - wSP/2;
     private static int ySP = 300;
@@ -34,7 +35,7 @@ public class TitleScreen extends JPanel{
       setVisible(true);
       setLayout(null);
       setSize(Bildwidth,Bildheight);
-      setBackground(Color.BLACK);
+      setBackground(new Color(16, 25, 74));
 
 
 //      JLabel firma = new JLabel("such dir was tolles aus Production presents...");
@@ -42,8 +43,8 @@ public class TitleScreen extends JPanel{
 //      firma.setForeground(Color.GREEN);
 //      firma.setBounds(10,500,300,50);
       //Titel
-      JLabel titleLabel = new JLabel("BlockBlast");
-      titleLabel.setFont(new Font("Tahoma", Font.BOLD, 50));
+      JLabel titleLabel = new JLabel("Block Blast");
+      titleLabel.setFont(new Font("Bit Count Grid Double", Font.BOLD, 50));
       titleLabel.setForeground(Color.GREEN);
       titleLabel.setBounds(0,100,Bildwidth,60);
       titleLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -54,7 +55,8 @@ public class TitleScreen extends JPanel{
       //singleplayer
       JButton sSP = new JButton("Singleplayer");
       sSP.setFont(new Font("Tahoma", Font.BOLD, 20));
-      sSP.setForeground(Color.BLUE);
+      sSP.setForeground(Color.WHITE);
+      sSP.setBackground(new Color(221, 203, 6));
       sSP.setBounds(xSP,ySP,wSP,hSP);
       sSP.setHorizontalAlignment(JButton.CENTER);
       sSP.addActionListener(new ActionListener() {
@@ -69,8 +71,9 @@ public class TitleScreen extends JPanel{
       //multiplayer
       JButton sMP = new JButton("Multiplayer");
       sMP.setFont(new Font("Tahoma", Font.BOLD, 20));
-      sMP.setForeground(Color.BLUE);
-      sMP.setBounds(xMP,yMP,wMP,hMP);
+      sMP.setForeground(Color.WHITE);
+      sMP.setBackground(new Color(8, 106, 8));
+      sMP.setBounds(xMP - 15,yMP,wMP,hMP);
       sMP.setHorizontalAlignment(SwingConstants.CENTER);
       sMP.addActionListener(new ActionListener() {
                                @Override
@@ -84,7 +87,7 @@ public class TitleScreen extends JPanel{
 
       JButton logout = new JButton("Logout");
       logout.setFont(new Font("Tahoma", Font.BOLD, 20));
-      logout.setForeground(Color.BLUE);
+      logout.setForeground(Color.WHITE);
       logout.setBounds(200,600,175,50);
       logout.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent e) {
