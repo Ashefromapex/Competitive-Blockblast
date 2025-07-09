@@ -7,8 +7,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.Image;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.util.Random;
 
 import com.blockblast.controller.controller;
 
@@ -20,27 +19,28 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     int deltay;
     int mainPanelBorder;
     int boardSize;
+    int blockPreviewSize;
     JLabel label;
     JLabel [][] grid = new JLabel[8][8];
     JLabel [][] fakeGrid = new JLabel[5][5];
     JLabel [][] blockPreview1 = new JLabel[5][5];
     JLabel [][] blockPreview2 = new JLabel[5][5];
     JLabel [][] blockPreview3 = new JLabel[5][5];
+    boolean [][] exists = new boolean[8][8];
     JLabel score;
     JPanel mainPanel;
     JPanel fakeBoard;
     JPanel block1;
     JPanel block2;
     JPanel block3;
-    ImageIcon blockHoverTexture = new  ImageIcon(("src/com/blockblast/assets/block_provisorisch.png"));
+    ImageIcon scaledTexture1;
+    ImageIcon scaledTexture2;
+    ImageIcon scaledTexture3;
+    ImageIcon scaledPlaced1;
+    ImageIcon scaledPlaced2;
+    ImageIcon scaledPlaced3;
     ImageIcon hintergrundTexture = new ImageIcon(("src/com/blockblast/assets/hintergrund.png"));
-    ImageIcon blockTexture = new  ImageIcon(("src/com/blockblast/assets/block_placed.png"));
-    Image scaleBlockTextureImgPreview;
-    ImageIcon scaleBlockTextureIconPreview;
-    Image scaleBlockHoverTextureImgBoard;
     ImageIcon scaleBlockHoverTextureIconBoard;
-    Image scaleBlockPlacedTextureImgBoard;
-    ImageIcon scaleBlockPlacedTextureIconBoard;
     Image scaleHintergrundTextureImg;
     ImageIcon scaleHintergrundTextureIcon;
     ImageIcon empty = new  ImageIcon();
@@ -53,8 +53,12 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     private boolean block1Hover = false;
     private boolean block2Hover = false;
     private boolean block3Hover = false;
+    Color backgroundColor = new Color(83,155,255);
     static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
     JButton gameOverButton;
+    ImageIcon [] texturePlaced = new ImageIcon[8];
+    ImageIcon [] textureHover = new ImageIcon[8];
+
 
 
 
@@ -87,7 +91,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
         LineBorder mainPanelOutline = new LineBorder(Color.black);
         CompoundBorder mainPanelCompoundBorder = new CompoundBorder(Distance, mainPanelOutline); //Coole schwarze Outline
         mainPanel.setBorder(mainPanelCompoundBorder);
-        mainPanel.setBackground(Color.BLUE);
+        mainPanel.setBackground(backgroundColor);
         scaleHintergrundTextureImg = hintergrundTexture.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/8,Image.SCALE_DEFAULT);
         scaleHintergrundTextureIcon = new ImageIcon(scaleHintergrundTextureImg);
         for(int i = 0; i < 8; i++)
@@ -121,10 +125,10 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
 
 
         int blockBorder = 25; //Abstand vom Rand
-        int blockPreviewSize = 100; //Größe des BlockPreviews
+        blockPreviewSize = 100; //Größe des BlockPreviews
         block1 = new JPanel(); //1.Block
         block1.setLayout(new GridLayout(5,5));
-        block1.setBackground(Color.BLUE);
+        block1.setBackground(backgroundColor);
         block1.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block1.setBounds(blockBorder,50+boardSize,blockPreviewSize,blockPreviewSize);
         for(int h = 0; h < 5; h++)
@@ -139,7 +143,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
 
         block2 = new JPanel(); //2.Block
         block2.setLayout(new GridLayout(5,5));
-        block2.setBackground(Color.BLUE);
+        block2.setBackground(backgroundColor);
         block2.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block2.setBounds(blockBorder*2+blockPreviewSize,50+boardSize,blockPreviewSize,blockPreviewSize);
         for(int h = 0; h < 5; h++)
@@ -154,7 +158,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
 
         block3 = new JPanel(); //3.Block
         block3.setLayout(new GridLayout(5,5));
-        block3.setBackground(Color.BLUE);
+        block3.setBackground(backgroundColor);
         block3.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block3.setBounds(blockBorder*3+blockPreviewSize*2,50+boardSize,blockPreviewSize,blockPreviewSize);
         for(int h = 0; h < 5; h++)
@@ -171,7 +175,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
 
         JPanel southBumper = new JPanel(); //Bumper zu unterem Rand
         int southBumperHeight = blockBorder*2; //Abstand zu unterem Rand
-        southBumper.setBackground(Color.BLUE);
+        southBumper.setBackground(backgroundColor);
         southBumper.setPreferredSize(new Dimension(blockBorder*4+blockPreviewSize*3, blockPreviewSize+southBumperHeight));
         southBumper.setBounds(0,50+boardSize,blockBorder*4+blockPreviewSize*3,blockPreviewSize+southBumperHeight);
 
@@ -191,14 +195,8 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
         score.setHorizontalAlignment(SwingConstants.CENTER);
         score.setFont(new Font("Tahoma", Font.BOLD, 30));
         score.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
+        score.setBackground(backgroundColor);
         score.setBounds(0,0,boardSize,50); //Bestimmt Position und Größe des Titels
-
-        scaleBlockTextureImgPreview = blockHoverTexture.getImage().getScaledInstance(blockPreviewSize/5,blockPreviewSize/5,Image.SCALE_DEFAULT);
-        scaleBlockTextureIconPreview = new ImageIcon(scaleBlockTextureImgPreview);
-        scaleBlockHoverTextureImgBoard = blockHoverTexture.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/8,Image.SCALE_DEFAULT);
-        scaleBlockHoverTextureIconBoard = new ImageIcon(scaleBlockHoverTextureImgBoard);
-        scaleBlockPlacedTextureImgBoard = blockTexture.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/8,Image.SCALE_DEFAULT);
-        scaleBlockPlacedTextureIconBoard = new ImageIcon(scaleBlockPlacedTextureImgBoard);
 
 
         gameOverButton = new JButton();
@@ -212,12 +210,27 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
             }
         });
 
+        for(int i = 0; i < 8; i++)
+        {
+            for(int j = 0;j < 8;j++) //Code Monstrum zusammengefasst
+            {
+                exists[i][j] = false;
+            }
+        }
+
+
+        //this is where I would add my textures to my arrays... If I had any
+        texturePlaced[0] = new ImageIcon(("src/com/blockblast/assets/BRICK.png"));
+        texturePlaced[1] = new ImageIcon(("src/com/blockblast/assets/Mistery.png"));
+        texturePlaced[2] = new ImageIcon(("src/com/blockblast/assets/block_provisorisch.png"));
+        texturePlaced[3] = new ImageIcon(("src/com/blockblast/assets/block_placed.png"));
+        texturePlaced[4] = new ImageIcon(("src/com/blockblast/assets/hintergrund.png"));
+
 
         //Top label layout
         //Start und Stop Stuff
         //fügt alles hinzu, was zuerst hinzugefügt wird ist am weitesten oben
         setSize(new Dimension(boardSize+15,50+boardSize+mainPanelBorder+blockPreviewSize+southBumperHeight-15));
-        add(gameOverButton);
         add(score);
         add(fakeBoard);
         add(mainPanel);
@@ -238,21 +251,29 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
 
     }
 
-    public void showMessage(String msg)
+    public ImageIcon scaleTexturePreview(ImageIcon preview)
     {
-        label.setText(msg);
-
+        Image scaleBlockTextureImgPreview = preview.getImage().getScaledInstance(blockPreviewSize/5,blockPreviewSize/5,Image.SCALE_DEFAULT);
+        return new ImageIcon(scaleBlockTextureImgPreview);
     }
+
+    public ImageIcon scaleTexturePlaced(ImageIcon placed)
+    {
+        Image scaleBlockHoverTextureImgBoard = placed.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/8,Image.SCALE_DEFAULT);
+        return new ImageIcon(scaleBlockHoverTextureImgBoard);
+    }
+
 
     public void chooseBlock1()
     {
+        scaledPlaced1 = scaleTexturePlaced(scaledTexture1);
         for(int i = 0; i < 5; i++)
         {
             for(int j = 0; j < 5; j++)
             {
-                if(blockPreview1 [i][j].getIcon() == scaleBlockTextureIconPreview )
+                if(blockPreview1 [i][j].getIcon() == scaledTexture1 )
                 {
-                    fakeGrid[i][j].setIcon(scaleBlockHoverTextureIconBoard); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
+                    fakeGrid[i][j].setIcon(scaledPlaced1); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
                 }
             }
         }
@@ -262,13 +283,14 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
 
     public void chooseBlock2() //the same as chooseBlock1() but for Block2
     {
+        scaledPlaced2 = scaleTexturePlaced(scaledTexture2);
         for(int i = 0; i < 5; i++)
         {
             for(int j = 0; j < 5; j++)
             {
-                if(blockPreview2 [i][j].getIcon() == scaleBlockTextureIconPreview )
+                if(blockPreview2 [i][j].getIcon() == scaledTexture2 )
                 {
-                    fakeGrid[i][j].setIcon(scaleBlockHoverTextureIconBoard); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
+                    fakeGrid[i][j].setIcon(scaledPlaced2); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
                 }
             }
         }
@@ -278,13 +300,14 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
 
     public void chooseBlock3() //the same as chooseBlock1() but for Block3
     {
+        scaledPlaced3 = scaleTexturePlaced(scaledTexture3);
         for(int i = 0; i < 5; i++)
         {
             for(int j = 0; j < 5; j++)
             {
-                if(blockPreview3 [i][j].getIcon() == scaleBlockTextureIconPreview )
+                if(blockPreview3 [i][j].getIcon() == scaledTexture3 )
                 {
-                    fakeGrid[i][j].setIcon(scaleBlockHoverTextureIconBoard); //sets the image of every block in fakeGrid to the equivalent in blockPreview1
+                    fakeGrid[i][j].setIcon(scaledPlaced3); //sets the image of every block in fakeGrid to the equivalent in blockPreview1
                 }
             }
         }
@@ -319,10 +342,11 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
         }
     }
 
-
     public void visualizeBlock1( int[][] array) {
 
-
+        Random rand = new Random();
+        ImageIcon blockTexture1 = texturePlaced [rand.nextInt(5)];
+        scaledTexture1 = scaleTexturePreview(blockTexture1);
         // einfärbern des blockpreviews
         for (int j=0; j< 5; j++){
 
@@ -330,7 +354,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
 
                 if (array[j][i] == 1)
                 {
-                    blockPreview1[j][i].setIcon(scaleBlockTextureIconPreview);
+                    blockPreview1[j][i].setIcon(scaledTexture1);
                 }
 
             }
@@ -338,6 +362,9 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     }
     public void visualizeBlock2(int[][] array) {
 
+        Random rand = new Random();
+        ImageIcon blockTexture2 = texturePlaced [rand.nextInt(5)];
+        scaledTexture2 = scaleTexturePreview(blockTexture2);
         // einfärbern des blockpreviews
         for (int j=0; j< 5; j++){
 
@@ -345,7 +372,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
 
                 if (array[j][i] == 1)
                 {
-                    blockPreview2[j][i].setIcon(scaleBlockTextureIconPreview);
+                    blockPreview2[j][i].setIcon(scaledTexture2);
                 }
 
             }
@@ -353,7 +380,9 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     }
     public void visualizeBlock3( int[][] array) {
 
-
+        Random rand = new Random();
+        ImageIcon blockTexture3 = texturePlaced [rand.nextInt(5)];
+        scaledTexture3 = scaleTexturePreview(blockTexture3);
         // einfärbern des blockpreviews
         for (int j=0; j< 5; j++){
 
@@ -361,7 +390,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
 
                 if (array[j][i] == 1)
                 {
-                    blockPreview3[j][i].setIcon(scaleBlockTextureIconPreview);
+                    blockPreview3[j][i].setIcon(scaledTexture3);
                 }
 
             }
@@ -378,9 +407,29 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
             {
                 for(int h = 0; h < 8; h++)
                 {
-                    if(c.b.getBoard()[g][h] >= 1)
+                    switch(blocknr)
                     {
-                        grid[g][h].setIcon(scaleBlockPlacedTextureIconBoard);
+                        case 1:
+                            if(c.b.getBoard()[g][h] >= 1 && !exists[g][h])
+                            {
+                                grid[g][h].setIcon(scaledPlaced1);
+                                exists[g][h] = true;
+                            }
+                            break;
+                        case 2:
+                            if(c.b.getBoard()[g][h] >= 1 && !exists[g][h])
+                            {
+                                grid[g][h].setIcon(scaledPlaced2);
+                                exists[g][h] = true;
+                            }
+                            break;
+                        case 3:
+                            if(c.b.getBoard()[g][h] >= 1 && !exists[g][h])
+                            {
+                                grid[g][h].setIcon(scaledPlaced3);
+                                exists[g][h] = true;
+                            }
+                            break;
                     }
                     if(c.b.getBoard()[g][h] == 0)
                     {
@@ -407,7 +456,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
                 block1Chosen = false;
                 block1Placed = true;
                 block1.setVisible(true);
-                System.out.println("Block1 placed (me)");
+                System.out.println("Block1 placed");
             }
             if(block2Chosen)
             {
@@ -421,7 +470,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
                 block2Chosen = false;
                 block2Placed = true;
                 block2.setVisible(true);
-                System.out.println("Block2 placed (me)");
+                System.out.println("Block2 placed");
             }
             if(block3Chosen)
             {
@@ -435,7 +484,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
                 block3Chosen = false;
                 block3Placed = true;
                 block3.setVisible(true);
-                System.out.println("Block3 placed (me)");
+                System.out.println("Block3 placed");
             }
             deltax = 0;
             deltay = 0;
@@ -467,54 +516,47 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     {
         int boardX = 0;
         int boardY = 0;
-        boolean blockChosen = true;
         for(int g = 0; g < 5; g++)
         {
             for(int h = 0; h < 5; h++)
             {
-                if(fakeGrid[g][h].getIcon() == scaleBlockHoverTextureIconBoard)
+                if(block1Chosen)
                 {
-                    if(block1Chosen)
+                    if(fakeGrid[g][h].getIcon() == scaledPlaced1)
                     {
-                        if(blockChosen)
-                        {
-                            boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-36)/41) + (c.getRoot(1)[1]-h);
-                            boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(1)[0]-g);
-                            System.out.println("Placement: " + boardX + " " + boardY);
-                            System.out.println("Block origin: " + g + " " + h);
-                            System.out.println("Fake board: " + fakeBoard.getX() + " " + fakeBoard.getY());
-                            System.out.println("Fake grid: " + fakeGrid[g][h].getX() + " " + fakeGrid[g][h].getY());
-                            placeBlock(1, boardX, boardY);
-                            blockChosen = false;
-                        }
+                        boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-36)/41) + (c.getRoot(1)[1]-h);
+                        boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(1)[0]-g);
+                        System.out.println("Placement: " + boardX + " " + boardY);
+                        System.out.println("Block origin: " + g + " " + h);
+                        System.out.println("Fake board: " + fakeBoard.getX() + " " + fakeBoard.getY());
+                        System.out.println("Fake grid: " + fakeGrid[g][h].getX() + " " + fakeGrid[g][h].getY());
+                        placeBlock(1, boardX, boardY);
                     }
-                    if(block2Chosen)
+                }
+                if(block2Chosen)
+                {
+                    if(fakeGrid[g][h].getIcon() == scaledPlaced2)
                     {
-                        if(blockChosen)
-                        {
-                            boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-36)/41) + (c.getRoot(2)[1]-h);
-                            boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(2)[0]-g);
-                            System.out.println("Placement: " + boardX + " " + boardY);
-                            System.out.println("Block origin: " + g + " " + h);
-                            System.out.println("Fake board: " + fakeBoard.getX() + " " + fakeBoard.getY());
-                            System.out.println("Fake grid: " + fakeGrid[g][h].getX() + " " + fakeGrid[g][h].getY());
-                            placeBlock(2, boardX, boardY);
-                            blockChosen = false;
-                        }
+                        boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-36)/41) + (c.getRoot(2)[1]-h);
+                        boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(2)[0]-g);
+                        System.out.println("Placement: " + boardX + " " + boardY);
+                        System.out.println("Block origin: " + g + " " + h);
+                        System.out.println("Fake board: " + fakeBoard.getX() + " " + fakeBoard.getY());
+                        System.out.println("Fake grid: " + fakeGrid[g][h].getX() + " " + fakeGrid[g][h].getY());
+                        placeBlock(2, boardX, boardY);
                     }
-                    if(block3Chosen)
+                }
+                if(block3Chosen)
+                {
+                    if(fakeGrid[g][h].getIcon() == scaledPlaced3)
                     {
-                        if(blockChosen)
-                        {
-                            boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-36)/41) + (c.getRoot(3)[1]-h);
-                            boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(3)[0]-g);
-                            System.out.println("Placement: " + boardX + " " + boardY);
-                            System.out.println("Block origin: " + g + " " + h);
-                            System.out.println("Fake board: " + fakeBoard.getX() + " " + fakeBoard.getY());
-                            System.out.println("Fake grid: " + fakeGrid[g][h].getX() + " " + fakeGrid[g][h].getY());
-                            placeBlock(3, boardX, boardY);
-                            blockChosen = false;
-                        }
+                        boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-36)/41) + (c.getRoot(3)[1]-h);
+                        boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(3)[0]-g);
+                        System.out.println("Placement: " + boardX + " " + boardY);
+                        System.out.println("Block origin: " + g + " " + h);
+                        System.out.println("Fake board: " + fakeBoard.getX() + " " + fakeBoard.getY());
+                        System.out.println("Fake grid: " + fakeGrid[g][h].getX() + " " + fakeGrid[g][h].getY());
+                        placeBlock(3, boardX, boardY);
                     }
                 }
             }
