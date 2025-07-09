@@ -49,7 +49,7 @@ public class Board {
         return board;
     }
 
-    public void check_field(int[][] board)//score ?
+    public void check_field()//score ?
     {
         int komboTest = kombo;
         int[] fullrow = check_row();
@@ -57,6 +57,10 @@ public class Board {
         //clears full rows/columns
         reset_row(fullrow);
         reset_column(fullcollumn);
+        if(allClear())
+        {
+            score += 10000 * kombo;
+        }
         if (kombo == komboTest)
         {
             missedKombo++;
@@ -250,7 +254,7 @@ public class Board {
                 break;
         }
         blocksplaced[blocknr - 1] = true;
-        check_field(board); // cleared feld, fals reihe voll + combo + score
+        check_field(); // cleared feld, fals reihe voll + combo + score
 
         //checks if all three blocks were placed
         if(blocksplaced[0] && blocksplaced[1] && blocksplaced[2])
@@ -383,6 +387,19 @@ public class Board {
                 kombo++;
             }
         }
+    }
+    private boolean allClear()
+    {
+        int check = 0;
+        for(int y = 0; y < 8; y++)
+        {
+            for(int x = 0; x < 8; x++)
+            {
+                check = check + board[x][y];
+            }
+
+        }
+        return check == 0;
     }
 
 

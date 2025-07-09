@@ -18,12 +18,14 @@ public class Algo
     Random rand = new Random();
     int blockinfo;   //Liam: Amount = 0; Typ = 1; Rotation = 2;
     private final int seed;
+    private int difficulty;
 
     public Algo()
     {
         blockinfo = 0;
         seed = rand.nextInt(100000);
         rand.setSeed(seed);
+        difficulty = 5; // geht von 0 (ez) bis unendlich, aber alles ab 10 ist basically unmöglich
 
     }
 
@@ -54,44 +56,69 @@ public class Algo
         return b3;
     }
 
+    public void setDifficulty(int difficulty)
+    {
+        if(difficulty < 0)
+        {
+            //theoretisch geht auch kleiner null aber das wäre way too ez
+            return;
+        }
+        this.difficulty = difficulty;
+    }
+
     public int generateBlock()
     {
-        int probability  = rand.nextInt(90);
-        if (probability <= 5)
+        //difficulty setting
+        //2 is default
+        //for lower difficulter (= easier) small blocks (1-3) are more common
+        //fpr higher difficulty bigger blocks are more common
+        //Bernoulli can help i figured :)
+        double p = 0.5 + 0.02 * (double) (difficulty - 5); //difficulty ig
+        int sum = 0;
+        for(int i = 0; i < 14; i++)
         {
-            amount = 1;
-            typ = 0;
+            if(rand.nextDouble(1) < p)
+            {
+                sum++;
+            }
         }
-        if (probability <= 15 && probability >5)
-        {
-            amount = 2;
-            typ = 0;
-        }
-        if (probability <= 30 && probability >15)
-        {
-            amount = 3;
-            typ = rand.nextInt(2);
-        }
-        if (probability <= 55 && probability >30)
-        {
-            amount = 4;
-            typ = rand.nextInt(7);
-        }
-        if(probability <= 65 && probability >55)
-        {
-            amount = 5;
-            typ = rand.nextInt(2);
-        }
-        if(probability <= 80 && probability >65)
-        {
-            amount = 6;
-            typ = 0;
-        }
-        if(probability >80)
-        {
-            amount = 9;
-            typ = 0;
-        }
+        //an 4ter stelle ist block 1
+        //an 10ter ist block 9
+       switch (sum)
+       {
+           case 5:
+               amount = 2;
+               typ = 0;
+               break;
+           case 6:
+               amount = 3;
+               typ = rand.nextInt(2);
+               break;
+           case 7:
+               amount = 4;
+               typ = rand.nextInt(7);
+               break;
+           case 8:
+               amount = 5;
+               typ = rand.nextInt(2);
+               break;
+           case 9:
+               amount = 6;
+               typ = 0;
+               break;
+           default:
+               if(sum < 5)
+               {
+                   amount = 1;
+                   typ = 0;
+               }
+               else
+               {
+                   amount = 9;
+                   typ = 0;
+               }
+       }
+
         rotation = rand.nextInt(4)+1;
         blockinfo = amount * 100 + typ * 10 + rotation;
         System.out.println(blockinfo);
