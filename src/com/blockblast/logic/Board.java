@@ -592,6 +592,10 @@ public class Board {
     {
         return score;
     }
+    public int getDif()
+    {
+        return alg.difficulty;
+    }
 
 
 }

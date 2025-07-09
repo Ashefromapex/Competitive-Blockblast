@@ -119,5 +119,13 @@ public class controller
     {
 
     }
+    public int getSeed()
+    {
+        return b.getSeed();
+    }
+    public int getDif()
+    {
+        return b.getDif();
+    }
 
 }

@@ -18,7 +18,7 @@ public class Algo
     Random rand = new Random();
     int blockinfo;   //Liam: Amount = 0; Typ = 1; Rotation = 2;
     private final int seed;
-    private int difficulty;
+    public int difficulty;
 
     public Algo()
     {
