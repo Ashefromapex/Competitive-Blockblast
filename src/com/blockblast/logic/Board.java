@@ -338,6 +338,7 @@ public class Board {
                 }
                 else
                 {
+                    System.out.println("Error placing block '"+ blocknr + "' at '"+ x + "," + y + "' :" + "\n" + "checkplacement: " + checkPlacement(x, y, b1) );
                     return false;
                 }
                 break;
@@ -348,6 +349,7 @@ public class Board {
                 }
                 else
                 {
+                    System.out.println("Error placing block '"+ blocknr + "' at '"+ x + "," + y + "' :" + "\n" + "checkplacement: " + checkPlacement(x, y, b2) );
                     return false;
                 }
                 break;
@@ -358,6 +360,7 @@ public class Board {
                 }
                 else
                 {
+                    System.out.println("Error placing block '"+ blocknr + "' at '"+ x + "," + y + "' :" + "\n" + "checkplacement: " + checkPlacement(x, y, b3) );
                     return false;
                 }
                 break;
