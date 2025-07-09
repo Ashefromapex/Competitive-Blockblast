@@ -699,9 +699,31 @@ public class Multiplayer extends JPanel {
             deltax = 0;
             deltay = 0;
         }
+        else
+        {
+            resetBlock();
+        }
 
+    }
+    public void resetBlock()
+    {
+        //clear fake grid
+        for(int i = 0; i < 8; i++) {
+            for(int j = 0; j < 8; j++) {
+                fakeGrid[i][j].setIcon(empty);
+            }
+        }
 
-
+        deltax = 0;
+        deltay = 0;
+        //redraw blocks
+        if(block1Chosen) {
+            chooseBlock1();
+        } else if(block2Chosen) {
+            chooseBlock2();
+        } else if(block3Chosen) {
+            chooseBlock3();
+        }
     }
 
     public void visualiseBlockAgain()

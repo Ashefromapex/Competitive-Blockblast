@@ -59,7 +59,7 @@ public class LoginScreen extends JPanel
 
     public void keyPressed(KeyEvent e)
     {
-        if(e.getKeyCode()==10)
+        if(e.getKeyCode()== KeyEvent.VK_ENTER)
         {
             if(!usernameField.getText().isEmpty())
             {
@@ -68,4 +68,5 @@ public class LoginScreen extends JPanel
             }
         }
     }
+
 }
