@@ -114,5 +114,10 @@ public class controller
         return b.optimalPlacements[blocknr];
     }
 
+    //realeted to net:
+    public void attackUpdate(int atk)
+    {
+
+    }
 
 }
