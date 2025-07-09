@@ -70,6 +70,13 @@ public class CallThread extends Thread
                 throw new RuntimeException(e);
             }
             //block was placed
+            //checks for gameover
+            if(net.gameover)
+            {
+                call(craftMsg('l', net.score));
+                stopCaller();
+                interrupt();
+            }
             //get current attack and send it
             //adds attack built up by placing block to global attack level:
             net.pubattack += net.privattack;
@@ -89,12 +96,18 @@ public class CallThread extends Thread
                 stopCaller();
                 interrupt();
             }
+            else if(ans.equals("!"))
+            {
+                stopCaller();
+                interrupt();
+            }
             else
             {
                 System.out.println("Invalid response... clsoing");
                 stopCaller();
                 interrupt();
             }
+
 
         }
     }
@@ -105,6 +118,7 @@ public class CallThread extends Thread
             in.close();
             out.close();
             client.close();
+            server.close();
         }
         catch (IOException e)
         {
