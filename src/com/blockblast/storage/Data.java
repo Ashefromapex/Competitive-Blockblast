@@ -445,6 +445,28 @@ public class Data
         System.arraycopy(buffer, 0, out, 0, pos);
         return out;
     }
+    public void resetData()
+    {
+        //clears the SP and MP data :(
+        Path p = Paths.get(FILEPATH_DATA);
+        try
+        {
+            Files.writeString(p, "");
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+        p = Paths.get(FILEPATH_DATA);
+        try
+        {
+            Files.writeString(p, "");
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
 
 
     public void exit()

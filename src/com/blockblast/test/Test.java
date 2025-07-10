@@ -52,6 +52,7 @@ public class Test
     private boolean testData()
     {
         Data data = new Data();
+//      data.resetData();
         String[] tmp = data.getScoreboard();
         for(String s : tmp)
         {
