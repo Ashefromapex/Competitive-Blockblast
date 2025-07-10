@@ -18,12 +18,14 @@ public class Algo
     Random rand = new Random();
     int blockinfo;   //Liam: Amount = 0; Typ = 1; Rotation = 2;
     private final int seed;
+    public int difficulty;
 
     public Algo()
     {
         blockinfo = 0;
         seed = rand.nextInt(100000);
         rand.setSeed(seed);
+        difficulty = 5; // geht von 0 (ez) bis unendlich, aber alles ab 10 ist basically unmöglich
 
     }
 
@@ -54,44 +56,69 @@ public class Algo
         return b3;
     }
 
+    public void setDifficulty(int difficulty)
+    {
+        if(difficulty < 0)
+        {
+            //theoretisch geht auch kleiner null aber das wäre way too ez
+            return;
+        }
+        this.difficulty = difficulty;
+    }
+
     public int generateBlock()
     {
-        int probability  = rand.nextInt(70);
-        if (probability <= 10)
+        //difficulty setting
+        //2 is default
+        //for lower difficulter (= easier) small blocks (1-3) are more common
+        //fpr higher difficulty bigger blocks are more common
+        //Bernoulli can help i figured :)
+        double p = 0.5 + 0.02 * (double) (difficulty - 5); //difficulty ig
+        int sum = 0;
+        for(int i = 0; i < 14; i++)
         {
-            amount = 1;
-            typ = 0;
+            if(rand.nextDouble(1) < p)
+            {
+                sum++;
+            }
         }
-        if (probability <= 20 && probability >10)
-        {
-            amount = 2;
-            typ = 0;
-        }
-        if (probability <= 30 && probability >20)
-        {
-            amount = 3;
-            typ = rand.nextInt(2);
-        }
-        if (probability <= 40 && probability >30)
-        {
-            amount = 4;
-            typ = rand.nextInt(7);
-        }
-        if(probability <= 50 && probability >40)
-        {
-            amount = 5;
-            typ = rand.nextInt(2);
-        }
-        if(probability <= 60 && probability >50)
-        {
-            amount = 6;
-            typ = 0;
-        }
-        if(probability >60)
-        {
-            amount = 9;
-            typ = 0;
-        }
+        //an 4ter stelle ist block 1
+        //an 10ter ist block 9
+       switch (sum)
+       {
+           case 5:
+               amount = 2;
+               typ = 0;
+               break;
+           case 6:
+               amount = 3;
+               typ = rand.nextInt(2);
+               break;
+           case 7:
+               amount = 4;
+               typ = rand.nextInt(7);
+               break;
+           case 8:
+               amount = 5;
+               typ = rand.nextInt(2);
+               break;
+           case 9:
+               amount = 6;
+               typ = 0;
+               break;
+           default:
+               if(sum < 5)
+               {
+                   amount = 1;
+                   typ = 0;
+               }
+               else
+               {
+                   amount = 9;
+                   typ = 0;
+               }
+       }
+
         rotation = rand.nextInt(4)+1;
         blockinfo = amount * 100 + typ * 10 + rotation;
         System.out.println(blockinfo);
@@ -132,6 +159,21 @@ public class Algo
 //            }
 //        }
         return block.rotate(rotation);
+    }
+
+    public Blockelement modifyBlock(Blockelement b, int  lvl)
+    {
+        //loop based on lvl
+        int r = rand.nextInt(4); //rotation where block gets added
+        switch (r)
+        {
+            //adding block
+            case 0 :
+
+
+        }
+        //check that blockdiff from the root (2,2) doesnt exceed 3, if it does rerun
+        return b;
     }
 }
 

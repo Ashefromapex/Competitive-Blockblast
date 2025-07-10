@@ -49,12 +49,17 @@ public class Board {
         return board;
     }
 
-    public void check_field(int[][] board)//score ?
+    public void check_field()//score ?
     {
         int komboTest = kombo;
-        for (int i = 0; i < 8; i++) {
-            check_column(i);
-            check_row(i);
+        int[] fullrow = check_row();
+        int[] fullcollumn = check_column(); //checks where a row/column is full
+        //clears full rows/columns
+        reset_row(fullrow);
+        reset_column(fullcollumn);
+        if(allClear())
+        {
+            score += 10000 * kombo;
         }
         if (kombo == komboTest)
         {
@@ -113,123 +118,6 @@ public class Board {
         checkAll();
     }
 
-    /*public boolean checkPlacement(int blockx, int y, int x)
-    {
-
-         {
-
-            switch(blockx)
-            {
-                case 1:
-
-                    if (y >= 0 && x >= 0 && y < 8 && x < 8 && faki[y][x] < 2)
-                    {
-                        int placeable = 0;
-                        faki[y][x] = faki[y][x] + b1.checkPlacement(y, x);
-                        if (!b1.above.isEnd()) {
-                            if(!checkPlacement(blockx, y - 1, x))
-                            {
-                                System.out.println(placeable);
-                                placeable = 1;
-                            }
-                        }
-                        if (!b1.left.isEnd()) {
-                            if(!checkPlacement(blockx, y, x - 1))
-                            {
-                                System.out.println(placeable);
-                                placeable = 1;
-                            }
-                        }
-                        if (!b1.below.isEnd()) {
-                            if(!checkPlacement(blockx, y + 1, x))
-                            {
-                                System.out.println(placeable);
-                                placeable = 1;
-                            }
-                        }
-                        if (!b1.right.isEnd()) {
-                            if(!checkPlacement(blockx, y, x + 1))
-                            {
-                                System.out.println(placeable);
-                                placeable = 1;
-                            }
-                        }
-                        System.out.println(placeable);
-                        return placeable == 0;
-                    }
-                    return false;
-
-
-                case 2:
-                    if (y >= 0 && x >= 0 && y < 8 && x < 8 && faki[y][x] < 2)
-                    {
-                        int placeable = 0;
-                        faki[y][x] = faki[y][x] + b2.checkPlacement(y, x);
-                        if (!b2.above.isEnd()) {
-                            if (checkPlacement(blockx, y - 1, x)) {
-                                placeable = 1;
-                            }
-                        }
-                        if (!b2.left.isEnd()) {
-                            if (checkPlacement(blockx, y, x - 1)) {
-                                placeable = 1;
-                            }
-                        }
-                        if (!b2.below.isEnd()) {
-                            if (checkPlacement(blockx, y + 1, x)) {
-                                placeable = 1;
-                            }
-                        }
-                        if (!b2.right.isEnd()) {
-                            if (checkPlacement(blockx, y, x + 1)) {
-                                placeable = 1;
-                            }
-                        }
-                        return placeable == 0;
-
-                    }
-
-                    return false;
-
-                case 3:
-                    if (y >= 0 && x >= 0 && y < 8 && x < 8 && faki[y][x] < 2) {
-
-                        int placeable = 0;
-                        faki[y][x] = faki[y][x] + b3.checkPlacement(y, x);
-                        if (!b3.above.isEnd()) {
-                            if(checkPlacement(blockx, y - 1, x))
-                            {
-                                placeable = 1;
-                            }
-                        }
-                        if (!b3.left.isEnd()) {
-                            if(checkPlacement(blockx, y, x - 1))
-                            {
-                                placeable = 1;
-                            }
-                        }
-                        if (!b3.below.isEnd()) {
-                            if(checkPlacement(blockx, y + 1, x))
-                            {
-                                placeable = 1;
-                            }
-                        }
-                        if (!b3.right.isEnd()) {
-                            if(checkPlacement(blockx, y, x + 1))
-                            {
-                                placeable = 1;
-                            }
-                        }
-                        return placeable == 0;
-
-
-                    }
-                    return false;
-            }
-
-
-        return false;
-    }*/
 
     public boolean checkPlacement(int y, int x, Blockelement b)
     {
@@ -338,6 +226,7 @@ public class Board {
                 }
                 else
                 {
+                    System.out.println("Error placing block '"+ blocknr + "' at '"+ x + "," + y + "' :" + "\n" + "checkplacement: " + checkPlacement(x, y, b1) );
                     return false;
                 }
                 break;
@@ -348,6 +237,7 @@ public class Board {
                 }
                 else
                 {
+                    System.out.println("Error placing block '"+ blocknr + "' at '"+ x + "," + y + "' :" + "\n" + "checkplacement: " + checkPlacement(x, y, b2) );
                     return false;
                 }
                 break;
@@ -358,12 +248,13 @@ public class Board {
                 }
                 else
                 {
+                    System.out.println("Error placing block '"+ blocknr + "' at '"+ x + "," + y + "' :" + "\n" + "checkplacement: " + checkPlacement(x, y, b3) );
                     return false;
                 }
                 break;
         }
         blocksplaced[blocknr - 1] = true;
-        check_field(board); // cleared feld, fals reihe voll + combo + score
+        check_field(); // cleared feld, fals reihe voll + combo + score
 
         //checks if all three blocks were placed
         if(blocksplaced[0] && blocksplaced[1] && blocksplaced[2])
@@ -411,6 +302,7 @@ public class Board {
         {
             System.out.println("Game Over");
             gameOver = true;
+
         }
     }
 
@@ -429,48 +321,85 @@ public class Board {
         }
     }
 
-    public void check_column(int columnY)
+    public int[] check_column()
+    {
+        int[] full = new int[8];
+        for(int i = 0; i < 8; i++)
+        {
+            int check = 0;
+            for(int x = 0; x < 8;x++)//check if column Y is full
+            {
+                check = check + board[x][i];
+            }
+            if(check == 8)//check is only 8 if all einträge = 1 aka the column is full and needs to be cleared
+            {
+                full[i] = 1;
+            }
+        }
+        return full;
+
+    }
+
+    public int[] check_row()
+    {
+        int[] full = new int[8];
+        for(int i = 0; i < 8; i++)
+        {
+            int check = 0;
+            for(int y = 0; y < 8;y++)//check if row X is full
+            {
+                check = check + board[i][y];
+            }
+            if(check == 8)
+            {
+                full[i] = 1;
+            }
+        }
+        return full;
+    }
+
+    private void reset_column(int[] full)
+    {
+        for(int i = 0; i < 8; i++)
+        {
+            if(full[i] == 1)
+            {
+                for (int y = 0; y < 8; y++)
+                {
+                    board[y][i] = 0;
+                }
+                kombo++;
+            }
+        }
+
+    }
+
+    private void reset_row(int[] full)
+    {
+        for(int i = 0; i < 8; i++)
+        {
+            if (full[i] == 1)
+            {
+                for (int y = 0; y < 8; y++)
+                {
+                    board[i][y] = 0;
+                }
+                kombo++;
+            }
+        }
+    }
+    private boolean allClear()
     {
         int check = 0;
-        for(int x = 0; x < 8;x++)//check if column Y is full
+        for(int y = 0; y < 8; y++)
         {
-            check = check + board[x][columnY];
-        }
-        if(check == 8)//check is only 8 if all einträge = 1 aka the column is full and needs to be cleared
-        {
-            reset_column(columnY);//resets the column
-        }
-    }
+            for(int x = 0; x < 8; x++)
+            {
+                check = check + board[x][y];
+            }
 
-    public void check_row(int rowX)
-    {
-        int check = 0;
-        for(int y = 0; y < 8;y++)//check if row X is full
-        {
-            check = check + board[rowX][y];
         }
-        if(check == 8)
-        {
-            reset_row(rowX);
-        }
-    }
-
-    private void reset_column(int columnY)
-    {
-        for (int y = 0; y < 8; y++)
-        {
-            board[y][columnY] = 0;
-        }
-        kombo++;
-    }
-
-    private void reset_row(int rowX)
-    {
-        for (int y = 0; y < 8; y++)
-        {
-            board[rowX][y] = 0;
-        }
-        kombo++;
+        return check == 0;
     }
 
 
@@ -662,6 +591,10 @@ public class Board {
     public int getScore()
     {
         return score;
+    }
+    public int getDif()
+    {
+        return alg.difficulty;
     }
 
 

@@ -1,19 +1,16 @@
 package com.blockblast.controller;
 
-import com.blockblast.blocks.Blockelement;
-import com.blockblast.gui.window.ControllerGUI;
-import com.blockblast.gui.window.Singleplayer;
+import com.blockblast.gui.window.*;
 import com.blockblast.logic.Board;
-import com.blockblast.gui.window.TitleScreen;
-import com.blockblast.gui.window.GameOver;
 import com.blockblast.storage.Data;
 public class controller
 
 {
-    private ControllerGUI controllerGUI;
+    public ControllerGUI cGUI;
     private TitleScreen t; //Titlebildschirm
     private GameOver g;
-    private Singleplayer w;//GUI object
+    public Singleplayer sp;//GUI object
+    private Multiplayer mp;
     public Board b;//Logic object
     public int [][] testfield = new int [8][8];
     int blockcnt = 3;
@@ -27,17 +24,11 @@ public class controller
     //handles communication between the GUI and the logic
     public void start()
     {
-        controllerGUI = new ControllerGUI(this);
+        cGUI = new ControllerGUI(this);
         d = new Data();
     }
 
 
-    public void GameOver()
-    {
-        g =  new GameOver(this);
-        d.pushScore(b.getScore());
-        d.exit();
-    }
 
     public boolean checkSinglePlayer()// überprüft ob single oder multiplayer
     {
@@ -47,21 +38,39 @@ public class controller
     public void startSP()
     {
         //start single player
+
         b = new Board();
         b.getBlocks();
         b.createBlockmatrix();
+        cGUI.singleplayer();
         runningSP = true;
+
 
     }
 
     public void startMP()
     {
         //start multiplayer
+
         b = new Board();
         b.getBlocks();
         b.createBlockmatrix();
         int seed = b.getSeed();
+        cGUI.multiplayer();
         runningSP = false;
+    }
+
+
+    public void GameOver()
+    {
+        cGUI.GameOver( b.getScore());
+
+        d.pushScore(b.getScore());
+        d.exit();
+    }
+    public void menu()
+    {
+        cGUI.titleScreen();
     }
 
     public boolean placeBlock(int blocknr, int x, int y)
@@ -83,6 +92,10 @@ public class controller
     {
         d.loginUser(user);
     }
+    public String[] getScoreboard()
+    {
+        return d.getScoreboard();
+    }
     public int[][] getBm1()
     {
         return b.bm1;
@@ -101,5 +114,18 @@ public class controller
         return b.optimalPlacements[blocknr];
     }
 
+    //realeted to net:
+    public void attackUpdate(int atk)
+    {
+
+    }
+    public int getSeed()
+    {
+        return b.getSeed();
+    }
+    public int getDif()
+    {
+        return b.getDif();
+    }
 
 }

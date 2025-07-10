@@ -423,6 +423,52 @@ public class Data
             return false;
         }
     }
+    public String[] getScoreboard()
+    {
+        //read userdata for every user, and creates a new and beautiful string
+        int pos = 0;
+        String[] buffer = new String[100];
+        while(true)
+        {
+            String in = readFromFile(FILEPATH_DATA, pos + 1);
+            if(in.equals("ERROR") || in.isEmpty())
+            {
+                System.out.println("Error :(");
+                break;
+            }
+                String user = getDataAtPosition(in, 1);
+                String score = getDataAtPosition(in, 2);
+                buffer[pos] = user + ": " + score;
+                pos++;
+        }
+        String[] out = new String[pos];
+        System.arraycopy(buffer, 0, out, 0, pos);
+        return out;
+    }
+    public void resetData()
+    {
+        //clears the SP and MP data :(
+        Path p = Paths.get(FILEPATH_DATA);
+        try
+        {
+            Files.writeString(p, "");
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+        p = Paths.get(FILEPATH_DATA);
+        try
+        {
+            Files.writeString(p, "");
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     public void exit()
     {
         //called when program closes/user switches
@@ -450,4 +496,5 @@ public class Data
 
 
     }
+
 }
