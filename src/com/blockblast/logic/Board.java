@@ -596,6 +596,7 @@ public class Board {
     {
         return alg.difficulty;
     }
+    public int getKombo(){return kombo;}
 
 
 }

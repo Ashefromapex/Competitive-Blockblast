@@ -7,7 +7,6 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -25,7 +24,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     JLabel [][] blockPreview1 = new JLabel[5][5];
     JLabel [][] blockPreview2 = new JLabel[5][5];
     JLabel [][] blockPreview3 = new JLabel[5][5];
-    JLabel [] attackCount = new JLabel[8];
+    JLabel [] attackCount = new JLabel[16];
     boolean [][] exists = new boolean[8][8];
     JLabel score;
     JPanel mainPanel;
@@ -43,17 +42,13 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     ImageIcon scaledPlaced2;
     ImageIcon scaledPlaced3;
     JPanel attackPanel;
-    ImageIcon blockHoverTexture = new  ImageIcon(("src/com/blockblast/assets/block_provisorisch.png"));
+    ImageIcon scaleDefenseIcon;
+    ImageIcon scaleOffenseIcon;
     ImageIcon hintergrundTexture = new ImageIcon(("src/com/blockblast/assets/hintergrund.png"));
-    ImageIcon blockTexture = new  ImageIcon(("src/com/blockblast/assets/block_placed.png"));
-    Image scaleBlockTextureImgPreview;
-    ImageIcon scaleBlockTextureIconPreview;
-    Image scaleBlockHoverTextureImgBoard;
-    ImageIcon scaleBlockHoverTextureIconBoard;
-    Image scaleBlockPlacedTextureImgBoard;
-    ImageIcon scaleBlockPlacedTextureIconBoard;
     Image scaleHintergrundTextureImg;
     ImageIcon scaleHintergrundTextureIcon;
+    Image scaleAttackTextureImg;
+    ImageIcon scaleAttackTextureIcon;
     ImageIcon empty = new  ImageIcon();
     private boolean block1Chosen = false;
     private boolean block2Chosen = false;
@@ -130,6 +125,14 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
             }
         }
 
+        ImageIcon defense = new ImageIcon(("src/com/blockblast/assets/block_provisorisch.png"));
+        Image scaleDefenseImg = defense.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/16,Image.SCALE_DEFAULT);
+        scaleDefenseIcon = new ImageIcon(scaleDefenseImg);
+
+        ImageIcon offense = new ImageIcon(("src/com/blockblast/assets/block_placed.png"));
+        Image scaleOffenseImg = offense.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/16,Image.SCALE_DEFAULT);
+        scaleOffenseIcon = new ImageIcon(scaleOffenseImg);
+
         attackPanel = new JPanel();
         attackPanel.setLayout(new GridLayout(0,1));
         attackPanel.setBackground(Color.BLUE);
@@ -137,10 +140,12 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
         LineBorder attackOutline = new LineBorder(Color.BLACK);
         CompoundBorder attackCompoundBorder = new  CompoundBorder(attackDistance,attackOutline);
         attackPanel.setBorder(attackCompoundBorder);
-        for(int h = 0; h < 8; h++)
+        scaleAttackTextureImg = hintergrundTexture.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/16,Image.SCALE_DEFAULT);
+        scaleAttackTextureIcon = new ImageIcon(scaleAttackTextureImg);
+        for(int h = 0; h < 16; h++)
         {
             JLabel b = new JLabel();
-            b.setIcon(scaleHintergrundTextureIcon);
+            b.setIcon(scaleAttackTextureIcon);
             attackPanel.add(b);
             attackCount[h] = b;
         }
@@ -205,7 +210,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
 
 
         //Titel erstellen
-        score = new JLabel(String.valueOf(c.b.getScore()));
+        score = new JLabel(c.b.getScore() + "   Kombo: " + c.b.getKombo());
         score.setHorizontalAlignment(SwingConstants.CENTER);
         score.setFont(new Font("Tahoma", Font.BOLD, 30));
         score.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
@@ -234,7 +239,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
         texturePlaced[1] = new ImageIcon(("src/com/blockblast/assets/Mistery.png"));
         texturePlaced[2] = new ImageIcon(("src/com/blockblast/assets/block_provisorisch.png"));
         texturePlaced[3] = new ImageIcon(("src/com/blockblast/assets/block_placed.png"));
-        texturePlaced[4] = new ImageIcon(("src/com/blockblast/assets/hintergrund.png"));
+        //texturePlaced[4] = new ImageIcon(("src/com/blockblast/assets/hintergrund.png"));
 
         //Top label layout
         //Start und Stop Stuff
@@ -361,7 +366,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     public void visualizeBlock1( int[][] array) {
 
         Random rand = new Random();
-        ImageIcon blockTexture1 = texturePlaced [rand.nextInt(5)];
+        ImageIcon blockTexture1 = texturePlaced [rand.nextInt(4)];
         scaledTexture1 = scaleTexturePreview(blockTexture1);
         // einfärbern des blockpreviews
         for (int j=0; j< 5; j++){
@@ -379,7 +384,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     public void visualizeBlock2(int[][] array) {
 
         Random rand = new Random();
-        ImageIcon blockTexture2 = texturePlaced [rand.nextInt(5)];
+        ImageIcon blockTexture2 = texturePlaced [rand.nextInt(4)];
         scaledTexture2 = scaleTexturePreview(blockTexture2);
         // einfärbern des blockpreviews
         for (int j=0; j< 5; j++){
@@ -397,7 +402,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     public void visualizeBlock3( int[][] array) {
 
         Random rand = new Random();
-        ImageIcon blockTexture3 = texturePlaced [rand.nextInt(5)];
+        ImageIcon blockTexture3 = texturePlaced [rand.nextInt(4)];
         scaledTexture3 = scaleTexturePreview(blockTexture3);
         // einfärbern des blockpreviews
         for (int j=0; j< 5; j++){
@@ -581,6 +586,36 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
 
     }
 
+    public void attacks()
+    {
+        //this is where I would put my c.b.getAttacks() if I had one
+        int x = -8;
+        if(x < 0)
+        {
+            int y=x*-1+8;
+            for(int g = 8; g < 16; g++)
+            {
+                attackCount[g].setIcon(scaleAttackTextureIcon);
+            }
+            for(int g = 8; g < y; g++)
+            {
+                attackCount[g].setIcon(scaleDefenseIcon);
+            }
+        }
+        if(x > 0)
+        {
+            int y=7-x;
+            for(int g = 7; g < 0; g--)
+            {
+                attackCount[g].setIcon(scaleAttackTextureIcon);
+            }
+            for(int g = 7; g > y; g--)
+            {
+                attackCount[g].setIcon(scaleOffenseIcon);
+            }
+        }
+    }
+
     int fakeBoardX = 0;
     int fakeBoardY = 0;
 
@@ -626,7 +661,8 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     public void mouseReleased(MouseEvent e)
     {
         snapBlock();
-        score.setText(String.valueOf(c.b.getScore()));
+        attacks();
+        score.setText(c.b.getScore() + "   Kombo: " + c.b.getKombo());
         block1Chosen = false;
         block2Chosen = false;
         block3Chosen = false;

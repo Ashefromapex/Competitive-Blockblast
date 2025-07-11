@@ -185,13 +185,12 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
         block2.addMouseMotionListener(this);
         block3.addMouseListener(this);
         block3.addMouseMotionListener(this);
-        mainPanel.addMouseListener(this);
         fakeBoard.addMouseListener(this);
         fakeBoard.addMouseMotionListener(this);
 
 
         //Titel erstellen
-        score = new JLabel(String.valueOf(c.b.getScore()));
+        score = new JLabel(c.b.getScore() + "   Kombo: " + c.b.getKombo());
         score.setHorizontalAlignment(SwingConstants.CENTER);
         score.setFont(new Font("Tahoma", Font.BOLD, 30));
         score.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
@@ -224,7 +223,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
         texturePlaced[1] = new ImageIcon(("src/com/blockblast/assets/Mistery.png"));
         texturePlaced[2] = new ImageIcon(("src/com/blockblast/assets/block_provisorisch.png"));
         texturePlaced[3] = new ImageIcon(("src/com/blockblast/assets/block_placed.png"));
-        texturePlaced[4] = new ImageIcon(("src/com/blockblast/assets/hintergrund.png"));
+        //texturePlaced[4] = new ImageIcon(("src/com/blockblast/assets/hintergrund.png"));
 
 
         //Top label layout
@@ -345,7 +344,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     public void visualizeBlock1( int[][] array) {
 
         Random rand = new Random();
-        ImageIcon blockTexture1 = texturePlaced [rand.nextInt(5)];
+        ImageIcon blockTexture1 = texturePlaced [rand.nextInt(4)];
         scaledTexture1 = scaleTexturePreview(blockTexture1);
         // einfärbern des blockpreviews
         for (int j=0; j< 5; j++){
@@ -363,7 +362,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     public void visualizeBlock2(int[][] array) {
 
         Random rand = new Random();
-        ImageIcon blockTexture2 = texturePlaced [rand.nextInt(5)];
+        ImageIcon blockTexture2 = texturePlaced [rand.nextInt(4)];
         scaledTexture2 = scaleTexturePreview(blockTexture2);
         // einfärbern des blockpreviews
         for (int j=0; j< 5; j++){
@@ -381,7 +380,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     public void visualizeBlock3( int[][] array) {
 
         Random rand = new Random();
-        ImageIcon blockTexture3 = texturePlaced [rand.nextInt(5)];
+        ImageIcon blockTexture3 = texturePlaced [rand.nextInt(4)];
         scaledTexture3 = scaleTexturePreview(blockTexture3);
         // einfärbern des blockpreviews
         for (int j=0; j< 5; j++){
@@ -614,7 +613,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     public void mouseReleased(MouseEvent e)
     {
         snapBlock();
-        score.setText(String.valueOf(c.b.getScore()));
+        score.setText(c.b.getScore() + "   Kombo: " + c.b.getKombo());
         block1Chosen = false;
         block2Chosen = false;
         block3Chosen = false;
