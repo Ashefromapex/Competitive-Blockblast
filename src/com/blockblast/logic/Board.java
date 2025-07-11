@@ -2,7 +2,6 @@ package com.blockblast.logic;
 
 //import java.lang.reflect.Array;
 import com.blockblast.blocks.Blockelement;
-import com.blockblast.controller.controller;
 
 import java.util.Arrays;
 
@@ -27,6 +26,9 @@ public class Board {
     public boolean gameOver;
     int missedKombo;
     public boolean[] blocksplaced;
+    int tempAtkLvL;
+    boolean allClear;
+
     public Board() {
         System.out.println("Board created");
         board = new int[8][8];
@@ -85,6 +87,31 @@ public class Board {
             score += 100;
         }
         return score;
+    }
+
+    public int getDefenseLvL()
+    {
+        if(allClear)
+        {
+            allClear = false;
+            return 8;
+        }
+        else
+        {
+            return tempAtkLvL;
+        }
+    }
+
+    public int calcDiff(int inc)
+    {
+        if(allClear)
+        {
+            return 8 - inc;
+        }
+        else
+        {
+            return tempAtkLvL- inc;
+        }
     }
 
     public void getBlocks()
@@ -217,6 +244,10 @@ public class Board {
     // wird ausgeführt wenn der nutzer den block platzieren will
     public boolean placeBlock(int blocknr, int x, int y)
     {
+        if(!blocksplaced[0] && !blocksplaced[1] && !blocksplaced[2])
+        {
+            tempAtkLvL = 0;
+        }
         switch (blocknr)
         {
             case 1:
@@ -369,6 +400,7 @@ public class Board {
                     board[y][i] = 0;
                 }
                 kombo++;
+                tempAtkLvL++;
             }
         }
 
@@ -385,19 +417,21 @@ public class Board {
                     board[i][y] = 0;
                 }
                 kombo++;
+                tempAtkLvL++;
             }
         }
     }
-    private boolean allClear()
-    {
+    private boolean allClear() {
         int check = 0;
-        for(int y = 0; y < 8; y++)
-        {
-            for(int x = 0; x < 8; x++)
-            {
+        for (int y = 0; y < 8; y++) {
+            for (int x = 0; x < 8; x++) {
                 check = check + board[x][y];
             }
 
+        }
+        if (!allClear)
+        {
+            allClear = check == 0;
         }
         return check == 0;
     }
