@@ -434,6 +434,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
                     if(c.b.getBoard()[g][h] == 0)
                     {
                         grid[g][h].setIcon(scaleHintergrundTextureIcon);
+                        exists[g][h] = false;
                     }
                 }
             }
