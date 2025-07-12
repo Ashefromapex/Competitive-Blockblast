@@ -50,6 +50,7 @@ public class Board {
     public int[][] getBoard() {
         return board;
     }
+    public int[][] getFaki() { return faki; }
 
     public void check_field()//score ?
     {
@@ -208,10 +209,6 @@ public class Board {
         {
             for (int y = 0; y < 8; y++)
             {
-                copyBoardToFaki();
-
-
-
                 if(checkPlacement(x,y,b1))
                 {
                     allPossible[0][x][y] = true;
@@ -227,18 +224,6 @@ public class Board {
             }
         }
         return true;// nur damit fehlermedlung weg ist sonst ist des eigl nicht hier bzw ohne gedanken hier
-    }
-
-
-    public void copyBoardToFaki()
-    {
-        for (int x = 0; x < 8; x++)
-        {
-            for (int y = 0; y < 8; y++)
-            {
-                faki[x][y] = board[x][y];
-            }
-        }
     }
 
     // wird ausgeführt wenn der nutzer den block platzieren will
@@ -443,7 +428,6 @@ public class Board {
 
     public void printi()
     {
-        System.out.println("faki" +"\n"+ Arrays.deepToString(faki));
         System.out.println("board" +"\n"+ Arrays.deepToString(board));
         System.out.println("allPossible" +"\n"+ Arrays.deepToString(allPossible));
     }
@@ -619,6 +603,43 @@ public class Board {
                 System.out.print(arr[i][j] + "  ");
             }
             System.out.println();
+        }
+    }
+
+    public boolean hoverBlock(int blocknr, int y, int x)
+    {
+        switch (blocknr)
+        {
+            case 1:
+                if(checkPlacement(x, y, b1))
+                {
+                    setBlockinArray(b1, x, y, faki);
+                }
+                break;
+            case 2:
+                if(checkPlacement(x, y, b2))
+                {
+                    setBlockinArray(b2, x, y, faki);
+                }
+                break;
+            case 3:
+                if(checkPlacement(x, y, b3))
+                {
+                    setBlockinArray(b3, x, y, faki);
+                }
+                break;
+        }
+        return true;
+    }
+
+    public void clearFaki()
+    {
+        for(int i = 0; i < 8; i++)
+        {
+            for(int j = 0; j < 8; j++)
+            {
+                faki[i][j] = 0;
+            }
         }
     }
 

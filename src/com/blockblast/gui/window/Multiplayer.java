@@ -21,6 +21,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     JLabel label;
     JLabel [][] grid = new JLabel[8][8];
     JLabel [][] fakeGrid = new JLabel[8][8];
+    JLabel [][] hoverGrid = new JLabel[8][8];
     JLabel [][] blockPreview1 = new JLabel[5][5];
     JLabel [][] blockPreview2 = new JLabel[5][5];
     JLabel [][] blockPreview3 = new JLabel[5][5];
@@ -28,6 +29,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     boolean [][] exists = new boolean[8][8];
     JLabel score;
     JPanel mainPanel;
+    JPanel hoverBoard;
     int boardSize;
     int mainPanelBorder;
     JPanel fakeBoard;
@@ -61,6 +63,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     private boolean block3Hover = false;
     ImageIcon [] texturePlaced = new ImageIcon[8];
     ImageIcon [] textureHover = new ImageIcon[8];
+    Color backgroundColor = new Color(83,155,255);
     static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
 
 
@@ -93,7 +96,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
         LineBorder mainPanelOutline = new LineBorder(Color.black);
         CompoundBorder mainPanelCompoundBorder = new CompoundBorder(Distance, mainPanelOutline); //Coole schwarze Outline
         mainPanel.setBorder(mainPanelCompoundBorder);
-        mainPanel.setBackground(Color.BLUE);
+        mainPanel.setBackground(backgroundColor);
         scaleHintergrundTextureImg = hintergrundTexture.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/8,Image.SCALE_DEFAULT);
         scaleHintergrundTextureIcon = new ImageIcon(scaleHintergrundTextureImg);
         for(int i = 0; i < 8; i++)
@@ -104,6 +107,22 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
                 b.setIcon(scaleHintergrundTextureIcon);
                 mainPanel.add(b);
                 grid[i][j] = b;
+            }
+        }
+
+        hoverBoard = new JPanel();
+        GridLayout hoverBoardGridLayout = new GridLayout(0,8);
+        hoverBoard.setLayout(hoverBoardGridLayout);
+        hoverBoard.setOpaque(false);
+        hoverBoard.setBounds((boardSize-mainPanelBorder*2)/8+attackBorder*2 + mainPanelBorder+4,54+mainPanelBorder,boardSize-(mainPanelBorder+4)*2,boardSize-(mainPanelBorder+4)*2);
+        for(int i = 0; i < 8; i++)
+        {
+            for(int j = 0; j < 8; j++)
+            {
+                JLabel b = new JLabel();
+                b.setOpaque(false);
+                hoverBoard.add(b);
+                hoverGrid[i][j] = b;
             }
         }
 
@@ -135,7 +154,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
 
         attackPanel = new JPanel();
         attackPanel.setLayout(new GridLayout(0,1));
-        attackPanel.setBackground(Color.BLUE);
+        attackPanel.setBackground(backgroundColor);
         EmptyBorder attackDistance = new EmptyBorder(mainPanelBorder, attackBorder, mainPanelBorder, attackBorder);
         LineBorder attackOutline = new LineBorder(Color.BLACK);
         CompoundBorder attackCompoundBorder = new  CompoundBorder(attackDistance,attackOutline);
@@ -156,7 +175,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
         blockPreviewSize = 100; //Größe des BlockPreviews
         block1 = new JPanel(); //1.Block
         block1.setLayout(new GridLayout(5,5));
-        block1.setBackground(Color.BLUE);
+        block1.setBackground(backgroundColor);
         block1.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block1.setBounds((boardSize-mainPanelBorder*2)/8+attackBorder*2+blockBorder,50+boardSize,blockPreviewSize,blockPreviewSize);
         for(int h = 0; h < 5; h++)
@@ -171,7 +190,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
 
         block2 = new JPanel(); //2.Block
         block2.setLayout(new GridLayout(5,5));
-        block2.setBackground(Color.BLUE);
+        block2.setBackground(backgroundColor);
         block2.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block2.setBounds((boardSize-mainPanelBorder*2)/8+attackBorder*2+blockBorder*2+blockPreviewSize,50+boardSize,blockPreviewSize,blockPreviewSize);
         for(int h = 0; h < 5; h++)
@@ -186,7 +205,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
 
         block3 = new JPanel(); //3.Block
         block3.setLayout(new GridLayout(5,5));
-        block3.setBackground(Color.BLUE);
+        block3.setBackground(backgroundColor);
         block3.setPreferredSize(new Dimension(blockPreviewSize, blockPreviewSize));
         block3.setBounds((boardSize-mainPanelBorder*2)/8+attackBorder*2+blockBorder*3+blockPreviewSize*2,50+boardSize,blockPreviewSize,blockPreviewSize);
         for(int h = 0; h < 5; h++)
@@ -203,7 +222,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
 
         JPanel southBumper = new JPanel(); //Bumper zu unterem Rand
         int southBumperHeight = blockBorder*2; //Abstand zu unterem Rand
-        southBumper.setBackground(Color.BLUE);
+        southBumper.setBackground(backgroundColor);
         southBumper.setPreferredSize(new Dimension(blockBorder*4+blockPreviewSize*3, blockPreviewSize+southBumperHeight));
         southBumper.setBounds(0,50+boardSize,attackPanel.getWidth()+blockBorder*4+blockPreviewSize*3,blockPreviewSize+southBumperHeight);
 
@@ -247,6 +266,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
         setSize(new Dimension((boardSize-mainPanelBorder*2)/8+attackBorder*2+boardSize+15,50+boardSize+mainPanelBorder+blockPreviewSize+southBumperHeight-15));
         add(score);
         add(fakeBoard);
+        add(hoverBoard);
         add(mainPanel);
         add(block1);
         add(block2);
@@ -516,9 +536,46 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
         {
             deselectBlock();
         }
+    }
 
-
-
+    public void hoverBlock(int blocknr, int x, int y)
+    {
+        boolean placeable = false;
+        placeable = c.b.hoverBlock(blocknr, x, y);
+        if(placeable)
+        {
+            for(int g = 0; g < 8; g++)
+            {
+                for(int h = 0; h < 8; h++)
+                {
+                    switch(blocknr)
+                    {
+                        case 1:
+                            if(c.b.getFaki()[g][h] >= 1 && !exists[g][h])
+                            {
+                                hoverGrid[g][h].setIcon(scaledPlaced1);
+                            }
+                            break;
+                        case 2:
+                            if(c.b.getFaki()[g][h] >= 1 && !exists[g][h])
+                            {
+                                hoverGrid[g][h].setIcon(scaledPlaced2);
+                            }
+                            break;
+                        case 3:
+                            if(c.b.getFaki()[g][h] >= 1 && !exists[g][h])
+                            {
+                                hoverGrid[g][h].setIcon(scaledPlaced3);
+                            }
+                            break;
+                    }
+                    if(c.b.getFaki()[g][h] == 0)
+                    {
+                        hoverGrid[g][h].setIcon(empty);
+                    }
+                }
+            }
+        }
     }
 
     public void visualiseBlockAgain()
@@ -549,9 +606,6 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
                         boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-149)/41) + (c.getRoot(1)[1]-h);
                         boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(1)[0]-g);
                         System.out.println("Placement: " + boardX + " " + boardY);
-                        System.out.println("Block origin: " + g + " " + h);
-                        System.out.println("Fake board: " + fakeBoard.getX() + " " + fakeBoard.getY());
-                        System.out.println("Fake grid: " + fakeGrid[g][h].getX() + " " + fakeGrid[g][h].getY());
                         placeBlock(1, boardX, boardY);
                     }
                 }
@@ -562,9 +616,6 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
                         boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-149)/41) + (c.getRoot(2)[1]-h);
                         boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(2)[0]-g);
                         System.out.println("Placement: " + boardX + " " + boardY);
-                        System.out.println("Block origin: " + g + " " + h);
-                        System.out.println("Fake board: " + fakeBoard.getX() + " " + fakeBoard.getY());
-                        System.out.println("Fake grid: " + fakeGrid[g][h].getX() + " " + fakeGrid[g][h].getY());
                         placeBlock(2, boardX, boardY);
                     }
                 }
@@ -575,10 +626,48 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
                         boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-149)/41) + (c.getRoot(3)[1]-h);
                         boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(3)[0]-g);
                         System.out.println("Placement: " + boardX + " " + boardY);
-                        System.out.println("Block origin: " + g + " " + h);
-                        System.out.println("Fake board: " + fakeBoard.getX() + " " + fakeBoard.getY());
-                        System.out.println("Fake grid: " + fakeGrid[g][h].getX() + " " + fakeGrid[g][h].getY());
                         placeBlock(3, boardX, boardY);
+                    }
+                }
+            }
+        }
+
+    }
+
+    public void snapBlockHover()
+    {
+        c.b.clearFaki();
+        int boardX = 0;
+        int boardY = 0;
+        for(int g = 0; g < 5; g++)
+        {
+            for(int h = 0; h < 5; h++)
+            {
+                if(block1Chosen)
+                {
+                    if(fakeGrid[g][h].getIcon() == scaledPlaced1)
+                    {
+                        boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-149)/41) + (c.getRoot(1)[1]-h);
+                        boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(1)[0]-g);
+                        hoverBlock(1, boardX, boardY);
+                    }
+                }
+                if(block2Chosen)
+                {
+                    if(fakeGrid[g][h].getIcon() == scaledPlaced2)
+                    {
+                        boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-149)/41) + (c.getRoot(2)[1]-h);
+                        boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(2)[0]-g);
+                        hoverBlock(2, boardX, boardY);
+                    }
+                }
+                if(block3Chosen)
+                {
+                    if(fakeGrid[g][h].getIcon() == scaledPlaced3)
+                    {
+                        boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-149)/41) + (c.getRoot(3)[1]-h);
+                        boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(3)[0]-g);
+                        hoverBlock(3, boardX, boardY);
                     }
                 }
             }
@@ -660,12 +749,20 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     @Override
     public void mouseReleased(MouseEvent e)
     {
+        for(int g = 0; g < 8; g++)
+        {
+            for(int h = 0; h < 8; h++)
+            {
+                hoverGrid[g][h].setIcon(empty);
+            }
+        }
         snapBlock();
         attacks();
         score.setText(c.b.getScore() + "   Kombo: " + c.b.getKombo());
         block1Chosen = false;
         block2Chosen = false;
         block3Chosen = false;
+        fakeBoard.setLocation(0,0);
     }
 
     @Override
@@ -706,8 +803,8 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     @Override
     public void mouseDragged(MouseEvent e)
     {
-
         fakeBoard.setLocation(fakeBoardX+e.getX(), fakeBoardY+e.getY());
+        snapBlockHover();
     }
 
     @Override
