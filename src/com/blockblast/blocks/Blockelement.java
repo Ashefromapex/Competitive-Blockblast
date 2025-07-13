@@ -2,43 +2,40 @@ package com.blockblast.blocks;
 
 import com.blockblast.controller.controller;
 
-public class Blockelement extends Block
-{
+public class Blockelement extends Block {
     public Block left;
     public Block right;
     public Block above;
     public Block below;
-    public Blockelement()
-    {
-        left  = new BlockEnd();
+
+    public Blockelement() {
+        left = new BlockEnd();
         right = new BlockEnd();
         above = new BlockEnd();
         below = new BlockEnd();
     }
 
-    protected void insertl(Block b)
-    {
+    protected void insertl(Block b) {
         left = b;
     }
-    protected void insertr(Block b)
-    {
-       right = b;
+
+    protected void insertr(Block b) {
+        right = b;
     }
-    protected void inserta(Block b)
-    {
+
+    protected void inserta(Block b) {
         above = b;
     }
-    protected void insertb(Block b)
-    {
+
+    protected void insertb(Block b) {
         below = b;
     }
-    public Blockelement rotate(int r)
-    {
+
+    public Blockelement rotate(int r) {
         //recursion magic
         Block tmp;
 
-        switch (r)
-        {
+        switch (r) {
             case 1:
                 return this;
             case 2:
@@ -70,63 +67,48 @@ public class Blockelement extends Block
 
 
     }
-    public Blockelement buildBlock(int ammount, int type)
-    {
+
+    public Blockelement buildBlock(int ammount, int type) {
         Blockelement b = new Blockelement();
-        switch(ammount)
-        {
+        switch (ammount) {
             case 1:
-                if(type == 0)
-                {
+                if (type == 0) {
                     return b;
-                }
-                else
-                {
+                } else {
                     System.out.println("WRONG TYPE");
                     break;
                 }
             case 2:
-                if(type == 1)
-                {
+                if (type == 1) {
                     //tells the user/developer to fuck themselves
                     System.out.println("Fuck you");
-                }
-                else if(type == 0)
-                {
+                } else if (type == 0) {
                     b.insertr(new Blockelement());
                     return b;
-                }
-                else
-                {
+                } else {
                     System.out.println("WRONG TYPE ");
                     break;
                 }
 
             case 3:
-                if(type == 0)
-                {
+                if (type == 0) {
                     //line
                     Blockelement tmp = new Blockelement();
                     tmp.insertr(new Blockelement());
                     b.insertr(tmp);
                     return b;
-                }
-                else if(type == 1)
-                {
+                } else if (type == 1) {
                     //dorito thing
                     b.insertr(new Blockelement());
                     b.insertb(new Blockelement());
                     return b;
-                }
-                else
-                {
+                } else {
                     System.out.println("TYPE NOT SUPPORTED");
                     break;
                 }
 
             case 4:
-                switch (type)
-                {
+                switch (type) {
                     case 0:
                         //line
                         Blockelement tmp01 = new Blockelement();
@@ -183,8 +165,7 @@ public class Blockelement extends Block
                 }
 
             case 5:
-                if(type == 0)
-                {
+                if (type == 0) {
                     //liiiiine
                     Blockelement tmp1 = new Blockelement();
                     Blockelement tmp2 = new Blockelement();
@@ -194,9 +175,7 @@ public class Blockelement extends Block
                     tmp3.insertr(tmp2);
                     b.insertr(tmp3);
                     return b;
-                }
-                else if (type == 1)
-                {
+                } else if (type == 1) {
                     //weird L
                     Blockelement tmp1 = new Blockelement();
                     Blockelement tmp2 = new Blockelement();
@@ -206,16 +185,13 @@ public class Blockelement extends Block
                     tmp3.insertr(tmp2);
                     b.insertr(tmp3);
                     return b;
-                }
-                else
-                {
+                } else {
                     System.out.println("Wrong type");
                     break;
                 }
 
             case 6:
-                if(type == 0)
-                {
+                if (type == 0) {
                     //BLOCK
                     Blockelement tmp1 = new Blockelement();
                     Blockelement tmp2 = new Blockelement();
@@ -226,16 +202,13 @@ public class Blockelement extends Block
                     tmp3.insertr(tmp2);
                     b.insertb(tmp3);
                     return b;
-                }
-                else
-                {
+                } else {
                     System.out.println("WRONG TYPE");
                     break;
                 }
 
             case 9:
-                if(type == 0)
-                {
+                if (type == 0) {
                     //BLOOOOCK
                     Blockelement tmp1 = new Blockelement();
                     Blockelement tmp2 = new Blockelement();
@@ -255,9 +228,7 @@ public class Blockelement extends Block
                     b.insertr(tmp5);
                     b.insertb(tmp4);
                     return b;
-                }
-                else
-                {
+                } else {
                     System.out.println("WRONG TYPE");
                     break;
                 }
@@ -267,23 +238,59 @@ public class Blockelement extends Block
         }
         return b;
     }
-    public boolean isEnd()
-    {
+
+    public boolean isEnd() {
         return false;
     }
 
     //@Override
-    public int checkPlacement(int y, int x)
-    {
+    public int checkPlacement(int y, int x) {
         return 1;
     }
 
     public int placeBlock(int y, int x) {
-    return 1;
+        return 1;
     }
 
     //placeBlock() etc; oder so
 
+    public void changeBlock(int direc) {
+        switch (direc) {
+            case 0:
+
+                if (!above.isEnd()) {
+                    above.changeBlock();
+                } else {
+                    above = new Blockelement();
+                }
+                break;
 
 
+            case 1:
+                if (!left.isEnd()) {
+                    left.changeBlock();
+                } else {
+                    left = new Blockelement();
+                }
+                break;
+
+            case 2:
+                if (!right.isEnd()) {
+                    right.changeBlock();
+                } else {
+                    right = new Blockelement();
+                }
+                break;
+
+            case 3:
+                if (!below.isEnd()) {
+                    below.changeBlock();
+                } else {
+                    below = new Blockelement();
+                }
+        }
+
+    }
 }
+
+

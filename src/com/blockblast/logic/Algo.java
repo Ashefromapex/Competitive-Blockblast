@@ -34,6 +34,8 @@ public class Algo
         return seed;
     }
 
+    public int genRdmNbr(int begin, int end) { return rand.nextInt(begin, end);}
+
     public void genBlocks()
     {
         code1 = generateBlock();

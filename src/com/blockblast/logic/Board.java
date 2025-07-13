@@ -90,7 +90,7 @@ public class Board {
         return score;
     }
 
-    public int getDefenseLvL()
+    public int getAtkLvL()
     {
         if(allClear)
         {
@@ -112,6 +112,25 @@ public class Board {
         else
         {
             return tempAtkLvL- inc;
+        }
+    }
+
+
+    public void changeBlock(int block)
+    {
+        int rotation = alg.genRdmNbr(0,3);
+        switch(block)
+        {
+            case 0:
+                b1.changeBlock(rotation);
+                break;
+            case 1:
+                b2.changeBlock(rotation);
+                break;
+            case 2:
+                b3.changeBlock(rotation);
+                break;
+
         }
     }
 
