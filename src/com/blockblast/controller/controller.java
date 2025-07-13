@@ -40,6 +40,8 @@ public class controller
         //start single player
 
         b = new Board();
+        b.alg.setDifficulty(cGUI.titleScreen.getDifficulty());
+        System.out.println("Difficulty: " + cGUI.titleScreen.getDifficulty());
         b.getBlocks();
         b.createBlockmatrix();
         cGUI.singleplayer();
@@ -53,6 +55,8 @@ public class controller
         //start multiplayer
 
         b = new Board();
+        b.alg.setDifficulty(cGUI.titleScreen.getDifficulty());
+        System.out.println("Difficulty: " + cGUI.titleScreen.getDifficulty());
         b.getBlocks();
         b.createBlockmatrix();
         int seed = b.getSeed();

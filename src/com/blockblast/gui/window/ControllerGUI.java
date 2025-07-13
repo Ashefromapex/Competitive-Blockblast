@@ -13,7 +13,7 @@ public class ControllerGUI extends JFrame
     controller c;
     Singleplayer sp;
     Multiplayer mp;
-    TitleScreen titleScreen;
+    public TitleScreen titleScreen;
     LoginScreen loginScreen;
     GameOver gameOver;
     EnemySelect enemySelect;
