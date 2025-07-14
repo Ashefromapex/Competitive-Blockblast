@@ -12,8 +12,6 @@ public class controller
     public Singleplayer sp;//GUI object
     private Multiplayer mp;
     public Board b;//Logic object
-    public int [][] testfield = new int [8][8];
-    int blockcnt = 3;
     boolean runningSP;
     private Data d;
 
@@ -60,7 +58,7 @@ public class controller
         b.getBlocks();
         b.createBlockmatrix();
         int seed = b.getSeed();
-        cGUI.multiplayer();
+        cGUI.enemySelect();
         runningSP = false;
     }
 
