@@ -16,34 +16,31 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     controller c;
     ControllerGUI cGUI;
     //instanzvariable erstellen
-    int deltax;
-    int deltay;
-    JLabel label;
     JLabel [][] grid = new JLabel[8][8];
-    JLabel [][] fakeGrid = new JLabel[8][8];
+    JLabel [][] movementGrid = new JLabel[8][8];
     JLabel [][] hoverGrid = new JLabel[8][8];
     JLabel [][] blockPreview1 = new JLabel[5][5];
     JLabel [][] blockPreview2 = new JLabel[5][5];
     JLabel [][] blockPreview3 = new JLabel[5][5];
     JLabel [] attackCount = new JLabel[16];
-    boolean [][] exists = new boolean[8][8];
+    boolean [][] exists = new boolean[8][8]; //colouring stuff
     JLabel score;
-    JPanel mainPanel;
-    JPanel hoverBoard;
+    JPanel mainPanel; //displays the placed blocks
+    JPanel hoverBoard; //displaying the place where the block will snap to when not placed yet
     int boardSize;
     int mainPanelBorder;
-    JPanel fakeBoard;
-    JPanel block1;
+    JPanel movementBoard; //moving the block around in the air
+    JPanel block1; //used to show the three blocks at the bottom of the screen
     JPanel block2;
     JPanel block3;
     int blockPreviewSize;
-    ImageIcon scaledTexture1;
+    ImageIcon scaledTexture1; //Textures for the blocks in all states
     ImageIcon scaledTexture2;
     ImageIcon scaledTexture3;
     ImageIcon scaledPlaced1;
     ImageIcon scaledPlaced2;
     ImageIcon scaledPlaced3;
-    JPanel attackPanel;
+    JPanel attackPanel; //attack + defense visualization
     ImageIcon scaleDefenseIcon;
     ImageIcon scaleOffenseIcon;
     ImageIcon hintergrundTexture = new ImageIcon(("src/com/blockblast/assets/hintergrund.png"));
@@ -52,7 +49,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     Image scaleAttackTextureImg;
     ImageIcon scaleAttackTextureIcon;
     ImageIcon empty = new  ImageIcon();
-    private boolean block1Chosen = false;
+    private boolean block1Chosen = false; //placement variables
     private boolean block2Chosen = false;
     private boolean block3Chosen = false;
     private boolean block1Placed = false;
@@ -61,27 +58,26 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     private boolean block1Hover = false;
     private boolean block2Hover = false;
     private boolean block3Hover = false;
-    ImageIcon [] texturePlaced = new ImageIcon[8];
-    ImageIcon [] textureHover = new ImageIcon[8];
+    ImageIcon [] texturePlaced = new ImageIcon[8]; //list of all placed textures
+    ImageIcon [] textureHover = new ImageIcon[8]; //list of all hovering textures
     Color backgroundColor = new Color(83,155,255);
-    static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
 
 
 
 
-    public Multiplayer(controller c, ControllerGUI cGUI) {
-        deltax = 0;
-        deltay = 0;
+    public Multiplayer(controller c, ControllerGUI cGUI)
+    {
 
         this.c = c;
         this.cGUI = cGUI;
+        //Overall settings for the frame
         setVisible(true);
         setLayout(null);
         setFocusable(true);
         addMouseListener(this);
         addMouseMotionListener(this);
-        //Window erstellen
 
+        //up here for calculation purposes
         int attackBorder = 36;
 
         //MainPanel erstellen
@@ -110,6 +106,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
             }
         }
 
+        //hoverPanel creation, pretty much an invisible copy of the mainPanel on top of it
         hoverBoard = new JPanel();
         GridLayout hoverBoardGridLayout = new GridLayout(0,8);
         hoverBoard.setLayout(hoverBoardGridLayout);
@@ -126,24 +123,25 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
             }
         }
 
-        //Fake Board zum Blöcke hovern erstellen, sieht genauso aus wie das Main Board
-        fakeBoard = new JPanel();
+        //Panel to grab and move blocks around
+        movementBoard = new JPanel();
         GridLayout fakeBoardGridLayout = new GridLayout(0,5);
-        fakeBoard.setLayout(fakeBoardGridLayout);
-        fakeBoard.setBounds(0,50,(boardSize-mainPanelBorder*2)/8*5,(boardSize-mainPanelBorder*2)/8*5);
-        fakeBoard.setOpaque(false); //macht durchsichtig
-        fakeBoard.setBackground(new Color(0,0,0,0)); //macht durchsichtig
+        movementBoard.setLayout(fakeBoardGridLayout);
+        movementBoard.setBounds(0,50,(boardSize-mainPanelBorder*2)/8*5,(boardSize-mainPanelBorder*2)/8*5);
+        movementBoard.setOpaque(false); //macht durchsichtig
+        movementBoard.setBackground(new Color(0,0,0,0)); //macht durchsichtig
         for(int i = 0; i < 5; i++)
         {
             for(int j = 0;j < 5;j++) //Füllen mit Blöcken
             {
                 JLabel b = new JLabel();
                 b.setOpaque(false);//macht durchsichtig
-                fakeBoard.add(b);
-                fakeGrid[i][j] = b;
+                movementBoard.add(b);
+                movementGrid[i][j] = b;
             }
         }
 
+        //multiplayer only: scaling the images for attack and defense
         ImageIcon defense = new ImageIcon(("src/com/blockblast/assets/block_provisorisch.png"));
         Image scaleDefenseImg = defense.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/16,Image.SCALE_DEFAULT);
         scaleDefenseIcon = new ImageIcon(scaleDefenseImg);
@@ -152,6 +150,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
         Image scaleOffenseImg = offense.getImage().getScaledInstance((boardSize-mainPanelBorder*2)/8,(boardSize-mainPanelBorder*2)/16,Image.SCALE_DEFAULT);
         scaleOffenseIcon = new ImageIcon(scaleOffenseImg);
 
+        //multiplayer only: the bar on the side of the screen used to display incoming attacks and defenses
         attackPanel = new JPanel();
         attackPanel.setLayout(new GridLayout(0,1));
         attackPanel.setBackground(backgroundColor);
@@ -170,7 +169,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
         }
         attackPanel.setBounds(0,50,(boardSize-mainPanelBorder*2)/8+attackBorder*2,(boardSize-mainPanelBorder*2)+mainPanelBorder*2);
 
-
+        //configuring the panels to display the blocks at the bottom of the screen
         int blockBorder = 25; //Abstand vom Rand
         blockPreviewSize = 100; //Größe des BlockPreviews
         block1 = new JPanel(); //1.Block
@@ -219,7 +218,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
         }
 
 
-
+        //leaving space between the bottom of the window and the blocks
         JPanel southBumper = new JPanel(); //Bumper zu unterem Rand
         int southBumperHeight = blockBorder*2; //Abstand zu unterem Rand
         southBumper.setBackground(backgroundColor);
@@ -235,6 +234,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
         score.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
         score.setBounds(0,0,boardSize,50); //Bestimmt Position und Größe des Titels
 
+        //adding mouseListeners for drag & drop where necessary
         block1.addMouseListener(this);
         block1.addMouseMotionListener(this);
         block2.addMouseListener(this);
@@ -242,9 +242,10 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
         block3.addMouseListener(this);
         block3.addMouseMotionListener(this);
         mainPanel.addMouseListener(this);
-        fakeBoard.addMouseListener(this);
-        fakeBoard.addMouseMotionListener(this);
+        movementBoard.addMouseListener(this);
+        movementBoard.addMouseMotionListener(this);
 
+        //different colours stuff
         for(int i = 0; i < 8; i++)
         {
             for(int j = 0;j < 8;j++) //Code Monstrum zusammengefasst
@@ -253,19 +254,17 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
             }
         }
 
-
+        //adding all the textures to both arrays
         texturePlaced[0] = new ImageIcon(("src/com/blockblast/assets/BRICK.png"));
         texturePlaced[1] = new ImageIcon(("src/com/blockblast/assets/Mistery.png"));
         texturePlaced[2] = new ImageIcon(("src/com/blockblast/assets/block_provisorisch.png"));
         texturePlaced[3] = new ImageIcon(("src/com/blockblast/assets/block_placed.png"));
         //texturePlaced[4] = new ImageIcon(("src/com/blockblast/assets/hintergrund.png"));
 
-        //Top label layout
-        //Start und Stop Stuff
         //fügt alles hinzu, was zuerst hinzugefügt wird ist am weitesten oben
         setSize(new Dimension((boardSize-mainPanelBorder*2)/8+attackBorder*2+boardSize+15,50+boardSize+mainPanelBorder+blockPreviewSize+southBumperHeight-15));
         add(score);
-        add(fakeBoard);
+        add(movementBoard);
         add(hoverBoard);
         add(mainPanel);
         add(block1);
@@ -277,21 +276,13 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
         int[][] testblock1 = c.getBm1();
         int[][] testblock2 = c.getBm2();
         int[][] testblock3 = c.getBm3();
+        //displays the blocks
         visualizeBlock1(testblock1);
         visualizeBlock2(testblock2);
         visualizeBlock3(testblock3);
-
-
-        //gibt ideale Größe an und centert den Frame
-
     }
 
-    public void showMessage(String msg)
-    {
-        label.setText(msg);
-
-    }
-
+    //scaling the textures for all occasions
     public ImageIcon scaleTexturePreview(ImageIcon preview)
     {
         Image scaleBlockTextureImgPreview = preview.getImage().getScaledInstance(blockPreviewSize/5,blockPreviewSize/5,Image.SCALE_DEFAULT);
@@ -304,7 +295,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
         return new ImageIcon(scaleBlockHoverTextureImgBoard);
     }
 
-
+    //copying the block out of the preview into the movement board
     public void chooseBlock1()
     {
         scaledPlaced1 = scaleTexturePlaced(scaledTexture1);
@@ -314,7 +305,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
             {
                 if(blockPreview1 [i][j].getIcon() == scaledTexture1 )
                 {
-                    fakeGrid[i][j].setIcon(scaledPlaced1); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
+                    movementGrid[i][j].setIcon(scaledPlaced1); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
                 }
             }
         }
@@ -331,7 +322,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
             {
                 if(blockPreview2 [i][j].getIcon() == scaledTexture2 )
                 {
-                    fakeGrid[i][j].setIcon(scaledPlaced2); //sets the text of every block in fakeGrid to the equivalent in blockPreview1
+                    movementGrid[i][j].setIcon(scaledPlaced2); //sets the text of every block in fakeGrid to the equivalent in blockPreview2
                 }
             }
         }
@@ -348,7 +339,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
             {
                 if(blockPreview3 [i][j].getIcon() == scaledTexture3 )
                 {
-                    fakeGrid[i][j].setIcon(scaledPlaced3); //sets the image of every block in fakeGrid to the equivalent in blockPreview1
+                    movementGrid[i][j].setIcon(scaledPlaced3); //sets the image of every block in fakeGrid to the equivalent in blockPreview3
                 }
             }
         }
@@ -362,7 +353,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
         {
             for(int j = 0; j < 5; j++)
             {
-                fakeGrid [i][j].setIcon(empty);
+                movementGrid[i][j].setIcon(empty);
             }
         }
 
@@ -393,9 +384,9 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
 
             for (int i=0; i<5; i++){
 
-                if (array[j][i] == 1)
+                if (array[j][i] == 1) //blockmatrix created in board
                 {
-                    blockPreview1[j][i].setIcon(scaledTexture1);
+                    blockPreview1[j][i].setIcon(scaledTexture1); //copies the blockmatrix into the blockPreview
                 }
 
             }
@@ -438,10 +429,11 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
         }
     }
 
+    //placing the block
     public void placeBlock(int blocknr, int x, int y)
     {
         boolean placeable = false;
-        placeable = c.placeBlock(blocknr,x,y);
+        placeable = c.placeBlock(blocknr,x,y); //checking if it is possible to place the block at the given location
         if(placeable)
         {
             for(int g = 0; g < 8; g++)
@@ -453,8 +445,8 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
                         case 1:
                             if(c.b.getBoard()[g][h] >= 1 && !exists[g][h])
                             {
-                                grid[g][h].setIcon(scaledPlaced1);
-                                exists[g][h] = true;
+                                grid[g][h].setIcon(scaledPlaced1); //copying the array from board into the GUI
+                                exists[g][h] = true; //this prevents the block from being recoloured
                             }
                             break;
                         case 2:
@@ -472,18 +464,18 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
                             }
                             break;
                     }
-                    if(c.b.getBoard()[g][h] == 0)
+                    if(c.b.getBoard()[g][h] == 0) //needed for cleared rows + columns
                     {
                         grid[g][h].setIcon(scaleHintergrundTextureIcon);
                         exists[g][h] = false;
                     }
                 }
             }
-            for(int g = 0; g < 5; g++)
+            for(int g = 0; g < 5; g++) //resetting the movementGrid and placed blocks
             {
                 for(int h = 0; h < 5; h++)
                 {
-                    fakeGrid[g][h].setIcon(empty);
+                    movementGrid[g][h].setIcon(empty);
                 }
             }
             if(block1Chosen)
@@ -528,16 +520,15 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
                 block3.setVisible(true);
                 System.out.println("Block3 placed");
             }
-            deltax = 0;
-            deltay = 0;
             visualiseBlockAgain();
         }
-        else
+        else //if block isnt placeable we go back to the original state
         {
             deselectBlock();
         }
     }
 
+    //same as placeBlock() but for hovering so the hoverGrid is used instead of the main grid
     public void hoverBlock(int blocknr, int x, int y)
     {
         boolean placeable = false;
@@ -578,6 +569,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
         }
     }
 
+    //called after every block placed and used to create 3 new blocks after all of them have been used
     public void visualiseBlockAgain()
     {
         if (block1Placed && block2Placed && block3Placed )
@@ -591,8 +583,10 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
         }
     }
 
+    //correctly placing the block after dropping it in a random location
     public void snapBlock()
     {
+        //the coordinates given out at the end
         int boardX = 0;
         int boardY = 0;
         for(int g = 0; g < 5; g++)
@@ -601,30 +595,30 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
             {
                 if(block1Chosen)
                 {
-                    if(fakeGrid[g][h].getIcon() == scaledPlaced1)
+                    if(movementGrid[g][h].getIcon() == scaledPlaced1)
                     {
-                        boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-149)/41) + (c.getRoot(1)[1]-h);
-                        boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(1)[0]-g);
+                        boardX = Math.round((float) (movementBoard.getX() + movementGrid[g][h].getX()-149)/41) + (c.getRoot(1)[1]-h);
+                        boardY = Math.round((float) (movementBoard.getY() + movementGrid[g][h].getY()-86)/41) + (c.getRoot(1)[0]-g);
                         System.out.println("Placement: " + boardX + " " + boardY);
                         placeBlock(1, boardX, boardY);
                     }
                 }
                 if(block2Chosen)
                 {
-                    if(fakeGrid[g][h].getIcon() == scaledPlaced2)
+                    if(movementGrid[g][h].getIcon() == scaledPlaced2)
                     {
-                        boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-149)/41) + (c.getRoot(2)[1]-h);
-                        boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(2)[0]-g);
+                        boardX = Math.round((float) (movementBoard.getX() + movementGrid[g][h].getX()-149)/41) + (c.getRoot(2)[1]-h);
+                        boardY = Math.round((float) (movementBoard.getY() + movementGrid[g][h].getY()-86)/41) + (c.getRoot(2)[0]-g);
                         System.out.println("Placement: " + boardX + " " + boardY);
                         placeBlock(2, boardX, boardY);
                     }
                 }
                 if(block3Chosen)
                 {
-                    if(fakeGrid[g][h].getIcon() == scaledPlaced3)
+                    if(movementGrid[g][h].getIcon() == scaledPlaced3)
                     {
-                        boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-149)/41) + (c.getRoot(3)[1]-h);
-                        boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(3)[0]-g);
+                        boardX = Math.round((float) (movementBoard.getX() + movementGrid[g][h].getX()-149)/41) + (c.getRoot(3)[1]-h);
+                        boardY = Math.round((float) (movementBoard.getY() + movementGrid[g][h].getY()-86)/41) + (c.getRoot(3)[0]-g);
                         System.out.println("Placement: " + boardX + " " + boardY);
                         placeBlock(3, boardX, boardY);
                     }
@@ -634,6 +628,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
 
     }
 
+    //same as snapBlock() but for hovering
     public void snapBlockHover()
     {
         c.b.clearFaki();
@@ -645,28 +640,28 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
             {
                 if(block1Chosen)
                 {
-                    if(fakeGrid[g][h].getIcon() == scaledPlaced1)
+                    if(movementGrid[g][h].getIcon() == scaledPlaced1)
                     {
-                        boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-149)/41) + (c.getRoot(1)[1]-h);
-                        boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(1)[0]-g);
+                        boardX = Math.round((float) (movementBoard.getX() + movementGrid[g][h].getX()-149)/41) + (c.getRoot(1)[1]-h);
+                        boardY = Math.round((float) (movementBoard.getY() + movementGrid[g][h].getY()-86)/41) + (c.getRoot(1)[0]-g);
                         hoverBlock(1, boardX, boardY);
                     }
                 }
                 if(block2Chosen)
                 {
-                    if(fakeGrid[g][h].getIcon() == scaledPlaced2)
+                    if(movementGrid[g][h].getIcon() == scaledPlaced2)
                     {
-                        boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-149)/41) + (c.getRoot(2)[1]-h);
-                        boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(2)[0]-g);
+                        boardX = Math.round((float) (movementBoard.getX() + movementGrid[g][h].getX()-149)/41) + (c.getRoot(2)[1]-h);
+                        boardY = Math.round((float) (movementBoard.getY() + movementGrid[g][h].getY()-86)/41) + (c.getRoot(2)[0]-g);
                         hoverBlock(2, boardX, boardY);
                     }
                 }
                 if(block3Chosen)
                 {
-                    if(fakeGrid[g][h].getIcon() == scaledPlaced3)
+                    if(movementGrid[g][h].getIcon() == scaledPlaced3)
                     {
-                        boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-149)/41) + (c.getRoot(3)[1]-h);
-                        boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(3)[0]-g);
+                        boardX = Math.round((float) (movementBoard.getX() + movementGrid[g][h].getX()-149)/41) + (c.getRoot(3)[1]-h);
+                        boardY = Math.round((float) (movementBoard.getY() + movementGrid[g][h].getY()-86)/41) + (c.getRoot(3)[0]-g);
                         hoverBlock(3, boardX, boardY);
                     }
                 }
@@ -675,6 +670,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
 
     }
 
+    //multiplayer only: visualizing the incoming attacks
     public void attacks()
     {
         //this is where I would put my c.b.getAttacks() if I had one
@@ -705,8 +701,9 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
         }
     }
 
-    int fakeBoardX = 0;
-    int fakeBoardY = 0;
+    //moving the movementGrid
+    int movementBoardX = 0;
+    int movementBoardY = 0;
 
     @Override
     public void mouseClicked(MouseEvent e)
@@ -715,39 +712,39 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     }
 
     @Override
-    public void mousePressed(MouseEvent e)
+    public void mousePressed(MouseEvent e) //choosing the block and positioning the movementGrid accordingly
     {
         if(block1Hover)
         {
             block1Chosen = true;
             block1.setVisible(false);
             chooseBlock1();
-            fakeBoard.setLocation(block1.getX()-50, block1.getY()-50);
-            fakeBoardX = fakeBoard.getX()-e.getX();
-            fakeBoardY = fakeBoard.getY()-e.getY();
+            movementBoard.setLocation(block1.getX()-50, block1.getY()-50); //offset because movementGrid is bigger than blockPreview
+            movementBoardX = movementBoard.getX()-e.getX();
+            movementBoardY = movementBoard.getY()-e.getY();
         }
         if(block2Hover)
         {
             block2Chosen = true;
             block2.setVisible(false);
             chooseBlock2();
-            fakeBoard.setLocation(block2.getX()-50, block2.getY()-50);
-            fakeBoardX = fakeBoard.getX()-e.getX();
-            fakeBoardY = fakeBoard.getY()-e.getY();
+            movementBoard.setLocation(block2.getX()-50, block2.getY()-50);
+            movementBoardX = movementBoard.getX()-e.getX();
+            movementBoardY = movementBoard.getY()-e.getY();
         }
         if(block3Hover)
         {
             block3Chosen = true;
             block3.setVisible(false);
             chooseBlock3();
-            fakeBoard.setLocation(block3.getX()-50, block3.getY()-50);
-            fakeBoardX = fakeBoard.getX()-e.getX();
-            fakeBoardY = fakeBoard.getY()-e.getY();
+            movementBoard.setLocation(block3.getX()-50, block3.getY()-50);
+            movementBoardX = movementBoard.getX()-e.getX();
+            movementBoardY = movementBoard.getY()-e.getY();
         }
     }
 
     @Override
-    public void mouseReleased(MouseEvent e)
+    public void mouseReleased(MouseEvent e) // placing the block
     {
         for(int g = 0; g < 8; g++)
         {
@@ -762,7 +759,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
         block1Chosen = false;
         block2Chosen = false;
         block3Chosen = false;
-        fakeBoard.setLocation(0,0);
+        movementBoard.setLocation(0,0); // allows spam-clicking on a singular block as much as you want
     }
 
     @Override
@@ -803,7 +800,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     @Override
     public void mouseDragged(MouseEvent e)
     {
-        fakeBoard.setLocation(fakeBoardX+e.getX(), fakeBoardY+e.getY());
+        movementBoard.setLocation(movementBoardX +e.getX(), movementBoardY +e.getY());
         snapBlockHover();
     }
 
