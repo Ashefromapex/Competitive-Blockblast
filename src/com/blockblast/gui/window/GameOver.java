@@ -40,6 +40,7 @@ public class GameOver extends JPanel {
         setBackground(Color.RED);
         setOpaque(true);
 
+// fügt gameover screen hinzu
 
         JLabel gameOver = new JLabel("Game Over");
         gameOver.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -48,7 +49,7 @@ public class GameOver extends JPanel {
         gameOver.setHorizontalTextPosition(JLabel.CENTER);
         gameOver.setHorizontalAlignment(SwingConstants.CENTER);
 
-
+//fügt den score vom spieker hinzu
         scoreLabel = new JLabel("Your Score: " + score);
         scoreLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
         scoreLabel.setForeground(Color.BLACK);
@@ -118,7 +119,6 @@ public class GameOver extends JPanel {
         add(menu);
         add(restart);
         add(scoreLabel);
-        add(test);
         add(scoreboard);
     }
 
