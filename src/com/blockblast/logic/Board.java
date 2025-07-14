@@ -165,7 +165,7 @@ public class Board {
         checkAll();
     }
 
-
+    //credits to Mau for this one he made the original and we improved it together just on my account
     public boolean checkPlacement(int y, int x, Blockelement b)
     {
         if(y>= 0 && y < 8 && x >= 0 && x < 8 && board[y][x] == 0)

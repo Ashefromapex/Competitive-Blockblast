@@ -7,6 +7,10 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+/*
+the class used for creating the frame and switching between the scenes, the methods are named after the scene that is being switched to
+ */
+
 public class ControllerGUI extends JFrame
 {
     //Instanzvariable
@@ -22,7 +26,6 @@ public class ControllerGUI extends JFrame
     public ControllerGUI(controller c) {
         setVisible(true);
         this.c = c;
-        enemySelect = new EnemySelect();
         loginScreen = new LoginScreen(this);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false); //Window bleibt genausogroß wie wir wollen
@@ -68,7 +71,7 @@ public class ControllerGUI extends JFrame
 
     public void enemySelect()
     {
-        enemySelect = new EnemySelect();
+        enemySelect = new EnemySelect(this);
         setContentPane(enemySelect);
         setSize(getContentPane().getWidth(), getContentPane().getHeight());
         setLocationRelativeTo(null);
