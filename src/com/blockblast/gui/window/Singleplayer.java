@@ -255,6 +255,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
         add(block1);
         add(block2);
         add(block3);
+        add(gameOverButton);
         add(southBumper);
         //imports the blocks
         int[][] testblock1 = c.getBm1();
