@@ -11,6 +11,10 @@ import java.util.Random;
 
 import com.blockblast.controller.controller;
 
+/*
+    for explanations look at the class "Multiplayer" I am not doing these twice
+ */
+
 public class Singleplayer extends JPanel implements MouseListener, MouseMotionListener{
     controller c;
     ControllerGUI cGUI;
