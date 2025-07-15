@@ -64,6 +64,15 @@ public class controller
         runningSP = false;
     }
 
+    public void startResponderGame(int seed, int difficulty)
+    {
+        b.specificAlg(seed, difficulty);
+    }
+    public void saveEnemyScore(int score)
+    {
+
+    }
+
 
     public void GameOver()
     {
