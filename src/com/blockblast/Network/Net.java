@@ -24,10 +24,14 @@ public class Net
         privattack = 0;
     }
 
-    public String getIp() {
-        try {
+    public String getIp()
+    {
+        try
+        {
             return InetAddress.getLocalHost().getHostAddress();
-        } catch (UnknownHostException e) {
+        }
+        catch (UnknownHostException e)
+        {
             throw new RuntimeException(e);
         }
 
@@ -43,7 +47,7 @@ public class Net
     {
         //falls alle drei blöcke platziert wurden, muss thread warten, auf andere
         //muss vom controller nach Platzieren eines blockes aufgerufen werden mit der beim Platzieren entstandenden attacke auch 0
-        privattack = -1* atk;
+        privattack = atk;
         notify();
     }
 
@@ -63,21 +67,12 @@ public class Net
     {
         //saves score of enemy
         //calls controller or something idfk
+        c.saveEnemyScore(escore);
 
-    }
-    public void saveSeed(int seed)
-    {
-        //saves seed to controller
-    }
-    public void saveDifficulty(int diff)
-    {
-        //saves difficulty
     }
     public boolean startBoard()
     {
-        //starts board of the responder (client)
-        //now that seed and difficulty is set start a board class with the parameters
-        //probably need to happen over controller
+        c.startResponderGame(seed, difficulty);
         return true;
     }
 

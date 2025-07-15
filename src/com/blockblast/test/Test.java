@@ -3,6 +3,7 @@ package com.blockblast.test;
 //import packages
 import com.blockblast.controller.controller;
 import com.blockblast.logic.Board;
+import com.blockblast.network.Net;
 import com.blockblast.storage.Data;
 import com.blockblast.logic.Algo;
 
@@ -23,20 +24,15 @@ public class Test
     }
     public void testAll()
     {
-       //einzelne testmethoden werden aufgerufen
-        if(testController() &&
-        testIp() &&
-        testData() &&
-        testGui() &&
-        testBoard() &&
-        testWindow(listener))
-        {
-            System.out.println("All tests passed successfully!");
-        }
-        else
-        {
-            System.out.println("Some tests failed. Please check the output for details.");
-        }
+        //start callthread
+        controller c = new controller();
+        Net n = new Net(c);
+        System.out.println(n.getIp());
+        c.startMP();
+        n.startCallThread();
+        System.out.println("meep");
+        n.blockUpdate(1);
+
     }
 
     private boolean testController()

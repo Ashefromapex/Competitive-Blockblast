@@ -17,7 +17,7 @@ public class Algo
     private int rotation;
     Random rand = new Random();
     int blockinfo;   //Liam: Amount = 0; Typ = 1; Rotation = 2;
-    private final int seed;
+    private int seed;
     public int difficulty;
 
     public Algo()
@@ -34,6 +34,16 @@ public class Algo
         return seed;
     }
 
+    public void setSeed(int seed)
+    {
+        this.seed = seed;
+        rand.setSeed(seed);
+    }
+    public void setDiff(int difficulty)
+    {
+        this.difficulty = difficulty;
+    }
+  
     public int genRdmNbr(int begin, int end) { return rand.nextInt(begin, end);}
 
     public void genBlocks()

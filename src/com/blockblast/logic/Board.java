@@ -672,6 +672,12 @@ public class Board {
     }
     public int getKombo(){return kombo;}
 
+    public void specificAlg(int seed, int difficulty)
+    {
+        alg.setSeed(seed);
+        alg.setDifficulty(difficulty);
+    }
+
 
 }
 
