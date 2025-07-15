@@ -138,6 +138,18 @@ public class Board {
         }
     }
 
+    public void changer(int lvl)
+    {
+        int rdm;
+        for(int i = 0; i < lvl; i++)
+        {
+            rdm = alg.genRdmNbr(0,2);
+            changeBlock(rdm);
+        }
+
+    }
+
+
     public void getBlocks()
     {
       alg.genBlocks();

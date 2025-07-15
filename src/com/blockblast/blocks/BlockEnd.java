@@ -38,5 +38,5 @@ public class BlockEnd extends Block {
     public int checkPlacement(int test, int x, int i) {return 0;}
 
 
-    public void changeBlock(){}
+    public void changeBlock(int x){}
 }

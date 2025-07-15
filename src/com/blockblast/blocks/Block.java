@@ -22,6 +22,6 @@ public abstract class Block
       return 99;
     }
 
-    public void changeBlock() {}
+    public void changeBlock(int x) {}
 
 }

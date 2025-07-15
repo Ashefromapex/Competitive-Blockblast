@@ -259,7 +259,7 @@ public class Blockelement extends Block {
             case 0:
 
                 if (!above.isEnd()) {
-                    above.changeBlock();
+                    above.changeBlock(direc);
                 } else {
                     above = new Blockelement();
                 }
@@ -268,7 +268,7 @@ public class Blockelement extends Block {
 
             case 1:
                 if (!left.isEnd()) {
-                    left.changeBlock();
+                    left.changeBlock(direc);
                 } else {
                     left = new Blockelement();
                 }
@@ -276,7 +276,7 @@ public class Blockelement extends Block {
 
             case 2:
                 if (!right.isEnd()) {
-                    right.changeBlock();
+                    right.changeBlock(direc);
                 } else {
                     right = new Blockelement();
                 }
@@ -284,7 +284,7 @@ public class Blockelement extends Block {
 
             case 3:
                 if (!below.isEnd()) {
-                    below.changeBlock();
+                    below.changeBlock(direc);
                 } else {
                     below = new Blockelement();
                 }
