@@ -187,5 +187,18 @@ public class Algo
         //check that blockdiff from the root (2,2) doesnt exceed 3, if it does rerun
         return b;
     }
+
+    public int getCode1()
+    {
+        return code1;
+    }
+    public int getCode2()
+    {
+        return code2;
+    }
+    public int getCode3()
+    {
+        return code3;
+    }
 }
 

@@ -121,17 +121,45 @@ public class Board {
 
     public void changeBlock(int block)//going from the center all the way in one of 4 directions and adds 1 blockelement
     {
+        int[][] changebm = new int[5][5];
         int rotation = alg.genRdmNbr(0,3);
         switch(block)
         {
             case 0:
-                b1.changeBlock(rotation);
+                Blockelement changedBm1 = alg.translate(alg.getCode1());
+                changedBm1.changeBlock(rotation);
+                if(setChangedBlockinArray(changedBm1,optimalPlacements[0][0],optimalPlacements[0][1],changebm))
+                {
+                    b1 = changedBm1;
+                }
+                else
+                {
+                    changeBlock(0);
+                }
                 break;
             case 1:
-                b2.changeBlock(rotation);
+                Blockelement changedBm2 = alg.translate(alg.getCode2());
+                changedBm2.changeBlock(rotation);
+                if(setChangedBlockinArray(changedBm2,optimalPlacements[1][0],optimalPlacements[1][1],changebm))
+                {
+                    b2 = changedBm2;
+                }
+                else
+                {
+                    changeBlock(1);
+                }
                 break;
             case 2:
-                b3.changeBlock(rotation);
+                Blockelement changedBm3 = alg.translate(alg.getCode3());
+                changedBm3.changeBlock(rotation);
+                if(setChangedBlockinArray(changedBm3,optimalPlacements[2][0],optimalPlacements[2][1],changebm))
+                {
+                    b3 = changedBm3;
+                }
+                else
+                {
+                    changeBlock(2);
+                }
                 break;
 
         }
@@ -478,6 +506,48 @@ public class Board {
         if (!b.right.isEnd()) {
             setBlockinArray((Blockelement) b.right, x , y + 1, array);
         }
+    }
+
+    public boolean setChangedBlockinArray(Blockelement b, int x, int y, int[][] array)
+    {
+        /*
+         *  It is assumed that only possible placements are made
+         *  credits to mau for recursion magic
+         */
+
+
+        if(x<0 || x>=5 || y<0 || y>=5)
+        {
+            int check = 0;
+            array[x][y] = array[x][y] + b.placeBlock(x, y);
+            if (!b.above.isEnd()) {
+                if(!setChangedBlockinArray((Blockelement) b.above, x - 1, y , array))
+                {
+                    check++;
+                }
+            }
+            if (!b.left.isEnd()) {
+                if(!setChangedBlockinArray((Blockelement) b.left, x , y - 1, array))
+                {
+                    check++;
+                }
+            }
+            if (!b.below.isEnd()) {
+                if(!setChangedBlockinArray((Blockelement) b.below, x + 1, y , array))
+                {
+                    check++;
+                }
+            }
+            if (!b.right.isEnd()) {
+                if(!setChangedBlockinArray((Blockelement) b.right, x , y + 1, array))
+                {
+                    check++;
+                }
+            }
+            return check == 0;
+        }
+
+        return false;
     }
 
     public void createBlockmatrix()
