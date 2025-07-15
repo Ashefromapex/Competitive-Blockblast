@@ -15,13 +15,15 @@ public class ControllerGUI extends JFrame
 {
     //Instanzvariable
     controller c;
-    Singleplayer sp;
+    public Singleplayer sp;
     Multiplayer mp;
     public TitleScreen titleScreen;
     LoginScreen loginScreen;
     GameOver gameOver;
     EnemySelect enemySelect;
     Queue queue;
+    int spHeight;
+    int spWidth;
 
     //Erzeugt Fenster
     public ControllerGUI(controller c) {
@@ -37,10 +39,16 @@ public class ControllerGUI extends JFrame
     }
 
     public void singleplayer() {
-        sp = new Singleplayer(c, this);
+        if(sp == null || !sp.gameStarted)
+        {
+            sp = new Singleplayer(c,this);
+            spHeight = sp.getHeight();
+            spWidth = sp.getWidth();
+        }
+
         sp.requestFocusInWindow();
         setContentPane(sp);
-        setSize(getContentPane().getWidth(), getContentPane().getHeight());
+        setSize(spWidth, spHeight);
         setLocationRelativeTo(null);
     }
 

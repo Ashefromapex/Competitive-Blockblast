@@ -255,11 +255,14 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
         }
 
         //adding all the textures to both arrays
-        texturePlaced[0] = new ImageIcon(("src/com/blockblast/assets/BRICK.png"));
-        texturePlaced[1] = new ImageIcon(("src/com/blockblast/assets/Mistery.png"));
-        texturePlaced[2] = new ImageIcon(("src/com/blockblast/assets/block_provisorisch.png"));
-        texturePlaced[3] = new ImageIcon(("src/com/blockblast/assets/block_placed.png"));
-        //texturePlaced[4] = new ImageIcon(("src/com/blockblast/assets/hintergrund.png"));
+        texturePlaced[0] = new ImageIcon(("src/com/blockblast/assets/Block_Texture_Blue.png"));
+        texturePlaced[1] = new ImageIcon(("src/com/blockblast/assets/Block_Texture_DarkBlue.png"));
+        texturePlaced[2] = new ImageIcon(("src/com/blockblast/assets/Block_Texture_Green.png"));
+        texturePlaced[3] = new ImageIcon(("src/com/blockblast/assets/Block_Texture_Pink.png"));
+        texturePlaced[4] = new ImageIcon(("src/com/blockblast/assets/Block_Texture_Yellow.png"));
+        texturePlaced[5] = new ImageIcon(("src/com/blockblast/assets/Block_Texture_Red.png"));
+        texturePlaced[6] = new ImageIcon(("src/com/blockblast/assets/Block_Texture_Orange.png"));
+        texturePlaced[7] = new ImageIcon(("src/com/blockblast/assets/Block_Texture_Purple.png"));
 
         //fügt alles hinzu, was zuerst hinzugefügt wird ist am weitesten oben
         setSize(new Dimension((boardSize-mainPanelBorder*2)/8+attackBorder*2+boardSize+15,50+boardSize+mainPanelBorder+blockPreviewSize+southBumperHeight-15));
@@ -377,7 +380,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     public void visualizeBlock1( int[][] array) {
 
         Random rand = new Random();
-        ImageIcon blockTexture1 = texturePlaced [rand.nextInt(4)];
+        ImageIcon blockTexture1 = texturePlaced [rand.nextInt(8)];
         scaledTexture1 = scaleTexturePreview(blockTexture1);
         // einfärbern des blockpreviews
         for (int j=0; j< 5; j++){
@@ -395,7 +398,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     public void visualizeBlock2(int[][] array) {
 
         Random rand = new Random();
-        ImageIcon blockTexture2 = texturePlaced [rand.nextInt(4)];
+        ImageIcon blockTexture2 = texturePlaced [rand.nextInt(8)];
         scaledTexture2 = scaleTexturePreview(blockTexture2);
         // einfärbern des blockpreviews
         for (int j=0; j< 5; j++){
@@ -413,7 +416,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     public void visualizeBlock3( int[][] array) {
 
         Random rand = new Random();
-        ImageIcon blockTexture3 = texturePlaced [rand.nextInt(4)];
+        ImageIcon blockTexture3 = texturePlaced [rand.nextInt(8)];
         scaledTexture3 = scaleTexturePreview(blockTexture3);
         // einfärbern des blockpreviews
         for (int j=0; j< 5; j++){

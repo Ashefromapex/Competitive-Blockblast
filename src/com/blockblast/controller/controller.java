@@ -36,12 +36,14 @@ public class controller
     public void startSP()
     {
         //start single player
-
-        b = new Board();
-        b.alg.setDifficulty(cGUI.titleScreen.getDifficulty());
-        System.out.println("Difficulty: " + cGUI.titleScreen.getDifficulty());
-        b.getBlocks();
-        b.createBlockmatrix();
+        if(cGUI.sp == null || !cGUI.sp.gameStarted)
+        {
+            b = new Board();
+            b.alg.setDifficulty(cGUI.titleScreen.getDifficulty());
+            System.out.println("Difficulty: " + cGUI.titleScreen.getDifficulty());
+            b.getBlocks();
+            b.createBlockmatrix();
+        }
         cGUI.singleplayer();
         runningSP = true;
 

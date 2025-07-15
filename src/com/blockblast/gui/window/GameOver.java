@@ -69,6 +69,7 @@ public class GameOver extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 if (c.checkSinglePlayer()) {
+                    c.cGUI.sp.gameStarted = false;
                     c.startSP();
                     System.out.println("Singleplayer wird gestartet");
                 } else {
