@@ -41,6 +41,8 @@ public class CallThread extends Thread
 
         //communication starts here
         //sends seed
+        synchronized (this)
+        {
         String ans = call(craftMsg('s', net.seed));
         if (!ans.equals("y"))
         {
@@ -60,21 +62,18 @@ public class CallThread extends Thread
             System.out.println("Error starting on client side");
             return;
         }
-        while(!isInterrupted())
-        {
+        System.out.println("started" + net.seed +  " " + net.difficulty);
+        while(!isInterrupted()) {
             //waits for block to be placed
-            try
-            {
+            try {
                 wait();
-            }
-            catch (InterruptedException e)
-            {
+            } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
             //block was placed
             //checks for gameover
-            if(net.gameover)
-            {
+            System.out.println("i was updated :))))");
+            if (net.gameover) {
                 call(craftMsg('l', net.score));
                 stopCaller();
                 interrupt();
@@ -84,32 +83,25 @@ public class CallThread extends Thread
             net.pubattack -= net.privattack;
             net.privattack = 0;
             ans = call(craftMsg('a', net.pubattack));
-            if(ans.charAt(0) == 'a')
-            {
+            if (ans.charAt(0) == 'a') {
                 int returned = getNum(ans);
-                net.attackUpdate(returned); //pushes global attack
-            }
-            else if (ans.charAt(0) == 'l')
-            {
+                net.attackUpdate(-1 * returned); //pushes global attack (but reversed)
+            } else if (ans.charAt(0) == 'l') {
                 //responder hat verloren (imagine)
                 //gets their score
                 int escore = getNum(ans);
                 net.saveScore(escore);
                 stopCaller();
                 interrupt();
-            }
-            else if(ans.equals("!"))
-            {
+            } else if (ans.equals("!")) {
                 stopCaller();
                 interrupt();
-            }
-            else
-            {
+            } else {
                 System.out.println("Invalid response... clsoing");
                 stopCaller();
                 interrupt();
             }
-
+        }
 
         }
     }

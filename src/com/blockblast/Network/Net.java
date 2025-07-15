@@ -41,6 +41,7 @@ public class Net
     {
         pubattack = atk;
         c.attackUpdate(atk);
+        System.out.println("updated attack: " + atk);
     }
 
     public void blockUpdate(int atk)
@@ -48,7 +49,10 @@ public class Net
         //falls alle drei blöcke platziert wurden, muss thread warten, auf andere
         //muss vom controller nach Platzieren eines blockes aufgerufen werden mit der beim Platzieren entstandenden attacke auch 0
         privattack = atk;
-        notify();
+        synchronized (this)
+        {
+            notify();
+        }
     }
 
     public void startCallThread()
