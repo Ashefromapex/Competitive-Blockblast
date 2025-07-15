@@ -68,6 +68,10 @@ public class Board {
         {
             missedKombo++;
         }
+        if(kombo != komboTest)
+        {
+            missedKombo = 0;
+        }
         if(missedKombo == 3)
         {
             missedKombo = 0;
