@@ -21,6 +21,7 @@ public class ControllerGUI extends JFrame
     LoginScreen loginScreen;
     GameOver gameOver;
     EnemySelect enemySelect;
+    Queue queue;
 
     //Erzeugt Fenster
     public ControllerGUI(controller c) {
@@ -73,6 +74,14 @@ public class ControllerGUI extends JFrame
     {
         enemySelect = new EnemySelect(this);
         setContentPane(enemySelect);
+        setSize(getContentPane().getWidth(), getContentPane().getHeight());
+        setLocationRelativeTo(null);
+    }
+
+    public void queue()
+    {
+        queue = new Queue(this);
+        setContentPane(queue);
         setSize(getContentPane().getWidth(), getContentPane().getHeight());
         setLocationRelativeTo(null);
     }

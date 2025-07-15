@@ -4,10 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-public class EnemySelect extends JPanel
+public class EnemySelect extends JPanel implements KeyListener
 {
     ControllerGUI c;
     TextField ip;
@@ -22,6 +24,7 @@ public class EnemySelect extends JPanel
         setLayout(null);
         setSize(500,500);
         setBackground(new Color(16, 25, 74));
+        addKeyListener(this);
 
         JLabel title = new JLabel("Choose your enemy!");
         title.setFont(new Font("Tahoma",Font.BOLD,40));
@@ -35,6 +38,7 @@ public class EnemySelect extends JPanel
         ip.setBounds(25,200,300,50);
         ip.setFont(new Font("Tahoma",Font.BOLD,40));
         ip.setBackground(Color.LIGHT_GRAY);
+        ip.addKeyListener(this);
 
         JButton playButton = new JButton("Play");
         playButton.setFont(new Font("Tahoma",Font.BOLD,20));
@@ -43,9 +47,13 @@ public class EnemySelect extends JPanel
         playButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(host || join)
+                if(join && !ip.getText().isEmpty())
                 {
                     c.multiplayer();
+                }
+                if(host)
+                {
+                    c.queue();
                 }
             }
         });
@@ -71,6 +79,7 @@ public class EnemySelect extends JPanel
         hostButton.setFont(new Font("Tahoma",Font.BOLD,20));
         hostButton.setBounds(75, 300, 150, 30);
         hostButton.setBackground(Color.WHITE);
+        hostButton.addKeyListener(this);
         hostButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -146,5 +155,31 @@ public class EnemySelect extends JPanel
     public boolean getJoin()
     {
         return join;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e)
+    {
+        if(e.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            if(join && !ip.getText().isEmpty())
+            {
+                c.multiplayer();
+            }
+            if(host)
+            {
+                c.queue();
+            }
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }

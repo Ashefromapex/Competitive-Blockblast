@@ -245,7 +245,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
         texturePlaced[1] = new ImageIcon(("src/com/blockblast/assets/Mistery.png"));
         texturePlaced[2] = new ImageIcon(("src/com/blockblast/assets/block_provisorisch.png"));
         texturePlaced[3] = new ImageIcon(("src/com/blockblast/assets/block_placed.png"));
-        //texturePlaced[4] = new ImageIcon(("src/com/blockblast/assets/hintergrund.png"));
+        texturePlaced[4] = new ImageIcon(("src/com/blockblast/assets/Block_Texture_Yellow.png"));
 
 
         //Top label layout
@@ -368,7 +368,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     public void visualizeBlock1( int[][] array) {
 
         Random rand = new Random();
-        ImageIcon blockTexture1 = texturePlaced [rand.nextInt(4)];
+        ImageIcon blockTexture1 = texturePlaced [4];
         scaledTexture1 = scaleTexturePreview(blockTexture1);
         // einfärbern des blockpreviews
         for (int j=0; j< 5; j++){
