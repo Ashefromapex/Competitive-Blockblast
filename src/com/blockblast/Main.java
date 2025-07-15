@@ -4,8 +4,6 @@ package com.blockblast;
  *  Die Main Klasse hat zwei Aufgaben:
  *  1. Die Testklasse aufrufen → testen aller Funktionen
  *  2. Den Controller starten → startet das Spiel
- */
-
 
 //import files
 
