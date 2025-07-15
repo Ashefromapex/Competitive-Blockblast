@@ -60,7 +60,7 @@ public class Board {
         //clears full rows/columns
         reset_row(fullrow);
         reset_column(fullcollumn);
-        if(allClear())
+        if(allClear())// add score for playing
         {
             score += 10000 * kombo;
         }
@@ -72,7 +72,7 @@ public class Board {
         {
             missedKombo = 0;
         }
-        if(missedKombo == 3)
+        if(missedKombo == 3)//if 3 consecutive blocks placed didnt clear a line: lose kombo
         {
             missedKombo = 0;
             kombo = 0;
@@ -80,7 +80,7 @@ public class Board {
         SetScore();
     }
 
-    public int SetScore()
+    public void SetScore()
     {
 
         if(kombo > 0)
@@ -91,23 +91,22 @@ public class Board {
         {
             score += 100;
         }
-        return score;
     }
 
-    public int getAtkLvL()
+    public int getAtkLvL()// check how high own defensive lvl is
     {
-        if(allClear)
+        if(allClear)//checks if the board has been cleared within the 3 blocks
         {
-            allClear = false;
-            return 8;
+            allClear = false; // resets the variable for the next round
+            return 8; //returns lvl 8
         }
         else
         {
-            return tempAtkLvL;
+            return tempAtkLvL; //retunrs the lvl
         }
     }
 
-    public int calcDiff(int inc)
+    public int calcDiff(int inc)// calculates the difference of the atkLvL of opponent and own lvl
     {
         if(allClear)
         {
@@ -120,7 +119,7 @@ public class Board {
     }
 
 
-    public void changeBlock(int block)
+    public void changeBlock(int block)//going from the center all the way in one of 4 directions and adds 1 blockelement
     {
         int rotation = alg.genRdmNbr(0,3);
         switch(block)
@@ -138,7 +137,7 @@ public class Board {
         }
     }
 
-    public void changer(int lvl)
+    public void changer(int lvl)// changeBlock "lvl" times random between the 3 blocks
     {
         int rdm;
         for(int i = 0; i < lvl; i++)
@@ -150,7 +149,7 @@ public class Board {
     }
 
 
-    public void getBlocks()
+    public void getBlocks()// creates new Blocks with codes
     {
       alg.genBlocks();
       b1 = alg.b1;
@@ -218,19 +217,12 @@ public class Board {
 
     public boolean checkSpezField(int y, int x)//useless rn lmao
     {
-        if (board[y][x] == 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return board[y][x] == 0;
 
     }
 
 
-    public boolean checkAll()
+    public boolean checkAll()//updates allPossible[][][]
     {
         //resets board
         for (int i = 0; i < 3; i++) {
@@ -264,7 +256,7 @@ public class Board {
     // wird ausgeführt wenn der nutzer den block platzieren will
     public boolean placeBlock(int blocknr, int x, int y)
     {
-        if(!blocksplaced[0] && !blocksplaced[1] && !blocksplaced[2])
+        if(!blocksplaced[0] && !blocksplaced[1] && !blocksplaced[2])//checks if new 3 blocks are being placed for calculating the atk LvL
         {
             tempAtkLvL = 0;
         }
@@ -461,7 +453,7 @@ public class Board {
 
 
 
-    public void printi()
+    public void printi()//for testing
     {
         System.out.println("board" +"\n"+ Arrays.deepToString(board));
         System.out.println("allPossible" +"\n"+ Arrays.deepToString(allPossible));
@@ -497,7 +489,7 @@ public class Board {
         setBlockinArray(b2, optimalPlacements[1][0], optimalPlacements[1][1], bm2);
         setBlockinArray(b3, optimalPlacements[2][0], optimalPlacements[2][1], bm3);
     }
-    public int[] optimalPlacement(int code)
+    public int[] optimalPlacement(int code)//calculates the optimal placement within the displayed matrix
     {
         /*
          *  returns the optimal x (at index 0) and y (at index 1) positions for the block
