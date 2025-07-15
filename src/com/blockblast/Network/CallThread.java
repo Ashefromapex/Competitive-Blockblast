@@ -17,9 +17,11 @@ public class CallThread extends Thread
     Socket client;
     PrintWriter out;
     BufferedReader in;
+    int blocks;
     public CallThread(Net n)
     {
         net = n;
+        blocks = 0;
     }
     public void run()
     {
@@ -78,8 +80,8 @@ public class CallThread extends Thread
                 interrupt();
             }
             //get current attack and send it
-            //adds attack built up by placing block to global attack level:
-            net.pubattack += net.privattack;
+            //subtracts attack built up by placing block to global attack level:
+            net.pubattack -= net.privattack;
             net.privattack = 0;
             ans = call(craftMsg('a', net.pubattack));
             if(ans.charAt(0) == 'a')

@@ -42,8 +42,7 @@ public class ResponseThread extends Thread
             System.out.println("Wrong start of conversation: no seed provided");
             return;
         }
-        int seed = getNum(in);
-        net.saveSeed(seed);
+        net.seed = getNum(in);
         respond("y"); //returns succes
         //get difficulty
         in = receive();
@@ -52,8 +51,7 @@ public class ResponseThread extends Thread
             System.out.println("Error in conversation: no difficulty provided");
             return;
         }
-        int difficulty = getNum(in);
-        net.saveDifficulty(difficulty);
+        net.difficulty = getNum(in);
         respond("y");
         //waits for start
         in = receive();
@@ -62,6 +60,7 @@ public class ResponseThread extends Thread
             System.out.println("Error: no start signal received");
             return;
         }
+        net.startBoard();
         if(!net.startBoard())
         {
             System.out.println("Error: couldn't start board");
@@ -79,10 +78,13 @@ public class ResponseThread extends Thread
                     respond(craftMsg('l', net.score));
                 }
                 //evaluate attack
-                int atk = getNum(in);
+                int atk = getNum(in); //public attack
+                net.pubattack = atk;
                 //add local privateattack
-                atk += net.privattack;
-                respond(craftMsg('a', atk));
+                net.pubattack -= net.privattack;
+                net.privattack = 0;
+                net.attackUpdate(atk);
+                respond(craftMsg('a', net.pubattack));
 
             }
             else if(in.charAt(0) == 'l')
