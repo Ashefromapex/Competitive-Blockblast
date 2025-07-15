@@ -1,10 +1,11 @@
-package com.blockblast.network;
+package com.blockblast.Network;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import com.blockblast.Network.*;
 
 public class ResponseThread extends Thread
 {
@@ -67,6 +68,7 @@ public class ResponseThread extends Thread
             return;
         }
         respond("y");
+        System.out.println("current state: " + net.seed + net.difficulty);
         while(!isInterrupted())
         {
             in = receive();

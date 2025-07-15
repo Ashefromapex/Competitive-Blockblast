@@ -3,7 +3,7 @@ package com.blockblast.test;
 //import packages
 import com.blockblast.controller.controller;
 import com.blockblast.logic.Board;
-import com.blockblast.network.Net;
+import com.blockblast.Network.Net;
 import com.blockblast.storage.Data;
 import com.blockblast.logic.Algo;
 
@@ -27,10 +27,9 @@ public class Test
         //start callthread
         controller c = new controller();
         Net n = new Net(c);
-        System.out.println(n.getIp());
-        c.startMP();
-        n.startCallThread();
-
+        n.startReponseThread("192.168.178.132", 9000);
+        System.out.println("ello");
+        n.blockUpdate(2);
     }
 
     private boolean testController()

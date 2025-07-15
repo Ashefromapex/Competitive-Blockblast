@@ -1,4 +1,4 @@
-package com.blockblast.network;
+package com.blockblast.Network;
 
 import java.io.*;
 import java.net.InetSocketAddress;

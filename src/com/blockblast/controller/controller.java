@@ -65,6 +65,7 @@ public class controller
 
     public void startResponderGame(int seed, int difficulty)
     {
+        b = new Board();
         b.specificAlg(seed, difficulty);
     }
     public void saveEnemyScore(int score)
