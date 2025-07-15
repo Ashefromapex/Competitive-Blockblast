@@ -14,6 +14,7 @@ public class controller
     public Board b;//Logic object
     boolean runningSP;
     private Data d;
+    private com.blockblast.network.Net net;
 
     public controller()
     {
@@ -139,6 +140,15 @@ public class controller
     public int getDif()
     {
         return b.getDif();
+    }
+
+    public void startCallThread()
+    {
+        net.startCallThread();
+    }
+    public void startResponseThread()
+    {
+        net.startReponseThread(cGUI.enemySelect.ip.getText() ,9000);
     }
 
 }

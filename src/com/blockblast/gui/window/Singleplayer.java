@@ -19,12 +19,9 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     controller c;
     ControllerGUI cGUI;
     //instanzvariable erstellen
-    int deltax;
-    int deltay;
     int mainPanelBorder;
     int boardSize;
     int blockPreviewSize;
-    JLabel label;
     JLabel [][] grid = new JLabel[8][8];
     JLabel [][] fakeGrid = new JLabel[5][5];
     JLabel [][] hoverGrid = new JLabel[8][8];
@@ -46,7 +43,6 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     ImageIcon scaledPlaced2;
     ImageIcon scaledPlaced3;
     ImageIcon hintergrundTexture = new ImageIcon(("src/com/blockblast/assets/hintergrund.png"));
-    ImageIcon scaleBlockHoverTextureIconBoard;
     Image scaleHintergrundTextureImg;
     ImageIcon scaleHintergrundTextureIcon;
     ImageIcon empty = new  ImageIcon();
@@ -71,10 +67,8 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
 
 
 
-    public Singleplayer(controller c, ControllerGUI cGUI) {
-        deltax = 0;
-        deltay = 0;
-
+    public Singleplayer(controller c, ControllerGUI cGUI)
+    {
         this.c = c;
         this.cGUI = cGUI;
         setVisible(true);
@@ -515,8 +509,6 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
                 block3.setVisible(true);
                 System.out.println("Block3 placed");
             }
-            deltax = 0;
-            deltay = 0;
             visualiseBlockAgain();
         }
         else
@@ -786,7 +778,3 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
 
     }
 }
-
-
-
-

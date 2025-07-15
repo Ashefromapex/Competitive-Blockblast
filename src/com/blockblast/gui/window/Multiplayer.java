@@ -59,7 +59,7 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     private boolean block2Hover = false;
     private boolean block3Hover = false;
     ImageIcon [] texturePlaced = new ImageIcon[8]; //list of all placed textures
-    ImageIcon [] textureHover = new ImageIcon[8]; //list of all hovering textures
+    ImageIcon [] textureHover = new ImageIcon[8]; //list of all hovering textures (extension)
     Color backgroundColor = new Color(83,155,255);
     int hoverBoardX;
     int hoverBoardY;

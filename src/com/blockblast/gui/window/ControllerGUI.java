@@ -20,7 +20,7 @@ public class ControllerGUI extends JFrame
     public TitleScreen titleScreen;
     LoginScreen loginScreen;
     GameOver gameOver;
-    EnemySelect enemySelect;
+    public EnemySelect enemySelect;
     Queue queue;
     int spHeight;
     int spWidth;

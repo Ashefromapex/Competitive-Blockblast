@@ -12,7 +12,7 @@ import java.net.UnknownHostException;
 public class EnemySelect extends JPanel implements KeyListener
 {
     ControllerGUI c;
-    TextField ip;
+    public TextField ip;
     public boolean host;
     public boolean join;
     JButton joinButton;
@@ -50,10 +50,12 @@ public class EnemySelect extends JPanel implements KeyListener
                 if(join && !ip.getText().isEmpty())
                 {
                     c.multiplayer();
+                    c.c.startResponseThread();
                 }
                 if(host)
                 {
                     c.queue();
+                    c.c.startCallThread();
                 }
             }
         });
@@ -170,10 +172,12 @@ public class EnemySelect extends JPanel implements KeyListener
             if(join && !ip.getText().isEmpty())
             {
                 c.multiplayer();
+                c.c.startResponseThread();
             }
             if(host)
             {
                 c.queue();
+                c.c.startCallThread();
             }
         }
     }
