@@ -54,10 +54,9 @@ public class controller
     public void startMP()
     {
         //start multiplayer
-
         b = new Board();
-//        b.alg.setDifficulty(cGUI.titleScreen.getDifficulty());
-        b.alg.setDifficulty(5);
+        b.alg.setDifficulty(cGUI.titleScreen.getDifficulty());
+        System.out.println("Difficulty: " + cGUI.titleScreen.getDifficulty());
         b.getBlocks();
         b.createBlockmatrix();
         int seed = b.getSeed();
