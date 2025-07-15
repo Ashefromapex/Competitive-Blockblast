@@ -30,6 +30,8 @@ public class Test
         System.out.println(n.getIp());
         c.startMP();
         n.startCallThread();
+        System.out.println("meep");
+        n.blockUpdate(1);
 
     }
 
