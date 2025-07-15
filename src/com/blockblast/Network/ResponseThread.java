@@ -79,7 +79,7 @@ public class ResponseThread extends Thread
                 }
                 //evaluate attack
                 int atk = getNum(in); //public attack
-                net.pubattack = atk;
+                net.pubattack = -1 * atk; //inverses bc fuck yeah
                 //add local privateattack
                 net.pubattack -= net.privattack;
                 net.privattack = 0;
