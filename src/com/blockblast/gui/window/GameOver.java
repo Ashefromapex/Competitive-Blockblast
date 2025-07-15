@@ -123,10 +123,7 @@ public class GameOver extends JPanel {
         add(scoreboard);
     }
 
-    public String Scoreboard(String[] s) {
 
-    return String.join(", ", s);
-    }
 
 }
 
