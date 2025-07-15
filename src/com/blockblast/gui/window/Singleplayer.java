@@ -64,6 +64,8 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     ImageIcon [] textureHover = new ImageIcon[8];
     JButton menuButton;
     public boolean gameStarted = false;
+    int hoverBoardX;
+    int hoverBoardY;
 
 
 
@@ -563,6 +565,8 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
                     }
                 }
             }
+            hoverBoardX = x;
+            hoverBoardY = y;
         }
     }
 
@@ -637,7 +641,10 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
                     {
                         boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-36)/41) + (c.getRoot(1)[1]-h);
                         boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(1)[0]-g);
-                        hoverBlock(1, boardX, boardY);
+                        if(hoverBoardX != boardX || hoverBoardY != boardY)
+                        {
+                            hoverBlock(1, boardX, boardY);
+                        }
                     }
                 }
                 if(block2Chosen)
@@ -646,7 +653,10 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
                     {
                         boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-36)/41) + (c.getRoot(2)[1]-h);
                         boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(2)[0]-g);
-                        hoverBlock(2, boardX, boardY);
+                        if(hoverBoardX != boardX || hoverBoardY != boardY)
+                        {
+                            hoverBlock(2, boardX, boardY);
+                        }
                     }
                 }
                 if(block3Chosen)
@@ -655,7 +665,10 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
                     {
                         boardX = Math.round((float) (fakeBoard.getX() + fakeGrid[g][h].getX()-36)/41) + (c.getRoot(3)[1]-h);
                         boardY = Math.round((float) (fakeBoard.getY() + fakeGrid[g][h].getY()-86)/41) + (c.getRoot(3)[0]-g);
-                        hoverBlock(3, boardX, boardY);
+                        if(hoverBoardX != boardX || hoverBoardY != boardY)
+                        {
+                            hoverBlock(3, boardX, boardY);
+                        }
                     }
                 }
             }

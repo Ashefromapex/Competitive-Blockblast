@@ -61,6 +61,8 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
     ImageIcon [] texturePlaced = new ImageIcon[8]; //list of all placed textures
     ImageIcon [] textureHover = new ImageIcon[8]; //list of all hovering textures
     Color backgroundColor = new Color(83,155,255);
+    int hoverBoardX;
+    int hoverBoardY;
 
 
 
@@ -569,6 +571,8 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
                     }
                 }
             }
+            hoverBoardX = x;
+            hoverBoardY = y;
         }
     }
 
@@ -647,7 +651,10 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
                     {
                         boardX = Math.round((float) (movementBoard.getX() + movementGrid[g][h].getX()-149)/41) + (c.getRoot(1)[1]-h);
                         boardY = Math.round((float) (movementBoard.getY() + movementGrid[g][h].getY()-86)/41) + (c.getRoot(1)[0]-g);
-                        hoverBlock(1, boardX, boardY);
+                        if(hoverBoardX != boardX || hoverBoardY != boardY)
+                        {
+                            hoverBlock(1, boardX, boardY);
+                        }
                     }
                 }
                 if(block2Chosen)
@@ -656,7 +663,10 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
                     {
                         boardX = Math.round((float) (movementBoard.getX() + movementGrid[g][h].getX()-149)/41) + (c.getRoot(2)[1]-h);
                         boardY = Math.round((float) (movementBoard.getY() + movementGrid[g][h].getY()-86)/41) + (c.getRoot(2)[0]-g);
-                        hoverBlock(2, boardX, boardY);
+                        if(hoverBoardX != boardX || hoverBoardY != boardY)
+                        {
+                            hoverBlock(2, boardX, boardY);
+                        }
                     }
                 }
                 if(block3Chosen)
@@ -665,7 +675,10 @@ public class Multiplayer extends JPanel implements MouseListener, MouseMotionLis
                     {
                         boardX = Math.round((float) (movementBoard.getX() + movementGrid[g][h].getX()-149)/41) + (c.getRoot(3)[1]-h);
                         boardY = Math.round((float) (movementBoard.getY() + movementGrid[g][h].getY()-86)/41) + (c.getRoot(3)[0]-g);
-                        hoverBlock(3, boardX, boardY);
+                        if(hoverBoardX != boardX || hoverBoardY != boardY)
+                        {
+                            hoverBlock(3, boardX, boardY);
+                        }
                     }
                 }
             }
