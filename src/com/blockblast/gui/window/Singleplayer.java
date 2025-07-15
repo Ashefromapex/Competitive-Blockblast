@@ -11,6 +11,10 @@ import java.util.Random;
 
 import com.blockblast.controller.controller;
 
+/*
+    for explanations look at the class "Multiplayer" I am not doing these twice
+ */
+
 public class Singleplayer extends JPanel implements MouseListener, MouseMotionListener{
     controller c;
     ControllerGUI cGUI;
@@ -56,10 +60,10 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     private boolean block2Hover = false;
     private boolean block3Hover = false;
     Color backgroundColor = new Color(83,155,255);
-    static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
-    JButton gameOverButton;
     ImageIcon [] texturePlaced = new ImageIcon[8];
     ImageIcon [] textureHover = new ImageIcon[8];
+    JButton menuButton;
+    public boolean gameStarted = false;
 
 
 
@@ -215,18 +219,6 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
         score.setBackground(backgroundColor);
         score.setBounds(0,0,boardSize,50); //Bestimmt Position und Größe des Titels
 
-
-        gameOverButton = new JButton();
-        gameOverButton.setText("Game Over");
-        gameOverButton.setBounds(0,0,50,50);
-        gameOverButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                c.GameOver();
-            }
-        });
-
         for(int i = 0; i < 8; i++)
         {
             for(int j = 0;j < 8;j++) //Code Monstrum zusammengefasst
@@ -235,13 +227,28 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
             }
         }
 
+        menuButton = new JButton();
+        menuButton.setText("Menu");
+        menuButton.setFont(new Font("Tahoma", Font.BOLD, 10));
+        menuButton.setBounds(0,0,70,50);
+        menuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cGUI.titleScreen();
+                gameStarted = true;
+            }
+        });
+
 
         //this is where I would add my textures to my arrays... If I had any
-        texturePlaced[0] = new ImageIcon(("src/com/blockblast/assets/BRICK.png"));
-        texturePlaced[1] = new ImageIcon(("src/com/blockblast/assets/Mistery.png"));
-        texturePlaced[2] = new ImageIcon(("src/com/blockblast/assets/block_provisorisch.png"));
-        texturePlaced[3] = new ImageIcon(("src/com/blockblast/assets/block_placed.png"));
-        //texturePlaced[4] = new ImageIcon(("src/com/blockblast/assets/hintergrund.png"));
+        texturePlaced[0] = new ImageIcon(("src/com/blockblast/assets/Block_Texture_Blue.png"));
+        texturePlaced[1] = new ImageIcon(("src/com/blockblast/assets/Block_Texture_DarkBlue.png"));
+        texturePlaced[2] = new ImageIcon(("src/com/blockblast/assets/Block_Texture_Green.png"));
+        texturePlaced[3] = new ImageIcon(("src/com/blockblast/assets/Block_Texture_Pink.png"));
+        texturePlaced[4] = new ImageIcon(("src/com/blockblast/assets/Block_Texture_Yellow.png"));
+        texturePlaced[5] = new ImageIcon(("src/com/blockblast/assets/Block_Texture_Red.png"));
+        texturePlaced[6] = new ImageIcon(("src/com/blockblast/assets/Block_Texture_Orange.png"));
+        texturePlaced[7] = new ImageIcon(("src/com/blockblast/assets/Block_Texture_Purple.png"));
 
 
         //Top label layout
@@ -255,6 +262,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
         add(block1);
         add(block2);
         add(block3);
+        add(menuButton);
         add(southBumper);
         //imports the blocks
         int[][] testblock1 = c.getBm1();
@@ -363,7 +371,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     public void visualizeBlock1( int[][] array) {
 
         Random rand = new Random();
-        ImageIcon blockTexture1 = texturePlaced [rand.nextInt(4)];
+        ImageIcon blockTexture1 = texturePlaced [rand.nextInt(8)];
         scaledTexture1 = scaleTexturePreview(blockTexture1);
         // einfärbern des blockpreviews
         for (int j=0; j< 5; j++){
@@ -381,7 +389,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     public void visualizeBlock2(int[][] array) {
 
         Random rand = new Random();
-        ImageIcon blockTexture2 = texturePlaced [rand.nextInt(4)];
+        ImageIcon blockTexture2 = texturePlaced [rand.nextInt(8)];
         scaledTexture2 = scaleTexturePreview(blockTexture2);
         // einfärbern des blockpreviews
         for (int j=0; j< 5; j++){
@@ -399,7 +407,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
     public void visualizeBlock3( int[][] array) {
 
         Random rand = new Random();
-        ImageIcon blockTexture3 = texturePlaced [rand.nextInt(4)];
+        ImageIcon blockTexture3 = texturePlaced [rand.nextInt(8)];
         scaledTexture3 = scaleTexturePreview(blockTexture3);
         // einfärbern des blockpreviews
         for (int j=0; j< 5; j++){
@@ -714,7 +722,7 @@ public class Singleplayer extends JPanel implements MouseListener, MouseMotionLi
         block1Chosen = false;
         block2Chosen = false;
         block3Chosen = false;
-        fakeBoard.setLocation(0,0);
+        fakeBoard.setLocation(500,500);
     }
 
     @Override

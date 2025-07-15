@@ -43,6 +43,8 @@ public class Algo
     {
         this.difficulty = difficulty;
     }
+  
+    public int genRdmNbr(int begin, int end) { return rand.nextInt(begin, end);}
 
     public void genBlocks()
     {

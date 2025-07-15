@@ -12,8 +12,6 @@ public class controller
     public Singleplayer sp;//GUI object
     private Multiplayer mp;
     public Board b;//Logic object
-    public int [][] testfield = new int [8][8];
-    int blockcnt = 3;
     boolean runningSP;
     private Data d;
 
@@ -38,12 +36,14 @@ public class controller
     public void startSP()
     {
         //start single player
-
-        b = new Board();
-        b.alg.setDifficulty(cGUI.titleScreen.getDifficulty());
-        System.out.println("Difficulty: " + cGUI.titleScreen.getDifficulty());
-        b.getBlocks();
-        b.createBlockmatrix();
+        if(cGUI.sp == null || !cGUI.sp.gameStarted)
+        {
+            b = new Board();
+            b.alg.setDifficulty(cGUI.titleScreen.getDifficulty());
+            System.out.println("Difficulty: " + cGUI.titleScreen.getDifficulty());
+            b.getBlocks();
+            b.createBlockmatrix();
+        }
         cGUI.singleplayer();
         runningSP = true;
 
@@ -60,6 +60,7 @@ public class controller
         b.getBlocks();
         b.createBlockmatrix();
         int seed = b.getSeed();
+        cGUI.enemySelect();
         runningSP = false;
     }
 
