@@ -91,6 +91,7 @@ public class GameOver extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 System.out.println("zurück zum Menü");
+                c.cGUI.sp.gameStarted = false;
                 c.menu();
 
             }
