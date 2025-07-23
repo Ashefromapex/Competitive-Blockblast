@@ -40,7 +40,7 @@ public class CallThread extends Thread
         {
             throw new RuntimeException(e);
         }
-
+        int step = 0;
         //communication starts here
         //sends seed
 
@@ -67,9 +67,13 @@ public class CallThread extends Thread
         System.out.println("started" + net.seed +  " " + net.difficulty);
         while(!isInterrupted()) {
             //waits for block to be placed
+            if(net.privattack.isEmpty())
+            {
+                System.out.println("waiting...");
+                net.waitForNet();
+            }
+            int outatk = net.privattack.pop(); //nimmt zwar die letzte attacke, nicht die älteste, juckt aber, da wir eh erst nach drei attacken zusammenrechen (mayb bisschen weird in der visualisierung aber idc)
 
-            System.out.println("waiting...");
-            net.waitForNet();
 
             //block was placed
             //checks for gameover
@@ -81,8 +85,7 @@ public class CallThread extends Thread
             }
             //get current attack and send it
             //subtracts attack built up by placing block to global attack level:
-            net.pubattack -= net.privattack;
-            net.privattack = 0;
+            net.attackUpdate(outatk);
             ans = call(craftMsg('a', net.pubattack));
             if(ans == null)
             {
@@ -90,9 +93,20 @@ public class CallThread extends Thread
                 net.stop();
                 return;
             }
-            if (ans.charAt(0) == 'a') {
+
+            if (ans.charAt(0) == 'a')
+            {
+                step++;
                 int returned = getNum(ans);
-                net.attackUpdate(-1 * returned); //pushes global attack (but reversed)
+                net.pubattack = -1 * returned; //pushes global attack (but reversed)
+                net.attackUpdate(0); //updates visual
+                if(step == 3)
+                {
+                    //now mwe can get new blocks because we both finished our turns
+                    net.endRound();
+                }
+
+
             } else if (ans.charAt(0) == 'l') {
                 //responder hat verloren (imagine)
                 //gets their score

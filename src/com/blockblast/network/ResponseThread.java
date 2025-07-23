@@ -80,6 +80,21 @@ public class ResponseThread extends Thread
             }
             if(in.charAt(0) == 'a')
             {
+
+                //evaluate attack
+                int atk = getNum(in); //public attack
+                net.pubattack = -1 * atk; //inverses bc fuck yeah
+                net.attackUpdate(0); //updates visual
+                //add local privateattack
+                if(net.privattack.isEmpty())
+                {
+                    System.out.println("waiting...");
+                    net.waitForNet();
+                }
+                int outatk = net.privattack.pop();
+                //block was placed
+                net.attackUpdate(outatk);
+                respond(craftMsg('a', net.pubattack));
                 //check for gameover
                 if(net.gameover)
                 {
@@ -87,14 +102,6 @@ public class ResponseThread extends Thread
                     net.stop();
                     interrupt();
                 }
-                //evaluate attack
-                int atk = getNum(in); //public attack
-                net.pubattack = -1 * atk; //inverses bc fuck yeah
-                //add local privateattack
-                net.pubattack -= net.privattack;
-                net.privattack = 0;
-                net.attackUpdate(atk);
-                respond(craftMsg('a', net.pubattack));
 
             }
             else if(in.charAt(0) == 'l')

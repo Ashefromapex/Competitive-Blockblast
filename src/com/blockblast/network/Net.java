@@ -3,6 +3,7 @@ package com.blockblast.network;
 import java.net.*;
 import java.util.Enumeration;
 import java.util.Objects;
+import java.util.Stack;
 
 import com.blockblast.controller.controller;
 
@@ -12,7 +13,7 @@ public class Net
     int seed;
     int difficulty;
     public int pubattack;
-    public int privattack; //always negative or 0
+    public Stack<Integer> privattack; //always negative or 0
     private controller c;
     private CallThread ct;
     private ResponseThread rp;
@@ -25,7 +26,7 @@ public class Net
     {
         this.c = c;
         pubattack = 0;
-        privattack = 0;
+        privattack = new Stack<Integer>();
         lock = new Object();
     }
 
@@ -62,16 +63,16 @@ public class Net
 
     public void attackUpdate(int atk)
     {
-        pubattack = atk;
+        pubattack -= atk;
         c.attackUpdate(atk);
         System.out.println("updated attack: " + atk);
     }
 
-    public void blockUpdate(int atk)
+    public void addAtk(int atk)
     {
         //falls alle drei blöcke platziert wurden, muss thread warten, auf andere
         //muss vom controller nach Platzieren eines blockes aufgerufen werden mit der beim Platzieren entstandenden attacke auch 0
-        privattack = atk;
+        privattack.push(atk);
         synchronized (lock)
         {
             lock.notifyAll();
@@ -139,5 +140,10 @@ public class Net
     }
 
 
+    public void endRound()
+    {
+        //updates visualization => new three blocks
+        //applies attack
+    }
 }
 
