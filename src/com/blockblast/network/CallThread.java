@@ -63,18 +63,22 @@ public class CallThread extends Thread
             return;
         }
         System.out.println("started" + net.seed +  " " + net.difficulty);
+        net.Up();
         while(!isInterrupted()) {
             //waits for block to be placed
-            try {
+            try
+            {
+                System.out.println("waiting...");
                 wait();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
             //block was placed
             //checks for gameover
-            System.out.println("i was updated :))))");
+            System.out.println("no longer waiting!)");
             if (net.gameover) {
                 call(craftMsg('l', net.score));
+                net.down();
                 stopCaller();
                 interrupt();
             }
@@ -83,6 +87,12 @@ public class CallThread extends Thread
             net.pubattack -= net.privattack;
             net.privattack = 0;
             ans = call(craftMsg('a', net.pubattack));
+            if(ans == null)
+            {
+                System.out.println("Client is dead :(");
+                net.stop();
+                return;
+            }
             if (ans.charAt(0) == 'a') {
                 int returned = getNum(ans);
                 net.attackUpdate(-1 * returned); //pushes global attack (but reversed)

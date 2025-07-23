@@ -3,6 +3,7 @@ package com.blockblast.test;
 //import packages
 import com.blockblast.controller.controller;
 import com.blockblast.logic.Board;
+import com.blockblast.network.Net;
 import com.blockblast.storage.Data;
 import com.blockblast.logic.Algo;
 
@@ -113,7 +114,13 @@ public class Test
 
     public void testNW()
     {
-        
+        //start a caller thread
+        controller c = new controller();
+        c.createBoard();
+        Net n = new Net(c);
+        System.out.println(n.getIp());
+        n.startCallThread();
+        n.blockUpdate(3);
     }
 
     //Methode testet alle Blöcke, es sollte funktionieren afaik, aber habs mal drin gelassen, falls wer nochmal Bock hat drüber zu schauen -Lami

@@ -1,6 +1,8 @@
 package com.blockblast.network;
 
 import java.net.*;
+import java.util.Enumeration;
+
 import com.blockblast.controller.controller;
 
 public class Net
@@ -15,6 +17,7 @@ public class Net
     private ResponseThread rp;
     public boolean gameover;
     public int score;
+    public boolean isUp;
 
 
     public Net(controller c)
@@ -26,15 +29,34 @@ public class Net
 
     public String getIp()
     {
+
         try
         {
-            return InetAddress.getLocalHost().getHostAddress();
+            Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+            while(interfaces.hasMoreElements())
+            {
+                NetworkInterface netif = interfaces.nextElement();
+                if(!netif.isUp() || netif.isLoopback())
+                {
+                    continue;
+                }
+                Enumeration<InetAddress> addresses = netif.getInetAddresses();
+                while(addresses.hasMoreElements())
+                {
+                    InetAddress address = addresses.nextElement();
+                    if(!address.isLoopbackAddress() && address instanceof java.net.Inet4Address)
+                    {
+                        return address.getHostAddress();
+                    }
+                }
+            }
         }
-        catch (UnknownHostException e)
+        catch (SocketException e)
         {
             throw new RuntimeException(e);
         }
-
+        System.out.println("no adresses found!");
+        return "";
     }
 
     public void attackUpdate(int atk)
@@ -79,7 +101,19 @@ public class Net
         c.startResponderGame(seed, difficulty);
         return true;
     }
-
+    public void stop()
+    {
+        //makews the player return to the main screen
+        down();
+    }
+    public void Up()
+    {
+        isUp = true;
+    }
+    public void down()
+    {
+        isUp = false;
+    }
 
 
 }

@@ -19,14 +19,15 @@ public class Main
         boolean testatstartup = false;
         Test t = new Test();
         t.testNW();
+
         if(testatstartup)
         {
             System.out.println("Testing!");
             Test test = new Test();
             test.testAll();
         }
-        controller c = new controller();
-        c.start();
+//        controller c = new controller();
+//        c.start();
 
     }
 

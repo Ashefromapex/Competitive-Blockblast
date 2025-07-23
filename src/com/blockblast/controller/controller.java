@@ -63,6 +63,10 @@ public class controller
         cGUI.enemySelect();
         runningSP = false;
     }
+    public void createBoard()
+    {
+        b = new Board();
+    }
 
     public void startResponderGame(int seed, int difficulty)
     {
