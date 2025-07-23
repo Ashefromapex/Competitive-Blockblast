@@ -2,6 +2,7 @@ package com.blockblast.network;
 
 import java.net.*;
 import java.util.Enumeration;
+import java.util.Objects;
 
 import com.blockblast.controller.controller;
 
@@ -18,13 +19,14 @@ public class Net
     public boolean gameover;
     public int score;
     public boolean isUp;
-
+    public final Object lock;
 
     public Net(controller c)
     {
         this.c = c;
         pubattack = 0;
         privattack = 0;
+        lock = new Object();
     }
 
     public String getIp()
@@ -70,9 +72,22 @@ public class Net
         //falls alle drei blöcke platziert wurden, muss thread warten, auf andere
         //muss vom controller nach Platzieren eines blockes aufgerufen werden mit der beim Platzieren entstandenden attacke auch 0
         privattack = atk;
-        synchronized (this)
+        synchronized (lock)
         {
-            notify();
+            lock.notifyAll();
+        }
+        System.out.println("notified");
+    }
+    public void waitForNet()
+    {
+        synchronized (lock)
+        {
+            try
+            {
+                lock.wait();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -106,11 +121,11 @@ public class Net
         //makews the player return to the main screen
         if(rp != null)
         {
-            rp.stopResponder();
+            //rp.stopResponder();
         }
         if(ct != null)
         {
-            ct.interrupt();
+            ct.stopCaller();
         }
         down();
     }

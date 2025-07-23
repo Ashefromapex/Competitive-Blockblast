@@ -9,6 +9,7 @@ import com.blockblast.logic.Algo;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.TimeUnit;
 
 public class Test
 {
@@ -116,14 +117,23 @@ public class Test
     {
         //start a caller thread
         controller c = new controller();
-        Net n = new Net(c);
         c.createBoard();
-        n.startReponseThread("192.168.178.132", 9000);
+        Net n = new Net(c);
+        System.out.println(n.getIp());
+        n.startCallThread();
         while(!n.isUp)
         {
-            //waits for connection to be up
+            //waitsd for connection to be up
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("no connection :(");
+
         }
-        n.blockUpdate(2);
+        System.out.println("connection up");
+        n.blockUpdate(3);
     }
 
     //Methode testet alle Blöcke, es sollte funktionieren afaik, aber habs mal drin gelassen, falls wer nochmal Bock hat drüber zu schauen -Lami

@@ -18,10 +18,12 @@ public class CallThread extends Thread
     PrintWriter out;
     BufferedReader in;
     int blocks;
+    public final Object lock;
     public CallThread(Net n)
     {
         net = n;
         blocks = 0;
+        lock = new Object();
     }
     public void run()
     {
@@ -41,8 +43,7 @@ public class CallThread extends Thread
 
         //communication starts here
         //sends seed
-        synchronized (this)
-        {
+
         String ans = call(craftMsg('s', net.seed));
         if (!ans.equals("y"))
         {
@@ -62,24 +63,20 @@ public class CallThread extends Thread
             System.out.println("Error starting on client side");
             return;
         }
-        System.out.println("started" + net.seed +  " " + net.difficulty);
         net.Up();
+        System.out.println("started" + net.seed +  " " + net.difficulty);
         while(!isInterrupted()) {
             //waits for block to be placed
-            try
-            {
-                System.out.println("waiting...");
-                wait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+
+            System.out.println("waiting...");
+            net.waitForNet();
+
             //block was placed
             //checks for gameover
             System.out.println("no longer waiting!)");
             if (net.gameover) {
                 call(craftMsg('l', net.score));
-                net.down();
-                stopCaller();
+                net.stop();
                 interrupt();
             }
             //get current attack and send it
@@ -112,8 +109,8 @@ public class CallThread extends Thread
                 interrupt();
             }
         }
+            System.out.println("stopped");
 
-        }
     }
     public void stopCaller()
     {
@@ -128,6 +125,7 @@ public class CallThread extends Thread
         {
             throw new RuntimeException(e);
         }
+        interrupt();
     }
 
     public String call(String msg)
@@ -157,4 +155,5 @@ public class CallThread extends Thread
         }
         return Integer.parseInt(ret.toString());
     }
+
 }
