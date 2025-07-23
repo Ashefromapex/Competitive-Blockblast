@@ -104,6 +104,14 @@ public class Net
     public void stop()
     {
         //makews the player return to the main screen
+        if(rp != null)
+        {
+            rp.stopResponder();
+        }
+        if(ct != null)
+        {
+            ct.interrupt();
+        }
         down();
     }
     public void Up()

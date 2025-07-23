@@ -116,11 +116,14 @@ public class Test
     {
         //start a caller thread
         controller c = new controller();
-        c.createBoard();
         Net n = new Net(c);
-        System.out.println(n.getIp());
-        n.startCallThread();
-        n.blockUpdate(3);
+        c.createBoard();
+        n.startReponseThread("192.168.178.132", 9000);
+        while(!n.isUp)
+        {
+            //waits for connection to be up
+        }
+        n.blockUpdate(2);
     }
 
     //Methode testet alle Blöcke, es sollte funktionieren afaik, aber habs mal drin gelassen, falls wer nochmal Bock hat drüber zu schauen -Lami

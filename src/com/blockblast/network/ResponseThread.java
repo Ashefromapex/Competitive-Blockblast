@@ -67,12 +67,15 @@ public class ResponseThread extends Thread
             return;
         }
         respond("y");
+        net.Up();
+        System.out.println("started");
         while(!isInterrupted())
         {
             in = receive();
             if(in == null)
             {
                 System.out.println("host is dead :(");
+                net.stop();
                 return;
             }
             if(in.charAt(0) == 'a')
@@ -81,6 +84,8 @@ public class ResponseThread extends Thread
                 if(net.gameover)
                 {
                     respond(craftMsg('l', net.score));
+                    net.stop();
+                    interrupt();
                 }
                 //evaluate attack
                 int atk = getNum(in); //public attack
@@ -100,6 +105,7 @@ public class ResponseThread extends Thread
 
             }
         }
+        System.out.println("stopped");
 
 
 
@@ -134,5 +140,17 @@ public class ResponseThread extends Thread
             ret.append(msg.charAt(i));
         }
         return Integer.parseInt(ret.toString());
+    }
+    public void stopResponder()
+    {
+        try
+        {
+            in.close();
+            out.close();
+            client.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        interrupt();
     }
 }
