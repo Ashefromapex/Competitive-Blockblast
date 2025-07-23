@@ -16,7 +16,9 @@ public class Main
         //DONT TOUCH
 
         //test project at startup
-        boolean testatstartup = true;
+        boolean testatstartup = false;
+        Test t = new Test();
+        t.testNW();
         if(testatstartup)
         {
             System.out.println("Testing!");

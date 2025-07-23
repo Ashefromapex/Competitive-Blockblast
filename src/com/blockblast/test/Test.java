@@ -111,6 +111,11 @@ public class Test
 
     }
 
+    public void testNW()
+    {
+        
+    }
+
     //Methode testet alle Blöcke, es sollte funktionieren afaik, aber habs mal drin gelassen, falls wer nochmal Bock hat drüber zu schauen -Lami
     /*private boolean testAllBlocks()//(pain)
     {
