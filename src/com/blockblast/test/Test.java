@@ -9,6 +9,7 @@ import com.blockblast.logic.Algo;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.TimeUnit;
 
 public class Test
 {
@@ -120,6 +121,18 @@ public class Test
         Net n = new Net(c);
         System.out.println(n.getIp());
         n.startCallThread();
+        while(!n.isUp)
+        {
+            //waitsd for connection to be up
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("no connection :(");
+
+        }
+        System.out.println("connection up");
         n.blockUpdate(3);
     }
 
