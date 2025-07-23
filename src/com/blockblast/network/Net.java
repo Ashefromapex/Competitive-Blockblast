@@ -77,7 +77,12 @@ public class Net
     public boolean startBoard()
     {
         c.startResponderGame(seed, difficulty);
+        System.out.println("game started with seed" + seed +"diff: " + difficulty) ;
         return true;
+    }
+    public void stop()
+    {
+        //makews the player return to the main screen
     }
 
 

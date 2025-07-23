@@ -60,16 +60,21 @@ public class ResponseThread extends Thread
             System.out.println("Error: no start signal received");
             return;
         }
-        net.startBoard();
         if(!net.startBoard())
         {
             System.out.println("Error: couldn't start board");
+            net.stop();
             return;
         }
         respond("y");
         while(!isInterrupted())
         {
             in = receive();
+            if(in == null)
+            {
+                System.out.println("host is dead :(");
+                return;
+            }
             if(in.charAt(0) == 'a')
             {
                 //check for gameover
