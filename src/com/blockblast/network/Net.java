@@ -121,7 +121,7 @@ public class Net
         //makews the player return to the main screen
         if(rp != null)
         {
-            //rp.stopResponder();
+            rp.stopResponder();
         }
         if(ct != null)
         {
