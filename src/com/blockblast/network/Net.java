@@ -29,7 +29,6 @@ public class Net
 
     public String getIp()
     {
-
         try
         {
             Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
@@ -99,6 +98,7 @@ public class Net
     public boolean startBoard()
     {
         c.startResponderGame(seed, difficulty);
+        System.out.println("game started with seed" + seed +"diff: " + difficulty) ;
         return true;
     }
     public void stop()
